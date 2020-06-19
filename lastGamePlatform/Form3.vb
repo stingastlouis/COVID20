@@ -60,7 +60,8 @@ Public Class Form3
         extbtn.Visible = False
         count = 0
         bulletNumber = -1
-        pScore = Form2.
+        Score = Form2.Score
+        pScore.Text = "Score :" + CStr(Score)
         Label1.Visible = False
         Label1.Enabled = False
         finishLine.Enabled = False
