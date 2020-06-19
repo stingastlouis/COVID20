@@ -387,18 +387,15 @@ Public Class Form2
             '-------------------------------------
         End Sub
 
-        Private Sub RestartBtn_Click(sender As Object, e As EventArgs) Handles RestartBtn.Click
-
-        If RestartBtn.Text = "Continue" Then
-            Form3.Show()
-            Me.Close()
-        End If
+    Private Sub RestartBtn_Click(sender As Object, e As EventArgs) Handles RestartBtn.Click
         If RestartBtn.Text = "Restart" Then
-            'Me.Hide()
-
-
+            Me.Hide()
+            Dim f1 = New mainCamera()
+            f1.Show()
+        End If
+        If RestartBtn.Text = "Continue" Then
             Me.Close()
-            Me.Show()
+            register.Show()
         End If
     End Sub
 

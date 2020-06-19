@@ -382,8 +382,6 @@ Public Class mainCamera
 
                 Me.Controls.Remove(Enemy(a))
                 Enemy(a).Enabled = False
-
-
             End If
         Next
 
@@ -391,29 +389,16 @@ Public Class mainCamera
     End Sub
 
     Private Sub RestartBtn_Click(sender As Object, e As EventArgs) Handles RestartBtn.Click
-        If RestartBtn.Text = "Continue" Then
-            Form2.Show()
-            Me.Close()
-        End If
         If RestartBtn.Text = "Restart" Then
-            'Me.Hide()
+            Me.Hide()
+            Dim f1 = New mainCamera()
+            f1.Show()
+        End If
+        If RestartBtn.Text = "Continue" Then
             Me.Close()
             register.Show()
         End If
-
-
-
-
-
-
-
-
-
-
     End Sub
-
-
-
 
     '-------------------MAin of enemy movements------------------------------
     Private Sub makeEnemyMove(ByVal pyer As Object)
