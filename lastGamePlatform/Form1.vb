@@ -394,7 +394,7 @@ Public Class mainCamera
         End If
         If RestartBtn.Text = "Continue" Then
             Me.Close()
-            register.Show()
+            Form2.show()
         End If
     End Sub
 

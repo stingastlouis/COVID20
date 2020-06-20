@@ -396,7 +396,7 @@ Public Class Form2
         End If
         If RestartBtn.Text = "Continue" Then
             Me.Close()
-            register.Show()
+            Form3.show()
         End If
     End Sub
 
