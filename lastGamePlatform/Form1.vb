@@ -40,8 +40,8 @@ Public Class mainCamera
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles Me.Load
         'name taken from register form
-        Dim lvl1 = New MyGameManager("John") 'name or name,life,score,item
-
+        'Dim lvl1 = New MyGameManager("John") 'name or name,life,score,item
+        setGame()
     End Sub
 
     Public Sub setGame()

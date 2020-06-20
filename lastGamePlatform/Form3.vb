@@ -41,7 +41,7 @@ Public Class Form3
     '----------------------------
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim lvl2 = New MyGameManager("John", previousLife, previousScore, previousItems) 'name or name,life,score,item
+        'Dim lvl2 = New MyGameManager("John", previousLife, previousScore, previousItems) 'name or name,life,score,item
         setGame()
     End Sub
     Private Sub setGame()
@@ -69,7 +69,7 @@ Public Class Form3
         ProgressBar1.Value = 20
         ProgressBar1.Enabled = False
         ProgressBar1.Visible = False
-        My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.Background)
+        My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop)
         shotGun = {gun1, gun2, lastGun}
         ground = {ground1, ground2}
         allowToshotShotGUNl = False
