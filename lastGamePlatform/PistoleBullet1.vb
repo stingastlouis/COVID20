@@ -6,7 +6,7 @@
     Public Sub New(ByVal ob As Object)
         With Me
             .Size = New Size(10, 30)
-            .Location = ob.Location
+            .Location = New Point(ob.Width + ob.Left, ob.Top + 12)
             .BackgroundImage = bmp
             .BackgroundImageLayout = ImageLayout.Stretch
             .BringToFront()
