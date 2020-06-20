@@ -175,52 +175,52 @@ Public Class Form2
 
     '----------All METHODS AND FUNCTIONS DOWN HERE---------------
     Private Sub gameManager_Tick(sender As Object, e As EventArgs) Handles gameManager.Tick
-            'wantTogoOut()
-            moveMycamera()
-            checkmovement()
-            checkGun()
+        'wantTogoOut()
+        moveMycamera()
+        checkmovement()
+        checkGun()
 
-            For x As Integer = 0 To ground.Length - 1
-                If checkforCollision(player1, ground(x)) = False Then
-                    giveGravity(player1)
-                Else
-                    stopThatGravity(player1)
-                    count = 0
-                End If
+        For x As Integer = 0 To ground.Length - 1
+            If checkforCollision(player1, ground(x)) = False Then
+                giveGravity(player1)
+            Else
+                stopThatGravity(player1)
+                count = 0
+            End If
 
-            Next
+        Next
 
-            makeEnemyMove(player1)
-            UpdatePlayer()
-            'getObjectToground()
-            loserWinner()
-            bulletManager()
-        End Sub
+        makeEnemyMove(player1)
+        UpdatePlayer()
+        'getObjectToground()
+        loserWinner()
+        bulletManager()
+    End Sub
 
 
 
-        Private Sub checkmovement()
-            If posLeft Then
-                player1.Left -= Speed
-                If player1.Left < 0 Then
+    Private Sub checkmovement()
+        If posLeft Then
+            player1.Left -= Speed
+            If player1.Left < 0 Then
+                player1.Left += Speed
+            End If
+            For x As Integer = 0 To wall.Length - 1
+                If checkforCollision(player1, wall(x)) Then
                     player1.Left += Speed
                 End If
-                For x As Integer = 0 To wall.Length - 1
-                    If checkforCollision(player1, wall(x)) Then
-                        player1.Left += Speed
-                    End If
-                Next
+            Next
 
 
-            End If
-            If posRight Then
-                player1.Left += Speed
-                For y As Integer = 0 To wall.Length - 1
-                    If checkforCollision(player1, wall(y)) Then
-                        player1.Left -= Speed
-                    End If
-                Next
-            End If
+        End If
+        If posRight Then
+            player1.Left += Speed
+            For y As Integer = 0 To wall.Length - 1
+                If checkforCollision(player1, wall(y)) Then
+                    player1.Left -= Speed
+                End If
+            Next
+        End If
         '---------------HERE THE COUNT IS VERY IMPORTANT-------------------
         If posUp And player1.Top > ground1.Top - 200 And Not count > 2 Then
             player1.Top -= JumpSpeed
@@ -242,15 +242,15 @@ Public Class Form2
 
     End Sub
 
-        '-------------Method for gravity----------------------
-        Private Sub giveGravity(ByVal ob1)
-            ob1.Top += gravitySpeed
+    '-------------Method for gravity----------------------
+    Private Sub giveGravity(ByVal ob1)
+        ob1.Top += gravitySpeed
 
-            For x As Integer = 0 To wall.Length - 1
-                If checkforCollision(ob1, wall(x)) Then
-                    ob1.Top -= gravitySpeed
+        For x As Integer = 0 To wall.Length - 1
+            If checkforCollision(ob1, wall(x)) Then
+                ob1.Top -= gravitySpeed
                 If posUp Then
-                    ob1.Top -= JumpSpeed + 60
+                    ob1.Top -= JumpSpeed + 90
                     If ob1.Top <= wall(x).Top + wall(x).Height Then
                         ob1.Top += JumpSpeed
                     End If
@@ -258,32 +258,32 @@ Public Class Form2
                 End If
             End If
 
-            Next
+        Next
 
-        End Sub
-        Private Sub stopThatGravity(ByVal ob1)
-            ob1.Top -= gravitySpeed
-        End Sub
+    End Sub
+    Private Sub stopThatGravity(ByVal ob1)
+        ob1.Top -= gravitySpeed
+    End Sub
 
 
-        '----------------------------------------------------
+    '----------------------------------------------------
 
-        'METHOD FOR COLLISION---------------------
-        Function checkforCollision(ByVal ob1 As Object, ByVal ob2 As Object) As Boolean
-            Dim collided As Boolean = False
-            If ob1.Top + ob1.Height >= ob2.Top - 5 And
-            ob2.Top + ob2.Height >= ob1.Top And
-            ob1.Left + ob1.Width >= ob2.Left And
-            ob2.Left + ob2.Width >= ob1.Left Then
-                collided = True
+    'METHOD FOR COLLISION---------------------
+    Function checkforCollision(ByVal ob1 As Object, ByVal ob2 As Object) As Boolean
+        Dim collided As Boolean = False
+        If ob1.Top + ob1.Height >= ob2.Top - 5 And
+        ob2.Top + ob2.Height >= ob1.Top And
+        ob1.Left + ob1.Width >= ob2.Left And
+        ob2.Left + ob2.Width >= ob1.Left Then
+            collided = True
 
-            End If
-            Return collided
-        End Function
-        '-------------------------------------
+        End If
+        Return collided
+    End Function
+    '-------------------------------------
 
-        '--------MOVE ALL CONTENT UPON PLAYER LOCATION--------------
-        Private Sub moveMycamera()
+    '--------MOVE ALL CONTENT UPON PLAYER LOCATION--------------
+    Private Sub moveMycamera()
 
 
         If Not player1.Left >= beforeBoss.Left + beforeBoss.Width Then
@@ -311,90 +311,90 @@ Public Class Form2
         End If
     End Sub
 
-        Private Sub beforeRestart()
-            If Not player1.Left <= Item2.Left And Item2.Enabled = False Then
-                For Each m As Control In Me.Controls
-                    If TypeOf m Is PictureBox Then
-                        If m.Tag = "content" Then
-                            m.Left += 15
-                        End If
+    Private Sub beforeRestart()
+        If Not player1.Left <= Item2.Left And Item2.Enabled = False Then
+            For Each m As Control In Me.Controls
+                If TypeOf m Is PictureBox Then
+                    If m.Tag = "content" Then
+                        m.Left += 15
                     End If
-                Next
-            Else
+                End If
+            Next
+        Else
+
+        End If
+
+
+    End Sub
+
+    Private Sub UpdatePlayer()
+
+        'CHECK FOR COLLISION WITH CASH ----------------------
+        For x As Integer = 0 To Bonus.Length - 1
+            If checkforCollision(player1, Bonus(x)) And Bonus(x).Enabled = True Then
+                Score += 3
+                pScore.Text = "Score :" + CStr(Score)
+
+                Me.Controls.Remove(Bonus(x))
+                Bonus(x).Enabled = False
+
+
 
             End If
+        Next
+        '-------------------------------------
+
+        'CHECK FOR COLLISION WITH LIFE ----------------
+        For y As Integer = 0 To lifeBox.Length - 1
+            If checkforCollision(player1, lifeBox(y)) And lifeBox(y).Enabled = True Then
+                Life_Point += 1
+                Score += 1
+                pScore.Text = "Score :" + CStr(Score)
+                pLife.Text = "X" + CStr(Life_Point)
 
 
-        End Sub
-
-        Private Sub UpdatePlayer()
-
-            'CHECK FOR COLLISION WITH CASH ----------------------
-            For x As Integer = 0 To Bonus.Length - 1
-                If checkforCollision(player1, Bonus(x)) And Bonus(x).Enabled = True Then
-                    Score += 3
-                    pScore.Text = "Score :" + CStr(Score)
-
-                    Me.Controls.Remove(Bonus(x))
-                    Bonus(x).Enabled = False
+                Me.Controls.Remove(lifeBox(y))
+                lifeBox(y).Enabled = False
 
 
+            End If
+        Next
+        '----------------------------------------------
 
-                End If
-            Next
-            '-------------------------------------
-
-            'CHECK FOR COLLISION WITH LIFE ----------------
-            For y As Integer = 0 To lifeBox.Length - 1
-                If checkforCollision(player1, lifeBox(y)) And lifeBox(y).Enabled = True Then
-                    Life_Point += 1
-                    Score += 1
-                    pScore.Text = "Score :" + CStr(Score)
-                    pLife.Text = "X" + CStr(Life_Point)
-
-
-                    Me.Controls.Remove(lifeBox(y))
-                    lifeBox(y).Enabled = False
+        'CHECK FOR COLLISION WITH ITEM FOR VACCIN----------------
+        For z As Integer = 0 To ItemVaccin.Length - 1
+            If checkforCollision(player1, ItemVaccin(z)) And ItemVaccin(z).Enabled = True Then
+                Item_Collected += 1
+                Score += 5
+                pScore.Text = "Score :" + CStr(Score)
+                pItem.Text = "Item :" + CStr(Item_Collected)
 
 
-                End If
-            Next
-            '----------------------------------------------
-
-            'CHECK FOR COLLISION WITH ITEM FOR VACCIN----------------
-            For z As Integer = 0 To ItemVaccin.Length - 1
-                If checkforCollision(player1, ItemVaccin(z)) And ItemVaccin(z).Enabled = True Then
-                    Item_Collected += 1
-                    Score += 5
-                    pScore.Text = "Score :" + CStr(Score)
-                    pItem.Text = "Item :" + CStr(Item_Collected)
+                Me.Controls.Remove(ItemVaccin(z))
+                ItemVaccin(z).Enabled = False
 
 
-                    Me.Controls.Remove(ItemVaccin(z))
-                    ItemVaccin(z).Enabled = False
+            End If
+        Next
+        '----------------------------------------------
 
 
-                End If
-            Next
-            '----------------------------------------------
+        'CHECK FOR COLLISION WITH ENEMY ----------------------
+        For a As Integer = 0 To Enemy.Length - 1
+            If checkforCollision(player1, Enemy(a)) And Enemy(a).Enabled = True Then
+                Life_Point -= 1
+                pLife.Text = "X" + CStr(Life_Point)
 
 
-            'CHECK FOR COLLISION WITH ENEMY ----------------------
-            For a As Integer = 0 To Enemy.Length - 1
-                If checkforCollision(player1, Enemy(a)) And Enemy(a).Enabled = True Then
-                    Life_Point -= 1
-                    pLife.Text = "X" + CStr(Life_Point)
+                Me.Controls.Remove(Enemy(a))
+                Enemy(a).Enabled = False
 
 
-                    Me.Controls.Remove(Enemy(a))
-                    Enemy(a).Enabled = False
+            End If
+        Next
 
-
-                End If
-            Next
-
-            '-------------------------------------
-        End Sub
+        '-------------------------------------
+    End Sub
 
     Private Sub RestartBtn_Click(sender As Object, e As EventArgs) Handles RestartBtn.Click
         If RestartBtn.Text = "Restart" Then
@@ -404,223 +404,222 @@ Public Class Form2
         End If
         If RestartBtn.Text = "Continue" Then
             Me.Close()
-            Form3.show()
+            Form3.Show()
         End If
     End Sub
 
 
 
 
-        '-------------------MAin of enemy movements------------------------------
-        Private Sub makeEnemyMove(ByVal pyer As Object)
-            For x As Integer = 0 To Enemy.Length - 1
+    '-------------------MAin of enemy movements------------------------------
+    Private Sub makeEnemyMove(ByVal pyer As Object)
+        For x As Integer = 0 To Enemy.Length - 1
 
             contaminatePlayer(Enemy(x), pyer) 'Important Check Below
 
             For y As Integer = 0 To ground.Length - 1
-                    If checkforCollision(Enemy(x), ground(y)) = False Then
-                        Enemy(x).Top += gravitySpeed
-                        For z As Integer = 0 To wall.Length - 1
+                If checkforCollision(Enemy(x), ground(y)) = False Then
+                    Enemy(x).Top += gravitySpeed
+                    For z As Integer = 0 To wall.Length - 1
                         If Enemy(x).Bounds.IntersectsWith(wall(z).Bounds) Then
                             Enemy(x).Top -= 15
                         End If
                     Next
-                    Else
-                        Enemy(x).Top -= gravitySpeed
-                    End If
-
-                Next
+                Else
+                    Enemy(x).Top -= gravitySpeed
+                End If
 
             Next
 
-        End Sub
+        Next
+
+    End Sub
 
 
 
 
-        '------------------------------------------------------------------------
+    '------------------------------------------------------------------------
 
-        '---It makes the enemies moves toward the user and checks if there is wall --------
-        Private Sub contaminatePlayer(ByRef ob1 As Object, ByRef ob2 As Object)
-            If ob1.left + ob1.Width > ob2.left Then
-                ob1.left -= 1
-                For m As Integer = 0 To wall.Length - 1
-                    If checkforCollision(ob1, wall(m)) Then
-                        ob1.left += 1
-                    End If
-                Next
-            End If
-            If ob1.left + ob1.Width < ob2.left Then
-                ob1.left += 1
-                For m As Integer = 0 To wall.Length - 1
-                    If checkforCollision(ob1, wall(m)) Then
-                        ob1.left -= 1
-                    End If
-                Next
-            End If
-            If ob1.Top + ob1.Height > ob2.Top Then
-                ob1.Top -= 1
-            End If
-            If ob1.Top + ob1.Height < ob2.Top Then
-                ob1.Top += 1
-            End If
-        End Sub
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        '----------------------------------------------------------------------------------
-        Private Sub AssignRandomPosition(ByRef obj As Object)
-            Dim ran As New Random
-            generator = ran.Next(0, 1000) + 1
-
-
-            obj.Top = 0
-            obj.Left = Me.Width * 1 + generator
-
-        End Sub
-        'Private Sub getObjectToground()
-        '    For x As Integer = 0 To ground.Length - 1
-        '        For y As Integer = 0 To Bonus.Length - 1
-        '            If checkforCollision(ground(x), Bonus(y)) = False Then
-        '                Bonus(y).Top += 1
-        '                For z As Integer = 0 To wall.Length - 1
-        '                    If checkforCollision(Bonus(y), wall(z)) Then
-        '                        Bonus(y).Top -= 1
-
-        '                    End If
-        '                Next
-        '            Else
-        '                Bonus(y).Top -= 1
-        '            End If
-        '        Next
-
-        '        For m As Integer = 0 To lifeBox.Length - 1
-        '            If checkforCollision(ground(x), lifeBox(m)) = False Then
-        '                lifeBox(m).Top += 1
-        '                For n As Integer = 0 To wall.Length - 1
-        '                    If checkforCollision(lifeBox(m), wall(n)) Then
-        '                        lifeBox(m).Top -= 1
-        '                    End If
-        '                Next
-        '            Else
-        '                lifeBox(m).Top -= 1
-        '            End If
-        '        Next
-
-        '        For mo As Integer = 0 To ItemVaccin.Length - 1
-        '            If checkforCollision(ground(x), ItemVaccin(mo)) = False Then
-        '                ItemVaccin(mo).Top += 1
-        '                For no As Integer = 0 To wall.Length - 1
-        '                    If checkforCollision(ItemVaccin(mo), wall(no)) Then
-        '                        ItemVaccin(mo).Top -= 1
-        '                    End If
-        '                Next
-        '            Else
-        '                ItemVaccin(mo).Top -= 1
-        '            End If
-        '        Next
-        '    Next
-
-
-
-
-        'End Sub
-
-        Private Sub loserWinner()
-            If ProgressBar1.Value <= 0 Then
-                ProgressBar1.Value = 0
-                gameManager.Enabled = False
-                winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
-                winorloseTxt.Visible = True
-
-                RestartBtn.Text = "Continue"
-                RestartBtn.Visible = True
-                RestartBtn.Enabled = True
-                winorloseTxt.Top = Me.Height / 2 - 60
-                winorloseTxt.Left = Me.Width / 2 - 15
-                RestartBtn.BringToFront()
-                RestartBtn.Top = Me.Height / 2
-                RestartBtn.Left = Me.Width / 2
-
-                extbtn.Visible = True
-                extbtn.Enabled = True
-                extbtn.Text = "Abandon Mission"
-                extbtn.Top = Me.Height / 2 + 30
-                extbtn.Left = Me.Width / 2
-                extbtn.BringToFront()
-
-            End If
-
-            If Life_Point <= 0 Then
-
-                winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
-                winorloseTxt.Visible = True
-
-                RestartBtn.Text = "Restart"
-                RestartBtn.Visible = True
-                RestartBtn.Enabled = True
-                RestartBtn.BringToFront()
-                winorloseTxt.Top = Me.Height / 2 - 60
-                winorloseTxt.Left = Me.Width / 2 - 15
-                RestartBtn.Top = Me.Height / 2
-                RestartBtn.Left = Me.Width / 2
-                extbtn.Visible = True
-                extbtn.Enabled = True
-                extbtn.Text = "Abandon Mission"
-                extbtn.Top = Me.Height / 2 + 30
-                extbtn.Left = Me.Width / 2
-                extbtn.BringToFront()
-
-
-
-            End If
-
-        End Sub
-
-        Private Sub checkGun()
-            For z As Integer = 0 To shotGun.Length - 1
-                If checkforCollision(player1, shotGun(z)) And shotGun(z).Enabled = True Then
-                    Score += getPointShotGun
-                    pScore.Text = "Score :" + CStr(Score)
-                    shotGun(z).Enabled = True
-                    Me.Controls.Remove(shotGun(z))
-
-                    allowToshotShotGUNl = True
+    '---It makes the enemies moves toward the user and checks if there is wall --------
+    Private Sub contaminatePlayer(ByRef ob1 As Object, ByRef ob2 As Object)
+        If ob1.left + ob1.Width > ob2.left Then
+            ob1.left -= 1
+            For m As Integer = 0 To wall.Length - 1
+                If checkforCollision(ob1, wall(m)) Then
+                    ob1.left += 1
                 End If
             Next
-        End Sub
+        End If
+        If ob1.left + ob1.Width < ob2.left Then
+            ob1.left += 1
+            For m As Integer = 0 To wall.Length - 1
+                If checkforCollision(ob1, wall(m)) Then
+                    ob1.left -= 1
+                End If
+            Next
+        End If
+        If ob1.Top + ob1.Height > ob2.Top Then
+            ob1.Top -= 1
+        End If
+        If ob1.Top + ob1.Height < ob2.Top Then
+            ob1.Top += 1
+        End If
+    End Sub
 
-        Private Sub bulletManager()
 
-            For x As Integer = 0 To bullet1.Length - 1
-                bullet1(x).Shoot(player1)
-            'If player1.Left >= beforeBoss.Left Then
-            '    '-------On touching witdth-------------------------------
-            '    If bullet1(x).Left >= Me.Left + Me.Width Then
-            '        bullet1(x).Dispose()
-            '        Me.Controls.Remove(bullet1(x))
-            '        bullet1(x).Enabled = False
-            '    End If
 
-            '    '---------------------------------------------------------
-            'End If
 
-            'kill bosss-----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    '----------------------------------------------------------------------------------
+    Private Sub AssignRandomPosition(ByRef obj As Object)
+        Dim ran As New Random
+        generator = ran.Next(0, 1000) + 1
+
+
+        obj.Top = 0
+        obj.Left = Me.Width * 1 + generator
+
+    End Sub
+    'Private Sub getObjectToground()
+    '    For x As Integer = 0 To ground.Length - 1
+    '        For y As Integer = 0 To Bonus.Length - 1
+    '            If checkforCollision(ground(x), Bonus(y)) = False Then
+    '                Bonus(y).Top += 1
+    '                For z As Integer = 0 To wall.Length - 1
+    '                    If checkforCollision(Bonus(y), wall(z)) Then
+    '                        Bonus(y).Top -= 1
+
+    '                    End If
+    '                Next
+    '            Else
+    '                Bonus(y).Top -= 1
+    '            End If
+    '        Next
+
+    '        For m As Integer = 0 To lifeBox.Length - 1
+    '            If checkforCollision(ground(x), lifeBox(m)) = False Then
+    '                lifeBox(m).Top += 1
+    '                For n As Integer = 0 To wall.Length - 1
+    '                    If checkforCollision(lifeBox(m), wall(n)) Then
+    '                        lifeBox(m).Top -= 1
+    '                    End If
+    '                Next
+    '            Else
+    '                lifeBox(m).Top -= 1
+    '            End If
+    '        Next
+
+    '        For mo As Integer = 0 To ItemVaccin.Length - 1
+    '            If checkforCollision(ground(x), ItemVaccin(mo)) = False Then
+    '                ItemVaccin(mo).Top += 1
+    '                For no As Integer = 0 To wall.Length - 1
+    '                    If checkforCollision(ItemVaccin(mo), wall(no)) Then
+    '                        ItemVaccin(mo).Top -= 1
+    '                    End If
+    '                Next
+    '            Else
+    '                ItemVaccin(mo).Top -= 1
+    '            End If
+    '        Next
+    '    Next
+
+
+
+
+    'End Sub
+
+    Private Sub loserWinner()
+        If ProgressBar1.Value <= 0 Then
+            posRight = False
+            posLeft = False
+            posUp = False
+            ProgressBar1.Value = 0
+            gameManager.Enabled = False
+            winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
+            winorloseTxt.Visible = True
+
+            RestartBtn.Text = "Continue"
+            RestartBtn.Visible = True
+            RestartBtn.Enabled = True
+            winorloseTxt.Top = Me.Height / 2 - 60
+            winorloseTxt.Left = Me.Width / 2 - 15
+            RestartBtn.BringToFront()
+            RestartBtn.Top = Me.Height / 2
+            RestartBtn.Left = Me.Width / 2
+
+            extbtn.Visible = True
+            extbtn.Enabled = True
+            extbtn.Text = "Abandon Mission"
+            extbtn.Top = Me.Height / 2 + 30
+            extbtn.Left = Me.Width / 2
+            extbtn.BringToFront()
+
+        End If
+
+        If Life_Point <= 0 Then
+            posRight = False
+            posLeft = False
+            posUp = False
+            winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
+            winorloseTxt.Visible = True
+
+            RestartBtn.Text = "Restart"
+            RestartBtn.Visible = True
+            RestartBtn.Enabled = True
+            RestartBtn.BringToFront()
+            winorloseTxt.Top = Me.Height / 2 - 60
+            winorloseTxt.Left = Me.Width / 2 - 15
+            RestartBtn.Top = Me.Height / 2
+            RestartBtn.Left = Me.Width / 2
+            extbtn.Visible = True
+            extbtn.Enabled = True
+            extbtn.Text = "Abandon Mission"
+            extbtn.Top = Me.Height / 2 + 30
+            extbtn.Left = Me.Width / 2
+            extbtn.BringToFront()
+
+
+
+        End If
+
+    End Sub
+
+    Private Sub checkGun()
+        For z As Integer = 0 To shotGun.Length - 1
+            If checkforCollision(player1, shotGun(z)) And shotGun(z).Enabled = True Then
+                Score += getPointShotGun
+                pScore.Text = "Score :" + CStr(Score)
+                shotGun(z).Enabled = True
+                Me.Controls.Remove(shotGun(z))
+
+                allowToshotShotGUNl = True
+            End If
+        Next
+    End Sub
+
+    Private Sub bulletManager()
+
+        For x As Integer = 0 To bullet1.Length - 1
+            bullet1(x).Shoot(player1)
+
+            If bullet1(x).Left = Me.Width Then
+                bullet1(x).Enabled = False
+                bullet1(x).Dispose()
+
+            End If
             If checkforCollision(bullet1(x), finishLine) And finishLine.Enabled = True And bullet1(x).Enabled = True Then
                 ProgressBar1.Value -= 1
                 Score += 30 * 0.5
@@ -633,92 +632,92 @@ Public Class Form2
             '--------------------------------------------
             '----kill enemy------------------------------
             For y As Integer = 0 To Enemy.Length - 1
-                    If checkforCollision(bullet1(x), Enemy(y)) And bullet1(x).Enabled = True And Enemy(y).Enabled = True Then
-                        Score += getEnemyScore
-                        pScore.Text = "Score :" + CStr(Score)
-                        bullet1(x).Dispose()
-                        bullet1(x).Enabled = False
-                        Enemy(y).Enabled = False
-                        Me.Controls.Remove(Enemy(y))
+                If checkforCollision(bullet1(x), Enemy(y)) And bullet1(x).Enabled = True And Enemy(y).Enabled = True Then
+                    Score += getEnemyScore
+                    pScore.Text = "Score :" + CStr(Score)
+                    bullet1(x).Dispose()
+                    bullet1(x).Enabled = False
+                    Enemy(y).Enabled = False
+                    Me.Controls.Remove(Enemy(y))
 
-                    End If
-                Next
-                '-------------------------------------------
-                '----------objects--Collision---------------
-                For a As Integer = 0 To Bonus.Length - 1
-                    If checkforCollision(bullet1(x), Bonus(a)) And bullet1(x).Enabled = True And Bonus(a).Enabled = True Then
-                        bullet1(x).Dispose()
-                        Me.Controls.Remove(bullet1(x))
-                        bullet1(x).Enabled = False
-                    End If
-                Next
-                For b As Integer = 0 To lifeBox.Length - 1
-                    If checkforCollision(bullet1(x), Bonus(b)) And bullet1(x).Enabled = True And lifeBox(b).Enabled = True Then
-                        bullet1(x).Dispose()
-                        Me.Controls.Remove(bullet1(x))
-                        bullet1(x).Enabled = False
-                    End If
-                Next
-                For c As Integer = 0 To ItemVaccin.Length - 1
-                    If checkforCollision(bullet1(x), ItemVaccin(c)) And bullet1(x).Enabled = True And ItemVaccin(c).Enabled = True Then
-                        bullet1(x).Dispose()
-                        Me.Controls.Remove(bullet1(x))
-                        bullet1(x).Enabled = False
-                    End If
-                Next
-                '-------------------------------------------
+                End If
             Next
-        End Sub
-        Dim timer1, timer2, timer3 As Integer
+            '-------------------------------------------
+            '----------objects--Collision---------------
+            For a As Integer = 0 To Bonus.Length - 1
+                If checkforCollision(bullet1(x), Bonus(a)) And bullet1(x).Enabled = True And Bonus(a).Enabled = True Then
+                    bullet1(x).Dispose()
+                    Me.Controls.Remove(bullet1(x))
+                    bullet1(x).Enabled = False
+                End If
+            Next
+            For b As Integer = 0 To lifeBox.Length - 1
+                If checkforCollision(bullet1(x), Bonus(b)) And bullet1(x).Enabled = True And lifeBox(b).Enabled = True Then
+                    bullet1(x).Dispose()
+                    Me.Controls.Remove(bullet1(x))
+                    bullet1(x).Enabled = False
+                End If
+            Next
+            For c As Integer = 0 To ItemVaccin.Length - 1
+                If checkforCollision(bullet1(x), ItemVaccin(c)) And bullet1(x).Enabled = True And ItemVaccin(c).Enabled = True Then
+                    bullet1(x).Dispose()
+                    Me.Controls.Remove(bullet1(x))
+                    bullet1(x).Enabled = False
+                End If
+            Next
+            '-------------------------------------------
+        Next
+    End Sub
+    Dim timer1, timer2, timer3 As Integer
 
 
 
-        Private Sub extbtn_Click(sender As Object, e As EventArgs) Handles extbtn.Click
-            Me.Hide()
-            startHere.ShowDialog()
-        End Sub
+    Private Sub extbtn_Click(sender As Object, e As EventArgs) Handles extbtn.Click
+        Me.Hide()
+        startHere.ShowDialog()
+    End Sub
 
-        Dim ran1 As New System.Random
-        Dim loc As New Integer
-        Private timeLimit As Integer
-        Private timeLimit2 As Integer
-        Private timeLimit3 As Integer
+    Dim ran1 As New System.Random
+    Dim loc As New Integer
+    Private timeLimit As Integer
+    Private timeLimit2 As Integer
+    Private timeLimit3 As Integer
 
-        Private Sub lastWave()
-            Label1.Visible = True
-            Label1.Enabled = True
-            ProgressBar1.Enabled = True
-            ProgressBar1.Visible = True
-            finishLine.Enabled = True
-            lastGun.Enabled = True
-            lastGun.Visible = True
-            If player1.Left + player1.Width >= Me.Width Then
-                player1.Left -= Speed
-            End If
-            contaminatePlayer(finishLine, player1)
-            If checkforCollision(player1, finishLine) Then
-                Life_Point -= 1
-                pLife.Text = "X " + CStr(Life_Point)
-                pScore.Text = "Score :" + CStr(Score)
-                pItem.Text = "Item :" + CStr(Item_Collected)
+    Private Sub lastWave()
+        Label1.Visible = True
+        Label1.Enabled = True
+        ProgressBar1.Enabled = True
+        ProgressBar1.Visible = True
+        finishLine.Enabled = True
+        lastGun.Enabled = True
+        lastGun.Visible = True
+        If player1.Left + player1.Width >= Me.Width Then
+            player1.Left -= Speed
+        End If
+        contaminatePlayer(finishLine, player1)
+        If checkforCollision(player1, finishLine) Then
+            Life_Point -= 1
+            pLife.Text = "X " + CStr(Life_Point)
+            pScore.Text = "Score :" + CStr(Score)
+            pItem.Text = "Item :" + CStr(Item_Collected)
 
-            End If
-            If checkforCollision(player1, lastGun) And lastGun.Enabled = True Then
-                allowToshotShotGUNl = True
-                Item_Collected = 2
-                pItem.Text = "Item :" + CStr(Item_Collected)
+        End If
+        If checkforCollision(player1, lastGun) And lastGun.Enabled = True Then
+            allowToshotShotGUNl = True
+            Item_Collected = 2
+            pItem.Text = "Item :" + CStr(Item_Collected)
 
-            End If
-
-
+        End If
 
 
 
 
 
-        End Sub
+
+
+    End Sub
 
 
 
 
-    End Class
+End Class
