@@ -127,8 +127,10 @@ Public Class Form2
         Select Case e.KeyValue
             Case Keys.Right
                 posRight = True
+                posLeft = False
             Case Keys.Left
                 posLeft = True
+                posRight = False
             Case Keys.Up
                 posUp = True
                 count += 1
@@ -219,21 +221,26 @@ Public Class Form2
                     End If
                 Next
             End If
-            '---------------HERE THE COUNT IS VERY IMPORTANT-------------------
-            If posUp And player1.Top > ground1.Top - 200 And Not count > 2 Then
-                player1.Top -= JumpSpeed
-               For x As Integer = 0 to wall.Length - 1
+        '---------------HERE THE COUNT IS VERY IMPORTANT-------------------
+        If posUp And player1.Top > ground1.Top - 200 And Not count > 2 Then
+            player1.Top -= JumpSpeed
+            For x As Integer = 0 To wall.Length - 1
 
                 If player1.Bounds.IntersectsWith(wall(x).Bounds) Then
                     player1.Top += JumpSpeed
                 End If
-            Next 
+            Next
+        Else
 
-            End If
-            '-------------------------------------------------------------------
-           
+        End If
 
-        End Sub
+        '-------------------------------------------------------------------
+        If posUp And (posLeft Or posRight) Then
+            player1.Top += JumpSpeed
+        End If
+
+
+    End Sub
 
         '-------------Method for gravity----------------------
         Private Sub giveGravity(ByVal ob1)
