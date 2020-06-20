@@ -39,34 +39,35 @@ Public Class mainCamera
     '----------------------------
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles Me.Load
-        setGame()
-    End Sub
-    Private Sub setGame()
+        'name taken from register form
+        Dim lvl1 = New MyGameManager("John") 'name or name,life,score,item
 
-        pp = New Player()
+    End Sub
+
+    Public Sub setGame()
         RestartBtn.Enabled = False
         lastGun.Visible = False
         lastItem1.Visible = False
-
         lastGun.Enabled = False
         lastItem1.Enabled = False
-        Score = 0
         pScore.Text = "Item :" + CStr(Score)
-
         RestartBtn.Visible = False
         winorloseTxt.Visible = False
         extbtn.Visible = False
-        count = 0
-        bulletNumber = -1
-
-
+        ProgressBar1.Enabled = False
+        ProgressBar1.Visible = False
         Label1.Visible = False
         Label1.Enabled = False
         finishLine.Enabled = False
+
+
+
+        pp = New Player()
+        Score = 0
+        count = 0
+        bulletNumber = -1
         ProgressBar1.Value = 20
-        ProgressBar1.Enabled = False
-        ProgressBar1.Visible = False
-        My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.Background)
+        My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop)
         shotGun = {gun1, gun2, lastGun}
         ground = {ground1, ground2}
         allowToshotShotGUNl = False
@@ -79,10 +80,9 @@ Public Class mainCamera
         wall = {wall1, wall2, wall5, wall3, wall4, wall7, wall6, wall8, wall9, wall10, wall11, wall12, wall13, wall14, wall15, wall16, wall17, wall22, wall23, wakk24, wall25, wall26, wall27, beforeBoss}
         ItemVaccin = {Item1, Item2, Item3, Item7, Item6, Item41, lastItem1}
         lifeBox = {life1, life2, lastLife}
-
-
         Bonus = {bonus1, bonus2, bonus3, bonus4, bonus5, bonus6, bonus9, bonus10, bonus13, bonus14, bonus15}
         Enemy = {enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy12, enemy15, enemy17, enemy40, enemy41}
+
         pointRegenerator = New Point(10, 10)
         For x As Integer = 0 To lifeBox.Length - 1
             lifeBox(x).Image = My.Resources.HP_Bonus_03
@@ -120,8 +120,6 @@ Public Class mainCamera
             ground(e).SizeMode = PictureBoxSizeMode.StretchImage
         Next
     End Sub
-
-
 
     Private Sub mainCamera_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue

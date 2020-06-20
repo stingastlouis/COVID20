@@ -41,6 +41,7 @@ Public Class Form3
     '----------------------------
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim lvl2 = New MyGameManager("John", previousLife, previousScore, previousItems) 'name or name,life,score,item
         setGame()
     End Sub
     Private Sub setGame()

@@ -6,41 +6,42 @@ Public Class Form2
 
     '--------Array-----------
     Dim wall() As PictureBox
-        Dim Bonus() As PictureBox
-        Dim ItemVaccin() As PictureBox
-        Dim ground() As PictureBox
-        Dim lifeBox() As PictureBox
-        Dim platform() As PictureBox
-        Dim Enemy() As PictureBox
-        Dim player() As PictureBox
-        Dim allowToshotShotGUNl As Boolean
-        Dim bullet1(-1) As PistoleBullet1
+    Dim Bonus() As PictureBox
+    Dim ItemVaccin() As PictureBox
+    Dim ground() As PictureBox
+    Dim lifeBox() As PictureBox
+    Dim platform() As PictureBox
+    Dim Enemy() As PictureBox
+    Dim player() As PictureBox
+    Dim allowToshotShotGUNl As Boolean
+    Dim bullet1(-1) As PistoleBullet1
 
-        Dim shotGun() As PictureBox
-        '--------------------------
+    Dim shotGun() As PictureBox
+    '--------------------------
 
-        '---------VARIABLE-----------
-        Dim posLeft, posRight, posUp, IsJumping As Boolean
-        Dim Speed, JumpSpeed, gravitySpeed As Integer
-        Dim count As Integer
-        Dim Player_Name As String
-        Dim Life_Point As Integer
-        Dim Item_Collected As Integer
-        Public Score As Integer
-        Dim generator As Integer
-        Dim pointRegenerator As Point
+    '---------VARIABLE-----------
+    Dim posLeft, posRight, posUp, IsJumping As Boolean
+    Dim Speed, JumpSpeed, gravitySpeed As Integer
+    Dim count As Integer
+    Dim Player_Name As String
+    Dim Life_Point As Integer
+    Dim Item_Collected As Integer
+    Public Score As Integer
+    Dim generator As Integer
+    Dim pointRegenerator As Point
 
-        Dim bulletNumber As Integer
-        Dim bulletArray1ForShotGun(5) As PictureBox
-        Dim count1 As Integer
-        Private getPointShotGun As Integer
-        Private getEnemyScore As Integer
-        Dim timerCount As Integer
-        '----------------------------
+    Dim bulletNumber As Integer
+    Dim bulletArray1ForShotGun(5) As PictureBox
+    Dim count1 As Integer
+    Private getPointShotGun As Integer
+    Private getEnemyScore As Integer
+    Dim timerCount As Integer
+    '----------------------------
 
-        Private Sub mainCamera_Load(sender As Object, e As EventArgs) Handles Me.Load
-            setGame()
-        End Sub
+    Private Sub mainCamera_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim lvl2 = New MyGameManager("John", previousLife, previousScore, previousItems) 'name or name,life,score,item
+        setGame()
+    End Sub
     Private Sub setGame()
 
         RestartBtn.Enabled = False
