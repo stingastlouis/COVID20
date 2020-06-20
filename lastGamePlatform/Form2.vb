@@ -69,7 +69,7 @@ Public Class Form2
         ground = {ground1, ground2}
         allowToshotShotGUNl = False
         Speed = 15
-        JumpSpeed = 10
+        JumpSpeed = 20
         gravitySpeed = 3
         Life_Point = 3
         gameManager.Enabled = True
@@ -111,6 +111,8 @@ Public Class Form2
             Enemy(d).Image = My.Resources._0_Ogre_Idle_000
             Enemy(d).BackColor = Color.Transparent
             Enemy(d).SizeMode = PictureBoxSizeMode.StretchImage
+            Enemy(d).BringToFront()
+
         Next
         For e As Integer = 0 To ground.Length - 1
             ground(e).Image = My.Resources.GrassCliffMid
@@ -220,14 +222,16 @@ Public Class Form2
             '---------------HERE THE COUNT IS VERY IMPORTANT-------------------
             If posUp And player1.Top > ground1.Top - 200 And Not count > 2 Then
                 player1.Top -= JumpSpeed
+               For x As Integer = 0 to wall.Length - 1
+
+                If player1.Bounds.IntersectsWith(wall(x).Bounds) Then
+                    player1.Top += JumpSpeed
+                End If
+            Next 
+
             End If
             '-------------------------------------------------------------------
-            For x As Integer = 0 To wall.Length - 1
-                If posUp = True And player1.Bounds.IntersectsWith(wall(x).Bounds) Then
-                    player1.Top -= JumpSpeed
-                End If
-
-            Next
+           
 
         End Sub
 
@@ -238,10 +242,14 @@ Public Class Form2
             For x As Integer = 0 To wall.Length - 1
                 If checkforCollision(ob1, wall(x)) Then
                     ob1.Top -= gravitySpeed
-                    If posUp Then
-                        ob1.Top -= JumpSpeed + 60
+                If posUp Then
+                    ob1.Top -= JumpSpeed + 60
+                    If ob1.Top <= wall(x).Top + wall(x).Height Then
+                        ob1.Top += JumpSpeed
                     End If
+
                 End If
+            End If
 
             Next
 
@@ -271,37 +279,30 @@ Public Class Form2
         Private Sub moveMycamera()
 
 
-            If Not player1.Left >= beforeBoss.Left + beforeBoss.Width Then
-                If player1.Left > Me.Width / 2 Then
+        If Not player1.Left >= beforeBoss.Left + beforeBoss.Width Then
+            If player1.Left > Me.Width / 2 Then
 
-                    For Each m As Control In Me.Controls
-                        If TypeOf m Is PictureBox Or TypeOf m Is Label Then
-                            If m.Tag = "content" Then
-                                m.Left -= Speed
-                            End If
+                For Each m As Control In Me.Controls
+                    If TypeOf m Is PictureBox Or TypeOf m Is Label Then
+                        If m.Tag = "content" Then
+                            m.Left -= Speed
                         End If
-                    Next
-                Else
-                End If
+                    End If
+                Next
             Else
-                If player1.Left + player1.Width >= Me.Width Then
-                    player1.Left -= Speed
-                End If
-                lastWave()
-                If allowToshotShotGUNl = False Then
-                    Item_Collected = 2
-                    pItem.Text = "Item :" + CStr(Item_Collected)
-                    allowToshotShotGUNl = True
-                End If
             End If
-
-
-
-
-
-
-
-        End Sub
+        Else
+            If player1.Left + player1.Width >= Me.Width Then
+                player1.Left -= Speed
+            End If
+            lastWave()
+            If allowToshotShotGUNl = False Then
+                Item_Collected = 2
+                pItem.Text = "Item :" + CStr(Item_Collected)
+                allowToshotShotGUNl = True
+            End If
+        End If
+    End Sub
 
         Private Sub beforeRestart()
             If Not player1.Left <= Item2.Left And Item2.Enabled = False Then
@@ -407,15 +408,16 @@ Public Class Form2
         Private Sub makeEnemyMove(ByVal pyer As Object)
             For x As Integer = 0 To Enemy.Length - 1
 
-                contaminatePlayer(Enemy(x), pyer) 'Important Check Below
-                For y As Integer = 0 To ground.Length - 1
+            contaminatePlayer(Enemy(x), pyer) 'Important Check Below
+
+            For y As Integer = 0 To ground.Length - 1
                     If checkforCollision(Enemy(x), ground(y)) = False Then
                         Enemy(x).Top += gravitySpeed
                         For z As Integer = 0 To wall.Length - 1
-                            If checkforCollision(Enemy(x), wall(z)) Then
-                                Enemy(x).Top -= gravitySpeed
-                            End If
-                        Next
+                        If Enemy(x).Bounds.IntersectsWith(wall(z).Bounds) Then
+                            Enemy(x).Top -= 15
+                        End If
+                    Next
                     Else
                         Enemy(x).Top -= gravitySpeed
                     End If
@@ -600,34 +602,30 @@ Public Class Form2
 
             For x As Integer = 0 To bullet1.Length - 1
                 bullet1(x).Shoot(player1)
-                'If player1.Left >= beforeBoss.Left Then
-                '    '-------On touching witdth-------------------------------
-                '    If bullet1(x).Left >= Me.Left + Me.Width Then
-                '        bullet1(x).Dispose()
-                '        Me.Controls.Remove(bullet1(x))
-                '        bullet1(x).Enabled = False
-                '    End If
+            'If player1.Left >= beforeBoss.Left Then
+            '    '-------On touching witdth-------------------------------
+            '    If bullet1(x).Left >= Me.Left + Me.Width Then
+            '        bullet1(x).Dispose()
+            '        Me.Controls.Remove(bullet1(x))
+            '        bullet1(x).Enabled = False
+            '    End If
 
-                '    '---------------------------------------------------------
-                'End If
+            '    '---------------------------------------------------------
+            'End If
 
-                'kill bosss-----------------------------------------------
-                If checkforCollision(bullet1(x), finishLine) And finishLine.Enabled = True And bullet1(x).Enabled = True Then
-                    ProgressBar1.Value -= 1
-                    Score += 30 * 0.5
-                    pScore.Text = "Score: " + CStr(Score)
-                    bullet1(x).Enabled = False
-                    bullet1(x).Dispose()
+            'kill bosss-----------------------------------------------
+            If checkforCollision(bullet1(x), finishLine) And finishLine.Enabled = True And bullet1(x).Enabled = True Then
+                ProgressBar1.Value -= 1
+                Score += 30 * 0.5
+                pScore.Text = "Score: " + CStr(Score)
+                bullet1(x).Enabled = False
+                bullet1(x).Dispose()
 
-                    finishLine.Enabled = False
-
-                End If
-
-                '---------------------------------------------------------
-
-
-                '----kill enemy------------------------------
-                For y As Integer = 0 To Enemy.Length - 1
+                finishLine.Enabled = False
+            End If
+            '--------------------------------------------
+            '----kill enemy------------------------------
+            For y As Integer = 0 To Enemy.Length - 1
                     If checkforCollision(bullet1(x), Enemy(y)) And bullet1(x).Enabled = True And Enemy(y).Enabled = True Then
                         Score += getEnemyScore
                         pScore.Text = "Score :" + CStr(Score)
