@@ -179,7 +179,7 @@ Partial Class Form2
         'ProgressBar1
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(588, 12)
-        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(4)
         Me.ProgressBar1.Maximum = 20
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(133, 28)
@@ -193,7 +193,7 @@ Partial Class Form2
         '
         Me.extbtn.Font = New System.Drawing.Font("Agency FB", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.extbtn.Location = New System.Drawing.Point(4076, 38)
-        Me.extbtn.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.extbtn.Margin = New System.Windows.Forms.Padding(4)
         Me.extbtn.Name = "extbtn"
         Me.extbtn.Size = New System.Drawing.Size(165, 46)
         Me.extbtn.TabIndex = 144
@@ -205,7 +205,7 @@ Partial Class Form2
         '
         Me.RestartBtn.Font = New System.Drawing.Font("Agency FB", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RestartBtn.Location = New System.Drawing.Point(4076, -15)
-        Me.RestartBtn.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RestartBtn.Margin = New System.Windows.Forms.Padding(4)
         Me.RestartBtn.Name = "RestartBtn"
         Me.RestartBtn.Size = New System.Drawing.Size(165, 46)
         Me.RestartBtn.TabIndex = 143
@@ -273,7 +273,7 @@ Partial Class Form2
         '
         Me.lastLife.BackColor = System.Drawing.Color.Fuchsia
         Me.lastLife.Location = New System.Drawing.Point(3455, 412)
-        Me.lastLife.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lastLife.Margin = New System.Windows.Forms.Padding(4)
         Me.lastLife.Name = "lastLife"
         Me.lastLife.Size = New System.Drawing.Size(55, 53)
         Me.lastLife.TabIndex = 192
@@ -285,7 +285,7 @@ Partial Class Form2
         Me.lastGun.BackColor = System.Drawing.Color.Transparent
         Me.lastGun.Image = Global.lastGamePlatform.My.Resources.Resources.gun2
         Me.lastGun.Location = New System.Drawing.Point(3379, 382)
-        Me.lastGun.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lastGun.Margin = New System.Windows.Forms.Padding(4)
         Me.lastGun.Name = "lastGun"
         Me.lastGun.Size = New System.Drawing.Size(52, 44)
         Me.lastGun.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -297,7 +297,7 @@ Partial Class Form2
         '
         Me.lastItem1.BackColor = System.Drawing.Color.Gold
         Me.lastItem1.Location = New System.Drawing.Point(2988, 384)
-        Me.lastItem1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lastItem1.Margin = New System.Windows.Forms.Padding(4)
         Me.lastItem1.Name = "lastItem1"
         Me.lastItem1.Size = New System.Drawing.Size(52, 44)
         Me.lastItem1.TabIndex = 184
@@ -309,7 +309,7 @@ Partial Class Form2
         '
         Me.Item41.BackColor = System.Drawing.Color.Gold
         Me.Item41.Location = New System.Drawing.Point(3517, 412)
-        Me.Item41.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Item41.Margin = New System.Windows.Forms.Padding(4)
         Me.Item41.Name = "Item41"
         Me.Item41.Size = New System.Drawing.Size(52, 44)
         Me.Item41.TabIndex = 183
@@ -320,7 +320,7 @@ Partial Class Form2
         '
         Me.enemy41.BackColor = System.Drawing.Color.Olive
         Me.enemy41.Location = New System.Drawing.Point(4052, 71)
-        Me.enemy41.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy41.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy41.Name = "enemy41"
         Me.enemy41.Size = New System.Drawing.Size(87, 62)
         Me.enemy41.TabIndex = 182
@@ -331,7 +331,7 @@ Partial Class Form2
         '
         Me.enemy40.BackColor = System.Drawing.Color.Olive
         Me.enemy40.Location = New System.Drawing.Point(3957, 92)
-        Me.enemy40.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy40.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy40.Name = "enemy40"
         Me.enemy40.Size = New System.Drawing.Size(87, 62)
         Me.enemy40.TabIndex = 181
@@ -342,7 +342,7 @@ Partial Class Form2
         '
         Me.Item7.BackColor = System.Drawing.Color.Gold
         Me.Item7.Location = New System.Drawing.Point(3344, 306)
-        Me.Item7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Item7.Margin = New System.Windows.Forms.Padding(4)
         Me.Item7.Name = "Item7"
         Me.Item7.Size = New System.Drawing.Size(52, 44)
         Me.Item7.TabIndex = 178
@@ -353,7 +353,7 @@ Partial Class Form2
         '
         Me.finishLine.BackColor = System.Drawing.Color.Olive
         Me.finishLine.Location = New System.Drawing.Point(4205, 382)
-        Me.finishLine.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.finishLine.Margin = New System.Windows.Forms.Padding(4)
         Me.finishLine.Name = "finishLine"
         Me.finishLine.Size = New System.Drawing.Size(173, 117)
         Me.finishLine.TabIndex = 177
@@ -364,9 +364,9 @@ Partial Class Form2
         '
         Me.ground2.BackColor = System.Drawing.Color.Maroon
         Me.ground2.Location = New System.Drawing.Point(3329, 498)
-        Me.ground2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ground2.Margin = New System.Windows.Forms.Padding(4)
         Me.ground2.Name = "ground2"
-        Me.ground2.Size = New System.Drawing.Size(1369, 63)
+        Me.ground2.Size = New System.Drawing.Size(1056, 63)
         Me.ground2.TabIndex = 176
         Me.ground2.TabStop = False
         Me.ground2.Tag = "content"
@@ -375,7 +375,7 @@ Partial Class Form2
         '
         Me.enemy17.BackColor = System.Drawing.Color.Olive
         Me.enemy17.Location = New System.Drawing.Point(3981, 96)
-        Me.enemy17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy17.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy17.Name = "enemy17"
         Me.enemy17.Size = New System.Drawing.Size(87, 62)
         Me.enemy17.TabIndex = 175
@@ -386,7 +386,7 @@ Partial Class Form2
         '
         Me.bonus14.BackColor = System.Drawing.Color.Yellow
         Me.bonus14.Location = New System.Drawing.Point(1369, 281)
-        Me.bonus14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus14.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus14.Name = "bonus14"
         Me.bonus14.Size = New System.Drawing.Size(87, 62)
         Me.bonus14.TabIndex = 166
@@ -397,7 +397,7 @@ Partial Class Form2
         '
         Me.wall26.BackColor = System.Drawing.Color.Maroon
         Me.wall26.Location = New System.Drawing.Point(3280, 426)
-        Me.wall26.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall26.Margin = New System.Windows.Forms.Padding(4)
         Me.wall26.Name = "wall26"
         Me.wall26.Size = New System.Drawing.Size(137, 39)
         Me.wall26.TabIndex = 174
@@ -408,7 +408,7 @@ Partial Class Form2
         '
         Me.wall27.BackColor = System.Drawing.Color.Maroon
         Me.wall27.Location = New System.Drawing.Point(3305, 464)
-        Me.wall27.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall27.Margin = New System.Windows.Forms.Padding(4)
         Me.wall27.Name = "wall27"
         Me.wall27.Size = New System.Drawing.Size(175, 39)
         Me.wall27.TabIndex = 173
@@ -419,7 +419,7 @@ Partial Class Form2
         '
         Me.wall25.BackColor = System.Drawing.Color.Maroon
         Me.wall25.Location = New System.Drawing.Point(3761, 156)
-        Me.wall25.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall25.Margin = New System.Windows.Forms.Padding(4)
         Me.wall25.Name = "wall25"
         Me.wall25.Size = New System.Drawing.Size(121, 39)
         Me.wall25.TabIndex = 172
@@ -430,7 +430,7 @@ Partial Class Form2
         '
         Me.wakk24.BackColor = System.Drawing.Color.Maroon
         Me.wakk24.Location = New System.Drawing.Point(4001, 161)
-        Me.wakk24.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wakk24.Margin = New System.Windows.Forms.Padding(4)
         Me.wakk24.Name = "wakk24"
         Me.wakk24.Size = New System.Drawing.Size(121, 39)
         Me.wakk24.TabIndex = 171
@@ -441,7 +441,7 @@ Partial Class Form2
         '
         Me.wall23.BackColor = System.Drawing.Color.Maroon
         Me.wall23.Location = New System.Drawing.Point(2929, 427)
-        Me.wall23.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall23.Margin = New System.Windows.Forms.Padding(4)
         Me.wall23.Name = "wall23"
         Me.wall23.Size = New System.Drawing.Size(111, 39)
         Me.wall23.TabIndex = 170
@@ -452,7 +452,7 @@ Partial Class Form2
         '
         Me.wall22.BackColor = System.Drawing.Color.Maroon
         Me.wall22.Location = New System.Drawing.Point(2868, 460)
-        Me.wall22.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall22.Margin = New System.Windows.Forms.Padding(4)
         Me.wall22.Name = "wall22"
         Me.wall22.Size = New System.Drawing.Size(145, 39)
         Me.wall22.TabIndex = 169
@@ -463,7 +463,7 @@ Partial Class Form2
         '
         Me.Item6.BackColor = System.Drawing.Color.DarkGray
         Me.Item6.Location = New System.Drawing.Point(2253, 444)
-        Me.Item6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Item6.Margin = New System.Windows.Forms.Padding(4)
         Me.Item6.Name = "Item6"
         Me.Item6.Size = New System.Drawing.Size(87, 48)
         Me.Item6.TabIndex = 168
@@ -474,7 +474,7 @@ Partial Class Form2
         '
         Me.bonus15.BackColor = System.Drawing.Color.Yellow
         Me.bonus15.Location = New System.Drawing.Point(1827, 181)
-        Me.bonus15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus15.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus15.Name = "bonus15"
         Me.bonus15.Size = New System.Drawing.Size(87, 62)
         Me.bonus15.TabIndex = 167
@@ -485,7 +485,7 @@ Partial Class Form2
         '
         Me.bonus13.BackColor = System.Drawing.Color.Yellow
         Me.bonus13.Location = New System.Drawing.Point(759, 405)
-        Me.bonus13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus13.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus13.Name = "bonus13"
         Me.bonus13.Size = New System.Drawing.Size(87, 62)
         Me.bonus13.TabIndex = 165
@@ -496,7 +496,7 @@ Partial Class Form2
         '
         Me.wall17.BackColor = System.Drawing.Color.Maroon
         Me.wall17.Location = New System.Drawing.Point(3891, 161)
-        Me.wall17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall17.Margin = New System.Windows.Forms.Padding(4)
         Me.wall17.Name = "wall17"
         Me.wall17.Size = New System.Drawing.Size(103, 34)
         Me.wall17.TabIndex = 164
@@ -507,7 +507,7 @@ Partial Class Form2
         '
         Me.wall16.BackColor = System.Drawing.Color.Maroon
         Me.wall16.Location = New System.Drawing.Point(3633, 156)
-        Me.wall16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall16.Margin = New System.Windows.Forms.Padding(4)
         Me.wall16.Name = "wall16"
         Me.wall16.Size = New System.Drawing.Size(120, 39)
         Me.wall16.TabIndex = 163
@@ -518,7 +518,7 @@ Partial Class Form2
         '
         Me.wall15.BackColor = System.Drawing.Color.Maroon
         Me.wall15.Location = New System.Drawing.Point(2657, 240)
-        Me.wall15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall15.Margin = New System.Windows.Forms.Padding(4)
         Me.wall15.Name = "wall15"
         Me.wall15.Size = New System.Drawing.Size(120, 38)
         Me.wall15.TabIndex = 162
@@ -529,7 +529,7 @@ Partial Class Form2
         '
         Me.wall14.BackColor = System.Drawing.Color.Maroon
         Me.wall14.Location = New System.Drawing.Point(2199, 239)
-        Me.wall14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall14.Margin = New System.Windows.Forms.Padding(4)
         Me.wall14.Name = "wall14"
         Me.wall14.Size = New System.Drawing.Size(371, 39)
         Me.wall14.TabIndex = 161
@@ -540,7 +540,7 @@ Partial Class Form2
         '
         Me.wall13.BackColor = System.Drawing.Color.Maroon
         Me.wall13.Location = New System.Drawing.Point(2559, 73)
-        Me.wall13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall13.Margin = New System.Windows.Forms.Padding(4)
         Me.wall13.Name = "wall13"
         Me.wall13.Size = New System.Drawing.Size(87, 33)
         Me.wall13.TabIndex = 160
@@ -551,7 +551,7 @@ Partial Class Form2
         '
         Me.bonus10.BackColor = System.Drawing.Color.Yellow
         Me.bonus10.Location = New System.Drawing.Point(2887, 137)
-        Me.bonus10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus10.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus10.Name = "bonus10"
         Me.bonus10.Size = New System.Drawing.Size(87, 62)
         Me.bonus10.TabIndex = 159
@@ -562,7 +562,7 @@ Partial Class Form2
         '
         Me.bonus9.BackColor = System.Drawing.Color.Yellow
         Me.bonus9.Location = New System.Drawing.Point(2455, 181)
-        Me.bonus9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus9.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus9.Name = "bonus9"
         Me.bonus9.Size = New System.Drawing.Size(87, 62)
         Me.bonus9.TabIndex = 158
@@ -573,7 +573,7 @@ Partial Class Form2
         '
         Me.bonus6.BackColor = System.Drawing.Color.Yellow
         Me.bonus6.Location = New System.Drawing.Point(1507, 443)
-        Me.bonus6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus6.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus6.Name = "bonus6"
         Me.bonus6.Size = New System.Drawing.Size(87, 62)
         Me.bonus6.TabIndex = 157
@@ -584,7 +584,7 @@ Partial Class Form2
         '
         Me.bonus5.BackColor = System.Drawing.Color.Yellow
         Me.bonus5.Location = New System.Drawing.Point(2535, 441)
-        Me.bonus5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus5.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus5.Name = "bonus5"
         Me.bonus5.Size = New System.Drawing.Size(87, 62)
         Me.bonus5.TabIndex = 156
@@ -595,7 +595,7 @@ Partial Class Form2
         '
         Me.bonus4.BackColor = System.Drawing.Color.Yellow
         Me.bonus4.Location = New System.Drawing.Point(2640, 370)
-        Me.bonus4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus4.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus4.Name = "bonus4"
         Me.bonus4.Size = New System.Drawing.Size(87, 62)
         Me.bonus4.TabIndex = 155
@@ -606,7 +606,7 @@ Partial Class Form2
         '
         Me.enemy15.BackColor = System.Drawing.Color.Olive
         Me.enemy15.Location = New System.Drawing.Point(1023, 405)
-        Me.enemy15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy15.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy15.Name = "enemy15"
         Me.enemy15.Size = New System.Drawing.Size(87, 62)
         Me.enemy15.TabIndex = 154
@@ -617,7 +617,7 @@ Partial Class Form2
         '
         Me.enemy12.BackColor = System.Drawing.Color.Olive
         Me.enemy12.Location = New System.Drawing.Point(2004, 326)
-        Me.enemy12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy12.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy12.Name = "enemy12"
         Me.enemy12.Size = New System.Drawing.Size(87, 62)
         Me.enemy12.TabIndex = 153
@@ -628,7 +628,7 @@ Partial Class Form2
         '
         Me.enemy9.BackColor = System.Drawing.Color.Olive
         Me.enemy9.Location = New System.Drawing.Point(3036, 498)
-        Me.enemy9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy9.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy9.Name = "enemy9"
         Me.enemy9.Size = New System.Drawing.Size(75, 36)
         Me.enemy9.TabIndex = 152
@@ -639,7 +639,7 @@ Partial Class Form2
         '
         Me.enemy8.BackColor = System.Drawing.Color.Olive
         Me.enemy8.Location = New System.Drawing.Point(2004, 110)
-        Me.enemy8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy8.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy8.Name = "enemy8"
         Me.enemy8.Size = New System.Drawing.Size(71, 47)
         Me.enemy8.TabIndex = 151
@@ -650,7 +650,7 @@ Partial Class Form2
         '
         Me.enemy7.BackColor = System.Drawing.Color.Olive
         Me.enemy7.Location = New System.Drawing.Point(3211, 486)
-        Me.enemy7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy7.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy7.Name = "enemy7"
         Me.enemy7.Size = New System.Drawing.Size(87, 48)
         Me.enemy7.TabIndex = 150
@@ -661,7 +661,7 @@ Partial Class Form2
         '
         Me.enemy6.BackColor = System.Drawing.Color.Olive
         Me.enemy6.Location = New System.Drawing.Point(2755, 4)
-        Me.enemy6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy6.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy6.Name = "enemy6"
         Me.enemy6.Size = New System.Drawing.Size(87, 62)
         Me.enemy6.TabIndex = 149
@@ -672,7 +672,7 @@ Partial Class Form2
         '
         Me.enemy5.BackColor = System.Drawing.Color.Olive
         Me.enemy5.Location = New System.Drawing.Point(3119, 486)
-        Me.enemy5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy5.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy5.Name = "enemy5"
         Me.enemy5.Size = New System.Drawing.Size(87, 48)
         Me.enemy5.TabIndex = 148
@@ -683,7 +683,7 @@ Partial Class Form2
         '
         Me.enemy4.BackColor = System.Drawing.Color.Olive
         Me.enemy4.Location = New System.Drawing.Point(2360, 181)
-        Me.enemy4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy4.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy4.Name = "enemy4"
         Me.enemy4.Size = New System.Drawing.Size(87, 62)
         Me.enemy4.TabIndex = 147
@@ -694,7 +694,7 @@ Partial Class Form2
         '
         Me.gun2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.gun2.Location = New System.Drawing.Point(115, 457)
-        Me.gun2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gun2.Margin = New System.Windows.Forms.Padding(4)
         Me.gun2.Name = "gun2"
         Me.gun2.Size = New System.Drawing.Size(41, 36)
         Me.gun2.TabIndex = 146
@@ -705,7 +705,7 @@ Partial Class Form2
         '
         Me.gun1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.gun1.Location = New System.Drawing.Point(2717, 196)
-        Me.gun1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gun1.Margin = New System.Windows.Forms.Padding(4)
         Me.gun1.Name = "gun1"
         Me.gun1.Size = New System.Drawing.Size(41, 36)
         Me.gun1.TabIndex = 145
@@ -716,7 +716,7 @@ Partial Class Form2
         '
         Me.beforeBoss.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.beforeBoss.Location = New System.Drawing.Point(3477, 464)
-        Me.beforeBoss.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.beforeBoss.Margin = New System.Windows.Forms.Padding(4)
         Me.beforeBoss.Name = "beforeBoss"
         Me.beforeBoss.Size = New System.Drawing.Size(117, 34)
         Me.beforeBoss.TabIndex = 141
@@ -727,7 +727,7 @@ Partial Class Form2
         '
         Me.enemy3.BackColor = System.Drawing.Color.Olive
         Me.enemy3.Location = New System.Drawing.Point(1827, 110)
-        Me.enemy3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy3.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy3.Name = "enemy3"
         Me.enemy3.Size = New System.Drawing.Size(87, 62)
         Me.enemy3.TabIndex = 140
@@ -738,7 +738,7 @@ Partial Class Form2
         '
         Me.enemy2.BackColor = System.Drawing.Color.Olive
         Me.enemy2.Location = New System.Drawing.Point(1840, 443)
-        Me.enemy2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.enemy2.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy2.Name = "enemy2"
         Me.enemy2.Size = New System.Drawing.Size(87, 62)
         Me.enemy2.TabIndex = 139
@@ -749,7 +749,7 @@ Partial Class Form2
         '
         Me.life1.BackColor = System.Drawing.Color.Fuchsia
         Me.life1.Location = New System.Drawing.Point(1183, 415)
-        Me.life1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.life1.Margin = New System.Windows.Forms.Padding(4)
         Me.life1.Name = "life1"
         Me.life1.Size = New System.Drawing.Size(68, 52)
         Me.life1.TabIndex = 138
@@ -760,7 +760,7 @@ Partial Class Form2
         '
         Me.life2.BackColor = System.Drawing.Color.Fuchsia
         Me.life2.Location = New System.Drawing.Point(1628, 281)
-        Me.life2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.life2.Margin = New System.Windows.Forms.Padding(4)
         Me.life2.Name = "life2"
         Me.life2.Size = New System.Drawing.Size(87, 62)
         Me.life2.TabIndex = 137
@@ -771,7 +771,7 @@ Partial Class Form2
         '
         Me.bonus3.BackColor = System.Drawing.Color.Yellow
         Me.bonus3.Location = New System.Drawing.Point(2228, 181)
-        Me.bonus3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus3.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus3.Name = "bonus3"
         Me.bonus3.Size = New System.Drawing.Size(87, 62)
         Me.bonus3.TabIndex = 136
@@ -782,7 +782,7 @@ Partial Class Form2
         '
         Me.bonus2.BackColor = System.Drawing.Color.Yellow
         Me.bonus2.Location = New System.Drawing.Point(2075, 95)
-        Me.bonus2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus2.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus2.Name = "bonus2"
         Me.bonus2.Size = New System.Drawing.Size(87, 62)
         Me.bonus2.TabIndex = 135
@@ -793,7 +793,7 @@ Partial Class Form2
         '
         Me.bonus1.BackColor = System.Drawing.Color.Yellow
         Me.bonus1.Location = New System.Drawing.Point(2512, 286)
-        Me.bonus1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.bonus1.Margin = New System.Windows.Forms.Padding(4)
         Me.bonus1.Name = "bonus1"
         Me.bonus1.Size = New System.Drawing.Size(87, 62)
         Me.bonus1.TabIndex = 134
@@ -804,7 +804,7 @@ Partial Class Form2
         '
         Me.Item3.BackColor = System.Drawing.Color.DarkGray
         Me.Item3.Location = New System.Drawing.Point(2420, 452)
-        Me.Item3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Item3.Margin = New System.Windows.Forms.Padding(4)
         Me.Item3.Name = "Item3"
         Me.Item3.Size = New System.Drawing.Size(87, 48)
         Me.Item3.TabIndex = 133
@@ -815,7 +815,7 @@ Partial Class Form2
         '
         Me.Item2.BackColor = System.Drawing.Color.DarkGray
         Me.Item2.Location = New System.Drawing.Point(295, 443)
-        Me.Item2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Item2.Margin = New System.Windows.Forms.Padding(4)
         Me.Item2.Name = "Item2"
         Me.Item2.Size = New System.Drawing.Size(71, 49)
         Me.Item2.TabIndex = 132
@@ -826,7 +826,7 @@ Partial Class Form2
         '
         Me.Item1.BackColor = System.Drawing.Color.DarkGray
         Me.Item1.Location = New System.Drawing.Point(456, 443)
-        Me.Item1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Item1.Margin = New System.Windows.Forms.Padding(4)
         Me.Item1.Name = "Item1"
         Me.Item1.Size = New System.Drawing.Size(76, 49)
         Me.Item1.TabIndex = 131
@@ -837,7 +837,7 @@ Partial Class Form2
         '
         Me.wall12.BackColor = System.Drawing.Color.Maroon
         Me.wall12.Location = New System.Drawing.Point(1369, 345)
-        Me.wall12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall12.Margin = New System.Windows.Forms.Padding(4)
         Me.wall12.Name = "wall12"
         Me.wall12.Size = New System.Drawing.Size(87, 26)
         Me.wall12.TabIndex = 126
@@ -848,7 +848,7 @@ Partial Class Form2
         '
         Me.wall11.BackColor = System.Drawing.Color.Maroon
         Me.wall11.Location = New System.Drawing.Point(759, 463)
-        Me.wall11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall11.Margin = New System.Windows.Forms.Padding(4)
         Me.wall11.Name = "wall11"
         Me.wall11.Size = New System.Drawing.Size(87, 42)
         Me.wall11.TabIndex = 125
@@ -859,7 +859,7 @@ Partial Class Form2
         '
         Me.wall10.BackColor = System.Drawing.Color.Maroon
         Me.wall10.Location = New System.Drawing.Point(2640, 439)
-        Me.wall10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall10.Margin = New System.Windows.Forms.Padding(4)
         Me.wall10.Name = "wall10"
         Me.wall10.Size = New System.Drawing.Size(87, 62)
         Me.wall10.TabIndex = 124
@@ -870,7 +870,7 @@ Partial Class Form2
         '
         Me.wall9.BackColor = System.Drawing.Color.Maroon
         Me.wall9.Location = New System.Drawing.Point(1935, 459)
-        Me.wall9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall9.Margin = New System.Windows.Forms.Padding(4)
         Me.wall9.Name = "wall9"
         Me.wall9.Size = New System.Drawing.Size(87, 43)
         Me.wall9.TabIndex = 123
@@ -881,7 +881,7 @@ Partial Class Form2
         '
         Me.wall8.BackColor = System.Drawing.Color.Maroon
         Me.wall8.Location = New System.Drawing.Point(2717, 73)
-        Me.wall8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall8.Margin = New System.Windows.Forms.Padding(4)
         Me.wall8.Name = "wall8"
         Me.wall8.Size = New System.Drawing.Size(87, 62)
         Me.wall8.TabIndex = 122
@@ -892,7 +892,7 @@ Partial Class Form2
         '
         Me.wall7.BackColor = System.Drawing.Color.Maroon
         Me.wall7.Location = New System.Drawing.Point(1164, 463)
-        Me.wall7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall7.Margin = New System.Windows.Forms.Padding(4)
         Me.wall7.Name = "wall7"
         Me.wall7.Size = New System.Drawing.Size(87, 42)
         Me.wall7.TabIndex = 121
@@ -903,7 +903,7 @@ Partial Class Form2
         '
         Me.wall6.BackColor = System.Drawing.Color.Maroon
         Me.wall6.Location = New System.Drawing.Point(1507, 97)
-        Me.wall6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall6.Margin = New System.Windows.Forms.Padding(4)
         Me.wall6.Name = "wall6"
         Me.wall6.Size = New System.Drawing.Size(87, 112)
         Me.wall6.TabIndex = 120
@@ -914,7 +914,7 @@ Partial Class Form2
         '
         Me.wall5.BackColor = System.Drawing.Color.Maroon
         Me.wall5.Location = New System.Drawing.Point(1628, 345)
-        Me.wall5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall5.Margin = New System.Windows.Forms.Padding(4)
         Me.wall5.Name = "wall5"
         Me.wall5.Size = New System.Drawing.Size(87, 26)
         Me.wall5.TabIndex = 119
@@ -925,7 +925,7 @@ Partial Class Form2
         '
         Me.wall4.BackColor = System.Drawing.Color.Maroon
         Me.wall4.Location = New System.Drawing.Point(1792, 250)
-        Me.wall4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall4.Margin = New System.Windows.Forms.Padding(4)
         Me.wall4.Name = "wall4"
         Me.wall4.Size = New System.Drawing.Size(121, 28)
         Me.wall4.TabIndex = 118
@@ -936,7 +936,7 @@ Partial Class Form2
         '
         Me.wall1.BackColor = System.Drawing.Color.Maroon
         Me.wall1.Location = New System.Drawing.Point(3005, 533)
-        Me.wall1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall1.Margin = New System.Windows.Forms.Padding(4)
         Me.wall1.Name = "wall1"
         Me.wall1.Size = New System.Drawing.Size(332, 28)
         Me.wall1.TabIndex = 117
@@ -947,7 +947,7 @@ Partial Class Form2
         '
         Me.wall3.BackColor = System.Drawing.Color.Maroon
         Me.wall3.Location = New System.Drawing.Point(2020, 441)
-        Me.wall3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall3.Margin = New System.Windows.Forms.Padding(4)
         Me.wall3.Name = "wall3"
         Me.wall3.Size = New System.Drawing.Size(87, 62)
         Me.wall3.TabIndex = 116
@@ -958,7 +958,7 @@ Partial Class Form2
         '
         Me.wall2.BackColor = System.Drawing.Color.Maroon
         Me.wall2.Location = New System.Drawing.Point(2004, 158)
-        Me.wall2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.wall2.Margin = New System.Windows.Forms.Padding(4)
         Me.wall2.Name = "wall2"
         Me.wall2.Size = New System.Drawing.Size(113, 28)
         Me.wall2.TabIndex = 115
@@ -970,7 +970,7 @@ Partial Class Form2
         Me.player1.BackColor = System.Drawing.Color.Transparent
         Me.player1.Image = Global.lastGamePlatform.My.Resources.Resources.player1Mov
         Me.player1.Location = New System.Drawing.Point(41, 206)
-        Me.player1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.player1.Margin = New System.Windows.Forms.Padding(4)
         Me.player1.Name = "player1"
         Me.player1.Size = New System.Drawing.Size(87, 62)
         Me.player1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -982,7 +982,7 @@ Partial Class Form2
         '
         Me.ground1.BackColor = System.Drawing.Color.Maroon
         Me.ground1.Location = New System.Drawing.Point(1, 500)
-        Me.ground1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ground1.Margin = New System.Windows.Forms.Padding(4)
         Me.ground1.Name = "ground1"
         Me.ground1.Size = New System.Drawing.Size(3012, 62)
         Me.ground1.TabIndex = 113
@@ -1069,7 +1069,7 @@ Partial Class Form2
         Me.Controls.Add(Me.wall2)
         Me.Controls.Add(Me.player1)
         Me.Controls.Add(Me.ground1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form2"
         Me.Text = "Form2"
         CType(Me.lastLife, System.ComponentModel.ISupportInitialize).EndInit()
