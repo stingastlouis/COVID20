@@ -286,16 +286,16 @@
     <None Include="Resources\arrow keys.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\HP_Bonus_03.png" />
+    <None Include="Images\life.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\item.png" />
+    <None Include="Images\adn.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\image 1.png" />
+    <None Include="Images\coin.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\gun2.png" />
+    <None Include="Images\gun.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

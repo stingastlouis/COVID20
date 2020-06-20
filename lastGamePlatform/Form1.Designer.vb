@@ -38,14 +38,14 @@ Partial Class mainCamera
 		Me.Label4 = New System.Windows.Forms.Label()
 		Me.Label5 = New System.Windows.Forms.Label()
 		Me.Label6 = New System.Windows.Forms.Label()
-		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-		Me.lastGun = New System.Windows.Forms.PictureBox()
+		Me.instruction = New System.Windows.Forms.PictureBox()
+		Me.gun = New System.Windows.Forms.PictureBox()
 		Me.lastItem1 = New System.Windows.Forms.PictureBox()
 		Me.Item41 = New System.Windows.Forms.PictureBox()
 		Me.enemy41 = New System.Windows.Forms.PictureBox()
 		Me.enemy40 = New System.Windows.Forms.PictureBox()
 		Me.Item7 = New System.Windows.Forms.PictureBox()
-		Me.finishLine = New System.Windows.Forms.PictureBox()
+		Me.boss = New System.Windows.Forms.PictureBox()
 		Me.ground2 = New System.Windows.Forms.PictureBox()
 		Me.enemy17 = New System.Windows.Forms.PictureBox()
 		Me.bonus14 = New System.Windows.Forms.PictureBox()
@@ -107,14 +107,14 @@ Partial Class mainCamera
 		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.lastGun, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.gun, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.Item41, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.enemy41, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.enemy40, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.Item7, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.finishLine, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.boss, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.ground2, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.enemy17, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bonus14, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -328,29 +328,29 @@ Partial Class mainCamera
 		Me.Label6.Tag = "content"
 		Me.Label6.Text = "Collect 2 Item and a gun to shoot"
 		'
-		'PictureBox1
+		'instruction
 		'
-		Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-		Me.PictureBox1.Image = Global.lastGamePlatform.My.Resources.Resources.arrow_keys
-		Me.PictureBox1.Location = New System.Drawing.Point(178, 84)
-		Me.PictureBox1.Name = "PictureBox1"
-		Me.PictureBox1.Size = New System.Drawing.Size(65, 50)
-		Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.PictureBox1.TabIndex = 107
-		Me.PictureBox1.TabStop = False
-		Me.PictureBox1.Tag = "content"
+		Me.instruction.BackColor = System.Drawing.Color.Transparent
+		Me.instruction.Image = Global.lastGamePlatform.My.Resources.Resources.arrow_keys
+		Me.instruction.Location = New System.Drawing.Point(178, 84)
+		Me.instruction.Name = "instruction"
+		Me.instruction.Size = New System.Drawing.Size(65, 50)
+		Me.instruction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.instruction.TabIndex = 107
+		Me.instruction.TabStop = False
+		Me.instruction.Tag = "content"
 		'
-		'lastGun
+		'gun
 		'
-		Me.lastGun.BackColor = System.Drawing.Color.Transparent
-		Me.lastGun.Image = Global.lastGamePlatform.My.Resources.Resources.gun2
-		Me.lastGun.Location = New System.Drawing.Point(2533, 310)
-		Me.lastGun.Name = "lastGun"
-		Me.lastGun.Size = New System.Drawing.Size(39, 36)
-		Me.lastGun.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.lastGun.TabIndex = 105
-		Me.lastGun.TabStop = False
-		Me.lastGun.Tag = "content"
+		Me.gun.BackColor = System.Drawing.Color.Transparent
+		Me.gun.Image = Global.lastGamePlatform.My.Resources.Resources.gun2
+		Me.gun.Location = New System.Drawing.Point(2533, 310)
+		Me.gun.Name = "gun"
+		Me.gun.Size = New System.Drawing.Size(39, 36)
+		Me.gun.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.gun.TabIndex = 105
+		Me.gun.TabStop = False
+		Me.gun.Tag = "content"
 		'
 		'lastItem1
 		'
@@ -403,15 +403,15 @@ Partial Class mainCamera
 		Me.Item7.TabStop = False
 		Me.Item7.Tag = "content"
 		'
-		'finishLine
+		'boss
 		'
-		Me.finishLine.BackColor = System.Drawing.Color.Olive
-		Me.finishLine.Location = New System.Drawing.Point(3153, 310)
-		Me.finishLine.Name = "finishLine"
-		Me.finishLine.Size = New System.Drawing.Size(130, 95)
-		Me.finishLine.TabIndex = 90
-		Me.finishLine.TabStop = False
-		Me.finishLine.Tag = "content"
+		Me.boss.BackColor = System.Drawing.Color.Olive
+		Me.boss.Location = New System.Drawing.Point(3153, 310)
+		Me.boss.Name = "boss"
+		Me.boss.Size = New System.Drawing.Size(130, 95)
+		Me.boss.TabIndex = 90
+		Me.boss.TabStop = False
+		Me.boss.Tag = "content"
 		'
 		'ground2
 		'
@@ -958,7 +958,7 @@ Partial Class mainCamera
 		'enemy12
 		'
 		Me.enemy12.BackColor = System.Drawing.Color.Olive
-		Me.enemy12.Location = New System.Drawing.Point(668, 274)
+		Me.enemy12.Location = New System.Drawing.Point(397, 350)
 		Me.enemy12.Name = "enemy12"
 		Me.enemy12.Size = New System.Drawing.Size(65, 50)
 		Me.enemy12.TabIndex = 52
@@ -978,7 +978,7 @@ Partial Class mainCamera
 		'Item1
 		'
 		Me.Item1.BackColor = System.Drawing.Color.DarkGray
-		Me.Item1.Location = New System.Drawing.Point(341, 360)
+		Me.Item1.Location = New System.Drawing.Point(749, 245)
 		Me.Item1.Name = "Item1"
 		Me.Item1.Size = New System.Drawing.Size(57, 40)
 		Me.Item1.TabIndex = 23
@@ -998,7 +998,7 @@ Partial Class mainCamera
 		'PictureBox2
 		'
 		Me.PictureBox2.BackColor = System.Drawing.Color.Yellow
-		Me.PictureBox2.Location = New System.Drawing.Point(242, 261)
+		Me.PictureBox2.Location = New System.Drawing.Point(142, 350)
 		Me.PictureBox2.Name = "PictureBox2"
 		Me.PictureBox2.Size = New System.Drawing.Size(65, 50)
 		Me.PictureBox2.TabIndex = 113
@@ -1039,9 +1039,9 @@ Partial Class mainCamera
 		Me.Controls.Add(Me.Label5)
 		Me.Controls.Add(Me.Label4)
 		Me.Controls.Add(Me.Label3)
-		Me.Controls.Add(Me.PictureBox1)
+		Me.Controls.Add(Me.instruction)
 		Me.Controls.Add(Me.Label2)
-		Me.Controls.Add(Me.lastGun)
+		Me.Controls.Add(Me.gun)
 		Me.Controls.Add(Me.lastItem1)
 		Me.Controls.Add(Me.Item41)
 		Me.Controls.Add(Me.enemy41)
@@ -1049,7 +1049,7 @@ Partial Class mainCamera
 		Me.Controls.Add(Me.Label1)
 		Me.Controls.Add(Me.ProgressBar1)
 		Me.Controls.Add(Me.Item7)
-		Me.Controls.Add(Me.finishLine)
+		Me.Controls.Add(Me.boss)
 		Me.Controls.Add(Me.ground2)
 		Me.Controls.Add(Me.enemy17)
 		Me.Controls.Add(Me.bonus14)
@@ -1117,14 +1117,14 @@ Partial Class mainCamera
 		Me.Name = "mainCamera"
 		Me.Tag = "content"
 		Me.Text = "Form1"
-		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.lastGun, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.instruction, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.gun, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.Item41, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.enemy41, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.enemy40, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.Item7, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.finishLine, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.boss, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.ground2, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.enemy17, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.bonus14, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1250,17 +1250,17 @@ Partial Class mainCamera
 	Friend WithEvents wall26 As PictureBox
 	Friend WithEvents enemy17 As PictureBox
 	Friend WithEvents ground2 As PictureBox
-	Friend WithEvents finishLine As PictureBox
+	Friend WithEvents boss As PictureBox
 	Friend WithEvents Item7 As PictureBox
 	Friend WithEvents ProgressBar1 As ProgressBar
 	Friend WithEvents Label1 As Label
 	Friend WithEvents enemy40 As PictureBox
 	Friend WithEvents enemy41 As PictureBox
 	Friend WithEvents Item41 As PictureBox
-	Friend WithEvents lastGun As PictureBox
+	Friend WithEvents gun As PictureBox
 	Friend WithEvents lastItem1 As PictureBox
 	Friend WithEvents Label2 As Label
-	Friend WithEvents PictureBox1 As PictureBox
+	Friend WithEvents instruction As PictureBox
 	Friend WithEvents Label3 As Label
 	Friend WithEvents Label4 As Label
 	Friend WithEvents Label5 As Label
