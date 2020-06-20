@@ -219,6 +219,7 @@
     <None Include="Resources\explosion.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\mysql-connector-net-8.0.20.msi" />
     <None Include="Resources\Webp.net-gifmaker.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +284,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow keys.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\HP_Bonus_03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\item.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\image 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\gun2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
