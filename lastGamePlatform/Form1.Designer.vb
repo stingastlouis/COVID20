@@ -52,7 +52,7 @@ Partial Class mainCamera
 		Me.wall26 = New System.Windows.Forms.PictureBox()
 		Me.wall27 = New System.Windows.Forms.PictureBox()
 		Me.wall25 = New System.Windows.Forms.PictureBox()
-		Me.wakk24 = New System.Windows.Forms.PictureBox()
+		Me.wall24 = New System.Windows.Forms.PictureBox()
 		Me.wall23 = New System.Windows.Forms.PictureBox()
 		Me.wall22 = New System.Windows.Forms.PictureBox()
 		Me.Item6 = New System.Windows.Forms.PictureBox()
@@ -121,7 +121,7 @@ Partial Class mainCamera
 		CType(Me.wall26, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall27, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall25, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.wakk24, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.wall24, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall23, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall22, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.Item6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -473,15 +473,15 @@ Partial Class mainCamera
 		Me.wall25.TabStop = False
 		Me.wall25.Tag = "content"
 		'
-		'wakk24
+		'wall24
 		'
-		Me.wakk24.BackColor = System.Drawing.Color.Maroon
-		Me.wakk24.Location = New System.Drawing.Point(2228, 315)
-		Me.wakk24.Name = "wakk24"
-		Me.wakk24.Size = New System.Drawing.Size(91, 32)
-		Me.wakk24.TabIndex = 82
-		Me.wakk24.TabStop = False
-		Me.wakk24.Tag = "content"
+		Me.wall24.BackColor = System.Drawing.Color.Maroon
+		Me.wall24.Location = New System.Drawing.Point(2228, 315)
+		Me.wall24.Name = "wall24"
+		Me.wall24.Size = New System.Drawing.Size(91, 32)
+		Me.wall24.TabIndex = 82
+		Me.wall24.TabStop = False
+		Me.wall24.Tag = "content"
 		'
 		'wall23
 		'
@@ -1056,7 +1056,7 @@ Partial Class mainCamera
 		Me.Controls.Add(Me.wall26)
 		Me.Controls.Add(Me.wall27)
 		Me.Controls.Add(Me.wall25)
-		Me.Controls.Add(Me.wakk24)
+		Me.Controls.Add(Me.wall24)
 		Me.Controls.Add(Me.wall23)
 		Me.Controls.Add(Me.wall22)
 		Me.Controls.Add(Me.Item6)
@@ -1131,7 +1131,7 @@ Partial Class mainCamera
 		CType(Me.wall26, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall27, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall25, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.wakk24, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.wall24, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall23, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall22, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.Item6, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1241,7 +1241,7 @@ Partial Class mainCamera
 	Friend WithEvents ground1 As PictureBox
 	Friend WithEvents wall22 As PictureBox
 	Friend WithEvents wall23 As PictureBox
-	Friend WithEvents wakk24 As PictureBox
+	Friend WithEvents wall24 As PictureBox
 	Friend WithEvents bonus14 As PictureBox
 	Friend WithEvents beforeBoss As PictureBox
 	Friend WithEvents bonus15 As PictureBox
