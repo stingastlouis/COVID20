@@ -107,6 +107,7 @@ Partial Class mainCamera
 		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+		Me.Timer500ms = New System.Windows.Forms.Timer(Me.components)
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.gun, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -180,7 +181,7 @@ Partial Class mainCamera
 		'
 		'gameManager
 		'
-		Me.gameManager.Interval = 10
+		Me.gameManager.Interval = 75
 		'
 		'pName
 		'
@@ -1025,6 +1026,11 @@ Partial Class mainCamera
 		Me.PictureBox4.TabStop = False
 		Me.PictureBox4.Tag = "content"
 		'
+		'Timer500ms
+		'
+		Me.Timer500ms.Enabled = True
+		Me.Timer500ms.Interval = 500
+		'
 		'mainCamera
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1274,4 +1280,5 @@ Partial Class mainCamera
 	Friend WithEvents PictureBox2 As PictureBox
 	Friend WithEvents PictureBox3 As PictureBox
 	Friend WithEvents PictureBox4 As PictureBox
+	Friend WithEvents Timer500ms As Timer
 End Class
