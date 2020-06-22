@@ -57,7 +57,6 @@ Partial Class Form2
         Me.wall16 = New System.Windows.Forms.PictureBox()
         Me.wall15 = New System.Windows.Forms.PictureBox()
         Me.wall14 = New System.Windows.Forms.PictureBox()
-        Me.wall13 = New System.Windows.Forms.PictureBox()
         Me.bonus10 = New System.Windows.Forms.PictureBox()
         Me.bonus9 = New System.Windows.Forms.PictureBox()
         Me.bonus6 = New System.Windows.Forms.PictureBox()
@@ -122,7 +121,6 @@ Partial Class Form2
         CType(Me.wall16, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.wall15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.wall14, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.wall13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bonus10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bonus9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bonus6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -536,17 +534,6 @@ Partial Class Form2
         Me.wall14.TabStop = False
         Me.wall14.Tag = "content"
         '
-        'wall13
-        '
-        Me.wall13.BackColor = System.Drawing.Color.Maroon
-        Me.wall13.Location = New System.Drawing.Point(2559, 73)
-        Me.wall13.Margin = New System.Windows.Forms.Padding(4)
-        Me.wall13.Name = "wall13"
-        Me.wall13.Size = New System.Drawing.Size(87, 33)
-        Me.wall13.TabIndex = 160
-        Me.wall13.TabStop = False
-        Me.wall13.Tag = "content"
-        '
         'bonus10
         '
         Me.bonus10.BackColor = System.Drawing.Color.Yellow
@@ -660,7 +647,7 @@ Partial Class Form2
         'enemy6
         '
         Me.enemy6.BackColor = System.Drawing.Color.Olive
-        Me.enemy6.Location = New System.Drawing.Point(2755, 4)
+        Me.enemy6.Location = New System.Drawing.Point(2839, 228)
         Me.enemy6.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy6.Name = "enemy6"
         Me.enemy6.Size = New System.Drawing.Size(87, 62)
@@ -671,7 +658,7 @@ Partial Class Form2
         'enemy5
         '
         Me.enemy5.BackColor = System.Drawing.Color.Olive
-        Me.enemy5.Location = New System.Drawing.Point(3119, 486)
+        Me.enemy5.Location = New System.Drawing.Point(3116, 405)
         Me.enemy5.Margin = New System.Windows.Forms.Padding(4)
         Me.enemy5.Name = "enemy5"
         Me.enemy5.Size = New System.Drawing.Size(87, 48)
@@ -858,7 +845,7 @@ Partial Class Form2
         'wall10
         '
         Me.wall10.BackColor = System.Drawing.Color.Maroon
-        Me.wall10.Location = New System.Drawing.Point(2640, 439)
+        Me.wall10.Location = New System.Drawing.Point(3116, 472)
         Me.wall10.Margin = New System.Windows.Forms.Padding(4)
         Me.wall10.Name = "wall10"
         Me.wall10.Size = New System.Drawing.Size(87, 62)
@@ -880,10 +867,10 @@ Partial Class Form2
         'wall8
         '
         Me.wall8.BackColor = System.Drawing.Color.Maroon
-        Me.wall8.Location = New System.Drawing.Point(2717, 73)
+        Me.wall8.Location = New System.Drawing.Point(3565, 196)
         Me.wall8.Margin = New System.Windows.Forms.Padding(4)
         Me.wall8.Name = "wall8"
-        Me.wall8.Size = New System.Drawing.Size(87, 62)
+        Me.wall8.Size = New System.Drawing.Size(87, 36)
         Me.wall8.TabIndex = 122
         Me.wall8.TabStop = False
         Me.wall8.Tag = "content"
@@ -1021,7 +1008,6 @@ Partial Class Form2
         Me.Controls.Add(Me.wall16)
         Me.Controls.Add(Me.wall15)
         Me.Controls.Add(Me.wall14)
-        Me.Controls.Add(Me.wall13)
         Me.Controls.Add(Me.bonus10)
         Me.Controls.Add(Me.bonus9)
         Me.Controls.Add(Me.bonus6)
@@ -1096,7 +1082,6 @@ Partial Class Form2
         CType(Me.wall16, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.wall15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.wall14, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.wall13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bonus10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bonus9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bonus6, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1168,7 +1153,6 @@ Partial Class Form2
     Friend WithEvents wall16 As PictureBox
     Friend WithEvents wall15 As PictureBox
     Friend WithEvents wall14 As PictureBox
-    Friend WithEvents wall13 As PictureBox
     Friend WithEvents bonus10 As PictureBox
     Friend WithEvents gameManager As Timer
     Friend WithEvents bonus9 As PictureBox

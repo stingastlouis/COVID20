@@ -74,7 +74,7 @@ Public Class Form2
         Life_Point = 3
         gameManager.Enabled = True
         IsJumping = False
-        wall = {wall1, wall2, wall5, wall3, wall4, wall7, wall6, wall8, wall9, wall10, wall11, wall12, wall13, wall14, wall15, wall16, wall17, wall22, wall23, wakk24, wall25, wall26, wall27, beforeBoss}
+        wall = {wall1, wall2, wall5, wall3, wall4, wall7, wall6, wall8, wall9, wall10, wall11, wall12, wall14, wall15, wall16, wall17, wall22, wall23, wakk24, wall25, wall26, wall27, beforeBoss}
         ItemVaccin = {Item1, Item2, Item3, Item7, Item6, Item41, lastItem1}
         lifeBox = {life1, life2, lastLife}
 
