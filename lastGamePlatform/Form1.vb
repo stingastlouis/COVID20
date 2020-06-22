@@ -28,7 +28,7 @@
 	'---------VARIABLE-----------
 	Dim posLeft, posRight, posUp, IsJumping As Boolean
 	Dim Speed, JumpSpeed, gravitySpeed As Integer
-	Dim count As Integer
+	'Dim count As Integer
 	Dim Player_Name As String
 	Dim Life_Point As Integer
 	Dim Item_Collected As Integer
@@ -103,15 +103,17 @@
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
 	Private Sub mainCamera_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
-		Select Case e.KeyValue'??????????????????????????????????????????????????pena break ni default ladan
+		Select Case e.KeyValue
 			Case Keys.Right
 				posRight = False
+				Exit Select
 			Case Keys.Left
 				posLeft = False
+				Exit Select'same as break
 			Case Keys.Up
 				posUp = False
-			Case Else 
-				'go fuck yourself. pas mete nanier . sinon li pou execute sem si  figure la rate bouton
+				playerHasGravity = True
+				Exit Select
 		End Select
 	End Sub
 
@@ -129,12 +131,13 @@
 				posLeft = True
 			Case Keys.Up
 				posUp = True
-				count += 1
+				'count += 1
+				playerHasGravity = True
 
 			Case Keys.Q
 				If allowToshotShotGUNl = True And Item_Collected >= 2 Then
-					ReDim Preserve bullet1(count1) '????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????#############################################kieT sa#################################################
-					Dim boulette As New PistoleBullet1(player1) '??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????#############################################kieT sa#################################################
+					ReDim Preserve bullet1(count1)
+					Dim boulette As New PistoleBullet1(player1)
 					Controls.Add(boulette)
 					bullet1(count1) = boulette
 					count1 += 1
@@ -151,21 +154,7 @@
 				startHere.Show()
 		End Select
 		'redim = li p redeclare aray la . to rappele la haut ti 0 ?
-		'sak fois to pou bez shoot .li pou increment li .et li p redeclare sa array la par le nombre de bal que to p shoot
-		'aster pistoletBullet1 - un class . check class la... to pou comprend
-	End Sub
-
-
-	''' <summary>
-	''' timer value = 500 . 2x per second
-	''' </summary>
-	''' <param name="sender"></param>
-	''' <param name="e"></param>
-	Private Sub Timer500ms_Tick(sender As Object, e As EventArgs) Handles Timer500ms.Tick '100 - 10fps
-		playerCollideWithItems()
-		If (ProgressBar1.Value <= 0) Or (Life_Point <= 0) Then
-			loserWinner()
-		End If
+		'???????????????????????????????????????????servi list<> pou boucoup pli facil pa bizin redeclar li chack foi li fr moins travail???????????????????????????????????????????????????
 	End Sub
 
 
@@ -195,10 +184,15 @@
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		'------------------------------------------------------------------------------------bon
+		'Console.WriteLine(posUp & "        " & count & "          " & playerHasGravity)
+		If (ProgressBar1.Value <= 0) Or (Life_Point <= 0) Then
+			loserWinner()
+		End If
+		collisionChecker()
 		If playerHasGravity Then
 			player1.Top += gravitySpeed
 		Else
-			count = 0 '?????????????????????????why count?
+			'count = 0 '?????????????????????????why count?
 			'count la li p servi pou checker combien le temps player p rest dans lair. si li arrive 2 . li fall
 			'et counter return to 0 
 		End If
@@ -208,9 +202,9 @@
 
 
 		'------------------------------------------------------------------------------------pa bon
-		'moveMycamera() 'bien bizin clean --- slowing 
-		'makeEnemyMove() 'bien bizin clean --- slowing 
-		'bulletManager() 'too much loop
+		moveMycamera() 'bien bizin clean --- slowing 
+		makeEnemyMove() 'bien bizin clean --- slowing 
+		bulletManager() 'too much loop
 	End Sub
 
 
@@ -222,22 +216,12 @@
 
 
 	'for enemy and boss
-	Private Sub contaminatePlayer(ByRef contaminer As Object) '????????????????????????????????????pa p compren kan par exemple 1 enemy touch r player la - life-1 et destroy enemy la sa bout la ki so role????????????????????????????????????
+	Private Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As Object)
 		If contaminer.left + contaminer.Width > player1.Left Then
 			contaminer.left -= 1
-			For Each wall As PictureBox In walls 'for all pictureboxes in List<walls>
-				If checkforCollision(contaminer, wall) Then
-					contaminer.left += 1
-				End If
-			Next
 		End If
 		If contaminer.left + contaminer.Width < player1.Left Then
 			contaminer.left += 1
-			For Each wall As PictureBox In walls 'for all pictureboxes in List<walls>
-				If checkforCollision(contaminer, wall) Then
-					contaminer.left -= 1
-				End If
-			Next
 		End If
 		If contaminer.Top + contaminer.Height > player1.Top Then
 			contaminer.Top -= 1
@@ -247,7 +231,7 @@
 		End If
 		'li p checker cote player la eT par rapport a enemy . si player dans droite li pou vers li . si li dans gauche li pou al vers li 
 		'aster le temps li p bouger si li ggn un wall devant li, li pas pou kav passer . 
-		
+		'?????????????????????????????????????????????????????'makeEnemyMove() pa rent ladan????????????????
 	End Sub
 
 
@@ -259,7 +243,7 @@
 	Private Sub moveMycamera()
 		If Not player1.Left >= beforeBoss.Left + beforeBoss.Width Then
 			If player1.Left > Me.Width / 2 Then
-				For Each content As Control In Me.Controls 
+				For Each content As Control In Me.Controls
 					If TypeOf content Is PictureBox Or TypeOf content Is Label Then
 						If content.Tag = "content" Then
 							content.Left -= Speed
@@ -267,7 +251,7 @@
 					End If
 				Next
 			End If
-		Else 
+		Else
 			If player1.Left + player1.Width >= Me.Width Then
 				player1.Left -= Speed
 			End If
@@ -281,7 +265,7 @@
 			If player1.Left + player1.Width >= Me.Width Then
 				player1.Left -= Speed
 			End If
-			contaminatePlayer(boss)
+			bossAndEnemiesMoveTowardPlayer(boss)
 			If checkforCollision(player1, boss) Then
 				Life_Point -= 1
 				updateLabels()
@@ -307,7 +291,7 @@
 
 	Private Sub makeEnemyMove()
 		For Each enemy As PictureBox In enemies 'for all pictureboxes in List<enemies>
-			contaminatePlayer(enemy) 'Important Check Below
+			bossAndEnemiesMoveTowardPlayer(enemy) 'Important Check Below
 			For Each ground As PictureBox In grounds 'scan all controls present in form
 				If Not checkforCollision(enemy, ground) Then
 					enemy.Top += gravitySpeed
@@ -327,10 +311,11 @@
 		For x As Integer = 0 To bullet1.Length - 1 '????????????????????????????????????????bizin recheck sa array la
 			bullet1(x).Shoot(player1)
 			If checkforCollision(bullet1(x), boss) And boss.Enabled = True And bullet1(x).Enabled = True Then
-				ProgressBar1.Value -= 1 '???????????????????????????????????????????????????????????????????p ggn exception kan player colide with boss
+				ProgressBar1.Value -= 1 '???????????????????????????????????????????????????????????????????p ggn exception kan boss mor
 				'besoin faire de sorte que si arriver value <= 0 
 				' value = 0 
 				' sem mone faire mo penser. 
+				'????????????????????ton mal penser p ggn errer neve
 				Score += 30 * 0.5
 				updateLabels()
 				bullet1(x).Enabled = False
@@ -355,12 +340,12 @@
 					enemies.Remove(enemy)
 					allActivePictureBoxes.Remove(enemy)
 					updateLabels()
-					Exit For''----------------------------------------------------------------------------kifer exit----?
+					Exit For ''----------------------------------------------------------------------------kifer exit----?mem zafr r break sa
 					'Me.Controls.Remove(enemy)
 				End If
 			Next
 
-		
+
 			For Each life As PictureBox In lifes
 				If checkforCollision(bullet1(x), life) And bullet1(x).Enabled And life.Enabled Then
 					bullet1(x).Dispose()
@@ -400,16 +385,18 @@
 				player1.Left += Speed
 			End If
 		End If
-
+		If posUp And Not playerHasGravity Then
+			player1.Top -= JumpSpeed
+		End If
 
 
 		'---------------HERE THE COUNT IS VERY IMPORTANT-------------------
-		'#################################### need to clean???????????????????????????????????ground2 ka v
-		If posUp And player1.Top > ground1.Top - 200 And Not count > 2 Then
-			player1.Top -= JumpSpeed
-		End If
-		'##########################################
+		'need to clean ground2 ka v
+		'If posUp And player1.Top > ground1.Top - 200 And Not count > 2 Then
+		'	player1.Top -= JumpSpeed
+		'End If
 		'li p marcher pourtant lor ground 2 ? mo pas connais kine derouler sa boute la . 
+		'???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????ale explik moi ki sa if la p fr
 	End Sub
 
 
@@ -446,14 +433,16 @@
 	''' used in timer
 	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
 	''' </summary>
-	Private Sub playerCollideWithItems()
+	Private Sub collisionChecker()
+		'playerHasGravity = True
 		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 				If activePictureBox.Name.Contains("ground") Then
 					playerHasGravity = False
-					'Exit For
 				End If
+
 				If activePictureBox.Name.Contains("wall") Then
+					playerHasGravity = False
 					If posLeft Then
 						player1.Left += Speed
 					End If
@@ -463,14 +452,12 @@
 					If posUp Then
 						player1.Top -= JumpSpeed
 					End If
-					playerHasGravity = False
 					If posUp Then
-						player1.Top -= JumpSpeed + 60 '????????????????????????????????why 60 
+						player1.Top -= JumpSpeed + 60
 						'kan mo lor ground tt korek . mais kan mo lor wall. gravity plus fort et mo pas kav saute bien . donc mone ajoute sa 
+						'----------------bizin reck li mon chanz emp zafr ladan
 					End If
-					'Exit For
 				End If
-
 
 
 
@@ -531,9 +518,20 @@
 					removeOtherPictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
 				End If
-			Else 'did not touch with any of the above pictureboxes
-				playerHasGravity = True
 			End If
+			If activePictureBox IsNot boss AndAlso boss.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+				If activePictureBox.Name.Contains("wall") Then
+					If boss.Left + boss.Width > player1.Left Then
+						boss.Left += 1
+					End If
+					If boss.Left + boss.Width < player1.Left Then
+						boss.Left -= 1
+					End If
+				End If
+			End If
+
+
+
 		Next
 		'If player1.Bounds.IntersectsWith(PictureBox2.Bounds) Then
 		'	PictureBox2.Hide()
@@ -542,6 +540,7 @@
 		'	Me.Controls.Remove(PictureBox2)
 		'	Console.WriteLine(PictureBox2)
 		'End If
+
 	End Sub
 
 
@@ -635,10 +634,12 @@
 		Label1.Visible = False
 		Label1.Enabled = False
 		boss.Enabled = False
+		Timer500ms.Enabled = True
+		Timer75ms.Enabled = True
 
 		pp = New Player()
 		Score = 0
-		count = 0
+		'count = 0
 		bulletNumber = -1
 		ProgressBar1.Value = 20
 		My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop) 'give a background music to the game "looping music"
