@@ -23,7 +23,7 @@ Partial Class mainCamera
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
-		Me.gameManager = New System.Windows.Forms.Timer(Me.components)
+		Me.Timer75ms = New System.Windows.Forms.Timer(Me.components)
 		Me.pName = New System.Windows.Forms.Label()
 		Me.pItem = New System.Windows.Forms.Label()
 		Me.pLife = New System.Windows.Forms.Label()
@@ -179,9 +179,10 @@ Partial Class mainCamera
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
-		'gameManager
+		'Timer75ms
 		'
-		Me.gameManager.Interval = 75
+		Me.Timer75ms.Enabled = True
+		Me.Timer75ms.Interval = 75
 		'
 		'pName
 		'
@@ -1197,7 +1198,7 @@ Partial Class mainCamera
 
 	End Sub
 	Friend WithEvents player1 As PictureBox
-    Friend WithEvents gameManager As Timer
+    Friend WithEvents Timer75ms As Timer
     Friend WithEvents wall2 As PictureBox
     Friend WithEvents wall3 As PictureBox
     Friend WithEvents wall1 As PictureBox
