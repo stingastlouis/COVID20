@@ -735,7 +735,7 @@ Partial Class Form2
         'life1
         '
         Me.life1.BackColor = System.Drawing.Color.Fuchsia
-        Me.life1.Location = New System.Drawing.Point(1183, 415)
+        Me.life1.Location = New System.Drawing.Point(1172, 405)
         Me.life1.Margin = New System.Windows.Forms.Padding(4)
         Me.life1.Name = "life1"
         Me.life1.Size = New System.Drawing.Size(68, 52)
@@ -956,7 +956,7 @@ Partial Class Form2
         '
         Me.player1.BackColor = System.Drawing.Color.Transparent
         Me.player1.Image = Global.lastGamePlatform.My.Resources.Resources.player1Mov
-        Me.player1.Location = New System.Drawing.Point(41, 206)
+        Me.player1.Location = New System.Drawing.Point(22, 209)
         Me.player1.Margin = New System.Windows.Forms.Padding(4)
         Me.player1.Name = "player1"
         Me.player1.Size = New System.Drawing.Size(87, 62)
@@ -981,7 +981,7 @@ Partial Class Form2
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1371, 577)
+        Me.ClientSize = New System.Drawing.Size(1371, 598)
         Me.Controls.Add(Me.lastLife)
         Me.Controls.Add(Me.lastGun)
         Me.Controls.Add(Me.lastItem1)

@@ -297,5 +297,8 @@
   <ItemGroup>
     <None Include="Images\gun.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\walk.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
