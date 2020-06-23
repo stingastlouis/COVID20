@@ -108,6 +108,7 @@ Partial Class mainCamera
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
 		Me.Timer500ms = New System.Windows.Forms.Timer(Me.components)
+		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.gun, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -177,6 +178,7 @@ Partial Class mainCamera
 		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'Timer75ms
@@ -192,36 +194,40 @@ Partial Class mainCamera
 		Me.pName.Name = "pName"
 		Me.pName.Size = New System.Drawing.Size(66, 24)
 		Me.pName.TabIndex = 19
+		Me.pName.Tag = "stayHere"
 		Me.pName.Text = "Johny "
 		'
 		'pItem
 		'
 		Me.pItem.AutoSize = True
 		Me.pItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.pItem.Location = New System.Drawing.Point(227, 9)
+		Me.pItem.Location = New System.Drawing.Point(249, 10)
 		Me.pItem.Name = "pItem"
 		Me.pItem.Size = New System.Drawing.Size(60, 24)
 		Me.pItem.TabIndex = 20
+		Me.pItem.Tag = "stayHere"
 		Me.pItem.Text = "Item : "
 		'
 		'pLife
 		'
 		Me.pLife.AutoSize = True
 		Me.pLife.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.pLife.Location = New System.Drawing.Point(70, 9)
+		Me.pLife.Location = New System.Drawing.Point(87, 10)
 		Me.pLife.Name = "pLife"
 		Me.pLife.Size = New System.Drawing.Size(39, 24)
 		Me.pLife.TabIndex = 21
+		Me.pLife.Tag = "stayHere"
 		Me.pLife.Text = "X 3"
 		'
 		'pScore
 		'
 		Me.pScore.AutoSize = True
 		Me.pScore.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.pScore.Location = New System.Drawing.Point(116, 9)
+		Me.pScore.Location = New System.Drawing.Point(132, 9)
 		Me.pScore.Name = "pScore"
 		Me.pScore.Size = New System.Drawing.Size(75, 24)
 		Me.pScore.TabIndex = 22
+		Me.pScore.Tag = "stayHere"
 		Me.pScore.Text = "Score : "
 		'
 		'winorloseTxt
@@ -264,6 +270,7 @@ Partial Class mainCamera
 		Me.ProgressBar1.Name = "ProgressBar1"
 		Me.ProgressBar1.Size = New System.Drawing.Size(100, 23)
 		Me.ProgressBar1.TabIndex = 96
+		Me.ProgressBar1.Tag = "stayHere"
 		'
 		'Label1
 		'
@@ -273,6 +280,7 @@ Partial Class mainCamera
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(100, 24)
 		Me.Label1.TabIndex = 97
+		Me.Label1.Tag = "stayHere"
 		Me.Label1.Text = "Boss Life : "
 		'
 		'Label2
@@ -698,7 +706,7 @@ Partial Class mainCamera
 		'gun2
 		'
 		Me.gun2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
-		Me.gun2.Location = New System.Drawing.Point(85, 371)
+		Me.gun2.Location = New System.Drawing.Point(308, 371)
 		Me.gun2.Name = "gun2"
 		Me.gun2.Size = New System.Drawing.Size(31, 29)
 		Me.gun2.TabIndex = 41
@@ -848,7 +856,7 @@ Partial Class mainCamera
 		'wall7
 		'
 		Me.wall7.BackColor = System.Drawing.Color.Maroon
-		Me.wall7.Location = New System.Drawing.Point(822, 289)
+		Me.wall7.Location = New System.Drawing.Point(30, 289)
 		Me.wall7.Name = "wall7"
 		Me.wall7.Size = New System.Drawing.Size(65, 121)
 		Me.wall7.TabIndex = 12
@@ -1032,12 +1040,21 @@ Partial Class mainCamera
 		Me.Timer500ms.Enabled = True
 		Me.Timer500ms.Interval = 500
 		'
+		'PictureBox1
+		'
+		Me.PictureBox1.Location = New System.Drawing.Point(327, 298)
+		Me.PictureBox1.Name = "PictureBox1"
+		Me.PictureBox1.Size = New System.Drawing.Size(59, 52)
+		Me.PictureBox1.TabIndex = 116
+		Me.PictureBox1.TabStop = False
+		'
 		'mainCamera
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
 		Me.ClientSize = New System.Drawing.Size(1028, 469)
+		Me.Controls.Add(Me.PictureBox1)
 		Me.Controls.Add(Me.PictureBox4)
 		Me.Controls.Add(Me.PictureBox3)
 		Me.Controls.Add(Me.PictureBox2)
@@ -1193,6 +1210,7 @@ Partial Class mainCamera
 		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -1282,4 +1300,5 @@ Partial Class mainCamera
 	Friend WithEvents PictureBox3 As PictureBox
 	Friend WithEvents PictureBox4 As PictureBox
 	Friend WithEvents Timer500ms As Timer
+	Friend WithEvents PictureBox1 As PictureBox
 End Class
