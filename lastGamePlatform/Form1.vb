@@ -1,11 +1,10 @@
 ﻿Public Class mainCamera
 	'list
 	Dim walls, grounds, enemies, coins, lifes, guns, adns As New List(Of PictureBox)
+	Dim allMyControls As New List(Of Control)
 	Dim allActivePictureBoxes As New List(Of PictureBox)
 
-	Dim playerHasGravity As Boolean = True
-
-
+	Dim playerIsFalling As Boolean
 
 	Private scoreGun, scoreEnemy As Integer
 
@@ -26,32 +25,30 @@
 	'--------------------------
 
 	'---------VARIABLE-----------
-	Dim posLeft, posRight, posUp, IsJumping As Boolean
-	Dim Speed, JumpSpeed, gravitySpeed As Integer
-	'Dim count As Integer
-	Dim Player_Name As String
+	Dim posLeft, posRight, IsJumping As Boolean
+	Dim Speed, jumpHeight, gravitySpeed As Integer
 	Dim Life_Point As Integer
 	Dim Item_Collected As Integer
 	Public Score As Integer
-	Dim generator As Integer
 	Dim pointRegenerator As Point
-
-	Dim bulletNumber As Integer
-	Dim bulletArray1ForShotGun(5) As PictureBox
-	Dim count1 As Integer
-	Private getEnemyScore As Integer
-	Dim timerCount As Integer
-
-	Dim timer1, timer2, timer3 As Integer
-	Dim ran1 As New Random
-	Dim loc As New Integer
-	Private timeLimit As Integer
-	Private timeLimit2 As Integer
-	Private timeLimit3 As Integer
-
 	Public universalScore As Integer
 	Dim pp As Player
+	Dim bulletNumber As Integer
+	Dim count1 As Integer
 
+
+	'Private getEnemyScore As Integer
+	'Dim generator As Integer
+	'Dim count As Integer
+	'Dim Player_Name As String
+	'Dim bulletArray1ForShotGun(5) As PictureBox
+	'Dim timerCount As Integer
+	'Dim timer1, timer2, timer3 As Integer
+	'Dim ran1 As New Random
+	'Dim loc As New Integer
+	'Private timeLimit As Integer
+	'Private timeLimit2 As Integer
+	'Private timeLimit3 As Integer
 
 
 	''' <summary>
@@ -109,11 +106,7 @@
 				Exit Select
 			Case Keys.Left
 				posLeft = False
-				Exit Select'same as break
-			Case Keys.Up
-				posUp = False
-				playerHasGravity = True
-				Exit Select
+				Exit Select 'same as break
 		End Select
 	End Sub
 
@@ -130,9 +123,10 @@
 			Case Keys.Left
 				posLeft = True
 			Case Keys.Up
-				posUp = True
-				'count += 1
-				playerHasGravity = True
+				If playerIsFalling = False Then
+					player1.Top -= jumpHeight
+					playerIsFalling = True
+				End If
 
 			Case Keys.Q
 				If allowToshotShotGUNl = True And Item_Collected >= 2 Then
@@ -155,20 +149,8 @@
 		End Select
 		'redim = li p redeclare aray la . to rappele la haut ti 0 ?
 		'???????????????????????????????????????????servi list<> pou boucoup pli facil pa bizin redeclar li chack foi li fr moins travail???????????????????????????????????????????????????
-	
+
 	End Sub
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -185,113 +167,32 @@
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		'------------------------------------------------------------------------------------bon
-		'Console.WriteLine(posUp & "        " & count & "          " & playerHasGravity)
 		If (ProgressBar1.Value <= 0) Or (Life_Point <= 0) Then
 			loserWinner()
 		End If
-		collisionChecker()
-		If playerHasGravity Then
-			player1.Top += gravitySpeed
-		Else
-			'count = 0 '?????????????????????????why count?
-			'count la li p servi pou checker combien le temps player p rest dans lair. si li arrive 2 . li fall
-			'et counter return to 0 
-		End If
-		checkmovement() 'need to clean
 
+		collisionChecker()
+		If playerIsFalling Then
+			player1.Top += gravitySpeed
+		End If
+
+		If posRight Then
+			player1.Left += Speed
+		ElseIf posLeft Then
+			player1.Left -= Speed
+		End If
 
 
 
 		'------------------------------------------------------------------------------------pa bon
-		moveMycamera() 'bien bizin clean --- slowing 
+		'moveMycamera() 'bien bizin clean --- slowing 
 		makeEnemyMove() 'bien bizin clean --- slowing 
 		bulletManager() 'too much loop
 	End Sub
 
 
 
-
-
-
-
-
-
-	'for enemy and boss
-	Private Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As Object)
-		If contaminer.left + contaminer.Width > player1.Left Then
-			contaminer.left -= 1
-		End If
-		If contaminer.left + contaminer.Width < player1.Left Then
-			contaminer.left += 1
-		End If
-		If contaminer.Top + contaminer.Height > player1.Top Then
-			contaminer.Top -= 1
-		End If
-		If contaminer.Top + contaminer.Height < player1.Top Then
-			contaminer.Top += 1
-		End If
-		'li p checker cote player la eT par rapport a enemy . si player dans droite li pou vers li . si li dans gauche li pou al vers li 
-		'aster le temps li p bouger si li ggn un wall devant li, li pas pou kav passer . 
-		'?????????????????????????????????????????????????????'makeEnemyMove() pa rent ladan????????????????
-		'b sem la bas em mo p servi la . li p suivre player mais en meme temps dans makemyenemymove li p donne li gravity et cheK si pendant gravity 
-		'li p collide ek un wall lerla. li faire li reste lor wall la
-
-	End Sub
-
-
-
-
-
-
 	'+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++pren la jus k lot++++++sa banlamm ki p fr zoue la lourd la====248-370
-	Private Sub moveMycamera()
-		If Not player1.Left >= beforeBoss.Left + beforeBoss.Width Then
-			If player1.Left > Me.Width / 2 Then
-				For Each content As Control In Me.Controls
-					If TypeOf content Is PictureBox Or TypeOf content Is Label Then
-						If content.Tag = "content" Then
-							content.Left -= Speed
-						End If
-					End If
-				Next
-			End If
-		Else
-			If player1.Left + player1.Width >= Me.Width Then
-				player1.Left -= Speed
-			End If
-			Label1.Visible = True
-			Label1.Enabled = True
-			ProgressBar1.Enabled = True
-			ProgressBar1.Visible = True
-			boss.Enabled = True
-			gun.Enabled = True
-			gun.Visible = True
-			If player1.Left + player1.Width >= Me.Width Then
-				player1.Left -= Speed
-			End If
-			bossAndEnemiesMoveTowardPlayer(boss)
-			If checkforCollision(player1, boss) Then
-				Life_Point -= 1
-				updateLabels()
-			End If
-			If checkforCollision(player1, gun) And gun.Enabled = True Then
-				allowToshotShotGUNl = True
-				Item_Collected = 2
-				updateLabels()
-			End If
-			If allowToshotShotGUNl = False Then
-				Item_Collected = 2
-				updateLabels()
-				allowToshotShotGUNl = True
-			End If
-		End If
-
-		'moveMyCamera explanation-----------------------------
-		'li em ki p faire tt content das form la bouger par rapport a player. tt content lor form la enemy,wall ground,bonus
-		'tt ena un tag content lerla si player la p arrive la moitier screen li pou move all content to the left.
-		'tant ki li pencore arrive cote un dernier wall'beforeboss' lerla li pou arreter 
-		'et sub lastwave pou start.(boss)
-	End Sub
 
 	Private Sub makeEnemyMove()
 		For Each enemy As PictureBox In enemies 'for all pictureboxes in List<enemies>
@@ -317,8 +218,8 @@
 			If checkforCollision(bullet1(x), boss) And boss.Enabled = True And bullet1(x).Enabled = True Then
 				ProgressBar1.Value -= 1 '???????????????????????????????????????????????????????????????????p ggn exception kan boss mor
 				If ProgressBar1.Value <= 0 Then
-					 ProgressBar1.Value = 0
-				End If 
+					ProgressBar1.Value = 0
+				End If
 				Score += 30 * 0.5
 				updateLabels()
 				bullet1(x).Enabled = False
@@ -372,41 +273,42 @@
 
 
 
-
-	Private Sub checkmovement()
-		If posLeft Then
-			If player1.Left < 0 Then
-				player1.Left += Speed
-			Else
-				player1.Left -= Speed
-			End If
+	'for enemy and boss
+	Private Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As Object)
+		If contaminer.left + contaminer.Width > player1.Left Then
+			contaminer.left -= 1
 		End If
-		If posRight Then
-			If player1.Right < 0 Then
-				player1.Left -= Speed
-			Else
-				player1.Left += Speed
-			End If
+		If contaminer.left + contaminer.Width < player1.Left Then
+			contaminer.left += 1
 		End If
-		If posUp And Not playerHasGravity Then
-			player1.Top -= JumpSpeed
+		If contaminer.Top + contaminer.Height > player1.Top Then
+			contaminer.Top -= 1
 		End If
+		If contaminer.Top + contaminer.Height < player1.Top Then
+			contaminer.Top += 1
+		End If
+		'li p checker cote player la eT par rapport a enemy . si player dans droite li pou vers li . si li dans gauche li pou al vers li 
+		'aster le temps li p bouger si li ggn un wall devant li, li pas pou kav passer . 
+		'?????????????????????????????????????????????????????'makeEnemyMove() pa rent ladan????????????????
+		'b sem la bas em mo p servi la . li p suivre player mais en meme temps dans makemyenemymove li p donne li gravity et cheK si pendant gravity 
+		'li p collide ek un wall lerla. li faire li reste lor wall la
 
-
-		'---------------HERE THE COUNT IS VERY IMPORTANT-------------------
-		'need to clean ground2 ka v
-		'If posUp And player1.Top > ground1.Top - 200 And Not count > 2 Then
-		'	player1.Top -= JumpSpeed
-		'End If
-		'li p marcher pourtant lor ground 2 ? mo pas connais kine derouler sa boute la . 
-		
-		'if la p checker si tone pez bouton al la haut.  et que li pas count > 2 
-		'lerla li kav jump . 
-
-		'???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????ale explik moi ki sa if la p fr
 	End Sub
 
 
+
+	''' <summary>
+	''' return true if the 2 obj collide else return false
+	''' </summary>
+	''' <param name="ob1"></param>
+	''' <param name="ob2"></param>
+	''' <returns></returns>
+	Function checkforCollision(ByVal ob1 As Object, ByVal ob2 As Object) As Boolean
+		If ob1.Top + ob1.Height >= ob2.Top - 5 And ob2.Top + ob2.Height >= ob1.Top And ob1.Left + ob1.Width >= ob2.Left And ob2.Left + ob2.Width >= ob1.Left Then
+			Return True
+		End If
+		Return False
+	End Function
 
 
 
@@ -441,39 +343,64 @@
 	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
 	''' </summary>
 	Private Sub collisionChecker()
-		'playerHasGravity = True
+		If player1.Left <= beforeBoss.Left + beforeBoss.Width Then
+			If player1.Left > Me.Width / 2 Then '???????????????????????????????????????????????????to pa croir li rent dan keydown-left?????????????
+				For Each ctrl As Control In allMyControls
+					If ctrl.Tag = "stayHere" Then
+					Else
+						ctrl.Left -= Speed
+					End If
+				Next
+			End If
+		Else
+			Label1.Visible = True
+			Label1.Enabled = True
+			ProgressBar1.Enabled = True
+			ProgressBar1.Visible = True
+			boss.Enabled = True
+			gun.Enabled = True
+			gun.Visible = True
+			If player1.Left + player1.Width >= Me.Width Then
+				player1.Left -= Speed
+			End If
+			bossAndEnemiesMoveTowardPlayer(boss)
+			If checkforCollision(player1, boss) Then
+				Life_Point -= 1
+				updateLabels()
+			End If
+			If checkforCollision(player1, gun) And gun.Enabled = True Then
+				allowToshotShotGUNl = True
+				Item_Collected = 2
+				updateLabels()
+			End If
+			If allowToshotShotGUNl = False Then
+				Item_Collected = 2
+				updateLabels()
+				allowToshotShotGUNl = True
+			End If
+		End If
+
+
+
+
+
+
+
+
+
+
+
+		playerIsFalling = True
 		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-				If activePictureBox.Name.Contains("ground") Then
-					playerHasGravity = False
-				End If
-
-				If activePictureBox.Name.Contains("wall") Then
-					playerHasGravity = False
-					If posLeft Then
-						player1.Left += Speed
-					End If
-					If posRight Then
-						player1.Left -= Speed
-					End If
-					If posUp Then
-						player1.Top -= JumpSpeed
-					End If
-					If posUp Then
-						player1.Top -= JumpSpeed + 60
-						'kan mo lor ground tt korek . mais kan mo lor wall. gravity plus fort et mo pas kav saute bien . donc mone ajoute sa 
-						'----------------bizin reck li mon chanz emp zafr ladan
-					End If
+				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+					playerIsFalling = False
+					Console.WriteLine("wall/ground")
+					'????????????????????????????bizin dreC???????this code allow to pass through wall
 				End If
 
 
-
-
-
-
-
-
-				'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@pou re me t sa
 				'If otherPicBox.Name.Contains("enemy") Then
 				'	Life_Point -= 1
 				'	Console.WriteLine("new enemy")
@@ -539,14 +466,12 @@
 
 
 
+
+
 		Next
-		'If player1.Bounds.IntersectsWith(PictureBox2.Bounds) Then
-		'	PictureBox2.Hide()
-		'	PictureBox2.Enabled = False
-		'	PictureBox2.Dispose()
-		'	Me.Controls.Remove(PictureBox2)
-		'	Console.WriteLine(PictureBox2)
-		'End If
+
+
+
 
 	End Sub
 
@@ -604,21 +529,6 @@
 
 
 	''' <summary>
-	''' return true if the 2 obj collide else return false
-	''' </summary>
-	''' <param name="ob1"></param>
-	''' <param name="ob2"></param>
-	''' <returns></returns>
-	Function checkforCollision(ByVal ob1 As Object, ByVal ob2 As Object) As Boolean
-		If ob1.Top + ob1.Height >= ob2.Top - 5 And ob2.Top + ob2.Height >= ob1.Top And ob1.Left + ob1.Width >= ob2.Left And ob2.Left + ob2.Width >= ob1.Left Then
-			Return True
-		End If
-		Return False
-	End Function
-
-
-
-	''' <summary>
 	''' set all picture box
 	''' enemies
 	''' boss
@@ -646,13 +556,12 @@
 
 		pp = New Player()
 		Score = 0
-		'count = 0
 		bulletNumber = -1
 		ProgressBar1.Value = 20
-		My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop) 'give a background music to the game "looping music"
+		'My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop) 
 		allowToshotShotGUNl = False
 		Speed = 15
-		JumpSpeed = 10
+		jumpHeight = 100
 		gravitySpeed = 3
 		Life_Point = 3
 		IsJumping = False
@@ -686,6 +595,9 @@
 				Else 'pictureboxes to include
 					randomPictureBoxArray.Add(ctrl) 'add the remaining control to List<randomPictureBoxArray> which will randomise the image to be inserted to the pictureboxes
 				End If
+			End If
+			If TypeOf ctrl Is PictureBox Or TypeOf ctrl Is Label Then
+				allMyControls.Add(ctrl)
 			End If
 		Next
 
