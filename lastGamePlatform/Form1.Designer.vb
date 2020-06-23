@@ -107,7 +107,6 @@ Partial Class mainCamera
 		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-		Me.Timer500ms = New System.Windows.Forms.Timer(Me.components)
 		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1035,11 +1034,6 @@ Partial Class mainCamera
 		Me.PictureBox4.TabStop = False
 		Me.PictureBox4.Tag = "content"
 		'
-		'Timer500ms
-		'
-		Me.Timer500ms.Enabled = True
-		Me.Timer500ms.Interval = 500
-		'
 		'PictureBox1
 		'
 		Me.PictureBox1.Location = New System.Drawing.Point(327, 298)
@@ -1299,6 +1293,5 @@ Partial Class mainCamera
 	Friend WithEvents PictureBox2 As PictureBox
 	Friend WithEvents PictureBox3 As PictureBox
 	Friend WithEvents PictureBox4 As PictureBox
-	Friend WithEvents Timer500ms As Timer
 	Friend WithEvents PictureBox1 As PictureBox
 End Class

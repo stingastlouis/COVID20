@@ -13,10 +13,16 @@
 	Dim allActivePictureBoxes As New List(Of PictureBox)
 
 
+	'player vars
 	Dim playerIsFalling As Boolean
+	Dim Speed As Integer
+	Dim gravitySpeed As Integer
+
+
 	Dim moveTheBoss As Boolean = False
 
 
+	'my items' scores
 	Dim scoreGun As Integer
 	Dim scoreEnemy As Integer
 
@@ -38,7 +44,7 @@
 
 	'---------VARIABLE-----------
 	Dim posLeft, posRight, IsJumping As Boolean
-	Dim Speed, jumpHeight, gravitySpeed As Integer
+	Dim jumpHeight As Integer
 	Dim Life_Point As Integer
 	Dim Item_Collected As Integer
 	Public Score As Integer
@@ -132,12 +138,6 @@
 		Select Case e.KeyValue
 			Case Keys.Right
 				posRight = True
-
-
-
-
-
-
 			Case Keys.Left
 				posLeft = True
 			Case Keys.Up
