@@ -1,12 +1,23 @@
 ﻿Public Class mainCamera
 	'list
-	Dim walls, grounds, enemies, coins, lifes, guns, adns As New List(Of PictureBox)
+	Dim walls As New List(Of PictureBox)
+	Dim grounds As New List(Of PictureBox)
+	Dim enemies As New List(Of PictureBox)
+	Dim coins As New List(Of PictureBox)
+	Dim lifes As New List(Of PictureBox)
+	Dim guns As New List(Of PictureBox)
+	Dim adns As New List(Of PictureBox)
+
+
 	Dim allMyControls As New List(Of Control)
 	Dim allActivePictureBoxes As New List(Of PictureBox)
 
+
 	Dim playerIsFalling As Boolean
 
-	Private scoreGun, scoreEnemy As Integer
+
+	Dim scoreGun As Integer
+	Dim scoreEnemy As Integer
 
 
 
@@ -346,6 +357,7 @@
 		If player1.Left <= beforeBoss.Left + beforeBoss.Width Then
 			If player1.Left > Me.Width / 2 Then '???????????????????????????????????????????????????to pa croir li rent dan keydown-left?????????????
 				For Each ctrl As Control In allMyControls
+					Console.WriteLine("ssssssssss")
 					If ctrl.Tag = "stayHere" Then
 					Else
 						ctrl.Left -= Speed
@@ -358,34 +370,19 @@
 			ProgressBar1.Enabled = True
 			ProgressBar1.Visible = True
 			boss.Enabled = True
-			gun.Enabled = True
-			gun.Visible = True
+			supergun.Enabled = True
+			supergun.Visible = True
 			If player1.Left + player1.Width >= Me.Width Then
 				player1.Left -= Speed
 			End If
 			bossAndEnemiesMoveTowardPlayer(boss)
-			If checkforCollision(player1, boss) Then
-				Life_Point -= 1
-				updateLabels()
-			End If
-			If checkforCollision(player1, gun) And gun.Enabled = True Then
-				allowToshotShotGUNl = True
-				Item_Collected = 2
-				updateLabels()
-			End If
+
 			If allowToshotShotGUNl = False Then
 				Item_Collected = 2
-				updateLabels()
 				allowToshotShotGUNl = True
+				updateLabels()
 			End If
 		End If
-
-
-
-
-
-
-
 
 
 
@@ -396,7 +393,7 @@
 				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
 					playerIsFalling = False
 					Console.WriteLine("wall/ground")
-					'????????????????????????????bizin dreC???????this code allow to pass through wall
+					'????????????????????????????bizin dreC???????this code allow to pass through wall???? 1 zafr width sa???
 				End If
 
 
@@ -408,14 +405,14 @@
 				'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
 				'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
 				'End If
-				'If otherPicBox.Name.Contains("boss") Then
-				'	Life_Point -= 10
-				'	Console.WriteLine("new boss")
-				'	Exit For 'exit the for loop as picturebox name contains "boss" help in using less cpu power
-				'End If
 				'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
+				If activePictureBox.Name.Contains("boss") Then
+					Life_Point -= 1
+					Console.WriteLine("new boss")
+					updateLabels()
+					Exit For 'exit the for loop as picturebox name contains "boss" help in using less cpu power
+				End If
 				If activePictureBox.Name.Contains("life") Then
 					Item_Collected += 1
 					Life_Point += 1
@@ -431,6 +428,10 @@
 					If activePictureBox.Enabled Then
 						Score += scoreGun
 						allowToshotShotGUNl = True
+					End If
+					If supergun.Enabled = True Then
+						allowToshotShotGUNl = True
+						Item_Collected = 2 '?????????????????????????????????????????????????????????????????????????????????????????? score + 100 ??????????? pa pli bon ????????
 					End If
 					guns.Remove(activePictureBox)
 					removeOtherPictureBoxAndUpdateScore(activePictureBox)
@@ -463,16 +464,7 @@
 					End If
 				End If
 			End If
-
-
-
-
-
 		Next
-
-
-
-
 	End Sub
 
 
@@ -538,9 +530,9 @@
 		RestartBtn.Enabled = False
 		scoreGun = 5
 		scoreEnemy = 10
-		gun.Visible = False
+		supergun.Visible = False
 		lastItem1.Visible = False
-		gun.Enabled = False
+		supergun.Enabled = False
 		lastItem1.Enabled = False
 		pScore.Text = "Item :" + CStr(Score)
 		RestartBtn.Visible = False

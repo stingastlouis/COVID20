@@ -39,7 +39,7 @@ Partial Class mainCamera
 		Me.Label5 = New System.Windows.Forms.Label()
 		Me.Label6 = New System.Windows.Forms.Label()
 		Me.instruction = New System.Windows.Forms.PictureBox()
-		Me.gun = New System.Windows.Forms.PictureBox()
+		Me.supergun = New System.Windows.Forms.PictureBox()
 		Me.lastItem1 = New System.Windows.Forms.PictureBox()
 		Me.Item41 = New System.Windows.Forms.PictureBox()
 		Me.enemy41 = New System.Windows.Forms.PictureBox()
@@ -110,7 +110,7 @@ Partial Class mainCamera
 		Me.Timer500ms = New System.Windows.Forms.Timer(Me.components)
 		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.gun, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.supergun, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.Item41, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.enemy41, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -350,17 +350,17 @@ Partial Class mainCamera
 		Me.instruction.TabStop = False
 		Me.instruction.Tag = "content"
 		'
-		'gun
+		'supergun
 		'
-		Me.gun.BackColor = System.Drawing.Color.Transparent
-		Me.gun.Image = Global.lastGamePlatform.My.Resources.Resources.gun2
-		Me.gun.Location = New System.Drawing.Point(2533, 310)
-		Me.gun.Name = "gun"
-		Me.gun.Size = New System.Drawing.Size(39, 36)
-		Me.gun.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.gun.TabIndex = 105
-		Me.gun.TabStop = False
-		Me.gun.Tag = "content"
+		Me.supergun.BackColor = System.Drawing.Color.Transparent
+		Me.supergun.Image = Global.lastGamePlatform.My.Resources.Resources.gun2
+		Me.supergun.Location = New System.Drawing.Point(2533, 310)
+		Me.supergun.Name = "supergun"
+		Me.supergun.Size = New System.Drawing.Size(39, 36)
+		Me.supergun.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.supergun.TabIndex = 105
+		Me.supergun.TabStop = False
+		Me.supergun.Tag = "content"
 		'
 		'lastItem1
 		'
@@ -1065,7 +1065,7 @@ Partial Class mainCamera
 		Me.Controls.Add(Me.Label3)
 		Me.Controls.Add(Me.instruction)
 		Me.Controls.Add(Me.Label2)
-		Me.Controls.Add(Me.gun)
+		Me.Controls.Add(Me.supergun)
 		Me.Controls.Add(Me.lastItem1)
 		Me.Controls.Add(Me.Item41)
 		Me.Controls.Add(Me.enemy41)
@@ -1142,7 +1142,7 @@ Partial Class mainCamera
 		Me.Tag = "content"
 		Me.Text = "Form1"
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.gun, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.supergun, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.Item41, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.enemy41, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1282,7 +1282,7 @@ Partial Class mainCamera
 	Friend WithEvents enemy40 As PictureBox
 	Friend WithEvents enemy41 As PictureBox
 	Friend WithEvents Item41 As PictureBox
-	Friend WithEvents gun As PictureBox
+	Friend WithEvents supergun As PictureBox
 	Friend WithEvents lastItem1 As PictureBox
 	Friend WithEvents Label2 As Label
 	Friend WithEvents instruction As PictureBox
