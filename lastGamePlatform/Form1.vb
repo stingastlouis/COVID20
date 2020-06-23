@@ -377,11 +377,6 @@
 			End If
 			bossAndEnemiesMoveTowardPlayer(boss)
 
-			If allowToshotShotGUNl = False Then
-				Item_Collected = 2
-				allowToshotShotGUNl = True
-				updateLabels()
-			End If
 		End If
 
 
