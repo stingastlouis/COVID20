@@ -14,6 +14,7 @@
 
 
 	Dim playerIsFalling As Boolean
+	Dim moveTheBoss As Boolean = False
 
 
 	Dim scoreGun As Integer
@@ -131,6 +132,12 @@
 		Select Case e.KeyValue
 			Case Keys.Right
 				posRight = True
+
+
+
+
+
+
 			Case Keys.Left
 				posLeft = True
 			Case Keys.Up
@@ -188,16 +195,38 @@
 		End If
 
 		If posRight Then
+			If player1.Left <= beforeBoss.Left + beforeBoss.Width Then
+				If player1.Left > Me.Width / 2 Then
+					For Each ctrl As Control In allMyControls '????????????????????????????????????????????????bizin rod 1 moyen optimize sa li p ralenti zouee la
+						If ctrl.Tag = "stayHere" Then
+						Else
+							ctrl.Left -= Speed
+						End If
+					Next
+				End If
+			Else
+				Label1.Visible = True
+				Label1.Enabled = True
+				ProgressBar1.Enabled = True
+				ProgressBar1.Visible = True
+				boss.Enabled = True
+				supergun.Enabled = True
+				supergun.Visible = True
+				moveTheBoss = True
+			End If
+			If moveTheBoss Then
+				bossAndEnemiesMoveTowardPlayer(boss)
+			End If
+
 			player1.Left += Speed
-		ElseIf posLeft Then
-			player1.Left -= Speed
+			ElseIf posLeft Then
+				player1.Left -= Speed
 		End If
 
 
 
 		'------------------------------------------------------------------------------------pa bon
-		'moveMycamera() 'bien bizin clean --- slowing 
-		makeEnemyMove() 'bien bizin clean --- slowing 
+		'makeEnemyMove() 'bien bizin clean --- slowing 
 		bulletManager() 'too much loop
 	End Sub
 
@@ -354,30 +383,7 @@
 	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
 	''' </summary>
 	Private Sub collisionChecker()
-		If player1.Left <= beforeBoss.Left + beforeBoss.Width Then
-			If player1.Left > Me.Width / 2 Then '???????????????????????????????????????????????????to pa croir li rent dan keydown-left?????????????
-				For Each ctrl As Control In allMyControls
-					Console.WriteLine("ssssssssss")
-					If ctrl.Tag = "stayHere" Then
-					Else
-						ctrl.Left -= Speed
-					End If
-				Next
-			End If
-		Else
-			Label1.Visible = True
-			Label1.Enabled = True
-			ProgressBar1.Enabled = True
-			ProgressBar1.Visible = True
-			boss.Enabled = True
-			supergun.Enabled = True
-			supergun.Visible = True
-			If player1.Left + player1.Width >= Me.Width Then
-				player1.Left -= Speed
-			End If
-			bossAndEnemiesMoveTowardPlayer(boss)
 
-		End If
 
 
 
@@ -538,7 +544,6 @@
 		Label1.Visible = False
 		Label1.Enabled = False
 		boss.Enabled = False
-		Timer500ms.Enabled = True
 		Timer75ms.Enabled = True
 
 		pp = New Player()
