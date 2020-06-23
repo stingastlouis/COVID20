@@ -162,8 +162,10 @@ Public Class Form2
         Select Case e.KeyValue
             Case Keys.Right
                 posRight = False
+                player1.Image = My.Resources.player1Mov
             Case Keys.Left
                 posLeft = False
+                player1.Image = My.Resources.player1Mov
             Case Keys.Up
                 posUp = False
 
@@ -202,6 +204,7 @@ Public Class Form2
     Private Sub checkmovement()
         If posLeft Then
             player1.Left -= Speed
+            player1.Image = My.Resources.walk
             If player1.Left < 0 Then
                 player1.Left += Speed
             End If
@@ -215,6 +218,7 @@ Public Class Form2
         End If
         If posRight Then
             player1.Left += Speed
+            player1.Image = My.Resources.walk
             For y As Integer = 0 To wall.Length - 1
                 If checkforCollision(player1, wall(y)) Then
                     player1.Left -= Speed
@@ -285,30 +289,50 @@ Public Class Form2
     '--------MOVE ALL CONTENT UPON PLAYER LOCATION--------------
     Private Sub moveMycamera()
 
+        If player1.Left + player1.Width >= Me.Left + Me.Width - 50 Then
+            Do While Not player1.Left <= 1
+                Me.BackColor = Color.Black
 
-        If Not player1.Left >= beforeBoss.Left + beforeBoss.Width Then
-            If player1.Left > Me.Width / 2 Then
-
-                For Each m As Control In Me.Controls
-                    If TypeOf m Is PictureBox Or TypeOf m Is Label Then
-                        If m.Tag = "content" Then
-                            m.Left -= Speed
+                posLeft = False
+                posRight = False
+                posUp = False
+                allowToshotShotGUNl = False
+                For Each content As Control In Me.Controls
+                    If TypeOf content Is PictureBox Or TypeOf content Is Label Then
+                        If content.Tag = "content" Then
+                            content.BackColor = Color.Black
+                            content.Left -= 30
                         End If
                     End If
                 Next
-            Else
-            End If
-        Else
-            If player1.Left + player1.Width >= Me.Width Then
-                player1.Left -= Speed
-            End If
-            lastWave()
-            If allowToshotShotGUNl = False Then
-                Item_Collected = 2
-                pItem.Text = "Item :" + CStr(Item_Collected)
-                allowToshotShotGUNl = True
-            End If
+
+            Loop
         End If
+
+
+        'If Not player1.Left >= beforeBoss.Left + beforeBoss.Width Then
+        '    If player1.Left > Me.Width / 2 Then
+
+        '        For Each m As Control In Me.Controls
+        '            If TypeOf m Is PictureBox Or TypeOf m Is Label Then
+        '                If m.Tag = "content" Then
+        '                    m.Left -= Speed
+        '                End If
+        '            End If
+        '        Next
+        '    Else
+        '    End If
+        'Else
+        '    If player1.Left + player1.Width >= Me.Width Then
+        '        player1.Left -= Speed
+        '    End If
+        '    lastWave()
+        '    If allowToshotShotGUNl = False Then
+        '        Item_Collected = 2
+        '        pItem.Text = "Item :" + CStr(Item_Collected)
+        '        allowToshotShotGUNl = True
+        '    End If
+        'End If
     End Sub
 
     Private Sub beforeRestart()
