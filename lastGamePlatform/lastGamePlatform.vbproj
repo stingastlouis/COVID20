@@ -300,5 +300,11 @@
   <ItemGroup>
     <None Include="Resources\walk.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nono%28top%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

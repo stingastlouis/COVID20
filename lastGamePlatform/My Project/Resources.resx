@@ -127,6 +127,9 @@
   <data name="Cinematic_Trailer___AShamaluevMusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cinematic Trailer - AShamaluevMusic.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cloud" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cloud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Dosseh___Le_bruit_du_silence__Clip_Officiel_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dosseh - Le bruit du silence (Clip Officiel).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -153,6 +156,9 @@
   </data>
   <data name="mm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nono_top_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\nono(top).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="player1Mov" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player1Mov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

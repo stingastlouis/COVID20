@@ -175,6 +175,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property cloud() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("cloud", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         '''</summary>
         Friend ReadOnly Property Dosseh___Le_bruit_du_silence__Clip_Officiel_() As System.IO.UnmanagedMemoryStream
@@ -259,6 +269,16 @@ Namespace My.Resources
         Friend ReadOnly Property mm() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("mm", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property nono_top_() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("nono_top_", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

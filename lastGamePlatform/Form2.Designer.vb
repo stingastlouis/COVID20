@@ -33,6 +33,7 @@ Partial Class Form2
         Me.pLife = New System.Windows.Forms.Label()
         Me.pItem = New System.Windows.Forms.Label()
         Me.pName = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lastLife = New System.Windows.Forms.PictureBox()
         Me.lastGun = New System.Windows.Forms.PictureBox()
         Me.lastItem1 = New System.Windows.Forms.PictureBox()
@@ -97,6 +98,10 @@ Partial Class Form2
         Me.wall2 = New System.Windows.Forms.PictureBox()
         Me.player1 = New System.Windows.Forms.PictureBox()
         Me.ground1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lastLife, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lastGun, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -161,6 +166,9 @@ Partial Class Form2
         CType(Me.wall2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.player1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ground1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -266,6 +274,19 @@ Partial Class Form2
         Me.pName.Size = New System.Drawing.Size(61, 28)
         Me.pName.TabIndex = 127
         Me.pName.Text = "Johny "
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Image = Global.lastGamePlatform.My.Resources.Resources.cloud
+        Me.PictureBox1.Location = New System.Drawing.Point(550, 135)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(87, 62)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 193
+        Me.PictureBox1.TabStop = False
+        Me.PictureBox1.Tag = "content"
         '
         'lastLife
         '
@@ -976,12 +997,57 @@ Partial Class Form2
         Me.ground1.TabStop = False
         Me.ground1.Tag = "content"
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox2.Image = Global.lastGamePlatform.My.Resources.Resources.cloud
+        Me.PictureBox2.Location = New System.Drawing.Point(279, 219)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(87, 62)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 194
+        Me.PictureBox2.TabStop = False
+        Me.PictureBox2.Tag = "content"
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox3.Image = Global.lastGamePlatform.My.Resources.Resources.cloud
+        Me.PictureBox3.Location = New System.Drawing.Point(1035, 135)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(87, 62)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox3.TabIndex = 195
+        Me.PictureBox3.TabStop = False
+        Me.PictureBox3.Tag = "content"
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox4.Image = Global.lastGamePlatform.My.Resources.Resources.cloud
+        Me.PictureBox4.Location = New System.Drawing.Point(1196, 209)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(87, 62)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox4.TabIndex = 196
+        Me.PictureBox4.TabStop = False
+        Me.PictureBox4.Tag = "content"
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1371, 598)
+        Me.BackColor = System.Drawing.Color.DarkTurquoise
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ClientSize = New System.Drawing.Size(1371, 619)
+        Me.Controls.Add(Me.PictureBox4)
+        Me.Controls.Add(Me.PictureBox3)
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lastLife)
         Me.Controls.Add(Me.lastGun)
         Me.Controls.Add(Me.lastItem1)
@@ -1058,6 +1124,7 @@ Partial Class Form2
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form2"
         Me.Text = "Form2"
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lastLife, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lastGun, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1122,6 +1189,9 @@ Partial Class Form2
         CType(Me.wall2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.player1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ground1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1201,4 +1271,8 @@ Partial Class Form2
     Friend WithEvents wall2 As PictureBox
     Friend WithEvents player1 As PictureBox
     Friend WithEvents ground1 As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents PictureBox4 As PictureBox
 End Class
