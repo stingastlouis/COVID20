@@ -108,6 +108,7 @@ Partial Class mainCamera
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+		Me.FastestTimer = New System.Windows.Forms.Timer(Me.components)
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1042,6 +1043,11 @@ Partial Class mainCamera
 		Me.PictureBox1.TabIndex = 116
 		Me.PictureBox1.TabStop = False
 		'
+		'FastestTimer
+		'
+		Me.FastestTimer.Enabled = True
+		Me.FastestTimer.Interval = 10
+		'
 		'mainCamera
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1294,4 +1300,5 @@ Partial Class mainCamera
 	Friend WithEvents PictureBox3 As PictureBox
 	Friend WithEvents PictureBox4 As PictureBox
 	Friend WithEvents PictureBox1 As PictureBox
+	Friend WithEvents FastestTimer As Timer
 End Class

@@ -1,4 +1,6 @@
-﻿Public Class mainCamera
+﻿Imports Microsoft.xna.framework
+
+Public Class mainCamera
 	'list
 	Dim walls As New List(Of PictureBox)
 	Dim grounds As New List(Of PictureBox)
@@ -15,11 +17,13 @@
 
 	'player vars
 	Dim playerIsFalling As Boolean
-	Dim Speed As Integer
-	Dim gravitySpeed As Integer
+	Dim cameraSpeed As Integer = 5
+	Dim playerSpeed As Integer = 5
+	Dim gravitySpeed As Integer = 3
 
 
 	Dim moveTheBoss As Boolean = False
+	Dim moveTheCamera As Boolean = False
 
 
 	'my items' scores
@@ -182,6 +186,60 @@
 
 
 
+	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
+		'transform.position = player1.transform.position + offset;
+
+		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) Then
+			If player1.Left > Me.Width / 2 Then
+				moveTheCamera = True
+			Else
+				moveTheCamera = False
+			End If
+		Else
+			Label1.Visible = True
+			Label1.Enabled = True
+			ProgressBar1.Enabled = True
+			ProgressBar1.Visible = True
+			boss.Enabled = True
+			supergun.Enabled = True
+			supergun.Visible = True
+			moveTheBoss = True
+			moveTheCamera = False
+		End If
+	End Sub
+
+
+
+
+
+
+
+	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
+		'If moveTheCamera Then
+		'	For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+
+		'		activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
+
+		'	Next
+		'End If
+
+
+
+		If playerIsFalling Then
+			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
+		End If
+		If moveTheCamera AndAlso posRight Then
+			player1.Location = New Point(player1.Location.X, player1.Location.Y)
+		End If
+		If posRight Then
+
+			player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
+
+		ElseIf posLeft Then
+			player1.Location = New Point(player1.Location.X - playerSpeed, player1.Location.Y)
+		End If
+	End Sub
+
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		'------------------------------------------------------------------------------------bon
@@ -190,44 +248,17 @@
 		End If
 
 		collisionChecker()
-		If playerIsFalling Then
-			player1.Top += gravitySpeed
+
+
+
+		If moveTheBoss Then
+			bossAndEnemiesMoveTowardPlayer(boss)
 		End If
-
-		If posRight Then
-			If player1.Left <= beforeBoss.Left + beforeBoss.Width Then
-				If player1.Left > Me.Width / 2 Then
-					For Each ctrl As Control In allMyControls '????????????????????????????????????????????????bizin rod 1 moyen optimize sa li p ralenti zouee la
-						If ctrl.Tag = "stayHere" Then
-						Else
-							ctrl.Left -= Speed
-						End If
-					Next
-				End If
-			Else
-				Label1.Visible = True
-				Label1.Enabled = True
-				ProgressBar1.Enabled = True
-				ProgressBar1.Visible = True
-				boss.Enabled = True
-				supergun.Enabled = True
-				supergun.Visible = True
-				moveTheBoss = True
-			End If
-			If moveTheBoss Then
-				bossAndEnemiesMoveTowardPlayer(boss)
-			End If
-
-			player1.Left += Speed
-			ElseIf posLeft Then
-				player1.Left -= Speed
-		End If
-
 
 
 		'------------------------------------------------------------------------------------pa bon
 		'makeEnemyMove() 'bien bizin clean --- slowing 
-		bulletManager() 'too much loop
+		'bulletManager() 'too much loop
 	End Sub
 
 
@@ -369,7 +400,7 @@
 
 
 
-
+	Dim i As Integer = 0
 
 
 
@@ -390,10 +421,15 @@
 
 		playerIsFalling = True
 		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+			If moveTheCamera Then
+				activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
+			End If
+
+
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
 					playerIsFalling = False
-					Console.WriteLine("wall/ground")
+					'Console.WriteLine("wall/ground")
 					'????????????????????????????bizin dreC???????this code allow to pass through wall???? 1 zafr width sa???
 				End If
 
@@ -552,9 +588,7 @@
 		ProgressBar1.Value = 20
 		'My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop) 
 		allowToshotShotGUNl = False
-		Speed = 15
 		jumpHeight = 100
-		gravitySpeed = 3
 		Life_Point = 3
 		IsJumping = False
 	End Sub
