@@ -289,25 +289,34 @@ Public Class Form2
     '--------MOVE ALL CONTENT UPON PLAYER LOCATION--------------
     Private Sub moveMycamera()
 
-        If player1.Left + player1.Width >= Me.Left + Me.Width - 50 Then
+        If player1.Left + player1.Width >= Me.Left + Me.Width Then
             Do While Not player1.Left <= 1
-                Me.BackColor = Color.Black
-
-                posLeft = False
-                posRight = False
-                posUp = False
-                allowToshotShotGUNl = False
-                For Each content As Control In Me.Controls
-                    If TypeOf content Is PictureBox Or TypeOf content Is Label Then
-                        If content.Tag = "content" Then
-                            content.BackColor = Color.Black
-                            content.Left -= 30
-                        End If
-                    End If
-                Next
-
+                Dim change As Integer = Me.HorizontalScroll.Value + Me.HorizontalScroll.SmallChange * 3
+                Me.AutoScrollPosition = New Point(change, 0)
             Loop
         End If
+
+
+
+        'If player1.Left + player1.Width >= Me.Left + Me.Width - 50 Then
+        '    Do While Not player1.Left <= 1
+        '        Me.BackColor = Color.Black
+
+        '        posLeft = False
+        '        posRight = False
+        '        posUp = False
+        '        allowToshotShotGUNl = False
+        '        For Each content As Control In Me.Controls
+        '            If TypeOf content Is PictureBox Or TypeOf content Is Label Then
+        '                If content.Tag = "content" Then
+        '                    content.BackColor = Color.Black
+        '                    content.Left -= 30
+        '                End If
+        '            End If
+        '        Next
+
+        '    Loop
+        'End If
 
 
         'If Not player1.Left >= beforeBoss.Left + beforeBoss.Width Then
