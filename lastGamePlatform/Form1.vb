@@ -1,4 +1,4 @@
-﻿Imports Microsoft.xna.framework
+﻿Imports Microsoft.VisualBasic.powerpack
 
 Public Class mainCamera
 	'list
@@ -187,14 +187,12 @@ Public Class mainCamera
 
 
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
-		'transform.position = player1.transform.position + offset;
+		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left > Me.Width / 2) Then
+			moveTheCamera = True
+			'Console.WriteLine(sender.ToString())'picturebox
+			'Console.WriteLine(e.ToString()) 'changing location
 
-		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) Then
-			If player1.Left > Me.Width / 2 Then
-				moveTheCamera = True
-			Else
-				moveTheCamera = False
-			End If
+
 		Else
 			Label1.Visible = True
 			Label1.Enabled = True
@@ -215,29 +213,36 @@ Public Class mainCamera
 
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
-		'If moveTheCamera Then
-		'	For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+		If moveTheCamera Then
+			'Me.AutoScrollPosition = New Point(Me.HorizontalScroll.Value + Me.HorizontalScroll.SmallChange * player1.Location.X, 0)
+			Me.AutoScrollPosition = New Point(Math.Abs(Me.HorizontalScroll.Value + cameraSpeed), 0)
+		End If
 
-		'		activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
 
-		'	Next
-		'End If
+		'Dim change As Integer = Me.HorizontalScroll.Value + Me.HorizontalScroll.SmallChange * 3
+		'Me.AutoScrollPosition = New Point(change, 0)
 
 
 
 		If playerIsFalling Then
 			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
 		End If
-		If moveTheCamera AndAlso posRight Then
-			player1.Location = New Point(player1.Location.X, player1.Location.Y)
-		End If
+		'If moveTheCamera AndAlso posRight Then
+		'	'player1.Location = New Point(player1.Location.X, player1.Location.Y)
+		'End If
 		If posRight Then
-
-			player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
-
+			If Not moveTheCamera Then
+				player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
+			End If
 		ElseIf posLeft Then
 			player1.Location = New Point(player1.Location.X - playerSpeed, player1.Location.Y)
 		End If
+
+		'For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+		'	If moveTheCamera Then
+		'		activePictureBox.Location = New Point(activePictureBox.Location.X - (5), activePictureBox.Location.Y)
+		'	End If
+		'Next
 	End Sub
 
 
@@ -248,7 +253,11 @@ Public Class mainCamera
 		End If
 
 		collisionChecker()
-
+		'For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+		'	If moveTheCamera Then
+		'		activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
+		'	End If
+		'Next
 
 
 		If moveTheBoss Then
@@ -421,9 +430,9 @@ Public Class mainCamera
 
 		playerIsFalling = True
 		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-			If moveTheCamera Then
-				activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
-			End If
+			'If moveTheCamera Then
+			'	activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
+			'End If
 
 
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
