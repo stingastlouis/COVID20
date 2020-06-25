@@ -1,4 +1,4 @@
-﻿Imports Microsoft.VisualBasic.powerpack
+﻿
 
 Public Class mainCamera
 	'list
@@ -187,7 +187,7 @@ Public Class mainCamera
 
 
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
-		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left + (player1.Width / 2) > Me.Width / 2) Then
+		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left + (player1.Width / 2) > (door.Left + (door.Width / 2))) Then '(player1.Left + (player1.Width / 2) > Me.Width / 2) Then
 			moveTheCamera = True
 			'Console.WriteLine(sender.ToString())'picturebox
 			'Console.WriteLine(e.ToString()) 'changing location
@@ -213,10 +213,10 @@ Public Class mainCamera
 
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
-		If moveTheCamera Then
-			'Me.AutoScrollPosition = New Point(Me.HorizontalScroll.Value + Me.HorizontalScroll.SmallChange * player1.Location.X, 0)
-			Me.AutoScrollPosition = New Point(Math.Abs(Me.HorizontalScroll.Value + cameraSpeed), 0)
-		End If
+		'If moveTheCamera Then
+		'	'Me.AutoScrollPosition = New Point(Me.HorizontalScroll.Value + Me.HorizontalScroll.SmallChange * player1.Location.X, 0)
+		'	Me.AutoScrollPosition = New Point(Math.Abs(Me.HorizontalScroll.Value + cameraSpeed), 0)
+		'End If
 
 
 		'Dim change As Integer = Me.HorizontalScroll.Value + Me.HorizontalScroll.SmallChange * 3
@@ -224,19 +224,18 @@ Public Class mainCamera
 
 
 		If posRight Then
-			If Not moveTheCamera Then
-				player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
-			End If
+			player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
+
 		ElseIf posLeft Then
 			player1.Location = New Point(player1.Location.X - playerSpeed, player1.Location.Y)
 		End If
 
 
-		'For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-		'	If moveTheCamera Then
-		'		activePictureBox.Location = New Point(activePictureBox.Location.X - (5), activePictureBox.Location.Y)
-		'	End If
-		'Next
+		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+			If moveTheCamera Then
+				activePictureBox.Location = New Point(activePictureBox.Location.X - player1.Location.X, activePictureBox.Location.Y)
+			End If
+		Next
 	End Sub
 
 
@@ -246,7 +245,7 @@ Public Class mainCamera
 			loserWinner()
 		End If
 
-		'collisionChecker()
+		collisionChecker()
 		'For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
 		'	If moveTheCamera Then
 		'		activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
@@ -625,6 +624,9 @@ Public Class mainCamera
 					myPredefinePictureBoxes(ctrl, My.Resources.Prop_6) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				ElseIf controlName.Contains("enemy") Then
+					myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					allActivePictureBoxes.Add(ctrl) 'push to list
+				ElseIf controlName.Contains("door") Then
 					myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				Else 'pictureboxes to include

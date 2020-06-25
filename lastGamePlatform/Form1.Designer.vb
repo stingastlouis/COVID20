@@ -57,7 +57,7 @@ Partial Class mainCamera
 		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+		Me.door = New System.Windows.Forms.PictureBox()
 		Me.FastestTimer = New System.Windows.Forms.Timer(Me.components)
 		Me.beforeBoss = New System.Windows.Forms.PictureBox()
 		Me.boss = New System.Windows.Forms.PictureBox()
@@ -83,7 +83,7 @@ Partial Class mainCamera
 		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.door, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.beforeBoss, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.boss, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -384,7 +384,7 @@ Partial Class mainCamera
 		'enemy12
 		'
 		Me.enemy12.BackColor = System.Drawing.Color.Olive
-		Me.enemy12.Location = New System.Drawing.Point(397, 350)
+		Me.enemy12.Location = New System.Drawing.Point(695, 125)
 		Me.enemy12.Name = "enemy12"
 		Me.enemy12.Size = New System.Drawing.Size(65, 50)
 		Me.enemy12.TabIndex = 52
@@ -434,20 +434,21 @@ Partial Class mainCamera
 		'PictureBox4
 		'
 		Me.PictureBox4.BackColor = System.Drawing.Color.Yellow
-		Me.PictureBox4.Location = New System.Drawing.Point(473, 201)
+		Me.PictureBox4.Location = New System.Drawing.Point(562, 183)
 		Me.PictureBox4.Name = "PictureBox4"
 		Me.PictureBox4.Size = New System.Drawing.Size(65, 50)
 		Me.PictureBox4.TabIndex = 115
 		Me.PictureBox4.TabStop = False
 		Me.PictureBox4.Tag = "content"
 		'
-		'PictureBox1
+		'door
 		'
-		Me.PictureBox1.Location = New System.Drawing.Point(327, 298)
-		Me.PictureBox1.Name = "PictureBox1"
-		Me.PictureBox1.Size = New System.Drawing.Size(59, 52)
-		Me.PictureBox1.TabIndex = 116
-		Me.PictureBox1.TabStop = False
+		Me.door.BackColor = System.Drawing.SystemColors.ActiveCaptionText
+		Me.door.Location = New System.Drawing.Point(423, 305)
+		Me.door.Name = "door"
+		Me.door.Size = New System.Drawing.Size(59, 105)
+		Me.door.TabIndex = 116
+		Me.door.TabStop = False
 		'
 		'FastestTimer
 		'
@@ -511,9 +512,9 @@ Partial Class mainCamera
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
-		Me.ClientSize = New System.Drawing.Size(476, 469)
+		Me.ClientSize = New System.Drawing.Size(453, 469)
 		Me.Controls.Add(Me.lastItem1)
-		Me.Controls.Add(Me.PictureBox1)
+		Me.Controls.Add(Me.door)
 		Me.Controls.Add(Me.PictureBox4)
 		Me.Controls.Add(Me.PictureBox3)
 		Me.Controls.Add(Me.PictureBox2)
@@ -574,7 +575,7 @@ Partial Class mainCamera
 		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.door, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.beforeBoss, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.boss, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).EndInit()
@@ -618,7 +619,7 @@ Partial Class mainCamera
 	Friend WithEvents PictureBox2 As PictureBox
 	Friend WithEvents PictureBox3 As PictureBox
 	Friend WithEvents PictureBox4 As PictureBox
-	Friend WithEvents PictureBox1 As PictureBox
+	Friend WithEvents door As PictureBox
 	Friend WithEvents FastestTimer As Timer
 	Friend WithEvents beforeBoss As PictureBox
 	Friend WithEvents boss As PictureBox
