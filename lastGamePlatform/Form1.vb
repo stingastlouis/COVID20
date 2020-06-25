@@ -627,7 +627,7 @@ Public Class mainCamera
 					myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				ElseIf controlName.Contains("door") Then
-					myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					'myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				Else 'pictureboxes to include
 					randomPictureBoxArray.Add(ctrl) 'add the remaining control to List<randomPictureBoxArray> which will randomise the image to be inserted to the pictureboxes
