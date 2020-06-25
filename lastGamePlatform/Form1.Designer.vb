@@ -94,7 +94,6 @@ Partial Class mainCamera
 		'Timer75ms
 		'
 		Me.Timer75ms.Enabled = True
-		Me.Timer75ms.Interval = 75
 		'
 		'pName
 		'
@@ -552,6 +551,7 @@ Partial Class mainCamera
 		Me.Controls.Add(Me.wall3)
 		Me.Controls.Add(Me.player1)
 		Me.Controls.Add(Me.ground1)
+		Me.DoubleBuffered = True
 		Me.Name = "mainCamera"
 		Me.Tag = "content"
 		Me.Text = "Form1"

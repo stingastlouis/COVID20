@@ -17,8 +17,8 @@ Public Class mainCamera
 
 	'player vars
 	Dim playerIsFalling As Boolean
-	Dim cameraSpeed As Integer = 5
 	Dim playerSpeed As Integer = 5
+	Dim cameraSpeed As Integer = 3 + playerSpeed
 	Dim gravitySpeed As Integer = 3
 
 
@@ -187,7 +187,7 @@ Public Class mainCamera
 
 
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
-		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left > Me.Width / 2) Then
+		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left + (player1.Width / 2) > Me.Width / 2) Then
 			moveTheCamera = True
 			'Console.WriteLine(sender.ToString())'picturebox
 			'Console.WriteLine(e.ToString()) 'changing location
@@ -223,13 +223,6 @@ Public Class mainCamera
 		'Me.AutoScrollPosition = New Point(change, 0)
 
 
-
-		If playerIsFalling Then
-			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
-		End If
-		'If moveTheCamera AndAlso posRight Then
-		'	'player1.Location = New Point(player1.Location.X, player1.Location.Y)
-		'End If
 		If posRight Then
 			If Not moveTheCamera Then
 				player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
@@ -237,6 +230,7 @@ Public Class mainCamera
 		ElseIf posLeft Then
 			player1.Location = New Point(player1.Location.X - playerSpeed, player1.Location.Y)
 		End If
+
 
 		'For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
 		'	If moveTheCamera Then
@@ -252,12 +246,18 @@ Public Class mainCamera
 			loserWinner()
 		End If
 
-		collisionChecker()
+		'collisionChecker()
 		'For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
 		'	If moveTheCamera Then
 		'		activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
 		'	End If
 		'Next
+		If playerIsFalling Then
+			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
+		End If
+		'If moveTheCamera AndAlso posRight Then
+		'	'player1.Location = New Point(player1.Location.X, player1.Location.Y)
+		'End If
 
 
 		If moveTheBoss Then
