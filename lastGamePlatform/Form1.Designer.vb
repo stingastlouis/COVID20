@@ -64,6 +64,7 @@ Partial Class mainCamera
 		Me.supergun = New System.Windows.Forms.PictureBox()
 		Me.lastLife = New System.Windows.Forms.PictureBox()
 		Me.lastItem1 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bonus13, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.gun2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,6 +90,7 @@ Partial Class mainCamera
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastLife, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'Timer75ms
@@ -507,12 +509,22 @@ Partial Class mainCamera
 		Me.lastItem1.TabStop = False
 		Me.lastItem1.Tag = "content"
 		'
+		'PictureBox1
+		'
+		Me.PictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText
+		Me.PictureBox1.Location = New System.Drawing.Point(879, 303)
+		Me.PictureBox1.Name = "PictureBox1"
+		Me.PictureBox1.Size = New System.Drawing.Size(59, 105)
+		Me.PictureBox1.TabIndex = 118
+		Me.PictureBox1.TabStop = False
+		'
 		'mainCamera
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
 		Me.ClientSize = New System.Drawing.Size(453, 469)
+		Me.Controls.Add(Me.PictureBox1)
 		Me.Controls.Add(Me.lastItem1)
 		Me.Controls.Add(Me.door)
 		Me.Controls.Add(Me.PictureBox4)
@@ -581,6 +593,7 @@ Partial Class mainCamera
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.lastLife, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -626,4 +639,5 @@ Partial Class mainCamera
 	Friend WithEvents supergun As PictureBox
 	Friend WithEvents lastLife As PictureBox
 	Friend WithEvents lastItem1 As PictureBox
+	Friend WithEvents PictureBox1 As PictureBox
 End Class

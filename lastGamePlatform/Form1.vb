@@ -187,7 +187,7 @@ Public Class mainCamera
 
 
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
-		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left + (player1.Width / 2) > (door.Left + (door.Width / 2))) Then '(player1.Left + (player1.Width / 2) > Me.Width / 2) Then
+		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left + (player1.Width / 2) > (Me.Width)) Then '(player1.Left + (player1.Width / 2) > Me.Width / 2) Then
 			moveTheCamera = True
 			'Console.WriteLine(sender.ToString())'picturebox
 			'Console.WriteLine(e.ToString()) 'changing location
