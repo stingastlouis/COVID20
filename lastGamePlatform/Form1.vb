@@ -188,8 +188,6 @@ Public Class mainCamera
 
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
 		collisionChecker()
-
-
 	End Sub
 
 
@@ -208,7 +206,9 @@ Public Class mainCamera
 
 		If (player1.Left + player1.Width > Me.Width) Then
 			For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width - Me.Width, activePictureBox.Location.Y)
+				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
+				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
+				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
 			Next
 		End If
 
@@ -513,6 +513,8 @@ Public Class mainCamera
 		jumpHeight = 100
 		Life_Point = 3
 		IsJumping = False
+
+		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
 	End Sub
 
 

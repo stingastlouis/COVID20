@@ -57,13 +57,14 @@ Partial Class mainCamera
 		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-		Me.door = New System.Windows.Forms.PictureBox()
+		Me.door2 = New System.Windows.Forms.PictureBox()
 		Me.FastestTimer = New System.Windows.Forms.Timer(Me.components)
 		Me.beforeBoss = New System.Windows.Forms.PictureBox()
 		Me.boss = New System.Windows.Forms.PictureBox()
 		Me.supergun = New System.Windows.Forms.PictureBox()
 		Me.lastLife = New System.Windows.Forms.PictureBox()
 		Me.lastItem1 = New System.Windows.Forms.PictureBox()
+		Me.door1 = New System.Windows.Forms.PictureBox()
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bonus13, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.gun2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -83,12 +84,13 @@ Partial Class mainCamera
 		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.door, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.door2, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.beforeBoss, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.boss, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastLife, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.door1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'Timer75ms
@@ -441,14 +443,14 @@ Partial Class mainCamera
 		Me.PictureBox4.TabStop = False
 		Me.PictureBox4.Tag = "content"
 		'
-		'door
+		'door2
 		'
-		Me.door.BackColor = System.Drawing.SystemColors.MenuHighlight
-		Me.door.Location = New System.Drawing.Point(2200, 40)
-		Me.door.Name = "door"
-		Me.door.Size = New System.Drawing.Size(59, 360)
-		Me.door.TabIndex = 116
-		Me.door.TabStop = False
+		Me.door2.BackColor = System.Drawing.SystemColors.MenuHighlight
+		Me.door2.Location = New System.Drawing.Point(2200, 40)
+		Me.door2.Name = "door2"
+		Me.door2.Size = New System.Drawing.Size(59, 360)
+		Me.door2.TabIndex = 116
+		Me.door2.TabStop = False
 		'
 		'FastestTimer
 		'
@@ -507,14 +509,24 @@ Partial Class mainCamera
 		Me.lastItem1.TabStop = False
 		Me.lastItem1.Tag = "content"
 		'
+		'door1
+		'
+		Me.door1.BackColor = System.Drawing.SystemColors.MenuHighlight
+		Me.door1.Location = New System.Drawing.Point(496, 40)
+		Me.door1.Name = "door1"
+		Me.door1.Size = New System.Drawing.Size(59, 360)
+		Me.door1.TabIndex = 118
+		Me.door1.TabStop = False
+		'
 		'mainCamera
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
 		Me.ClientSize = New System.Drawing.Size(521, 469)
+		Me.Controls.Add(Me.door1)
 		Me.Controls.Add(Me.lastItem1)
-		Me.Controls.Add(Me.door)
+		Me.Controls.Add(Me.door2)
 		Me.Controls.Add(Me.PictureBox4)
 		Me.Controls.Add(Me.PictureBox3)
 		Me.Controls.Add(Me.PictureBox2)
@@ -575,12 +587,13 @@ Partial Class mainCamera
 		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.door, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.door2, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.beforeBoss, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.boss, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.lastLife, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.door1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -619,11 +632,12 @@ Partial Class mainCamera
 	Friend WithEvents PictureBox2 As PictureBox
 	Friend WithEvents PictureBox3 As PictureBox
 	Friend WithEvents PictureBox4 As PictureBox
-	Friend WithEvents door As PictureBox
+	Friend WithEvents door2 As PictureBox
 	Friend WithEvents FastestTimer As Timer
 	Friend WithEvents beforeBoss As PictureBox
 	Friend WithEvents boss As PictureBox
 	Friend WithEvents supergun As PictureBox
 	Friend WithEvents lastLife As PictureBox
 	Friend WithEvents lastItem1 As PictureBox
+	Friend WithEvents door1 As PictureBox
 End Class
