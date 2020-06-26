@@ -189,34 +189,12 @@ Public Class mainCamera
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
 		collisionChecker()
 
-		'playerIsFalling = True
-		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left + (player1.Width / 2) > (Me.Width)) Then '(player1.Left + (player1.Width / 2) > Me.Width / 2) Then
-			moveTheCamera = True
-			'Console.WriteLine(sender.ToString())'picturebox
-			'Console.WriteLine(e.ToString()) 'changing location
 
-
-		Else
-			Label1.Visible = True
-			Label1.Enabled = True
-			ProgressBar1.Enabled = True
-			ProgressBar1.Visible = True
-			boss.Enabled = True
-			supergun.Enabled = True
-			supergun.Visible = True
-			moveTheBoss = True
-			moveTheCamera = False
-		End If
 	End Sub
 
 
 
-
-
-
-
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
-
 		If posRight Then
 			player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
 		ElseIf posLeft Then
@@ -228,14 +206,24 @@ Public Class mainCamera
 		End If
 
 
+		If (player1.Left + player1.Width > Me.Width) Then
+			For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width - Me.Width, activePictureBox.Location.Y)
+			Next
+		End If
 
-
-		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-			If moveTheCamera Then
-				activePictureBox.Location = New Point(activePictureBox.Location.X - player1.Location.X, activePictureBox.Location.Y)
-			End If
-		Next
+		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then
+			Label1.Visible = True
+			Label1.Enabled = True
+			ProgressBar1.Enabled = True
+			ProgressBar1.Visible = True
+			boss.Enabled = True
+			supergun.Enabled = True
+			supergun.Visible = True
+			moveTheBoss = True
+		End If
 	End Sub
+
 
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
@@ -243,18 +231,6 @@ Public Class mainCamera
 		If (ProgressBar1.Value <= 0) Or (Life_Point <= 0) Then
 			loserWinner()
 		End If
-
-		'collisionChecker()
-		'For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-		'	If moveTheCamera Then
-		'		activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
-		'	End If
-		'Next
-
-		'If moveTheCamera AndAlso posRight Then
-		'	'player1.Location = New Point(player1.Location.X, player1.Location.Y)
-		'End If
-
 
 		If moveTheBoss Then
 			bossAndEnemiesMoveTowardPlayer(boss)
@@ -265,6 +241,13 @@ Public Class mainCamera
 		'makeEnemyMove() 'bien bizin clean --- slowing 
 		'bulletManager() 'too much loop
 	End Sub
+
+
+
+
+
+
+
 
 
 
@@ -405,34 +388,18 @@ Public Class mainCamera
 
 
 
-	Dim i As Integer = 0
-
-
-
-
-
-
-
-
 	''' <summary>
 	''' used in timer
 	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
 	''' </summary>
 	Private Sub collisionChecker()
-
-
-
-
-
 		playerIsFalling = True
 		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-
 					'Console.WriteLine("wall/ground")
 					'????????????????????????????bizin dreC???????this code allow to pass through wall???? 1 zafr width sa???
-
-					If player1.Top > activePictureBox.Top - player1.Height Then
+					If player1.Top > activePictureBox.Top - player1.Height Then 'to stay on top of ground and wall
 						player1.Location = New Point(player1.Location.X, activePictureBox.Top - player1.Height)
 						playerIsFalling = False
 					End If
@@ -508,57 +475,6 @@ Public Class mainCamera
 				End If
 			End If
 		Next
-	End Sub
-
-
-
-	''' <summary>
-	''' display buttons / message if win or lost
-	''' </summary>
-	Private Sub loserWinner()
-		If ProgressBar1.Value <= 0 Then
-			universalScore = Score
-			ProgressBar1.Value = 0
-			Timer75ms.Enabled = False
-			winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
-			winorloseTxt.Visible = True
-
-			RestartBtn.Text = "Continue"
-			RestartBtn.Visible = True
-			RestartBtn.Enabled = True
-			winorloseTxt.Top = Me.Height / 2 - 60
-			winorloseTxt.Left = Me.Width / 2 - 15
-			RestartBtn.BringToFront()
-			RestartBtn.Top = Me.Height / 2
-			RestartBtn.Left = Me.Width / 2
-
-			extbtn.Visible = True
-			extbtn.Enabled = True
-			extbtn.Text = "Abandon Mission"
-			extbtn.Top = Me.Height / 2 + 30
-			extbtn.Left = Me.Width / 2
-			extbtn.BringToFront()
-		End If
-
-		If Life_Point <= 0 Then
-			winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
-			winorloseTxt.Visible = True
-
-			RestartBtn.Text = "Restart"
-			RestartBtn.Visible = True
-			RestartBtn.Enabled = True
-			RestartBtn.BringToFront()
-			winorloseTxt.Top = Me.Height / 2 - 60
-			winorloseTxt.Left = Me.Width / 2 - 15
-			RestartBtn.Top = Me.Height / 2
-			RestartBtn.Left = Me.Width / 2
-			extbtn.Visible = True
-			extbtn.Enabled = True
-			extbtn.Text = "Abandon Mission"
-			extbtn.Top = Me.Height / 2 + 30
-			extbtn.Left = Me.Width / 2
-			extbtn.BringToFront()
-		End If
 	End Sub
 
 
@@ -690,6 +606,19 @@ Public Class mainCamera
 
 
 	''' <summary>
+	''' remove the pictureboxes that the player collided with and update the labels
+	''' </summary>
+	''' <param name="otherPicBox">picturebox to remove</param>
+	Private Sub removeOtherPictureBoxAndUpdateScore(otherPicBox As PictureBox)
+		'removing the control
+		allActivePictureBoxes.Remove(otherPicBox)
+		Me.Controls.Remove(otherPicBox)
+		updateLabels()
+	End Sub
+
+
+
+	''' <summary>
 	''' inserting image to control
 	''' </summary>
 	''' <param name="ctrl">take control as parameter</param>
@@ -705,19 +634,6 @@ Public Class mainCamera
 
 
 	''' <summary>
-	''' remove the pictureboxes that the player collided with and update the labels
-	''' </summary>
-	''' <param name="otherPicBox">picturebox to remove</param>
-	Private Sub removeOtherPictureBoxAndUpdateScore(otherPicBox As PictureBox)
-		'removing the control
-		allActivePictureBoxes.Remove(otherPicBox)
-		Me.Controls.Remove(otherPicBox)
-		updateLabels()
-	End Sub
-
-
-
-	''' <summary>
 	''' refresh all lables
 	''' </summary>
 	Private Sub updateLabels()
@@ -725,4 +641,58 @@ Public Class mainCamera
 		pLife.Text = "X" + CStr(Life_Point)
 		pItem.Text = "Item :" + CStr(Item_Collected)
 	End Sub
+
+
+
+	''' <summary>
+	''' display buttons / message if win or lost
+	''' </summary>
+	Private Sub loserWinner()
+		If ProgressBar1.Value <= 0 Then
+			universalScore = Score
+			ProgressBar1.Value = 0
+			Timer75ms.Enabled = False
+			winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
+			winorloseTxt.Visible = True
+
+			RestartBtn.Text = "Continue"
+			RestartBtn.Visible = True
+			RestartBtn.Enabled = True
+			winorloseTxt.Top = Me.Height / 2 - 60
+			winorloseTxt.Left = Me.Width / 2 - 15
+			RestartBtn.BringToFront()
+			RestartBtn.Top = Me.Height / 2
+			RestartBtn.Left = Me.Width / 2
+
+			extbtn.Visible = True
+			extbtn.Enabled = True
+			extbtn.Text = "Abandon Mission"
+			extbtn.Top = Me.Height / 2 + 30
+			extbtn.Left = Me.Width / 2
+			extbtn.BringToFront()
+		End If
+
+		If Life_Point <= 0 Then
+			winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
+			winorloseTxt.Visible = True
+
+			RestartBtn.Text = "Restart"
+			RestartBtn.Visible = True
+			RestartBtn.Enabled = True
+			RestartBtn.BringToFront()
+			winorloseTxt.Top = Me.Height / 2 - 60
+			winorloseTxt.Left = Me.Width / 2 - 15
+			RestartBtn.Top = Me.Height / 2
+			RestartBtn.Left = Me.Width / 2
+			extbtn.Visible = True
+			extbtn.Enabled = True
+			extbtn.Text = "Abandon Mission"
+			extbtn.Top = Me.Height / 2 + 30
+			extbtn.Left = Me.Width / 2
+			extbtn.BringToFront()
+		End If
+	End Sub
+
+
+
 End Class

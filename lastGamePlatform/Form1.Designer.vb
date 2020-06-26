@@ -1,27 +1,27 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class mainCamera
-    Inherits System.Windows.Forms.Form
+	Inherits System.Windows.Forms.Form
 
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
-    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        Try
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-        Finally
-            MyBase.Dispose(disposing)
-        End Try
-    End Sub
+	'Form overrides dispose to clean up the component list.
+	<System.Diagnostics.DebuggerNonUserCode()>
+	Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+		Try
+			If disposing AndAlso components IsNot Nothing Then
+				components.Dispose()
+			End If
+		Finally
+			MyBase.Dispose(disposing)
+		End Try
+	End Sub
 
-    'Required by the Windows Form Designer
-    Private components As System.ComponentModel.IContainer
+	'Required by the Windows Form Designer
+	Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
-    Private Sub InitializeComponent()
+	'NOTE: The following procedure is required by the Windows Form Designer
+	'It can be modified using the Windows Form Designer.  
+	'Do not modify it using the code editor.
+	<System.Diagnostics.DebuggerStepThrough()>
+	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Me.Timer75ms = New System.Windows.Forms.Timer(Me.components)
 		Me.pName = New System.Windows.Forms.Label()
@@ -64,7 +64,6 @@ Partial Class mainCamera
 		Me.supergun = New System.Windows.Forms.PictureBox()
 		Me.lastLife = New System.Windows.Forms.PictureBox()
 		Me.lastItem1 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bonus13, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.gun2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -90,7 +89,6 @@ Partial Class mainCamera
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastLife, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'Timer75ms
@@ -426,7 +424,7 @@ Partial Class mainCamera
 		'PictureBox3
 		'
 		Me.PictureBox3.BackColor = System.Drawing.Color.Yellow
-		Me.PictureBox3.Location = New System.Drawing.Point(366, 208)
+		Me.PictureBox3.Location = New System.Drawing.Point(352, 210)
 		Me.PictureBox3.Name = "PictureBox3"
 		Me.PictureBox3.Size = New System.Drawing.Size(65, 50)
 		Me.PictureBox3.TabIndex = 114
@@ -445,10 +443,10 @@ Partial Class mainCamera
 		'
 		'door
 		'
-		Me.door.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-		Me.door.Location = New System.Drawing.Point(423, 305)
+		Me.door.BackColor = System.Drawing.SystemColors.MenuHighlight
+		Me.door.Location = New System.Drawing.Point(2200, 40)
 		Me.door.Name = "door"
-		Me.door.Size = New System.Drawing.Size(59, 105)
+		Me.door.Size = New System.Drawing.Size(59, 360)
 		Me.door.TabIndex = 116
 		Me.door.TabStop = False
 		'
@@ -470,7 +468,7 @@ Partial Class mainCamera
 		'boss
 		'
 		Me.boss.BackColor = System.Drawing.Color.Olive
-		Me.boss.Location = New System.Drawing.Point(1467, 261)
+		Me.boss.Location = New System.Drawing.Point(2050, 305)
 		Me.boss.Name = "boss"
 		Me.boss.Size = New System.Drawing.Size(130, 95)
 		Me.boss.TabIndex = 90
@@ -509,22 +507,12 @@ Partial Class mainCamera
 		Me.lastItem1.TabStop = False
 		Me.lastItem1.Tag = "content"
 		'
-		'PictureBox1
-		'
-		Me.PictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-		Me.PictureBox1.Location = New System.Drawing.Point(879, 303)
-		Me.PictureBox1.Name = "PictureBox1"
-		Me.PictureBox1.Size = New System.Drawing.Size(59, 105)
-		Me.PictureBox1.TabIndex = 118
-		Me.PictureBox1.TabStop = False
-		'
 		'mainCamera
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
-		Me.ClientSize = New System.Drawing.Size(453, 469)
-		Me.Controls.Add(Me.PictureBox1)
+		Me.ClientSize = New System.Drawing.Size(521, 469)
 		Me.Controls.Add(Me.lastItem1)
 		Me.Controls.Add(Me.door)
 		Me.Controls.Add(Me.PictureBox4)
@@ -593,13 +581,12 @@ Partial Class mainCamera
 		CType(Me.supergun, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.lastLife, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
 	End Sub
 	Friend WithEvents player1 As PictureBox
-    Friend WithEvents Timer75ms As Timer
+	Friend WithEvents Timer75ms As Timer
 	Friend WithEvents wall3 As PictureBox
 	Friend WithEvents wall5 As PictureBox
 	Friend WithEvents wall6 As PictureBox
@@ -639,5 +626,4 @@ Partial Class mainCamera
 	Friend WithEvents supergun As PictureBox
 	Friend WithEvents lastLife As PictureBox
 	Friend WithEvents lastItem1 As PictureBox
-	Friend WithEvents PictureBox1 As PictureBox
 End Class
