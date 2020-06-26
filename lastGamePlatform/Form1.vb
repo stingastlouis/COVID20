@@ -16,7 +16,7 @@ Public Class mainCamera
 
 
 	'player vars
-	Dim playerIsFalling As Boolean
+	Dim playerIsFalling As Boolean = True
 	Dim playerSpeed As Integer = 5
 	Dim cameraSpeed As Integer = 3 + playerSpeed
 	Dim gravitySpeed As Integer = 3
@@ -145,7 +145,7 @@ Public Class mainCamera
 			Case Keys.Left
 				posLeft = True
 			Case Keys.Up
-				If playerIsFalling = False Then
+				If Not playerIsFalling Then
 					player1.Top -= jumpHeight
 					playerIsFalling = True
 				End If
@@ -187,6 +187,9 @@ Public Class mainCamera
 
 
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
+		collisionChecker()
+
+		'playerIsFalling = True
 		If (player1.Left <= beforeBoss.Left + beforeBoss.Width) AndAlso (player1.Left + (player1.Width / 2) > (Me.Width)) Then '(player1.Left + (player1.Width / 2) > Me.Width / 2) Then
 			moveTheCamera = True
 			'Console.WriteLine(sender.ToString())'picturebox
@@ -213,22 +216,18 @@ Public Class mainCamera
 
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
-		'If moveTheCamera Then
-		'	'Me.AutoScrollPosition = New Point(Me.HorizontalScroll.Value + Me.HorizontalScroll.SmallChange * player1.Location.X, 0)
-		'	Me.AutoScrollPosition = New Point(Math.Abs(Me.HorizontalScroll.Value + cameraSpeed), 0)
-		'End If
-
-
-		'Dim change As Integer = Me.HorizontalScroll.Value + Me.HorizontalScroll.SmallChange * 3
-		'Me.AutoScrollPosition = New Point(change, 0)
-
 
 		If posRight Then
 			player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
-
 		ElseIf posLeft Then
 			player1.Location = New Point(player1.Location.X - playerSpeed, player1.Location.Y)
 		End If
+
+		If playerIsFalling Then
+			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
+		End If
+
+
 
 
 		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
@@ -245,15 +244,13 @@ Public Class mainCamera
 			loserWinner()
 		End If
 
-		collisionChecker()
+		'collisionChecker()
 		'For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
 		'	If moveTheCamera Then
 		'		activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
 		'	End If
 		'Next
-		If playerIsFalling Then
-			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
-		End If
+
 		'If moveTheCamera AndAlso posRight Then
 		'	'player1.Location = New Point(player1.Location.X, player1.Location.Y)
 		'End If
@@ -429,16 +426,17 @@ Public Class mainCamera
 
 		playerIsFalling = True
 		For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-			'If moveTheCamera Then
-			'	activePictureBox.Location = New Point(activePictureBox.Location.X - 5, activePictureBox.Location.Y)
-			'End If
-
-
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-					playerIsFalling = False
+
 					'Console.WriteLine("wall/ground")
 					'????????????????????????????bizin dreC???????this code allow to pass through wall???? 1 zafr width sa???
+
+					If player1.Top > activePictureBox.Top - player1.Height Then
+						player1.Location = New Point(player1.Location.X, activePictureBox.Top - player1.Height)
+						playerIsFalling = False
+					End If
+					Exit For
 				End If
 
 
@@ -607,7 +605,7 @@ Public Class mainCamera
 	''' give images to pictureboxes and push to seperate list
 	''' </summary>
 	Private Sub setPictureBoxes()
-		Dim randomPictureBoxArray As New List(Of PictureBox) ' PictureBox2, PictureBox3, PictureBox4.....
+		Dim randomPictureBoxes As New List(Of PictureBox) ' PictureBox2, PictureBox3, PictureBox4.....
 		For Each ctrl As Control In Me.Controls 'scan all controls present in form1
 			If TypeOf (ctrl) Is PictureBox Then 'if the control is a picturebox then
 				Dim controlName As String = ctrl.Name 'get the name of the picturebox
@@ -630,7 +628,7 @@ Public Class mainCamera
 					'myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				Else 'pictureboxes to include
-					randomPictureBoxArray.Add(ctrl) 'add the remaining control to List<randomPictureBoxArray> which will randomise the image to be inserted to the pictureboxes
+					randomPictureBoxes.Add(ctrl) 'add the remaining control to List<randomPictureBoxes> which will randomise the image to be inserted to the pictureboxes
 				End If
 			End If
 			If TypeOf ctrl Is PictureBox Or TypeOf ctrl Is Label Then
@@ -645,13 +643,13 @@ Public Class mainCamera
 
 		Dim random As New Random()
 		Dim i As Integer = 0
-		For Each pb As PictureBox In randomPictureBoxArray 'for all pictureboxes in List<randomPictureBoxArray>
+		For Each pb As PictureBox In randomPictureBoxes 'for all pictureboxes in List<randomPictureBoxes>
 			i += 1
 			Dim path As String = imgList(random.Next(0, listCount)) 'path = return random image path in Directory"Images" i.e. C:\...\lastGamePlatform\Images\coin.png for example
 			Dim result As String = (IO.Path.GetFileNameWithoutExtension(path) & i).ToString() 'result = return the image name only with "i" added. e.g.coin1,adn2,coin3,...
 
 			'the 2 comming lines are to give the pictureboxes nearly the same name of their images e.g. picturebox=adn10 and path=C:\...\adn.png
-			pb.Name = result 'give a new name the pictureboxes that need to have randomised items refer to List<randomPictureBoxArray>
+			pb.Name = result 'give a new name the pictureboxes that need to have randomised items refer to List<randomPictureBoxes>
 			pb.Image = Image.FromFile(path) 'insert the random image generated to picturebox
 
 			allActivePictureBoxes.Add(pb) 'push to list
@@ -669,7 +667,7 @@ Public Class mainCamera
 	''' </summary>
 	Private Sub updateAllLists()
 		For Each activePictureBox As PictureBox In allActivePictureBoxes
-			'seperating randompictureboxarray to specific ones
+			'seperating randomPictureBoxes to specific ones
 			If activePictureBox.Name.Contains("adn") Then
 				adns.Add(activePictureBox)
 			ElseIf activePictureBox.Name.Contains("coin") Then
