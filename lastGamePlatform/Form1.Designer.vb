@@ -53,7 +53,7 @@ Partial Class mainCamera
 		Me.life1 = New System.Windows.Forms.PictureBox()
 		Me.enemy12 = New System.Windows.Forms.PictureBox()
 		Me.Item1 = New System.Windows.Forms.PictureBox()
-		Me.Item2 = New System.Windows.Forms.PictureBox()
+		Me.enemy3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -80,7 +80,7 @@ Partial Class mainCamera
 		CType(Me.life1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.enemy12, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.Item1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.Item2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.enemy3, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -403,15 +403,15 @@ Partial Class mainCamera
 		Me.Item1.TabStop = False
 		Me.Item1.Tag = "content"
 		'
-		'Item2
+		'enemy3
 		'
-		Me.Item2.BackColor = System.Drawing.Color.DarkGray
-		Me.Item2.Location = New System.Drawing.Point(220, 360)
-		Me.Item2.Name = "Item2"
-		Me.Item2.Size = New System.Drawing.Size(53, 40)
-		Me.Item2.TabIndex = 24
-		Me.Item2.TabStop = False
-		Me.Item2.Tag = "content"
+		Me.enemy3.BackColor = System.Drawing.Color.DarkGray
+		Me.enemy3.Location = New System.Drawing.Point(220, 360)
+		Me.enemy3.Name = "enemy3"
+		Me.enemy3.Size = New System.Drawing.Size(53, 40)
+		Me.enemy3.TabIndex = 24
+		Me.enemy3.TabStop = False
+		Me.enemy3.Tag = "content"
 		'
 		'PictureBox2
 		'
@@ -523,7 +523,7 @@ Partial Class mainCamera
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
-		Me.ClientSize = New System.Drawing.Size(521, 469)
+		Me.ClientSize = New System.Drawing.Size(521, 483)
 		Me.Controls.Add(Me.door1)
 		Me.Controls.Add(Me.lastItem1)
 		Me.Controls.Add(Me.door2)
@@ -549,7 +549,7 @@ Partial Class mainCamera
 		Me.Controls.Add(Me.winorloseTxt)
 		Me.Controls.Add(Me.beforeBoss)
 		Me.Controls.Add(Me.life1)
-		Me.Controls.Add(Me.Item2)
+		Me.Controls.Add(Me.enemy3)
 		Me.Controls.Add(Me.Item1)
 		Me.Controls.Add(Me.pScore)
 		Me.Controls.Add(Me.pLife)
@@ -583,7 +583,7 @@ Partial Class mainCamera
 		CType(Me.life1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.enemy12, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.Item1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.Item2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.enemy3, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -628,7 +628,7 @@ Partial Class mainCamera
 	Friend WithEvents life1 As PictureBox
 	Friend WithEvents enemy12 As PictureBox
 	Friend WithEvents Item1 As PictureBox
-	Friend WithEvents Item2 As PictureBox
+	Friend WithEvents enemy3 As PictureBox
 	Friend WithEvents PictureBox2 As PictureBox
 	Friend WithEvents PictureBox3 As PictureBox
 	Friend WithEvents PictureBox4 As PictureBox

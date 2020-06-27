@@ -238,7 +238,7 @@ Public Class mainCamera
 
 
 		'------------------------------------------------------------------------------------pa bon
-		'makeEnemyMove() 'bien bizin clean --- slowing 
+		makeEnemyMove() 'bien bizin clean --- slowing 
 		'bulletManager() 'too much loop
 	End Sub
 
