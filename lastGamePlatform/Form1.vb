@@ -626,7 +626,6 @@ Public Class mainCamera
 	''' <param name="ctrl">take control as parameter</param>
 	''' <param name="img">take a bitmap as parameter from Resources Directory</param>
 	Private Sub myPredefinePictureBoxes(ctrl As Control, img As Bitmap)
-		Dim unused As New PictureBox
 		Dim myPicBox As PictureBox = ctrl
 		myPicBox.Image = img
 		myPicBox.BackColor = Color.Transparent

@@ -107,6 +107,12 @@
     <Compile Include="Form3.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Intro.Designer.vb">
+      <DependentUpon>Intro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Intro.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MyGameManager.vb" />
     <Compile Include="multiplayerRegForm.Designer.vb">
       <DependentUpon>multiplayerRegForm.vb</DependentUpon>
@@ -174,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Intro.resx">
+      <DependentUpon>Intro.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="multiplayerRegForm.resx">
       <DependentUpon>multiplayerRegForm.vb</DependentUpon>
@@ -338,6 +347,10 @@
     <Content Include="AudioVideo\bonusScene.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
+    <None Include="IntroImages\player.png" />
+    <Content Include="IntroImages\definition.png" />
+    <Content Include="IntroImages\introAfter.png" />
+    <Content Include="IntroImages\introBefore.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

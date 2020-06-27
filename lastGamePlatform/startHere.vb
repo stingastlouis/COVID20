@@ -29,4 +29,6 @@
         Me.Hide()
         bonusForm.Show()
     End Sub
+
+
 End Class
