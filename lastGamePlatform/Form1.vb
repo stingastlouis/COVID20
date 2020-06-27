@@ -257,7 +257,7 @@ Public Class mainCamera
 		End With
 		Me.Controls.Add(enemy21)
 
-
+		'aa
 		Dim enemy22 As New PictureBox
 		With enemy22
 			.Width = 87
