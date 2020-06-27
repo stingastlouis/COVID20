@@ -78,7 +78,7 @@ Public Class mainCamera
 	''' </summary>
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
-	Private Sub Form2_Load(sender As Object, e As EventArgs) Handles Me.Load
+	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
 		'name taken from register form
 		'Dim lvl1 = New MyGameManager("John") 'name or name,life,score,item
 		setGame()
@@ -204,13 +204,7 @@ Public Class mainCamera
 		End If
 
 
-		If (player1.Left + player1.Width > Me.Width) Then
-			For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
-				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
-				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
-			Next
-		End If
+
 
 		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then
 			Label1.Visible = True
@@ -224,7 +218,89 @@ Public Class mainCamera
 		End If
 	End Sub
 
+	Private Sub dothatshit()
+		Dim time As Integer = 1000
+		Dim ran As New Random
+		Dim x1 As Integer = ran.Next(300, 500)
+		Dim x2 As Integer = ran.Next(600, 800)
+		Dim x3 As Integer = ran.Next(800, 1000)
 
+		FastestTimer.Enabled = False
+
+		'-------here must come your code to do a random position-----------
+		'creating 3 enemies. adding to form and putting in list enemies
+		'issue not putting in the list and not getting on ground
+
+		Dim enemy20 As New PictureBox
+		With enemy20
+			.Width = 87
+			.Height = 62
+			.Location = New Point(x1, 200)
+			'.ImageLocation = "C:\Users\sting\Source\Repos\COVID20\lastGamePlatform\Resources\0_Ogre_Idle_000.png"
+			.BackColor = Color.Red
+			.BackgroundImageLayout = ImageLayout.Stretch
+			.Name = "enemy20"
+			.BringToFront()
+		End With
+		Me.Controls.Add(enemy20)
+
+		Dim enemy21 As New PictureBox
+		With enemy21
+			.Width = 87
+			.Height = 62
+			.Location = New Point(x2, 200)
+			'.ImageLocation = "C:\Users\sting\Source\Repos\COVID20\lastGamePlatform\Resources\0_Ogre_Idle_000.png"
+			.BackColor = Color.Red
+			.BackgroundImageLayout = ImageLayout.Stretch
+			.Name = "enemy21"
+			.BringToFront()
+		End With
+		Me.Controls.Add(enemy21)
+
+
+		Dim enemy22 As New PictureBox
+		With enemy22
+			.Width = 87
+			.Height = 62
+			.Location = New Point(x3, 200)
+			'.ImageLocation = "C:\Users\sting\Source\Repos\COVID20\lastGamePlatform\Resources\0_Ogre_Idle_000.png"
+			.BackColor = Color.Red
+			.BackgroundImageLayout = ImageLayout.Stretch
+			.Name = "enemy22"
+			.BringToFront()
+
+		End With
+		Me.Controls.Add(enemy22)
+		allActivePictureBoxes.Add(enemy20)
+		allActivePictureBoxes.Add(enemy21)
+		allActivePictureBoxes.Add(enemy22)
+		Debug.WriteLine("X1; " + CStr(x1) + vbNewLine + "X2; " + CStr(x2) + vbNewLine + "X3; " + CStr(x3) + vbNewLine)
+
+
+
+
+		'----------------------
+
+
+
+
+
+		Do
+			time -= 1
+			Debug.WriteLine(CStr(time))
+		Loop Until time = 0
+
+		If time = 0 Then
+
+			FastestTimer.Enabled = True
+			time = 1000
+
+
+		End If
+
+
+
+	End Sub
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		'------------------------------------------------------------------------------------bon
@@ -235,11 +311,25 @@ Public Class mainCamera
 		If moveTheBoss Then
 			bossAndEnemiesMoveTowardPlayer(boss)
 		End If
+		If (player1.Left + player1.Width > Me.Width) Then
+			dothatshit()
 
+
+
+
+
+
+
+			For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
+				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
+				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
+			Next
+		End If
 
 		'------------------------------------------------------------------------------------pa bon
-		'makeEnemyMove() 'bien bizin clean --- slowing 
-		'bulletManager() 'too much loop
+		makeEnemyMove() 'bien bizin clean --- slowing 
+		bulletManager()
 	End Sub
 
 
@@ -256,18 +346,21 @@ Public Class mainCamera
 	Private Sub makeEnemyMove()
 		For Each enemy As PictureBox In enemies 'for all pictureboxes in List<enemies>
 			bossAndEnemiesMoveTowardPlayer(enemy) 'Important Check Below
-			For Each ground As PictureBox In grounds 'scan all controls present in form
-				If Not checkforCollision(enemy, ground) Then
-					enemy.Top += gravitySpeed
-					For Each wall As PictureBox In walls
-						If checkforCollision(enemy, wall) Then
-							enemy.Top -= gravitySpeed
-						End If
-					Next
-				Else
-					enemy.Top -= gravitySpeed
-				End If
-			Next
+
+
+
+			'For Each ground As PictureBox In grounds 'scan all controls present in form
+			'	If Not checkforCollision(enemy, ground) Then
+			'		enemy.Top += gravitySpeed
+			'		For Each wall As PictureBox In walls
+			'			If checkforCollision(enemy, wall) Then
+			'				enemy.Top -= gravitySpeed
+			'			End If
+			'		Next
+			'	Else
+			'		enemy.Top -= gravitySpeed
+			'	End If
+			'Next
 		Next
 	End Sub
 
@@ -340,12 +433,8 @@ Public Class mainCamera
 		If contaminer.left + contaminer.Width < player1.Left Then
 			contaminer.left += 1
 		End If
-		If contaminer.Top + contaminer.Height > player1.Top Then
-			contaminer.Top -= 1
-		End If
-		If contaminer.Top + contaminer.Height < player1.Top Then
-			contaminer.Top += 1
-		End If
+
+
 		'li p checker cote player la eT par rapport a enemy . si player dans droite li pou vers li . si li dans gauche li pou al vers li 
 		'aster le temps li p bouger si li ggn un wall devant li, li pas pou kav passer . 
 		'?????????????????????????????????????????????????????'makeEnemyMove() pa rent ladan????????????????

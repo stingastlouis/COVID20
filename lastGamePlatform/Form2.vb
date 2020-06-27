@@ -137,10 +137,19 @@ Public Class Form2
 
             Case Keys.Q
                 If allowToshotShotGUNl = True And Item_Collected >= 2 Then
+
+
+
+
                     ReDim Preserve bullet1(count1)
                     Dim boulette As New PistoleBullet1(player1)
                     Controls.Add(boulette)
                     bullet1(count1) = boulette
+
+
+
+
+
                     count1 += 1
                     If count1 = 10 Then
                         allowToshotShotGUNl = False
