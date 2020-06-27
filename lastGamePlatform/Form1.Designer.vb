@@ -523,7 +523,7 @@ Partial Class mainCamera
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
-		Me.ClientSize = New System.Drawing.Size(521, 469)
+		Me.ClientSize = New System.Drawing.Size(774, 469)
 		Me.Controls.Add(Me.door1)
 		Me.Controls.Add(Me.lastItem1)
 		Me.Controls.Add(Me.door2)

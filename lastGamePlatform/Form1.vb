@@ -203,6 +203,13 @@ Public Class mainCamera
 			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
 		End If
 
+		'If (player1.Left + player1.Width > Me.Width) Then
+		'	For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+		'		door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
+		'		door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
+		'		activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
+		'	Next
+		'End If
 
 
 
@@ -311,15 +318,10 @@ Public Class mainCamera
 		If moveTheBoss Then
 			bossAndEnemiesMoveTowardPlayer(boss)
 		End If
+
+
 		If (player1.Left + player1.Width > Me.Width) Then
 			dothatshit()
-
-
-
-
-
-
-
 			For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
 				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
