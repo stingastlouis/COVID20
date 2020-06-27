@@ -82,6 +82,12 @@
     <Compile Include="BattleMultiplayer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="bonusForm.Designer.vb">
+      <DependentUpon>bonusForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="bonusForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
   <ItemGroup>
     <EmbeddedResource Include="BattleMultiplayer.resx">
       <DependentUpon>BattleMultiplayer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bonusForm.resx">
+      <DependentUpon>bonusForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -305,6 +314,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AudioVideo\bonusScene.mp4" />
+    <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
+    <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
