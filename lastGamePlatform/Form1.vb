@@ -191,6 +191,17 @@ Public Class mainCamera
 	End Sub
 
 
+	Dim waitBeforeFight As Integer = 3
+	Private Sub Timer1000ms_Tick(sender As Object, e As EventArgs) Handles Timer1000ms.Tick
+		Console.WriteLine(waitBeforeFight)
+		If waitBeforeFight <= 0 Then
+			Timer1000ms.Enabled = False
+			Console.WriteLine("go")
+			FastestTimer.Enabled = True
+		End If
+		waitBeforeFight -= 1
+	End Sub
+
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
 		If posRight Then
@@ -203,17 +214,38 @@ Public Class mainCamera
 			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
 		End If
 
-		'If (player1.Left + player1.Width > Me.Width) Then
-		'	For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-		'		door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
-		'		door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
-		'		activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
-		'	Next
-		'End If
+		If (player1.Left + player1.Width > Me.Width) Then
+			For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
+				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
+				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
+				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
+			Next
+
+			Dim noOfEnemies As Integer = Randomiser.NumberOfEnemies()
+			While noOfEnemies > 0
+				Dim xPos As Integer = Randomiser.NumberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1)
+				Dim yPos As Integer = Randomiser.NumberBetween(0, ground1.Top - 1)
+
+				Dim enemyPictureBox As New PictureBox
+				With enemyPictureBox
+					.Width = 87
+					.Height = 62
+					.Location = New Point(xPos, yPos)
+					.Name = "enemy" & noOfEnemies
+					.BringToFront()
+				End With
+				myPredefinePictureBoxes(enemyPictureBox, My.Resources._0_Ogre_Idle_000)
+				Me.Controls.Add(enemyPictureBox)
+				allActivePictureBoxes.Add(enemyPictureBox)
+				enemies.Add(enemyPictureBox)
+				noOfEnemies -= 1
+			End While
+			FastestTimer.Enabled = False
+			Timer1000ms.Enabled = True
+		End If
 
 
-
-		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then
+		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then '?????????????????????????????????????bizin recheck sa la
 			Label1.Visible = True
 			Label1.Enabled = True
 			ProgressBar1.Enabled = True
@@ -225,89 +257,6 @@ Public Class mainCamera
 		End If
 	End Sub
 
-	Private Sub dothatshit()
-		Dim time As Integer = 1000
-		Dim ran As New Random
-		Dim x1 As Integer = ran.Next(300, 500)
-		Dim x2 As Integer = ran.Next(600, 800)
-		Dim x3 As Integer = ran.Next(800, 1000)
-
-		FastestTimer.Enabled = False
-
-		'-------here must come your code to do a random position-----------
-		'creating 3 enemies. adding to form and putting in list enemies
-		'issue not putting in the list and not getting on ground
-
-		Dim enemy20 As New PictureBox
-		With enemy20
-			.Width = 87
-			.Height = 62
-			.Location = New Point(x1, 200)
-			'.ImageLocation = "C:\Users\sting\Source\Repos\COVID20\lastGamePlatform\Resources\0_Ogre_Idle_000.png"
-			.BackColor = Color.Red
-			.BackgroundImageLayout = ImageLayout.Stretch
-			.Name = "enemy20"
-			.BringToFront()
-		End With
-		Me.Controls.Add(enemy20)
-
-		Dim enemy21 As New PictureBox
-		With enemy21
-			.Width = 87
-			.Height = 62
-			.Location = New Point(x2, 200)
-			'.ImageLocation = "C:\Users\sting\Source\Repos\COVID20\lastGamePlatform\Resources\0_Ogre_Idle_000.png"
-			.BackColor = Color.Red
-			.BackgroundImageLayout = ImageLayout.Stretch
-			.Name = "enemy21"
-			.BringToFront()
-		End With
-		Me.Controls.Add(enemy21)
-
-		'aa
-		Dim enemy22 As New PictureBox
-		With enemy22
-			.Width = 87
-			.Height = 62
-			.Location = New Point(x3, 200)
-			'.ImageLocation = "C:\Users\sting\Source\Repos\COVID20\lastGamePlatform\Resources\0_Ogre_Idle_000.png"
-			.BackColor = Color.Red
-			.BackgroundImageLayout = ImageLayout.Stretch
-			.Name = "enemy22"
-			.BringToFront()
-
-		End With
-		Me.Controls.Add(enemy22)
-		allActivePictureBoxes.Add(enemy20)
-		allActivePictureBoxes.Add(enemy21)
-		allActivePictureBoxes.Add(enemy22)
-		Debug.WriteLine("X1; " + CStr(x1) + vbNewLine + "X2; " + CStr(x2) + vbNewLine + "X3; " + CStr(x3) + vbNewLine)
-
-
-
-
-		'----------------------
-
-
-
-
-
-		Do
-			time -= 1
-			Debug.WriteLine(CStr(time))
-		Loop Until time = 0
-
-		If time = 0 Then
-
-			FastestTimer.Enabled = True
-			time = 1000
-
-
-		End If
-
-
-
-	End Sub
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		'------------------------------------------------------------------------------------bon
@@ -320,20 +269,12 @@ Public Class mainCamera
 		End If
 
 
-		If (player1.Left + player1.Width > Me.Width) Then
-			dothatshit()
-			For Each activePictureBox As PictureBox In allActivePictureBoxes 'list all controls in the form
-				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
-				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
-				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
-			Next
-		End If
+
 
 		'------------------------------------------------------------------------------------pa bon
 		'makeEnemyMove() 'bien bizin clean --- slowing 
 		'bulletManager() 'too much loop
 	End Sub
-
 
 
 
@@ -605,6 +546,8 @@ Public Class mainCamera
 		Life_Point = 3
 		IsJumping = False
 
+
+		MyPublicSharedClass.level = 1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
 	End Sub
 

@@ -65,6 +65,7 @@ Partial Class mainCamera
 		Me.lastLife = New System.Windows.Forms.PictureBox()
 		Me.lastItem1 = New System.Windows.Forms.PictureBox()
 		Me.door1 = New System.Windows.Forms.PictureBox()
+		Me.Timer1000ms = New System.Windows.Forms.Timer(Me.components)
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bonus13, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.gun2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -512,11 +513,15 @@ Partial Class mainCamera
 		'door1
 		'
 		Me.door1.BackColor = System.Drawing.SystemColors.MenuHighlight
-		Me.door1.Location = New System.Drawing.Point(496, 40)
+		Me.door1.Location = New System.Drawing.Point(2265, 40)
 		Me.door1.Name = "door1"
 		Me.door1.Size = New System.Drawing.Size(59, 360)
 		Me.door1.TabIndex = 118
 		Me.door1.TabStop = False
+		'
+		'Timer1000ms
+		'
+		Me.Timer1000ms.Interval = 1000
 		'
 		'mainCamera
 		'
@@ -640,4 +645,5 @@ Partial Class mainCamera
 	Friend WithEvents lastLife As PictureBox
 	Friend WithEvents lastItem1 As PictureBox
 	Friend WithEvents door1 As PictureBox
+	Friend WithEvents Timer1000ms As Timer
 End Class
