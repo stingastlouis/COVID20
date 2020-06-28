@@ -17,7 +17,7 @@ Public Class Intro
 
 	Private Sub GameButton_Click(sender As Object, e As EventArgs) Handles GameButton.Click
 		Me.Hide()
-		mainCamera.Show()
+		Form1.Show()
 	End Sub
 
 	Private Sub Intro_Load(sender As Object, e As EventArgs) Handles MyBase.Load

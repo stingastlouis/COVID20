@@ -42,7 +42,7 @@ Public Class register
             End If
 
 
-            cmd = New MySqlCommand("INSERT INTO playerTable(NAME,EMAIL,AGE,GENDER,SCORE)VALUES('" & TextBox1.Text & "','" & TextBox2.Text & "','" & age & "','" & strGender & "','" & mainCamera.Score & "')", conn)
+            cmd = New MySqlCommand("INSERT INTO playerTable(NAME,EMAIL,AGE,GENDER,SCORE)VALUES('" & TextBox1.Text & "','" & TextBox2.Text & "','" & age & "','" & strGender & "','" & Form1.Score & "')", conn)
             cmd.ExecuteNonQuery()
             MsgBox("1 NEW RECORD")
             finish = True

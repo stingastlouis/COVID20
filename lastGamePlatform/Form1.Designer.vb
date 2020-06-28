@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class mainCamera
+Partial Class Form1
 	Inherits System.Windows.Forms.Form
 
 	'Form overrides dispose to clean up the component list.
@@ -356,7 +356,7 @@ Partial Class mainCamera
 		'
 		Me.player1.BackColor = System.Drawing.Color.Transparent
 		Me.player1.Image = Global.lastGamePlatform.My.Resources.Resources.player1Mov
-		Me.player1.Location = New System.Drawing.Point(27, 220)
+		Me.player1.Location = New System.Drawing.Point(30, 191)
 		Me.player1.Name = "player1"
 		Me.player1.Size = New System.Drawing.Size(65, 50)
 		Me.player1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -427,7 +427,7 @@ Partial Class mainCamera
 		'PictureBox3
 		'
 		Me.PictureBox3.BackColor = System.Drawing.Color.Yellow
-		Me.PictureBox3.Location = New System.Drawing.Point(352, 210)
+		Me.PictureBox3.Location = New System.Drawing.Point(475, 183)
 		Me.PictureBox3.Name = "PictureBox3"
 		Me.PictureBox3.Size = New System.Drawing.Size(65, 50)
 		Me.PictureBox3.TabIndex = 114
@@ -523,7 +523,7 @@ Partial Class mainCamera
 		'
 		Me.Timer1000ms.Interval = 1000
 		'
-		'mainCamera
+		'Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -570,7 +570,7 @@ Partial Class mainCamera
 		Me.Controls.Add(Me.player1)
 		Me.Controls.Add(Me.ground1)
 		Me.DoubleBuffered = True
-		Me.Name = "mainCamera"
+		Me.Name = "Form1"
 		Me.Tag = "content"
 		Me.Text = "Form1"
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).EndInit()

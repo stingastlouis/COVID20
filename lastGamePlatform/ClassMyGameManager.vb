@@ -1,7 +1,7 @@
-﻿Public Class MyGameManager
+﻿Public Class ClassMyGameManager
 
     '--------------------------------------------------------------------------------------------------------vars
-    Public Shared universalScore As Integer
+
     Private name As String
     Private life, score, item As Integer
 

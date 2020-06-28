@@ -88,6 +88,10 @@
     <Compile Include="bonusForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ClassBoss.vb" />
+    <Compile Include="ClassBullets.vb" />
+    <Compile Include="ClassEnemy.vb" />
+    <Compile Include="ClassItems.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -113,7 +117,7 @@
     <Compile Include="Intro.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MyGameManager.vb" />
+    <Compile Include="ClassMyGameManager.vb" />
     <Compile Include="multiplayerRegForm.Designer.vb">
       <DependentUpon>multiplayerRegForm.vb</DependentUpon>
     </Compile>
@@ -142,12 +146,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="MyPublicSharedClass.vb" />
+    <Compile Include="ClassMyPublicShared.vb" />
     <Compile Include="PistoleBullet1.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Player.vb" />
-    <Compile Include="Randomiser.vb" />
+    <Compile Include="ClassPlayer.vb" />
+    <Compile Include="ModuleRandomiser.vb" />
     <Compile Include="register.Designer.vb">
       <DependentUpon>register.vb</DependentUpon>
     </Compile>
@@ -306,16 +310,16 @@
     <None Include="Resources\arrow keys.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\life.png" />
+    <None Include="ItemsImages\life.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\adn.png" />
+    <None Include="ItemsImages\adn.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\coin.png" />
+    <None Include="ItemsImages\coin.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\gun.png" />
+    <None Include="ItemsImages\gun.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\walk.gif" />
