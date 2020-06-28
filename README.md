@@ -1,2 +1,2 @@
-# COVID20
-uni project
+# "COVID-20" The Game
+The new virus
