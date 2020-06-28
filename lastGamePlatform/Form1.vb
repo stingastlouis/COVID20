@@ -20,42 +20,46 @@ Public Class mainCamera
 	Dim playerSpeed As Integer = 5
 	Dim cameraSpeed As Integer = 3 + playerSpeed
 	Dim gravitySpeed As Integer = 3
+	Dim jumpHeight As Integer = 100
+	Dim IsJumping As Boolean = False
 
 
+	'score vars
+	Dim scoreGun As Integer = 5
+	Dim scoreEnemy As Integer = 10
+	Dim Life_Point As Integer = 3
+
+
+	'boss vars
 	Dim moveTheBoss As Boolean = False
-	Dim moveTheCamera As Boolean = False
 
 
-	'my items' scores
-	Dim scoreGun As Integer
-	Dim scoreEnemy As Integer
+	'number of second to wait before fight
+	Dim waitBeforeFight As Integer = 3
 
 
-
-
-
+	'bullet vars
+	Dim bulletNumber As Integer = -1
 
 
 
 
 
 
-	Dim allowToshotShotGUNl As Boolean
+	Dim allowToshotShotGUNl As Boolean = False
+
+	Public Score As Integer = 0
+
 	Dim bullet1(-1) As PistoleBullet1
 
 	'Dim shotGun() As PictureBox
 	'--------------------------
 
 	'---------VARIABLE-----------
-	Dim posLeft, posRight, IsJumping As Boolean
-	Dim jumpHeight As Integer
-	Dim Life_Point As Integer
+	Dim posLeft, posRight As Boolean
 	Dim Item_Collected As Integer
-	Public Score As Integer
 	Dim pointRegenerator As Point
-	Public universalScore As Integer
 	Dim pp As Player
-	Dim bulletNumber As Integer
 	Dim count1 As Integer
 
 
@@ -74,7 +78,7 @@ Public Class mainCamera
 
 
 	''' <summary>
-	''' 
+	''' when the form is loading
 	''' </summary>
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
@@ -83,12 +87,11 @@ Public Class mainCamera
 		'Dim lvl1 = New MyGameManager("John") 'name or name,life,score,item
 		setGame()
 		setPictureBoxes()
-
 	End Sub
 
 
 	''' <summary>
-	''' 
+	''' continue or restart button
 	''' </summary>
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
@@ -106,7 +109,7 @@ Public Class mainCamera
 
 
 	''' <summary>
-	''' 
+	''' exit button reopen startHere form
 	''' </summary>
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
@@ -175,23 +178,28 @@ Public Class mainCamera
 	End Sub
 
 
-
-
-
-
-
-
-
-
-
-
-
+	''' <summary>
+	''' check player collision with...each time player change the position
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
 		collisionChecker()
 	End Sub
 
 
-	Dim waitBeforeFight As Integer = 3
+
+
+
+
+
+
+
+
+
+
+
+
 	Private Sub Timer1000ms_Tick(sender As Object, e As EventArgs) Handles Timer1000ms.Tick
 		Console.WriteLine(waitBeforeFight)
 		If waitBeforeFight <= 0 Then
@@ -275,10 +283,6 @@ Public Class mainCamera
 		'makeEnemyMove() 'bien bizin clean --- slowing 
 		'bulletManager() 'too much loop
 	End Sub
-
-
-
-
 
 
 
@@ -519,8 +523,6 @@ Public Class mainCamera
 	''' </summary>
 	Private Sub setGame()
 		RestartBtn.Enabled = False
-		scoreGun = 5
-		scoreEnemy = 10
 		supergun.Visible = False
 		lastItem1.Visible = False
 		supergun.Enabled = False
@@ -537,15 +539,8 @@ Public Class mainCamera
 		Timer75ms.Enabled = True
 
 		pp = New Player()
-		Score = 0
-		bulletNumber = -1
 		ProgressBar1.Value = 20
 		'My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop) 
-		allowToshotShotGUNl = False
-		jumpHeight = 100
-		Life_Point = 3
-		IsJumping = False
-
 
 		MyPublicSharedClass.level = 1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
@@ -565,16 +560,16 @@ Public Class mainCamera
 				If controlName.Contains("boss") OrElse controlName.Contains("player") OrElse controlName.Contains("instruction") Then 'all pictureboxes to exclude here
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				ElseIf controlName.Contains("gun") Then 'e.g. gun1,lastgun...
-					myPredefinePictureBoxes(ctrl, My.Resources.gun2) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					MyPredefinePictureBoxes(ctrl, My.Resources.gun2) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				ElseIf controlName.Contains("ground") Then
-					myPredefinePictureBoxes(ctrl, My.Resources.GrassCliffMid) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					MyPredefinePictureBoxes(ctrl, My.Resources.GrassCliffMid) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				ElseIf controlName.Contains("wall") Then
-					myPredefinePictureBoxes(ctrl, My.Resources.Prop_6) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					MyPredefinePictureBoxes(ctrl, My.Resources.Prop_6) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				ElseIf controlName.Contains("enemy") Then
-					myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					MyPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					allActivePictureBoxes.Add(ctrl) 'push to list
 				ElseIf controlName.Contains("door") Then
 					'myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
@@ -593,11 +588,10 @@ Public Class mainCamera
 		Dim imgList As List(Of String) = imagePathArray.ToList() 'converting array to List
 		Dim listCount As Integer = imgList.Count 'get number of item(s) in the List<imgList>
 
-		Dim random As New Random()
 		Dim i As Integer = 0
 		For Each pb As PictureBox In randomPictureBoxes 'for all pictureboxes in List<randomPictureBoxes>
 			i += 1
-			Dim path As String = imgList(random.Next(0, listCount)) 'path = return random image path in Directory"Images" i.e. C:\...\lastGamePlatform\Images\coin.png for example
+			Dim path As String = imgList(Randomiser.NumberBetween(0, listCount - 1)) 'path = return random image path in Directory"Images" i.e. C:\...\lastGamePlatform\Images\coin.png for example
 			Dim result As String = (IO.Path.GetFileNameWithoutExtension(path) & i).ToString() 'result = return the image name only with "i" added. e.g.coin1,adn2,coin3,...
 
 			'the 2 comming lines are to give the pictureboxes nearly the same name of their images e.g. picturebox=adn10 and path=C:\...\adn.png
@@ -609,7 +603,7 @@ Public Class mainCamera
 			pb.SizeMode = PictureBoxSizeMode.StretchImage 'to make the image fit the pictureboxes
 			pb.BackColor = Color.Transparent 'set the background colour of the pictureboxes to transparent
 		Next
-		updateAllLists()
+		UpdateAllLists()
 	End Sub
 
 
@@ -649,7 +643,7 @@ Public Class mainCamera
 		'removing the control
 		allActivePictureBoxes.Remove(otherPicBox)
 		Me.Controls.Remove(otherPicBox)
-		updateLabels()
+		UpdateLabels()
 	End Sub
 
 
@@ -684,7 +678,6 @@ Public Class mainCamera
 	''' </summary>
 	Private Sub loserWinner()
 		If ProgressBar1.Value <= 0 Then
-			universalScore = Score
 			ProgressBar1.Value = 0
 			Timer75ms.Enabled = False
 			winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"

@@ -50,7 +50,7 @@ Public Class Form2
 
         lastGun.Enabled = False
         lastItem1.Enabled = False
-        Score = mainCamera.universalScore
+        Score = mainCamera.Score
         pScore.Text = "Score :" + CStr(Score)
         RestartBtn.Visible = False
         winorloseTxt.Visible = False

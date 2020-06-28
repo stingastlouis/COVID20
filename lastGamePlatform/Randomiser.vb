@@ -2,7 +2,7 @@
 	Dim random As New Random()
 
 
-	Function NumberOfEnemies()
+	Function numberOfEnemies()
 		Dim noOfEnemies As Integer = 0
 
 		If MyPublicSharedClass.level = 1 Then
@@ -18,7 +18,7 @@
 
 
 
-	Function NumberBetween(a As Integer, b As Integer)
+	Function numberBetween(a As Integer, b As Integer)
 		Return random.Next(a, b + 1)
 	End Function
 End Module
