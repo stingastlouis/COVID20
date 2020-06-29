@@ -118,9 +118,9 @@
 	End Function
 
 
-	Public Sub makeEnemyMoves()
+	Public Sub makeEnemyMoves(ByVal enemy As List(Of PictureBox), ByVal player1 As Object)
 		Dim speed As Integer = 1
-		For Each ene As PictureBox In enemies
+		For Each ene As PictureBox In enemy
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
 				If activePictureBox IsNot ene AndAlso ene.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then

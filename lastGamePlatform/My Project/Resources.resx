@@ -130,6 +130,9 @@
   <data name="cloud" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cloud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Dirt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dirt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="door" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngguru.com.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -177,6 +180,12 @@
   </data>
   <data name="walk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\walk.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wally" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wally.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wally2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wally2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Webp_net_gifmaker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Webp.net-gifmaker.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
