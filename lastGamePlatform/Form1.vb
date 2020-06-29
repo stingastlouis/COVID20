@@ -305,47 +305,32 @@ Public Class Form1
 	Public Sub makeEnemyMoves()
 		Dim speed As Integer = 1
 		For Each ene As PictureBox In enemies
-			'For Each wall As PictureBox In walls
-			'	If ene.Left + ene.Width > player1.Left Then
-			'		ene.Left -= speed
-			'		If checkforCollision(ene, wall) Then
-			'			ene.Left += speed
-			'		End If
-			'	End If
-			'	If ene.Left + ene.Width < player1.Left Then
-			'		ene.Left += speed
-			'		If checkforCollision(ene, wall) Then
-			'			ene.Left -= speed
-			'		End If
-			'	End If
-
-			'Next
-
-
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 
 				If ene.Left + ene.Width > player1.Left Then
 					ene.Left -= speed
-					If activePictureBox.Name.Contains("walls") Then
+					If activePictureBox.Name.Contains("wall") Then
+						If ene.Left <= activePictureBox.Left + activePictureBox.Width Then
 
-					End If
-				ElseIf ene.Left <= activePictureBox.Left + activePictureBox.Width + 100 Then
-
-						ene.Left += speed
-
-
+							ene.Left += speed
+						End If
 					End If
 
-					If ene.Left + ene.Width < player1.Left Then
-						ene.Left += speed
-					ElseIf ene.Left + ene.Width >= activePictureBox.Width Then
-						ene.Left -= speed
 
 
-					End If
 				End If
 
+				If ene.Left + ene.Width < player1.Left Then
+					ene.Left += speed
+					If activePictureBox.Name.Contains("wall") Then
+						If ene.Left + ene.Width >= activePictureBox.Left Then
 
+							ene.Left -= speed
+
+						End If
+					End If
+
+				End If
 			Next
 		Next
 
