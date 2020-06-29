@@ -297,7 +297,9 @@ Public Class Form1
 
 
 		Dim enemy As New ClassEnemy()
-		enemy.makeEnemyMoves()
+		enemy.makeEnemyMoves(enemies, player1)
+
+
 
 		'bulletManager() 'too much loop
 	End Sub

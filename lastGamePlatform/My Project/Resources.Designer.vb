@@ -187,6 +187,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property Dirt() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Dirt", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property door() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("door", resourceCulture)
@@ -339,6 +349,26 @@ Namespace My.Resources
         Friend ReadOnly Property walk() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("walk", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property wally() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("wally", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property wally2() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("wally2", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

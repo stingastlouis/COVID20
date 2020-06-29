@@ -353,6 +353,9 @@
     <Content Include="AudioVideo\bonusScene.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
+    <None Include="Resources\wally.jpg" />
+    <None Include="Resources\wally2.jpg" />
+    <None Include="Resources\Dirt.png" />
     <None Include="Resources\door2.png" />
     <None Include="Resources\pngguru.com.png" />
     <None Include="IntroImages\player.png" />
