@@ -86,6 +86,12 @@ Public Class Form1
 	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
 		'name taken from register form
 		'Dim lvl1 = New MyGameManager("John") 'name or name,life,score,item
+
+
+
+
+
+
 		Console.WriteLine("clear main list of objects")
 		ClassMyPublicShared.allPictureBoxes.Clear()
 

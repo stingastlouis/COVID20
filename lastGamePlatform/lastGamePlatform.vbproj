@@ -198,9 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="register.resx">
       <DependentUpon>register.vb</DependentUpon>
@@ -235,9 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\5a3719ae33d594.4783473215135604942123.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\mm.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\explosion.png" />
@@ -280,22 +277,7 @@
     <None Include="Resources\Cinematic Trailer - AShamaluevMusic.mp3" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Prop_6.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\HP_Bonus_03.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\GrassCliffMid.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\gun2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image 1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\item.png" />
+    <None Include="Resources\ground.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\player1Mov.png" />
@@ -325,12 +307,6 @@
     <None Include="Resources\walk.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\nono%28top%29.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\cloud.png" />
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="AxWMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -353,12 +329,13 @@
     <Content Include="AudioVideo\bonusScene.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
+    <Content Include="Resources\wall2.png" />
+    <Content Include="Resources\wall1.png" />
     <None Include="Resources\life.png" />
     <None Include="Resources\gun.png" />
     <None Include="Resources\coin.png" />
     <None Include="Resources\adn.png" />
     <None Include="Resources\door2.png" />
-    <None Include="Resources\pngguru.com.png" />
     <None Include="IntroImages\player.png" />
     <Content Include="IntroImages\definition.png" />
     <Content Include="IntroImages\introAfter.png" />

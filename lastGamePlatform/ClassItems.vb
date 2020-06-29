@@ -1,5 +1,14 @@
 ﻿Public Class ClassItems
-	Dim randomItemImage As New List(Of Bitmap)({My.Resources.adn, My.Resources.coin, My.Resources.gun, My.Resources.life})
+
+
+
+
+
+
+
+
+
+
 
 
 	'functions
@@ -23,19 +32,18 @@
 					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
 
 				ElseIf ctrl.Name.Contains("gun") Then 'e.g. gun1,lastgun...
-					myPredefinePictureBoxes(ctrl, My.Resources.gun2) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					myPredefinePictureBoxes(ctrl, My.Resources.gun) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
 
 				ElseIf ctrl.Name.Contains("ground") Then
-					myPredefinePictureBoxes(ctrl, My.Resources.GrassCliffMid) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					myPredefinePictureBoxes(ctrl, My.Resources.ground) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
 
 				ElseIf ctrl.Name.Contains("wall") Then
-					myPredefinePictureBoxes(ctrl, My.Resources.wally) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+					myPredefinePictureBoxes(ctrl, Image.FromFile(ClassMyPublicShared.randomWallImages(numberBetween(0, ClassMyPublicShared.randomWallImages.Count - 1)))) 'randomise picture for wall
 					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
 
 				ElseIf ctrl.Name.Contains("door") Then
-
 					myPredefinePictureBoxes(ctrl, My.Resources.door2) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
 
@@ -45,18 +53,13 @@
 			End If
 		Next
 
-		Dim imgPath As String = AppDomain.CurrentDomain.BaseDirectory.Replace("\bin\Debug\", "\ItemsImages\") 'get path of the directories and replace "\bin\Debug\" with "\Images\"
-		Dim imagePathArray As String() = IO.Directory.GetFiles(imgPath) 'get all files' name in the imgPath
-		Dim imgList As List(Of String) = imagePathArray.ToList() 'converting array to List
-		Dim listCount As Integer = imgList.Count 'get number of item(s) in the List<imgList>
-
 		Dim i As Integer = 0
 		For Each pb As PictureBox In randomPictureBoxes 'for all pictureboxes in List<randomPictureBoxes>
 			i += 1
-			Dim path As String = imgList(numberBetween(0, listCount - 1)) 'path = return random image path in Directory"Images" i.e. C:\...\lastGamePlatform\Images\coin.png for example
+			Dim path As String = ClassMyPublicShared.randomItemImages(numberBetween(0, ClassMyPublicShared.randomItemImages.Count - 1)) 'path = return random image path in Directory"Images" i.e. C:\...\lastGamePlatform\Images\coin.png for example
 			Dim result As String = (IO.Path.GetFileNameWithoutExtension(path) & i).ToString() 'result = return the image name only with "i" added. e.g.coin1,adn2,coin3,...
 
-			'the 2 comming lines are to give the pictureboxes nearly the same name of their images e.g. picturebox=adn10 and path=C:\...\adn.png
+			'to give the pictureboxes nearly the same name of their images e.g. picturebox=adn10 and path=C:\...\adn.png
 			pb.Name = result 'give a new name the pictureboxes that need to have randomised items refer to List<randomPictureBoxes>
 
 			Dim img As Bitmap = Image.FromFile(path) 'insert the random image generated to picturebox
@@ -64,13 +67,7 @@
 
 			ClassMyPublicShared.allPictureBoxes.Add(pb) 'push to list
 		Next
-
 		randomPictureBoxes = Nothing
-		imgPath = Nothing
-		imagePathArray = Nothing
-		imgList = Nothing
-		listCount = Nothing
-
 	End Sub
 
 

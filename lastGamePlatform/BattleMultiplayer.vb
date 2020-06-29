@@ -119,7 +119,7 @@
         BattleManager.Enabled = True
 
         For x As Integer = 0 To showWeapon.Length - 1
-            showWeapon(x).Image = My.Resources.mm
+            showWeapon(x).Image = My.Resources._5a3719ae33d594_4783473215135604942123
             showWeapon(x).BackgroundImageLayout = ImageLayout.None
 
             showWeapon(x).BackColor = Color.Transparent
