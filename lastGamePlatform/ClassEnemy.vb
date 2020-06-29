@@ -10,6 +10,9 @@
 
 
 	'constructors
+	Sub New()
+
+	End Sub
 	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
 		Me.width = 87
 		Me.height = 62
@@ -115,26 +118,7 @@
 	End Function
 
 
-	'Private Sub makeEnemyMove()
-	'	For Each enemy As PictureBox In enemies 'for all pictureboxes in List<enemies>
-	'		bossAndEnemiesMoveTowardPlayer(enemy) 'Important Check Below
 
-
-
-	'		'For Each ground As PictureBox In grounds 'scan all controls present in form
-	'		'	If Not checkforCollision(enemy, ground) Then
-	'		'		enemy.Top += gravitySpeed
-	'		'		For Each wall As PictureBox In walls
-	'		'			If checkforCollision(enemy, wall) Then
-	'		'				enemy.Top -= gravitySpeed
-	'		'			End If
-	'		'		Next
-	'		'	Else
-	'		'		enemy.Top -= gravitySpeed
-	'		'	End If
-	'		'Next
-	'	Next
-	'End Sub
 
 
 

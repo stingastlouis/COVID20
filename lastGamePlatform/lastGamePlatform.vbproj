@@ -353,6 +353,7 @@
     <Content Include="AudioVideo\bonusScene.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
+    <Content Include="Resources\door.jpg" />
     <None Include="IntroImages\player.png" />
     <Content Include="IntroImages\definition.png" />
     <Content Include="IntroImages\introAfter.png" />

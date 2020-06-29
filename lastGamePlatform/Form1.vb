@@ -232,6 +232,7 @@ Public Class Form1
 
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
+
 		If posRight Then
 			player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
 		ElseIf posLeft Then
@@ -243,6 +244,10 @@ Public Class Form1
 		End If
 
 		If (player1.Left + player1.Width > Me.Width) Then
+			For Each enemy As PictureBox In enemies
+				enemy.Dispose()
+				Me.Controls.Remove(enemy)
+			Next
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
@@ -252,7 +257,7 @@ Public Class Form1
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
 				Dim xPos As Integer = numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1) 'start 20% to (door2 -1)
-				Dim yPos As Integer = numberBetween(0, ground1.Top - 1)
+				Dim yPos As Integer = ground1.Top - 50
 
 				Dim enemyGenerated As New ClassEnemy(xPos, yPos, "enemy" & noOfEnemies, 3)
 				Dim enemyPictureBox As PictureBox = enemyGenerated.generatePictureBox()
@@ -291,11 +296,88 @@ Public Class Form1
 
 
 
-		'makeEnemyMove() 'bien bizin clean --- slowing 
-		'bulletManager() 'too much loop
+
+
+		makeEnemyMoves()
+		bulletManager() 'too much loop
 	End Sub
 
+	Public Sub makeEnemyMoves()
+		Dim speed As Integer = 1
+		For Each ene As PictureBox In enemies
+			'For Each wall As PictureBox In walls
+			'	If ene.Left + ene.Width > player1.Left Then
+			'		ene.Left -= speed
+			'		If checkforCollision(ene, wall) Then
+			'			ene.Left += speed
+			'		End If
+			'	End If
+			'	If ene.Left + ene.Width < player1.Left Then
+			'		ene.Left += speed
+			'		If checkforCollision(ene, wall) Then
+			'			ene.Left -= speed
+			'		End If
+			'	End If
 
+			'Next
+
+
+			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+
+				If ene.Left + ene.Width > player1.Left Then
+					ene.Left -= speed
+					If activePictureBox.Name.Contains("walls") Then
+
+					End If
+				ElseIf ene.Left <= activePictureBox.Left + activePictureBox.Width + 100 Then
+
+						ene.Left += speed
+
+
+					End If
+
+					If ene.Left + ene.Width < player1.Left Then
+						ene.Left += speed
+					ElseIf ene.Left + ene.Width >= activePictureBox.Width Then
+						ene.Left -= speed
+
+
+					End If
+				End If
+
+
+			Next
+		Next
+
+
+
+
+
+
+
+
+
+		'		For Each wally As PictureBox In walls
+
+		'		If ene.Bounds.IntersectsWith(wally.Bounds) Then
+		'				ene.Left += 3
+
+
+		'			End If
+		'		End If
+
+		'		If ene.Left + ene.Width < player1.Left Then
+		'			ene.Left += 1
+		'			If ene.Bounds.IntersectsWith(wally.Bounds) Then
+		'				ene.Left -= 3
+		'			ElseIf ene.Left + ene.Width >= Me.Width - 30 Then
+		'				ene.Dispose()
+		'				ene.Enabled = False
+		'			End If
+		'		End If
+		'	Next
+		'Next
+	End Sub
 
 
 
