@@ -35,8 +35,9 @@
 					myPredefinePictureBoxes(ctrl, My.Resources.Prop_6) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
 
-				ElseIf ctrl.Name.Contains("door") Then
-					'myPredefinePictureBoxes(ctrl, My.Resources._0_Ogre_Idle_000) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
+				ElseIf ctrl.Name.Contains("door2") Then
+
+					myPredefinePictureBoxes(ctrl, My.Resources.door2) 'pass the control"picturebox" and the image to this method that will insert the image in the picturebox
 					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
 
 				Else 'pictureboxes to include

@@ -244,11 +244,9 @@ Public Class Form1
 		End If
 
 		If (player1.Left + player1.Width > Me.Width) Then
-			'For Each enemy As PictureBox In enemies
-			'	enemy.Dispose()
-			'	Me.Controls.Remove(enemy)
-			'Next
+			enemies.Clear()
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+
 				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
 				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
@@ -258,7 +256,7 @@ Public Class Form1
 			Console.WriteLine(noOfEnemies & " enemies")
 			While noOfEnemies > 0
 				Dim xPos As Integer = numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1) 'start 20% to (door2 -1)
-				Dim yPos As Integer = numberBetween(0, ground1.Top - 1)
+				Dim yPos As Integer = ground1.Top - 60
 
 				Dim enemyGenerated As New ClassEnemy(xPos, yPos, "enemy" & noOfEnemies, 3)
 				Dim enemyPictureBox As PictureBox = enemyGenerated.generatePictureBox()
@@ -306,8 +304,11 @@ Public Class Form1
 	Public Sub makeEnemyMoves()
 		Dim speed As Integer = 1
 
+
 		For Each ene As PictureBox In enemies
-			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
+
+				
 				If activePictureBox IsNot ene AndAlso ene.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
 						Console.WriteLine("wall/ground")
@@ -331,8 +332,8 @@ Public Class Form1
 			ElseIf ene.Top < player1.Top Then
 				ene.Top += speed
 			End If
-		Next
 
+		Next
 
 
 
