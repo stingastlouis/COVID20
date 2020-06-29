@@ -296,74 +296,13 @@ Public Class Form1
 
 
 
+		Dim enemy As New ClassEnemy()
+		enemy.makeEnemyMoves()
 
-		makeEnemyMoves()
-		bulletManager() 'too much loop
+		'bulletManager() 'too much loop
 	End Sub
 
-	Public Sub makeEnemyMoves()
-		Dim speed As Integer = 1
 
-
-		For Each ene As PictureBox In enemies
-			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
-
-				
-				If activePictureBox IsNot ene AndAlso ene.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-						Console.WriteLine("wall/ground")
-
-						If ene.Top > activePictureBox.Top - ene.Height Then 'to stay on top of ground and wall
-							ene.Location = New Point(ene.Location.X, activePictureBox.Top - ene.Height)
-						End If
-						Exit For
-					End If
-
-
-				End If
-			Next
-			If ene.Left > player1.Left Then
-				ene.Left -= speed
-			ElseIf ene.Left < player1.Left Then
-				ene.Left += speed
-			End If
-			If ene.Top > player1.Top Then
-				ene.Top -= speed
-			ElseIf ene.Top < player1.Top Then
-				ene.Top += speed
-			End If
-
-		Next
-
-
-
-
-
-
-
-
-
-		'		For Each wally As PictureBox In walls
-
-		'		If ene.Bounds.IntersectsWith(wally.Bounds) Then
-		'				ene.Left += 3
-
-
-		'			End If
-		'		End If
-
-		'		If ene.Left + ene.Width < player1.Left Then
-		'			ene.Left += 1
-		'			If ene.Bounds.IntersectsWith(wally.Bounds) Then
-		'				ene.Left -= 3
-		'			ElseIf ene.Left + ene.Width >= Me.Width - 30 Then
-		'				ene.Dispose()
-		'				ene.Enabled = False
-		'			End If
-		'		End If
-		'	Next
-		'Next
-	End Sub
 
 
 
@@ -548,14 +487,15 @@ Public Class Form1
 				'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
 				'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
 				'End If
+
+				'If activePictureBox.Name.Contains("boss") Then
+				'	startLife = 0
+				'	Console.WriteLine("collide with boss and die")
+				'	updateLabels()
+				'	Exit For 'exit the for loop as picturebox name contains "boss" help in using less cpu power
+				'End If
 				'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-				If activePictureBox.Name.Contains("boss") Then
-					startLife = 0
-					Console.WriteLine("collide with boss and die")
-					updateLabels()
-					Exit For 'exit the for loop as picturebox name contains "boss" help in using less cpu power
-				End If
 				If activePictureBox.Name.Contains("life") Then
 					Item_Collected += 1
 					startLife += 1
@@ -646,7 +586,6 @@ Public Class Form1
 		Me.Controls.Remove(otherPicBox)
 		updateLabels()
 	End Sub
-
 
 
 
