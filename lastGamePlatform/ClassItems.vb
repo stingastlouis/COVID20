@@ -1,6 +1,5 @@
 ﻿Public Class ClassItems
-
-
+	Dim randomItemImage As New List(Of Bitmap)({My.Resources.adn, My.Resources.coin, My.Resources.gun, My.Resources.life})
 
 
 	'functions

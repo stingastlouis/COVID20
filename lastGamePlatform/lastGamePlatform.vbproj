@@ -353,6 +353,10 @@
     <Content Include="AudioVideo\bonusScene.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
+    <None Include="Resources\life.png" />
+    <None Include="Resources\gun.png" />
+    <None Include="Resources\coin.png" />
+    <None Include="Resources\adn.png" />
     <None Include="Resources\door2.png" />
     <None Include="Resources\pngguru.com.png" />
     <None Include="IntroImages\player.png" />
