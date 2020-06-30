@@ -118,6 +118,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ClassMyGameManager.vb" />
+    <Compile Include="Module1.vb" />
     <Compile Include="multiplayerRegForm.Designer.vb">
       <DependentUpon>multiplayerRegForm.vb</DependentUpon>
     </Compile>
