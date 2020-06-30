@@ -190,7 +190,7 @@ Partial Class Form3
         'lastGun
         '
         Me.lastGun.BackColor = System.Drawing.Color.Transparent
-        Me.lastGun.Image = Global.lastGamePlatform.My.Resources.Resources.gun2
+        Me.lastGun.Image = Global.lastGamePlatform.My.Resources.Resources.gun
         Me.lastGun.Location = New System.Drawing.Point(2614, 343)
         Me.lastGun.Name = "lastGun"
         Me.lastGun.Size = New System.Drawing.Size(39, 36)

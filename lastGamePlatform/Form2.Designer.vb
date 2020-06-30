@@ -278,7 +278,7 @@ Partial Class Form2
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.Image = Global.lastGamePlatform.My.Resources.Resources.cloud
+        Me.PictureBox1.Image = Global.lastGamePlatform.My.Resources.Resources.wall2
         Me.PictureBox1.Location = New System.Drawing.Point(550, 135)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
@@ -302,7 +302,7 @@ Partial Class Form2
         'lastGun
         '
         Me.lastGun.BackColor = System.Drawing.Color.Transparent
-        Me.lastGun.Image = Global.lastGamePlatform.My.Resources.Resources.gun2
+        Me.lastGun.Image = Global.lastGamePlatform.My.Resources.Resources.gun
         Me.lastGun.Location = New System.Drawing.Point(3379, 382)
         Me.lastGun.Margin = New System.Windows.Forms.Padding(4)
         Me.lastGun.Name = "lastGun"
@@ -1000,7 +1000,7 @@ Partial Class Form2
         'PictureBox2
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Image = Global.lastGamePlatform.My.Resources.Resources.cloud
+        Me.PictureBox2.Image = Global.lastGamePlatform.My.Resources.Resources.wall2
         Me.PictureBox2.Location = New System.Drawing.Point(279, 219)
         Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox2.Name = "PictureBox2"
@@ -1013,7 +1013,7 @@ Partial Class Form2
         'PictureBox3
         '
         Me.PictureBox3.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox3.Image = Global.lastGamePlatform.My.Resources.Resources.cloud
+        Me.PictureBox3.Image = Global.lastGamePlatform.My.Resources.Resources.wall2
         Me.PictureBox3.Location = New System.Drawing.Point(1035, 135)
         Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
@@ -1026,7 +1026,7 @@ Partial Class Form2
         'PictureBox4
         '
         Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox4.Image = Global.lastGamePlatform.My.Resources.Resources.cloud
+        Me.PictureBox4.Image = Global.lastGamePlatform.My.Resources.Resources.wall2
         Me.PictureBox4.Location = New System.Drawing.Point(1196, 209)
         Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"

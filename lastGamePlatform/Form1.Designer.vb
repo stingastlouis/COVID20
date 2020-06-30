@@ -519,7 +519,7 @@ Partial Class Form1
         'supergun
         '
         Me.supergun.BackColor = System.Drawing.Color.Transparent
-        Me.supergun.Image = Global.lastGamePlatform.My.Resources.Resources.gun2
+        Me.supergun.Image = Global.lastGamePlatform.My.Resources.Resources.gun
         Me.supergun.Location = New System.Drawing.Point(1129, 321)
         Me.supergun.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.supergun.Name = "supergun"

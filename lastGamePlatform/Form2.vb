@@ -83,27 +83,27 @@ Public Class Form2
         Enemy = {enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy12, enemy15, enemy17, enemy40, enemy41}
         pointRegenerator = New Point(10, 10)
         For x As Integer = 0 To lifeBox.Length - 1
-            lifeBox(x).Image = My.Resources.HP_Bonus_03
+            lifeBox(x).Image = My.Resources.life
             lifeBox(x).BackColor = Color.Transparent
             lifeBox(x).SizeMode = PictureBoxSizeMode.StretchImage
         Next
         For y As Integer = 0 To Bonus.Length - 1
-            Bonus(y).Image = My.Resources.image_1
+            Bonus(y).Image = My.Resources.coin
             Bonus(y).BackColor = Color.Transparent
             Bonus(y).SizeMode = PictureBoxSizeMode.StretchImage
         Next
         For m As Integer = 0 To shotGun.Length - 1
-            shotGun(m).Image = My.Resources.gun2
+            shotGun(m).Image = My.Resources.gun
             shotGun(m).BackColor = Color.Transparent
             shotGun(m).SizeMode = PictureBoxSizeMode.StretchImage
         Next
         For b As Integer = 0 To wall.Length - 1
-            wall(b).Image = My.Resources.Prop_6
+            wall(b).Image = My.Resources.wall1
             wall(b).BackColor = Color.Transparent
             wall(b).SizeMode = PictureBoxSizeMode.StretchImage
         Next
         For c As Integer = 0 To ItemVaccin.Length - 1
-            ItemVaccin(c).Image = My.Resources.item
+            ItemVaccin(c).Image = My.Resources.adn
             ItemVaccin(c).BackColor = Color.Transparent
             ItemVaccin(c).SizeMode = PictureBoxSizeMode.StretchImage
         Next
@@ -115,7 +115,7 @@ Public Class Form2
 
         Next
         For e As Integer = 0 To ground.Length - 1
-            ground(e).Image = My.Resources.GrassCliffMid
+            ground(e).Image = My.Resources.ground
             ground(e).BackColor = Color.Transparent
             ground(e).SizeMode = PictureBoxSizeMode.StretchImage
         Next
