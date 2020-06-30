@@ -1,11 +1,11 @@
 ﻿Public Class ClassEnemy
-	Private Width As Integer
-	Private Height As Integer
-	Private XPosition As Integer
-	Private YPosition As Integer
-	Private Name As String
-	Private MoveSpeed As Integer
-	Private Image As Bitmap
+	Private width As Integer
+	Private height As Integer
+	Private xPosition As Integer
+	Private yPosition As Integer
+	Private name As String
+	Private moveSpeed As Integer
+	Private image As Bitmap
 
 
 
@@ -22,16 +22,20 @@
 		Me.yPosition = yPosition
 		Me.name = name
 		Me.moveSpeed = moveSpeed
+
+		'Controls.Add(pb)
 	End Sub
 	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap)
 		Me.width = 87
 		Me.height = 62
-		Me.image = Me.image
+		Me.image = image
 
 		Me.xPosition = xPosition
 		Me.yPosition = yPosition
 		Me.name = name
 		Me.moveSpeed = moveSpeed
+
+
 	End Sub
 
 
@@ -101,20 +105,14 @@
 
 
 
-	'function
-	Public Function generatePictureBox()
-		Dim enemyPictureBox As New PictureBox
-		With enemyPictureBox
-			.Width = Me.width
-			.Height = Me.height
-			.Name = Me.name
-			.Location = New Point(Me.xPosition, Me.yPosition)
-			.Image = Me.image
-			.BackColor = Color.Transparent
-			.SizeMode = PictureBoxSizeMode.StretchImage
-			.BringToFront()
-		End With
-		Return enemyPictureBox
+
+
+
+
+	'functions
+	Public Function generateEnemy()
+		Dim pb As New ClassPictureBox(Width1, Height1, Name1, XPosition1, YPosition1, Image1)
+		Return pb.showPictureBox()
 	End Function
 
 

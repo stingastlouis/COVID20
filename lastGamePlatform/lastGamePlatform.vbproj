@@ -92,6 +92,7 @@
     <Compile Include="ClassBullets.vb" />
     <Compile Include="ClassEnemy.vb" />
     <Compile Include="ClassItems.vb" />
+    <Compile Include="ClassPictureBox.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +330,8 @@
     <Content Include="AudioVideo\bonusScene.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
+    <None Include="Resources\RandomImages.bmp" />
+    <None Include="Resources\superGun.png" />
     <Content Include="Resources\wall2.png" />
     <Content Include="Resources\wall1.png" />
     <None Include="Resources\life.png" />

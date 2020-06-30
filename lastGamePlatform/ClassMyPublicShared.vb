@@ -9,7 +9,7 @@
 
 	Public Shared randomItemImages As New List(Of String)({IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\adn.png"), IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\coin.png"), IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\gun.png"), IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\life.png")})
 	Public Shared randomWallImages As New List(Of String)({IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\wall1.png"), IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\wall2.png")})
-	'Public Shared randomEnemyImage As New List(Of Bitmap)({My.Resources.enemy1, My.Resources.enemy2, My.Resources.enemy3})
+	'Public Shared randomEnemyImage As New List
 
 
 End Class

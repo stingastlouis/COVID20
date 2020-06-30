@@ -99,8 +99,8 @@ Public Class Form1
 		setGame()
 
 		Console.WriteLine("pushing pictureboxes to main list of objects")
-		Dim gatheringItems As New ClassItems()
-		gatheringItems.populatingAllPictureBoxes()
+		Dim itm As New ClassItems()
+		itm.scanPredefineItem()
 
 
 
@@ -226,12 +226,21 @@ Public Class Form1
 
 
 	Private Sub Timer1000ms_Tick(sender As Object, e As EventArgs) Handles Timer1000ms.Tick
+
+		Dim myGraphics As Graphics = Me.CreateGraphics
+		Dim myFont As Font
+		Dim myBrush As Brush
+
+		myBrush = New SolidBrush(Color.Red)
+		myFont = New Font("Verdana", 25, FontStyle.Italic)
+
 		If waitBeforeFight <= 0 Then
 			Timer1000ms.Enabled = False
-			Console.WriteLine("go")
+			myGraphics.DrawString("Go", myFont, myBrush, Me.Width / 2, Me.Height / 2)
 			waitBeforeFight = ClassMyPublicShared.waitBeforeFight
 			FastestTimer.Enabled = True
 		End If
+		myGraphics.DrawString(waitBeforeFight.ToString(), myFont, myBrush, Me.Width / 2, Me.Height / 2)
 		Console.WriteLine(waitBeforeFight)
 		waitBeforeFight -= 1
 	End Sub
@@ -252,23 +261,16 @@ Public Class Form1
 		If (player1.Left + player1.Width > Me.Width) Then
 			enemies.Clear()
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
-
 				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
 				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
 			Next
 
 			Dim noOfEnemies As Integer = numberOfEnemies()
-			Console.WriteLine(noOfEnemies & " enemies")
 			While noOfEnemies > 0
-				Dim xPos As Integer = numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1) 'start 20% to (door2 -1)
-				Dim yPos As Integer = ground1.Top - 60
-
-				Dim enemyGenerated As New ClassEnemy(xPos, yPos, "enemy" & noOfEnemies, 3)
-				Dim enemyPictureBox As PictureBox = enemyGenerated.generatePictureBox()
-				Me.Controls.Add(enemyPictureBox)
-				ClassMyPublicShared.allPictureBoxes.Add(enemyPictureBox)
-				enemies.Add(enemyPictureBox)
+				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, 3)
+				Me.Controls.Add(enemy.generateEnemy())
+				enemies.Add(enemy.generateEnemy())
 
 				noOfEnemies -= 1
 			End While
@@ -277,16 +279,7 @@ Public Class Form1
 		End If
 
 
-		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then '?????????????????????????????????????bizin recheck sa la
-			Label1.Visible = True
-			Label1.Enabled = True
-			ProgressBar1.Enabled = True
-			ProgressBar1.Visible = True
-			boss.Enabled = True
-			supergun.Enabled = True
-			supergun.Visible = True
-			moveTheBoss = True
-		End If
+
 	End Sub
 
 
@@ -298,12 +291,21 @@ Public Class Form1
 			bossAndEnemiesMoveTowardPlayer(boss)
 		End If
 
-
+		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then '?????????????????????????????????????bizin recheck sa la
+			Label1.Visible = True
+			Label1.Enabled = True
+			ProgressBar1.Enabled = True
+			ProgressBar1.Visible = True
+			boss.Enabled = True
+			supergun0.Enabled = True
+			supergun0.Visible = True
+			moveTheBoss = True
+		End If
 
 
 
 		Dim enemy As New ClassEnemy()
-		enemy.makeEnemyMoves(enemies, player1)
+		'enemy.makeEnemyMoves(enemies, player1)''''movespeed pa p marC recheck sa
 
 
 
@@ -463,11 +465,6 @@ Public Class Form1
 
 
 
-
-
-
-
-
 	''' <summary>
 	''' used in timer
 	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
@@ -520,7 +517,7 @@ Public Class Form1
 						Score += scoreGun
 						allowToshotShotGUNl = True
 					End If
-					If supergun.Enabled = True Then
+					If supergun0.Enabled = True Then
 						allowToshotShotGUNl = True
 						Item_Collected = 2 '?????????????????????????????????????????????????????????????????????????????????????????? score + 100 ??????????? pa pli bon ????????
 					End If
@@ -561,9 +558,9 @@ Public Class Form1
 	''' </summary>
 	Private Sub setGame()
 		RestartBtn.Enabled = False
-		supergun.Visible = False
+		supergun0.Visible = False
 		lastItem1.Visible = False
-		supergun.Enabled = False
+		supergun0.Enabled = False
 		lastItem1.Enabled = False
 		pScore.Text = "Item :" + CStr(Score)
 		RestartBtn.Visible = False
