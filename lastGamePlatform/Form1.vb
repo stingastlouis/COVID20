@@ -313,76 +313,21 @@ Public Class Form1
 	End Sub
 
 
-
+	'ohh makarena  bam bam 
 
 
 	'+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++pren la jus k lot++++++sa banlamm ki p fr zoue la lourd la====248-370
 
 
 
-	Private Sub bulletManager()
-		For x As Integer = 0 To bullet1.Length - 1 '????????????????????????????????????????bizin recheck sa array la
-			bullet1(x).Shoot(player1)
-			If checkforCollision(bullet1(x), boss) And boss.Enabled = True And bullet1(x).Enabled = True Then
-				ProgressBar1.Value -= 1 '???????????????????????????????????????????????????????????????????p ggn exception kan boss mor
-				If ProgressBar1.Value <= 0 Then
-					ProgressBar1.Value = 0
-				End If
-				Score += 30 * 0.5
-				updateLabels()
-				bullet1(x).Enabled = False
-				bullet1(x).Dispose()
-				boss.Enabled = False
-			End If
 
-			For Each coin As PictureBox In coins
-				If checkforCollision(bullet1(x), coin) And bullet1(x).Enabled And coin.Enabled Then
-					bullet1(x).Dispose()
-					Me.Controls.Remove(bullet1(x))
-					bullet1(x).Enabled = False
-				End If
-			Next
-			For Each enemy As PictureBox In enemies
-				If checkforCollision(bullet1(x), enemy) And bullet1(x).Enabled And enemy.Enabled Then
-					Score += scoreEnemy
-					bullet1(x).Dispose()
-					bullet1(x).Enabled = False
-					'enemy.Enabled = False
-					Me.Controls.Remove(enemy)
-					enemies.Remove(enemy)
-					ClassMyPublicShared.allPictureBoxes.Remove(enemy)
-					updateLabels()
-					Exit For ''----------------------------------------------------------------------------kifer exit----?mem zafr r break sa
-					'Me.Controls.Remove(enemy)
-				End If
-			Next
-
-
-			For Each life As PictureBox In lifes
-				If checkforCollision(bullet1(x), life) And bullet1(x).Enabled And life.Enabled Then
-					bullet1(x).Dispose()
-					Me.Controls.Remove(bullet1(x))
-					bullet1(x).Enabled = False
-				End If
-			Next
-
-			For Each adn As PictureBox In adns 'scan all controls present in form
-				If checkforCollision(bullet1(x), adn) And bullet1(x).Enabled And adn.Enabled Then
-					bullet1(x).Dispose()
-					Me.Controls.Remove(bullet1(x))
-					bullet1(x).Enabled = False
-				End If
-			Next
-			'-------------------------------------------
-		Next
-	End Sub
 
 	'+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++jus k la++++++
 
 
 
 	'for enemy and boss
-	Private Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As Object)
+	Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As Object)
 		If contaminer.left + contaminer.Width > player1.Left Then
 			contaminer.left -= 1
 		End If
@@ -407,19 +352,13 @@ Public Class Form1
 	''' <param name="ob1"></param>
 	''' <param name="ob2"></param>
 	''' <returns></returns>
-	Function checkforCollision(ByVal ob1 As Object, ByVal ob2 As Object) As Boolean
-		If ob1.Top + ob1.Height >= ob2.Top - 5 And ob2.Top + ob2.Height >= ob1.Top And ob1.Left + ob1.Width >= ob2.Left And ob2.Left + ob2.Width >= ob1.Left Then
-			Return True
-		End If
-		Return False
-	End Function
 
 
 
 
 
 	'''''######################################################################################will be deleted
-	Private Sub updateAllLists()
+	Public Sub updateAllLists()
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
 			'seperating randomPictureBoxes to specific ones
 			If activePictureBox.Name.Contains("adn") Then
@@ -442,7 +381,7 @@ Public Class Form1
 	End Sub
 
 	'''''######################################################################################will be in classboss
-	Private Sub bossCollision()
+	Public Sub bossCollision()
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 			If activePictureBox IsNot boss AndAlso boss.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 				If activePictureBox.Name.Contains("wall") Then
@@ -469,7 +408,7 @@ Public Class Form1
 	''' used in timer
 	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
 	''' </summary>
-	Private Sub collisionChecker()
+	Public Sub collisionChecker()
 		playerIsFalling = True
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
@@ -597,56 +536,112 @@ Public Class Form1
 	''' <summary>
 	''' refresh all lables
 	''' </summary>
-	Private Sub updateLabels()
-		pScore.Text = "Score :" + CStr(Score)
+	Private Sub updateLabels(ByRef timer As Timer, ByRef progressbar1 As ProgressBar, ByRef lblscore As Label, ByRef lbllife As Label, ByRef lblItem As Label, ByRef score As Integer, ByRef life As Integer, ByRef item As Integer)
+		pScore.Text = "Score :" + CStr(score)
 		pLife.Text = "X" + CStr(startLife)
 		pItem.Text = "Item :" + CStr(Item_Collected)
+		Dim winOrlose As New Label
+		Dim btnSucess As New Button
+		Dim btnExit As New Button
 
-		If (ProgressBar1.Value <= 0) Then
-			ProgressBar1.Value = 0
+		If (progressbar1.Value <= 0) Then
+			progressbar1.Value = 0
 			Timer75ms.Enabled = False
-			winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
-			winorloseTxt.Visible = True
 
-			RestartBtn.Text = "Continue"
-			RestartBtn.Visible = True
-			RestartBtn.Enabled = True
-			winorloseTxt.Top = Me.Height / 2 - 60
-			winorloseTxt.Left = Me.Width / 2 - 15
-			RestartBtn.BringToFront()
-			RestartBtn.Top = Me.Height / 2
-			RestartBtn.Left = Me.Width / 2
 
-			extbtn.Visible = True
-			extbtn.Enabled = True
-			extbtn.Text = "Abandon Mission"
-			extbtn.Top = Me.Height / 2 + 30
-			extbtn.Left = Me.Width / 2
-			extbtn.BringToFront()
+			With winOrlose
+				.Width = 165
+				.Height = 65
+				.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
+				.Visible = True
+				.Enabled = True
+
+				.Top = Me.Height / 2 - 60
+				.Left = Me.Width / 2 - 15
+				.BringToFront()
+
+			End With
+			Me.Controls.Add(winOrlose)
+
+			With btnSucess
+				.Width = 165
+				.Height = 65
+				.Text = "Continue"
+				.Visible = True
+				.Enabled = True
+
+
+				.Top = Me.Height / 2
+				.Left = Me.Width / 2
+				.BringToFront()
+			End With
+			Me.Controls.Add(btnSucess)
+
+
+			With btnExit
+				.Text = "Abandon Mission"
+				.Width = 165
+				.Height = 65
+				.Top = Me.Height / 2 + 30
+				.Left = Me.Width / 2
+				.BringToFront()
+				.Enabled = True
+				.Visible = True
+			End With
+			Me.Controls.Add(btnExit)
+
+
 
 
 		ElseIf (startLife <= 0) Then
-			winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
-			winorloseTxt.Visible = True
 
-			RestartBtn.Text = "Restart"
-			RestartBtn.Visible = True
-			RestartBtn.Enabled = True
-			RestartBtn.BringToFront()
-			winorloseTxt.Top = Me.Height / 2 - 60
-			winorloseTxt.Left = Me.Width / 2 - 15
-			RestartBtn.Top = Me.Height / 2
-			RestartBtn.Left = Me.Width / 2
-			extbtn.Visible = True
-			extbtn.Enabled = True
-			extbtn.Text = "Abandon Mission"
-			extbtn.Top = Me.Height / 2 + 30
-			extbtn.Left = Me.Width / 2
-			extbtn.BringToFront()
+			With winOrlose
+				.Width = 165
+				.Height = 65
+				.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
+				.Visible = True
+				.Enabled = True
+
+				.Top = Me.Height / 2 - 60
+				.Left = Me.Width / 2 - 15
+				.BringToFront()
+
+			End With
+			Me.Controls.Add(winOrlose)
+
+
+			With btnSucess
+				.Width = 165
+				.Height = 65
+				.Text = "Restart"
+				.Visible = True
+				.Enabled = True
+				.Top = Me.Height / 2
+				.Left = Me.Width / 2
+				.BringToFront()
+			End With
+			Me.Controls.Add(btnSucess)
+			btnSucess.PerformClick
+			Clicked_Btn1()
+
+			With btnExit
+				.Text = "Abandon Mission"
+				.Width = 165
+				.Height = 65
+				.Top = Me.Height / 2 + 30
+				.Left = Me.Width / 2
+				.BringToFront()
+				.Enabled = True
+				.Visible = True
+			End With
+			Me.Controls.Add(btnExit)
+
 		End If
 	End Sub
 
+	Private Sub Clicked_Btn1(sender As Object, e As EventArgs)
 
+	End Sub
 
 
 End Class
