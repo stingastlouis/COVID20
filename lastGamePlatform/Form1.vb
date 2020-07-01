@@ -4,13 +4,14 @@ Public Class Form1
 	'list
 	Dim walls As New List(Of PictureBox)
 	Dim grounds As New List(Of PictureBox)
-	Dim enemies As New List(Of PictureBox)
 	Dim coins As New List(Of PictureBox)
 	Dim lifes As New List(Of PictureBox)
 	Dim guns As New List(Of PictureBox)
 	Dim adns As New List(Of PictureBox)
 
 
+	Dim enemies As New List(Of PictureBox)
+	Dim enemiesSpeed As New List(Of Integer)
 	'Dim allMyControls As New List(Of Control)
 	'Dim allPictureBoxes As New List(Of PictureBox)
 
@@ -103,10 +104,10 @@ Public Class Form1
 		itm.scanPredefineItem()
 
 
-		Console.WriteLine("try with classbullet()")
-		Dim bullet As New ClassBullets(player1)
-		Dim bulletpb As PictureBox = bullet.generateBullet()
-		Me.Controls.Add(bulletpb)
+		'Console.WriteLine("try with classbullet()")
+		'Dim bullet As New ClassBullets(player1)
+		'Dim bulletpb As PictureBox = bullet.generateBullet()
+		'Me.Controls.Add(bulletpb)
 
 
 
@@ -191,7 +192,7 @@ Public Class Form1
 						allowToshotShotGUNl = False
 						count1 = 0
 						Item_Collected = 0
-						updateLabels(Timer75ms, ProgressBar1, pScore, pLife, pItem, Score, startLife, Item_Collected)
+						updateLabels()
 					End If
 				End If
 
@@ -265,6 +266,7 @@ Public Class Form1
 
 		If (player1.Left + player1.Width > Me.Width) Then
 			enemies.Clear()
+			enemiesSpeed.Clear()
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
@@ -273,9 +275,10 @@ Public Class Form1
 
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
-				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, 3)
+				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
 				Dim en As PictureBox = enemy.generateEnemy()
 				Me.Controls.Add(en)
+				enemiesSpeed.Add(enemy.MoveSpeed1)
 				enemies.Add(en)
 
 				noOfEnemies -= 1
@@ -308,13 +311,32 @@ Public Class Form1
 			moveTheBoss = True
 		End If
 
+		For en As Integer = 0 To enemies.Count - 1
+			If enemies(en).Left > player1.Left Then
+				enemies(en).Left -= enemiesSpeed(en)
+			ElseIf enemies(en).Left < player1.Left Then
+				enemies(en).Left += enemiesSpeed(en)
+			End If
+			If enemies(en).Top > player1.Top Then
+				enemies(en).Top -= enemiesSpeed(en)
+			ElseIf enemies(en).Top < player1.Top Then
+				enemies(en).Top += enemiesSpeed(en)
+			End If
 
-		For Each en In enemies
-			Console.WriteLine(en.Name)
 		Next
 
-		Dim enemy As New ClassEnemy()
-		enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
+
+
+
+
+
+
+		'For Each en In enemies
+		'	Console.WriteLine(en.Name)
+		'Next
+
+		'Dim enemy As New ClassEnemy()
+		'enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
 
 
 		Dim mono As New PistoleBullet1(player1)
@@ -542,7 +564,7 @@ Public Class Form1
 		'removing the control
 		ClassMyPublicShared.allPictureBoxes.Remove(otherPicBox)
 		Me.Controls.Remove(otherPicBox)
-		updateLabels(Timer75ms, ProgressBar1, pScore, pLife, pItem, Score, startLife, Item_Collected)
+		updateLabels()
 	End Sub
 
 
@@ -550,8 +572,8 @@ Public Class Form1
 	''' <summary>
 	''' refresh all lables
 	''' </summary>
-	Private Sub updateLabels(ByRef timer As Timer, ByRef progressbar1 As ProgressBar, ByRef lblscore As Label, ByRef lbllife As Label, ByRef lblItem As Label, ByRef score As Integer, ByRef life As Integer, ByRef item As Integer)
-		pScore.Text = "Score :" + CStr(score)
+	Private Sub updateLabels()
+		pScore.Text = "Score :" + CStr(Score)
 		pLife.Text = "X" + CStr(startLife)
 		pItem.Text = "Item :" + CStr(Item_Collected)
 		'Dim winOrlose As New Label
@@ -559,8 +581,8 @@ Public Class Form1
 		'Dim btnExit As New Button
 
 
-		If progressbar1.Value <= 0 Then
-			progressbar1.Value = 0
+		If ProgressBar1.Value <= 0 Then
+			ProgressBar1.Value = 0
 			Timer75ms.Enabled = False
 			winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
 			winorloseTxt.Visible = True
@@ -581,9 +603,7 @@ Public Class Form1
 			extbtn.Left = Me.Width / 2
 			extbtn.BringToFront()
 
-		End If
-
-		If startLife <= 0 Then
+		ElseIf startLife <= 0 Then
 
 			winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
 			winorloseTxt.Visible = True

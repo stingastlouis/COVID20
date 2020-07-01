@@ -116,33 +116,33 @@
 	End Function
 
 
-	Public Sub makeEnemyMoves(enemy As List(Of PictureBox), player1 As PictureBox)
-		Dim speed As Integer = 1
-		For Each ene As PictureBox In enemy
-			'For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
-			'	If activePictureBox IsNot ene AndAlso ene.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-			'		If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-			'			Console.WriteLine("wall/ground")
+	'Public Sub makeEnemyMoves(enemy As List(Of PictureBox), player1 As PictureBox)
+	'	Dim speed As Integer = 1
+	'	For Each ene As PictureBox In enemy
+	'		'For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
+	'		'	If activePictureBox IsNot ene AndAlso ene.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+	'		'		If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+	'		'			Console.WriteLine("wall/ground")
 
-			'			If ene.Top > activePictureBox.Top - ene.Height Then 'to stay on top of ground and wall
-			'				ene.Location = New Point(ene.Location.X, activePictureBox.Top - ene.Height)
-			'			End If
-			'			Exit For
-			'		End If
-			'	End If
-			'Next
-			If ene.Left > player1.Left Then
-				ene.Left -= speed
-			ElseIf ene.Left < player1.Left Then
-				ene.Left += speed
-			End If
-			If ene.Top > player1.Top Then
-				ene.Top -= speed
-			ElseIf ene.Top < player1.Top Then
-				ene.Top += speed
-			End If
-		Next
-	End Sub
+	'		'			If ene.Top > activePictureBox.Top - ene.Height Then 'to stay on top of ground and wall
+	'		'				ene.Location = New Point(ene.Location.X, activePictureBox.Top - ene.Height)
+	'		'			End If
+	'		'			Exit For
+	'		'		End If
+	'		'	End If
+	'		'Next
+	'		If ene.Left > player1.Left Then
+	'			ene.Left -= speed
+	'		ElseIf ene.Left < player1.Left Then
+	'			ene.Left += speed
+	'		End If
+	'		If ene.Top > player1.Top Then
+	'			ene.Top -= speed
+	'		ElseIf ene.Top < player1.Top Then
+	'			ene.Top += speed
+	'		End If
+	'	Next
+	'End Sub
 
 
 
