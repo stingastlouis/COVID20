@@ -341,10 +341,12 @@ Public Class Form1
 
 		Dim mono As New PistoleBullet1(player1)
 		mono.bulletManager(bullet1, player1, boss, enemies, coins, lifes, adns)
-		mono.getScore(Score)
+
 		Score = mono.setScore(Score)
-		mono.getBossLife(ProgressBar1)
+		mono.bosslifeRequire(ProgressBar1)
 		ProgressBar1.Value = mono.setBossLife()
+		updateLabels()
+
 
 	End Sub
 

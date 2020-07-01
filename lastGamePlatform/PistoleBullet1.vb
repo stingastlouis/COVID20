@@ -54,7 +54,7 @@
 
 				bullet1(x).Enabled = False
 				bullet1(x).Dispose()
-				boss.Enabled = False
+
 			End If
 
 			For Each coin As PictureBox In coins
@@ -69,9 +69,9 @@
 					Me.score += shootEnemy
 					bullet1(x).Dispose()
 					bullet1(x).Enabled = False
-					'enemy.Enabled = False
+					enemy.Enabled = False
 					Me.Controls.Remove(enemy)
-
+					enemy.Dispose()
 					ClassMyPublicShared.allPictureBoxes.Remove(enemy)
 
 					Exit For ''----------------------------------------------------------------------------kifer exit----?mem zafr r break sa
@@ -102,17 +102,17 @@
 
 	End Sub
 
-	Public Sub getScore(ByVal score As Integer)
-		Me.score = score
-	End Sub
-	Public Sub getBossLife(ByVal life As ProgressBar)
-		Me.bossValue = life.Value
-	End Sub
 
-	Function setScore(ByRef value) As Integer
+
+
+	Function setScore(ByVal value) As Integer
 		Return value + Me.score
+
 	End Function
 	Function setBossLife() As Integer
 		Return Me.bossValue
 	End Function
+	Public Sub bosslifeRequire(ByVal boss As ProgressBar)
+		bossValue = boss.Value
+	End Sub
 End Class
