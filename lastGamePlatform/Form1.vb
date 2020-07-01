@@ -4,13 +4,14 @@ Public Class Form1
 	'list
 	Dim walls As New List(Of PictureBox)
 	Dim grounds As New List(Of PictureBox)
-	Dim enemies As New List(Of PictureBox)
 	Dim coins As New List(Of PictureBox)
 	Dim lifes As New List(Of PictureBox)
 	Dim guns As New List(Of PictureBox)
 	Dim adns As New List(Of PictureBox)
 
 
+	Dim enemies As New List(Of PictureBox)
+	Dim enemiesSpeed As New List(Of Integer)
 	'Dim allMyControls As New List(Of Control)
 	'Dim allPictureBoxes As New List(Of PictureBox)
 
@@ -265,6 +266,7 @@ Public Class Form1
 
 		If (player1.Left + player1.Width > Me.Width) Then
 			enemies.Clear()
+			enemiesSpeed.Clear()
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
@@ -273,9 +275,10 @@ Public Class Form1
 
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
-				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, 3)
+				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
 				Dim en As PictureBox = enemy.generateEnemy()
 				Me.Controls.Add(en)
+				enemiesSpeed.Add(enemy.MoveSpeed1)
 				enemies.Add(en)
 
 				noOfEnemies -= 1
@@ -308,13 +311,32 @@ Public Class Form1
 			moveTheBoss = True
 		End If
 
+		For en As Integer = 0 To enemies.Count - 1
+			If enemies(en).Left > player1.Left Then
+				enemies(en).Left -= enemiesSpeed(en)
+			ElseIf enemies(en).Left < player1.Left Then
+				enemies(en).Left += enemiesSpeed(en)
+			End If
+			If enemies(en).Top > player1.Top Then
+				enemies(en).Top -= enemiesSpeed(en)
+			ElseIf enemies(en).Top < player1.Top Then
+				enemies(en).Top += enemiesSpeed(en)
+			End If
 
-		For Each en In enemies
-			Console.WriteLine(en.Name)
 		Next
 
-		Dim enemy As New ClassEnemy()
-		enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
+
+
+
+
+
+
+		'For Each en In enemies
+		'	Console.WriteLine(en.Name)
+		'Next
+
+		'Dim enemy As New ClassEnemy()
+		'enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
 
 
 		'Dim mono As New PistoleBullet1(player1)
