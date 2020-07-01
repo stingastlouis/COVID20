@@ -6,7 +6,8 @@
 	Dim shootEnemy As Integer = 5
 	Dim shootBoss As Integer = 10
 	Dim score As Integer = 0
-	Dim bossValue As Integer
+	Dim hitBoss As Integer = 0
+	Dim maxHit As Integer
 	Public Sub New(ByVal ob As Object)
 		With Me
 			.Size = New Size(10, 30)
@@ -46,10 +47,10 @@
 			bullet1(x).Shoot(player1)
 
 			If Module1.checkforCollision(bullet1(x), boss) And boss.Enabled = True And bullet1(x).Enabled = True Then
-				Me.bossValue -= 1 '???????????????????????????????????????????????????????????????????p ggn exception kan boss mor
-				If Me.bossValue <= 0 Then
-					Me.bossValue = 0
-				End If
+				Me.hitBoss += 1 '???????????????????????????????????????????????????????????????????p ggn exception kan boss mor
+				'If Me.hitBoss >= maxHit Then
+				'	Me.hitBoss = 20
+				'End If
 				Me.score += shootBoss
 
 				bullet1(x).Enabled = False
@@ -109,10 +110,18 @@
 		Return value + Me.score
 
 	End Function
-	Function setBossLife() As Integer
-		Return Me.bossValue
+
+
+	Function setBossLife(ByRef boss As ProgressBar) As Integer
+
+		If hitBoss >= Me.maxHit Then
+			Return boss.Value = -1
+		End If
+		Return boss.Value - hitBoss
+
+
 	End Function
-	Public Sub bosslifeRequire(ByVal boss As ProgressBar)
-		bossValue = boss.Value
+	Public Sub bosslifeRequire(ByRef boss As ProgressBar)
+		maxHit = boss.Maximum
 	End Sub
 End Class
