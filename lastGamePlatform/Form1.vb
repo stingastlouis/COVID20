@@ -191,7 +191,7 @@ Public Class Form1
 						allowToshotShotGUNl = False
 						count1 = 0
 						Item_Collected = 0
-						updateLabels(Timer75ms, ProgressBar1, pScore, pLife, pItem, Score, startLife, Item_Collected)
+						updateLabels()
 					End If
 				End If
 
@@ -538,7 +538,7 @@ Public Class Form1
 		'removing the control
 		ClassMyPublicShared.allPictureBoxes.Remove(otherPicBox)
 		Me.Controls.Remove(otherPicBox)
-		updateLabels(Timer75ms, ProgressBar1, pScore, pLife, pItem, Score, startLife, Item_Collected)
+		updateLabels()
 	End Sub
 
 
@@ -546,8 +546,8 @@ Public Class Form1
 	''' <summary>
 	''' refresh all lables
 	''' </summary>
-	Private Sub updateLabels(ByRef timer As Timer, ByRef progressbar1 As ProgressBar, ByRef lblscore As Label, ByRef lbllife As Label, ByRef lblItem As Label, ByRef score As Integer, ByRef life As Integer, ByRef item As Integer)
-		pScore.Text = "Score :" + CStr(score)
+	Private Sub updateLabels()
+		pScore.Text = "Score :" + CStr(Score)
 		pLife.Text = "X" + CStr(startLife)
 		pItem.Text = "Item :" + CStr(Item_Collected)
 		'Dim winOrlose As New Label
@@ -555,8 +555,8 @@ Public Class Form1
 		'Dim btnExit As New Button
 
 
-		If progressbar1.Value <= 0 Then
-			progressbar1.Value = 0
+		If ProgressBar1.Value <= 0 Then
+			ProgressBar1.Value = 0
 			Timer75ms.Enabled = False
 			winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
 			winorloseTxt.Visible = True
@@ -577,9 +577,7 @@ Public Class Form1
 			extbtn.Left = Me.Width / 2
 			extbtn.BringToFront()
 
-		End If
-
-		If startLife <= 0 Then
+		ElseIf startLife <= 0 Then
 
 			winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
 			winorloseTxt.Visible = True
