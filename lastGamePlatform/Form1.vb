@@ -104,10 +104,10 @@ Public Class Form1
 		itm.scanPredefineItem()
 
 
-		Console.WriteLine("try with classbullet()")
-		Dim bullet As New ClassBullets(player1)
-		Dim bulletpb As PictureBox = bullet.generateBullet()
-		Me.Controls.Add(bulletpb)
+		'Console.WriteLine("try with classbullet()")
+		'Dim bullet As New ClassBullets(player1)
+		'Dim bulletpb As PictureBox = bullet.generateBullet()
+		'Me.Controls.Add(bulletpb)
 
 
 
