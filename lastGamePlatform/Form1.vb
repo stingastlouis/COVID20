@@ -39,7 +39,7 @@ Public Class Form1
 
 	'bullet vars
 	Dim bulletNumber As Integer = -1
-
+	Dim bullet1(-1) As PistoleBullet1
 
 	'
 	Dim waitBeforeFight As Integer = ClassMyPublicShared.waitBeforeFight
@@ -51,7 +51,7 @@ Public Class Form1
 
 	Public Score As Integer = 0
 
-	Dim bullet1(-1) As PistoleBullet1
+
 
 	'Dim shotGun() As PictureBox
 	'--------------------------
@@ -317,8 +317,12 @@ Public Class Form1
 		enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
 
 
-		'Dim mono As New PistoleBullet1(player1)
-		'mono.bulletManager(Score, ProgressBar1, bullet1, player1, boss, enemies, coins, lifes, adns)
+		Dim mono As New PistoleBullet1(player1)
+		mono.bulletManager(bullet1, player1, boss, enemies, coins, lifes, adns)
+		mono.getScore(Score)
+		Score = mono.setScore(Score)
+		mono.getBossLife(ProgressBar1)
+		ProgressBar1.Value = mono.setBossLife()
 
 	End Sub
 
