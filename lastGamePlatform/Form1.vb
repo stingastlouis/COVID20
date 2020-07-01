@@ -12,6 +12,8 @@ Public Class Form1
 
 	Dim enemies As New List(Of PictureBox)
 	Dim enemiesSpeed As New List(Of Integer)
+
+
 	'Dim allMyControls As New List(Of Control)
 	'Dim allPictureBoxes As New List(Of PictureBox)
 
@@ -275,7 +277,7 @@ Public Class Form1
 
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
-				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
+				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(Me.Height / 2, ground1.Top - 62 - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
 				Dim en As PictureBox = enemy.generateEnemy()
 				Me.Controls.Add(en)
 				enemiesSpeed.Add(enemy.MoveSpeed1)
@@ -311,20 +313,20 @@ Public Class Form1
 			moveTheBoss = True
 		End If
 
-		For en As Integer = 0 To enemies.Count - 1
-			If enemies(en).Left > player1.Left Then
-				enemies(en).Left -= enemiesSpeed(en)
-			ElseIf enemies(en).Left < player1.Left Then
-				enemies(en).Left += enemiesSpeed(en)
-			End If
-			If enemies(en).Top > player1.Top Then
-				enemies(en).Top -= enemiesSpeed(en)
-			ElseIf enemies(en).Top < player1.Top Then
-				enemies(en).Top += enemiesSpeed(en)
+
+		For x As Integer = 0 To enemies.Count - 1
+			If enemies(x).Left > player1.Left Then
+				enemies(x).Left -= enemiesSpeed(x)
+			ElseIf enemies(x).Left < player1.Left Then
+				enemies(x).Left += enemiesSpeed(x)
 			End If
 
+			If enemies(x).Top > player1.Top Then
+				enemies(x).Top -= enemiesSpeed(x)
+			ElseIf enemies(x).Top < player1.Top Then
+				enemies(x).Top += enemiesSpeed(x)
+			End If
 		Next
-
 
 
 
