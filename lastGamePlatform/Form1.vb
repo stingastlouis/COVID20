@@ -324,19 +324,17 @@ Public Class Form1
 			End If
 
 		Next
+		Dim eneC As New ClassEnemy
+		eneC.getLives(startLife)
+		eneC.collisionPlayer(player1, enemies)
+
+
+		startLife = eneC.submitLives()
 
 
 
 
 
-
-
-		'For Each en In enemies
-		'	Console.WriteLine(en.Name)
-		'Next
-
-		'Dim enemy As New ClassEnemy()
-		'enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
 
 
 		Dim mono As New PistoleBullet1(player1)

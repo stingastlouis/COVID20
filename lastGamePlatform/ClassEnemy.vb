@@ -6,7 +6,7 @@
 	Private name As String
 	Private moveSpeed As Integer
 	Private image As Bitmap
-
+	Dim playerlives As Integer = 0
 
 
 	'constructors
@@ -144,6 +144,24 @@
 	'	Next
 	'End Sub
 
+	Public Sub collisionPlayer(ByVal player As Object, ByVal enemy As List(Of PictureBox))
+		For Each x As PictureBox In enemy
+			If Module1.checkforCollision(player, x) And x.Enabled = True Then
+				x.Dispose()
+				x.Enabled = False
+				Me.playerlives -= 1
+
+			End If
+		Next
+
+	End Sub
+
+	Public Sub getLives(ByRef life As Integer)
+		Me.playerlives = life
+	End Sub
+	Public Function submitLives() As Integer
+		Return Me.playerlives
+	End Function
 
 
 End Class
