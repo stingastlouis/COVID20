@@ -36,7 +36,7 @@
         Me.Left -= shootSpeed
     End Sub
 
-	Private Sub bulletManager(ByRef Score As Integer, ByRef ProgressBar1 As ProgressBar, ByVal bullet1 As Array, ByVal player1 As Object, ByVal boss As Object, ByVal coins As Array, ByVal enemies As Array, ByVal lifes As Array, ByVal adns As Array)
+	Public Sub bulletManager(ByRef Score As Integer, ByRef ProgressBar1 As ProgressBar, ByVal bullet1 As Array, ByVal player1 As Object, ByVal boss As Object, ByVal enemies As List(Of PictureBox))
 
 
 
@@ -48,19 +48,19 @@
 					ProgressBar1.Value = 0
 				End If
 				Score += shootBoss
-				updateLabels()
+
 				bullet1(x).Enabled = False
 				bullet1(x).Dispose()
 				boss.Enabled = False
 			End If
 
-			For Each coin As PictureBox In coins
-				If Module1.checkforCollision(bullet1(x), coin) And bullet1(x).Enabled And coin.Enabled Then
-					bullet1(x).Dispose()
-					Me.Controls.Remove(bullet1(x))
-					bullet1(x).Enabled = False
-				End If
-			Next
+			'For Each coin As PictureBox In coins
+			'	If Module1.checkforCollision(bullet1(x), coin) And bullet1(x).Enabled And coin.Enabled Then
+			'		bullet1(x).Dispose()
+			'		Me.Controls.Remove(bullet1(x))
+			'		bullet1(x).Enabled = False
+			'	End If
+			'Next
 			For Each enemy As PictureBox In enemies
 				If checkforCollision(bullet1(x), enemy) And bullet1(x).Enabled And enemy.Enabled Then
 					Score += shootEnemy
@@ -70,29 +70,29 @@
 					Me.Controls.Remove(enemy)
 
 					ClassMyPublicShared.allPictureBoxes.Remove(enemy)
-					updateLabels()
+
 					Exit For ''----------------------------------------------------------------------------kifer exit----?mem zafr r break sa
 					'Me.Controls.Remove(enemy)
 				End If
 			Next
 
 
-			For Each life As PictureBox In lifes
-				If checkforCollision(bullet1(x), life) And bullet1(x).Enabled And life.Enabled Then
-					bullet1(x).Dispose()
-					Me.Controls.Remove(bullet1(x))
-					bullet1(x).Enabled = False
-				End If
-			Next
+			'	For Each life As PictureBox In lifes
+			'		If checkforCollision(bullet1(x), life) And bullet1(x).Enabled And life.Enabled Then
+			'			bullet1(x).Dispose()
+			'			Me.Controls.Remove(bullet1(x))
+			'			bullet1(x).Enabled = False
+			'		End If
+			'	Next
 
-			For Each adn As PictureBox In adns 'scan all controls present in form
-				If checkforCollision(bullet1(x), adn) And bullet1(x).Enabled And adn.Enabled Then
-					bullet1(x).Dispose()
-					Me.Controls.Remove(bullet1(x))
-					bullet1(x).Enabled = False
-				End If
-			Next
-			'-------------------------------------------
+			'	For Each adn As PictureBox In adns 'scan all controls present in form
+			'		If checkforCollision(bullet1(x), adn) And bullet1(x).Enabled And adn.Enabled Then
+			'			bullet1(x).Dispose()
+			'			Me.Controls.Remove(bullet1(x))
+			'			bullet1(x).Enabled = False
+			'		End If
+			'	Next
+			'	'-------------------------------------------
 		Next
 
 

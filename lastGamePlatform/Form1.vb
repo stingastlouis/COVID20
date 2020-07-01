@@ -184,7 +184,7 @@ Public Class Form1
 						allowToshotShotGUNl = False
 						count1 = 0
 						Item_Collected = 0
-						updateLabels()
+						updateLabels(Timer75ms, ProgressBar1, pScore, pLife, pItem, Score, startLife, Item_Collected)
 					End If
 				End If
 
@@ -240,7 +240,7 @@ Public Class Form1
 			waitBeforeFight = ClassMyPublicShared.waitBeforeFight
 			FastestTimer.Enabled = True
 		End If
-		myGraphics.DrawString(waitBeforeFight.ToString(), myFont, myBrush, Me.Width / 2, Me.Height / 2)
+		myGraphics.DrawString(waitBeforeFight.ToString(), myFont, myBrush, Me.Width / 2, Me.Height / 2)  'ki tone dessiner la ??????
 		Console.WriteLine(waitBeforeFight)
 		waitBeforeFight -= 1
 	End Sub
@@ -307,9 +307,9 @@ Public Class Form1
 		Dim enemy As New ClassEnemy()
 		'enemy.makeEnemyMoves(enemies, player1)''''movespeed pa p marC recheck sa
 
+		Dim mono As New PistoleBullet1(player1)
+		mono.bulletManager(Score, ProgressBar1, bullet1, player1, boss, enemies)
 
-
-		'bulletManager() 'too much loop
 	End Sub
 
 
@@ -528,7 +528,7 @@ Public Class Form1
 		'removing the control
 		ClassMyPublicShared.allPictureBoxes.Remove(otherPicBox)
 		Me.Controls.Remove(otherPicBox)
-		updateLabels()
+		updateLabels(Timer75ms, ProgressBar1, pScore, pLife, pItem, Score, startLife, Item_Collected)
 	End Sub
 
 
@@ -540,108 +540,157 @@ Public Class Form1
 		pScore.Text = "Score :" + CStr(score)
 		pLife.Text = "X" + CStr(startLife)
 		pItem.Text = "Item :" + CStr(Item_Collected)
-		Dim winOrlose As New Label
-		Dim btnSucess As New Button
-		Dim btnExit As New Button
+		'Dim winOrlose As New Label
+		'Dim btnSucess As New Button
+		'Dim btnExit As New Button
 
-		If (progressbar1.Value <= 0) Then
+
+		If progressbar1.Value <= 0 Then
 			progressbar1.Value = 0
 			Timer75ms.Enabled = False
+			winorloseTxt.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
+			winorloseTxt.Visible = True
 
+			RestartBtn.Text = "Continue"
+			RestartBtn.Visible = True
+			RestartBtn.Enabled = True
+			winorloseTxt.Top = Me.Height / 2 - 60
+			winorloseTxt.Left = Me.Width / 2 - 15
+			RestartBtn.BringToFront()
+			RestartBtn.Top = Me.Height / 2
+			RestartBtn.Left = Me.Width / 2
 
-			With winOrlose
-				.Width = 165
-				.Height = 65
-				.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
-				.Visible = True
-				.Enabled = True
-
-				.Top = Me.Height / 2 - 60
-				.Left = Me.Width / 2 - 15
-				.BringToFront()
-
-			End With
-			Me.Controls.Add(winOrlose)
-
-			With btnSucess
-				.Width = 165
-				.Height = 65
-				.Text = "Continue"
-				.Visible = True
-				.Enabled = True
-
-
-				.Top = Me.Height / 2
-				.Left = Me.Width / 2
-				.BringToFront()
-			End With
-			Me.Controls.Add(btnSucess)
-
-
-			With btnExit
-				.Text = "Abandon Mission"
-				.Width = 165
-				.Height = 65
-				.Top = Me.Height / 2 + 30
-				.Left = Me.Width / 2
-				.BringToFront()
-				.Enabled = True
-				.Visible = True
-			End With
-			Me.Controls.Add(btnExit)
-
-
-
-
-		ElseIf (startLife <= 0) Then
-
-			With winOrlose
-				.Width = 165
-				.Height = 65
-				.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
-				.Visible = True
-				.Enabled = True
-
-				.Top = Me.Height / 2 - 60
-				.Left = Me.Width / 2 - 15
-				.BringToFront()
-
-			End With
-			Me.Controls.Add(winOrlose)
-
-
-			With btnSucess
-				.Width = 165
-				.Height = 65
-				.Text = "Restart"
-				.Visible = True
-				.Enabled = True
-				.Top = Me.Height / 2
-				.Left = Me.Width / 2
-				.BringToFront()
-			End With
-			Me.Controls.Add(btnSucess)
-			btnSucess.PerformClick
-			Clicked_Btn1()
-
-			With btnExit
-				.Text = "Abandon Mission"
-				.Width = 165
-				.Height = 65
-				.Top = Me.Height / 2 + 30
-				.Left = Me.Width / 2
-				.BringToFront()
-				.Enabled = True
-				.Visible = True
-			End With
-			Me.Controls.Add(btnExit)
+			extbtn.Visible = True
+			extbtn.Enabled = True
+			extbtn.Text = "Abandon Mission"
+			extbtn.Top = Me.Height / 2 + 30
+			extbtn.Left = Me.Width / 2
+			extbtn.BringToFront()
 
 		End If
+
+		If startLife <= 0 Then
+
+			winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
+			winorloseTxt.Visible = True
+
+			RestartBtn.Text = "Restart"
+			RestartBtn.Visible = True
+			RestartBtn.Enabled = True
+			RestartBtn.BringToFront()
+			winorloseTxt.Top = Me.Height / 2 - 60
+			winorloseTxt.Left = Me.Width / 2 - 15
+			RestartBtn.Top = Me.Height / 2
+			RestartBtn.Left = Me.Width / 2
+			extbtn.Visible = True
+			extbtn.Enabled = True
+			extbtn.Text = "Abandon Mission"
+			extbtn.Top = Me.Height / 2 + 30
+			extbtn.Left = Me.Width / 2
+			extbtn.BringToFront()
+
+
+
+		End If
+
+		'If (progressbar1.Value <= 0) Then
+		'	progressbar1.Value = 0
+		'	Timer75ms.Enabled = False
+
+
+		'	'	With winOrlose
+		'	'		.Width = 165
+		'	'		.Height = 65
+		'	'		.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
+		'	'		.Visible = True
+		'	'		.Enabled = True
+
+		'	'		.Top = Me.Height / 2 - 60
+		'	'		.Left = Me.Width / 2 - 15
+		'	'		.BringToFront()
+
+		'	'	End With
+		'	'	Me.Controls.Add(winOrlose)
+
+		'	'	With btnSucess
+		'	'		.Width = 165
+		'	'		.Height = 65
+		'	'		.Text = "Continue"
+		'	'		.Visible = True
+		'	'		.Enabled = True
+
+
+		'	'		.Top = Me.Height / 2
+		'	'		.Left = Me.Width / 2
+		'	'		.BringToFront()
+		'	'	End With
+		'	'	Me.Controls.Add(btnSucess)
+
+
+		'	'	With btnExit
+		'	'		.Text = "Abandon Mission"
+		'	'		.Width = 165
+		'	'		.Height = 65
+		'	'		.Top = Me.Height / 2 + 30
+		'	'		.Left = Me.Width / 2
+		'	'		.BringToFront()
+		'	'		.Enabled = True
+		'	'		.Visible = True
+		'	'	End With
+		'	'	Me.Controls.Add(btnExit)
+
+
+
+
+		'	'ElseIf (startLife <= 0) Then
+
+		'	'	With winOrlose
+		'	'		.Width = 165
+		'	'		.Height = 65
+		'	'		.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
+		'	'		.Visible = True
+		'	'		.Enabled = True
+
+		'	'		.Top = Me.Height / 2 - 60
+		'	'		.Left = Me.Width / 2 - 15
+		'	'		.BringToFront()
+
+		'	'	End With
+		'	'	Me.Controls.Add(winOrlose)
+		' btnSucess.Click,addressOf btn_naame
+
+
+		'	'	With btnSucess
+		'	'		.Width = 165
+		'	'		.Height = 65
+		'	'		.Text = "Restart"
+		'	'		.Visible = True
+		'	'		.Enabled = True
+		'	'		.Top = Me.Height / 2
+		'	'		.Left = Me.Width / 2
+		'	'		.BringToFront()
+		'	'	End With
+		'	'	Me.Controls.Add(btnSucess)
+		'	'	AddHandler btnSucess.Click,addressOf btn_naame 
+
+
+		'	'	With btnExit
+		'	'		.Text = "Abandon Mission"
+		'	'		.Width = 165
+		'	'		.Height = 65
+		'	'		.Top = Me.Height / 2 + 30
+		'	'		.Left = Me.Width / 2
+		'	'		.BringToFront()
+		'	'		.Enabled = True
+		'	'		.Visible = True
+		'	'	End With
+		'	'	Me.Controls.Add(btnExit)
+		'AddHandler btnSucess.Click,addressOf btn_naame
+
+		'End If
 	End Sub
 
-	Private Sub Clicked_Btn1(sender As Object, e As EventArgs)
 
-	End Sub
 
 
 End Class
