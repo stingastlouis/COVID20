@@ -308,7 +308,7 @@ Public Class Form1
 		'enemy.makeEnemyMoves(enemies, player1)''''movespeed pa p marC recheck sa
 
 		Dim mono As New PistoleBullet1(player1)
-		mono.bulletManager(Score, ProgressBar1, bullet1, player1, boss, enemies)
+		mono.bulletManager(Score, ProgressBar1, bullet1, player1, boss, enemies, coins, lifes, adns)
 
 	End Sub
 

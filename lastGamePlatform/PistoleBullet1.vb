@@ -36,12 +36,13 @@
         Me.Left -= shootSpeed
     End Sub
 
-	Public Sub bulletManager(ByRef Score As Integer, ByRef ProgressBar1 As ProgressBar, ByVal bullet1 As Array, ByVal player1 As Object, ByVal boss As Object, ByVal enemies As List(Of PictureBox))
+	Public Sub bulletManager(ByRef Score As Integer, ByRef ProgressBar1 As ProgressBar, ByVal bullet1 As Array, ByVal player1 As Object, ByVal boss As Object, ByRef enemies As List(Of PictureBox), ByVal coins As List(Of PictureBox), ByVal lifes As List(Of PictureBox), ByVal adns As List(Of PictureBox))
 
 
 
 		For x As Integer = 0 To bullet1.Length - 1 '????????????????????????????????????????bizin recheck sa array la
 			bullet1(x).Shoot(player1)
+
 			If Module1.checkforCollision(bullet1(x), boss) And boss.Enabled = True And bullet1(x).Enabled = True Then
 				ProgressBar1.Value -= 1 '???????????????????????????????????????????????????????????????????p ggn exception kan boss mor
 				If ProgressBar1.Value <= 0 Then
@@ -54,13 +55,13 @@
 				boss.Enabled = False
 			End If
 
-			'For Each coin As PictureBox In coins
-			'	If Module1.checkforCollision(bullet1(x), coin) And bullet1(x).Enabled And coin.Enabled Then
-			'		bullet1(x).Dispose()
-			'		Me.Controls.Remove(bullet1(x))
-			'		bullet1(x).Enabled = False
-			'	End If
-			'Next
+			For Each coin As PictureBox In coins
+				If Module1.checkforCollision(bullet1(x), coin) And bullet1(x).Enabled And coin.Enabled Then
+					bullet1(x).Dispose()
+					Me.Controls.Remove(bullet1(x))
+					bullet1(x).Enabled = False
+				End If
+			Next
 			For Each enemy As PictureBox In enemies
 				If checkforCollision(bullet1(x), enemy) And bullet1(x).Enabled And enemy.Enabled Then
 					Score += shootEnemy
@@ -77,22 +78,23 @@
 			Next
 
 
-			'	For Each life As PictureBox In lifes
-			'		If checkforCollision(bullet1(x), life) And bullet1(x).Enabled And life.Enabled Then
-			'			bullet1(x).Dispose()
-			'			Me.Controls.Remove(bullet1(x))
-			'			bullet1(x).Enabled = False
-			'		End If
-			'	Next
+			For Each life As PictureBox In lifes
+				If checkforCollision(bullet1(x), life) And bullet1(x).Enabled And life.Enabled Then
+					bullet1(x).Dispose()
+					Me.Controls.Remove(bullet1(x))
+					bullet1(x).Enabled = False
+				End If
+			Next
 
-			'	For Each adn As PictureBox In adns 'scan all controls present in form
-			'		If checkforCollision(bullet1(x), adn) And bullet1(x).Enabled And adn.Enabled Then
-			'			bullet1(x).Dispose()
-			'			Me.Controls.Remove(bullet1(x))
-			'			bullet1(x).Enabled = False
-			'		End If
-			'	Next
-			'	'-------------------------------------------
+			For Each adn As PictureBox In adns 'scan all controls present in form
+				If checkforCollision(bullet1(x), adn) And bullet1(x).Enabled And adn.Enabled Then
+					bullet1(x).Dispose()
+					Me.Controls.Remove(bullet1(x))
+					bullet1(x).Enabled = False
+				End If
+			Next
+			'-------------------------------------------
+
 		Next
 
 
