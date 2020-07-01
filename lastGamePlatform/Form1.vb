@@ -269,9 +269,9 @@ Public Class Form1
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
 				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, 3)
-				Me.Controls.Add(enemy.generateEnemy())
-				enemies.Add(enemy.generateEnemy())
-
+				Dim en As PictureBox = enemy.generateEnemy
+				Me.Controls.Add(en)
+				enemies.Add(en)
 				noOfEnemies -= 1
 			End While
 			FastestTimer.Enabled = False
@@ -305,7 +305,7 @@ Public Class Form1
 
 
 		Dim enemy As New ClassEnemy()
-		'enemy.makeEnemyMoves(enemies, player1)''''movespeed pa p marC recheck sa
+		enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
 
 		Dim mono As New PistoleBullet1(player1)
 		mono.bulletManager(Score, ProgressBar1, bullet1, player1, boss, enemies, coins, lifes, adns)
