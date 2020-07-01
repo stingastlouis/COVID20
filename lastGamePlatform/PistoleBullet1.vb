@@ -16,16 +16,16 @@
 
 
     End Sub
-    Public Sub player1(ByVal ob1 As Object)
-        With ob1
-            .Size = New Size(10, 30)
-            .Location = ob1.Location
-            .BackgroundImage = bmp
-            .BackgroundImageLayout = ImageLayout.Stretch
+	'Public Sub player1(ByVal ob1 As Object)
+	'    With ob1
+	'        .Size = New Size(10, 30)
+	'        .Location = ob1.Location
+	'        .BackgroundImage = bmp
+	'        .BackgroundImageLayout = ImageLayout.Stretch
 
-        End With
-    End Sub
-    Public Sub Shoot(ByVal b As Object)
+	'    End With
+	'End Sub
+	Public Sub Shoot(ByVal b As Object)
 
         Me.Left += shootSpeed
 
