@@ -27,11 +27,11 @@
 	'End Sub
 	Public Sub Shoot(ByVal b As Object)
 
-        Me.Left += shootSpeed
+		Me.Left += shootSpeed
 
 
 	End Sub
-    Public Sub Shoot2(ByVal aa As Object)
+	Public Sub Shoot2(ByVal aa As Object)
 
         Me.Left -= shootSpeed
     End Sub

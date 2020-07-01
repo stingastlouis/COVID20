@@ -103,6 +103,13 @@ Public Class Form1
 		itm.scanPredefineItem()
 
 
+		Console.WriteLine("try with classbullet()")
+		Dim bullet As New ClassBullets(player1)
+		Dim bulletpb As PictureBox = bullet.generateBullet()
+		Me.Controls.Add(bulletpb)
+
+
+
 
 		Console.WriteLine("updating the lists")
 		updateAllLists()
@@ -226,7 +233,6 @@ Public Class Form1
 
 
 	Private Sub Timer1000ms_Tick(sender As Object, e As EventArgs) Handles Timer1000ms.Tick
-
 		Dim myGraphics As Graphics = Me.CreateGraphics
 		Dim myFont As Font
 		Dim myBrush As Brush
@@ -236,12 +242,11 @@ Public Class Form1
 
 		If waitBeforeFight <= 0 Then
 			Timer1000ms.Enabled = False
-			myGraphics.DrawString("Go", myFont, myBrush, Me.Width / 2, Me.Height / 2)
+			myGraphics.DrawString("Go", myFont, myBrush, Me.Width / 2, Me.Height / 2) 'go
 			waitBeforeFight = ClassMyPublicShared.waitBeforeFight
 			FastestTimer.Enabled = True
 		End If
-		myGraphics.DrawString(waitBeforeFight.ToString(), myFont, myBrush, Me.Width / 2, Me.Height / 2)  'ki tone dessiner la ??????
-		Console.WriteLine(waitBeforeFight)
+		myGraphics.DrawString(waitBeforeFight.ToString(), myFont, myBrush, Me.Width / 2, Me.Height / 2)  '3,2,1
 		waitBeforeFight -= 1
 	End Sub
 
@@ -269,9 +274,10 @@ Public Class Form1
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
 				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, 3)
-				Dim en As PictureBox = enemy.generateEnemy
+				Dim en As PictureBox = enemy.generateEnemy()
 				Me.Controls.Add(en)
 				enemies.Add(en)
+
 				noOfEnemies -= 1
 			End While
 			FastestTimer.Enabled = False
@@ -303,12 +309,16 @@ Public Class Form1
 		End If
 
 
+		For Each en In enemies
+			Console.WriteLine(en.Name)
+		Next
 
 		Dim enemy As New ClassEnemy()
 		enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
 
-		Dim mono As New PistoleBullet1(player1)
-		mono.bulletManager(Score, ProgressBar1, bullet1, player1, boss, enemies, coins, lifes, adns)
+
+		'Dim mono As New PistoleBullet1(player1)
+		'mono.bulletManager(Score, ProgressBar1, bullet1, player1, boss, enemies, coins, lifes, adns)
 
 	End Sub
 
