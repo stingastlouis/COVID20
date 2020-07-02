@@ -21,6 +21,7 @@ Public Class Intro
 	End Sub
 
 	Private Sub Intro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+		My.Computer.Audio.Play(My.Resources.Cinematic_Trailer___AShamaluevMusic, AudioPlayMode.BackgroundLoop)
 		myChangingLabel.Add("Le 31 Dec 2019, la novel coronavirus fait son apparition, causant des crise dans le monde.")
 		myChangingPictureBoxPath.Add(imgPath & "introAfter.png")
 

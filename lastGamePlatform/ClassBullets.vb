@@ -113,13 +113,5 @@
 		Return pb.showPictureBox()
 	End Function
 
-	Public Sub bulletMovement(bullets As List(Of PictureBox))
-		For Each bullet In bullets
-			bullet.Location = New Point(bullet.Location.X + MoveSpeed1, bullet.Location.Y)
-			If bullet.Location.X > Me.width Then
-				bullets.Remove(bullet)
-				Exit For
-			End If
-		Next
-	End Sub
+
 End Class

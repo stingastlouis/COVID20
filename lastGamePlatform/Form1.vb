@@ -26,7 +26,7 @@ Public Class Form1
 
 
 	'score vars
-	Dim Score As Integer
+	Public Score As Integer
 	Dim Item_Collected As Integer
 	Dim scoreGun As Integer
 	Dim scoreEnemy As Integer
@@ -162,6 +162,7 @@ Public Class Form1
 				Dim bulletpb As PictureBox = bullet.generateBullet()
 				Me.Controls.Add(bulletpb)
 				bullets.Add(bulletpb)
+				My.Computer.Audio.Play(My.Resources._1, AudioPlayMode.Background)
 
 			Case Keys.Escape
 				Me.Close()
@@ -263,8 +264,22 @@ Public Class Form1
 			Timer1000ms.Enabled = True
 		End If
 
-		For Each bullet In bullets
-			For Each enemy In enemies
+
+		enemyMovement() 'bizin re check to code logic
+
+
+
+
+		If bullets.Count > 0 Then
+			bulletMovement()
+			bulletIntersectWithEnemy()
+		End If
+	End Sub
+
+	Public Sub bulletIntersectWithEnemy()
+		For Each enemy In enemies
+			For Each bullet In bullets
+
 				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if player picturebox 
 					Console.WriteLine("bullet intersect enemy")
 					Score += enemyScore
@@ -277,17 +292,60 @@ Public Class Form1
 			Next
 			Exit For
 		Next
-
-
-
-		Dim em As New ClassEnemies()
-		em.enemyMovement(enemies, enemiesSpeed, player1)
-
-
-		Dim b As New ClassBullets()
-		b.bulletMovement(bullets)
-
 	End Sub
+	Public Sub bulletMovement()
+		For Each bullet In bullets
+			bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y)
+			If bullet.Location.X > Me.Width Then
+				bullets.Remove(bullet)
+				removeOtherPictureBoxAndUpdateScore(bullet)
+				Exit For
+			End If
+		Next
+	End Sub
+	Public Sub enemyMovement()
+		For en As Integer = 0 To enemies.Count - 1
+			'If player1 IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(player1.Bounds) Then
+			'	Console.WriteLine("player intersect with enemy")
+			'	Exit For
+			'End If
+			'For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
+			'	If activePictureBox IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+			'		If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+			'			If enemies(en).Top > activePictureBox.Top - enemies(en).Height Then 'to stay on top of ground and wall
+			'				enemies(en).Location = New Point(enemies(en).Location.X, activePictureBox.Top - enemies(en).Height)
+			'			End If
+			'			Exit For
+			'		End If
+			'		'If otherPicBox.Name.Contains("enemy") Then
+			'		'	startLife -= 1
+			'		'	Console.WriteLine("new enemy")
+			'		'	enemies.Remove(otherPicBox)
+			'		'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
+			'		'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
+			'		'End If
+
+			'	End If
+			'Next
+
+
+
+
+			If enemies(en).Left > player1.Left Then
+				enemies(en).Left -= enemiesSpeed(en)
+			ElseIf enemies(en).Left < player1.Left Then
+				enemies(en).Left += enemiesSpeed(en)
+			End If
+			If enemies(en).Top > player1.Top Then
+				enemies(en).Top -= enemiesSpeed(en)
+			ElseIf enemies(en).Top < player1.Top Then
+				enemies(en).Top += enemiesSpeed(en)
+			End If
+
+
+		Next
+	End Sub
+
 
 
 
@@ -453,6 +511,7 @@ Public Class Form1
 		Label1.Visible = False
 		Label1.Enabled = False
 		boss.Enabled = False
+		HorizontalScroll.Enabled = False
 		HorizontalScroll.Visible = False
 
 
@@ -483,10 +542,11 @@ Public Class Form1
 	''' remove the pictureboxes that the player collided with and update the labels
 	''' </summary>
 	''' <param name="otherPicBox">picturebox to remove</param>
-	Private Sub removeOtherPictureBoxAndUpdateScore(otherPicBox As PictureBox)
+	Private Sub removeOtherPictureBoxAndUpdateScore(picBox As PictureBox)
 		'removing the control
-		ClassMyPublicShared.allPictureBoxes.Remove(otherPicBox)
-		Me.Controls.Remove(otherPicBox)
+		ClassMyPublicShared.allPictureBoxes.Remove(picBox)
+		Me.Controls.Remove(picBox)
+		picBox.Dispose()
 		updateLabels()
 	End Sub
 

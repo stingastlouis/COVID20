@@ -126,48 +126,7 @@
 		Return pb.showPictureBox()
 	End Function
 
-	Public Sub enemyMovement(enemies As List(Of PictureBox), enemiesSpeed As List(Of Integer), player1 As PictureBox)
-		For en As Integer = 0 To enemies.Count - 1
-			If player1 IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(player1.Bounds) Then
-				Console.WriteLine("player intersect with enemy")
-				Exit For
-			End If
-			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
-				If activePictureBox IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-						If enemies(en).Top > activePictureBox.Top - enemies(en).Height Then 'to stay on top of ground and wall
-							enemies(en).Location = New Point(enemies(en).Location.X, activePictureBox.Top - enemies(en).Height)
-						End If
-						Exit For
-					End If
-					'If otherPicBox.Name.Contains("enemy") Then
-					'	startLife -= 1
-					'	Console.WriteLine("new enemy")
-					'	enemies.Remove(otherPicBox)
-					'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
-					'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
-					'End If
 
-				End If
-			Next
-
-
-
-
-			If enemies(en).Left > player1.Left Then
-				enemies(en).Left -= enemiesSpeed(en)
-			ElseIf enemies(en).Left < player1.Left Then
-				enemies(en).Left += enemiesSpeed(en)
-			End If
-			If enemies(en).Top > player1.Top Then
-				enemies(en).Top -= enemiesSpeed(en)
-			ElseIf enemies(en).Top < player1.Top Then
-				enemies(en).Top += enemiesSpeed(en)
-			End If
-
-
-		Next
-	End Sub
 
 
 
