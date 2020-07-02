@@ -6,24 +6,36 @@ Public Class Form1
 	Dim grounds As New List(Of PictureBox)
 
 
+	'enemies var
 	Dim enemies As New List(Of PictureBox)
 	Dim enemiesSpeed As New List(Of Integer)
 
 
+	'bullet vars
+	Dim bullets As New List(Of PictureBox)
+	Dim bulletMoveSpeed As Integer
+
+
 	'player vars
-	Dim playerIsFalling As Boolean = True
-	Dim playerSpeed As Integer = 5
-	Dim cameraSpeed As Integer = 3 + playerSpeed
-	Dim gravitySpeed As Integer = 3
-	Dim jumpHeight As Integer = 100
-	Dim IsJumping As Boolean = False
+	Dim playerIsFalling As Boolean
+	Dim playerSpeed As Integer
+	Dim gravitySpeed As Integer
+	Dim jumpHeight As Integer
+	Dim posLeft As Boolean
+	Dim posRight As Boolean
 
 
 	'score vars
-	Dim scoreGun As Integer = 5
-	Dim scoreEnemy As Integer = 10
-	Dim startLife As Integer = 3
-	Dim enemyScore As Integer = 5
+	Dim Score As Integer
+	Dim Item_Collected As Integer
+	Dim scoreGun As Integer
+	Dim scoreEnemy As Integer
+	Dim startLife As Integer
+	Dim enemyScore As Integer
+
+
+	'no of sec to wait 
+	Dim waitBeforeFight As Integer
 
 
 	'boss vars
@@ -33,52 +45,8 @@ Public Class Form1
 
 
 
-	'bullet vars
-	Dim bullets As New List(Of PictureBox)
-	Dim bulletMoveSpeed As Integer
 
 
-
-
-	'no of sec to wait 
-	Dim waitBeforeFight As Integer = ClassMyPublicShared.waitBeforeFight
-
-
-
-
-	Dim allowToshotShotGUNl As Boolean = False
-
-	Public Score As Integer = 0
-
-
-
-	'Dim shotGun() As PictureBox
-	'Dim bulletNumber As Integer = -1
-	'Dim bullet1(-1) As PistoleBullet1
-
-
-	'--------------------------
-
-	'---------VARIABLE-----------
-	Dim posLeft, posRight As Boolean
-	Dim Item_Collected As Integer
-	Dim pointRegenerator As Point
-	'Dim pp As Player
-	Dim count1 As Integer
-
-
-	'Private getEnemyScore As Integer
-	'Dim generator As Integer
-	'Dim count As Integer
-	'Dim Player_Name As String
-	'Dim bulletArray1ForShotGun(5) As PictureBox
-	'Dim timerCount As Integer
-	'Dim timer1, timer2, timer3 As Integer
-	'Dim ran1 As New Random
-	'Dim loc As New Integer
-	'Private timeLimit As Integer
-	'Private timeLimit2 As Integer
-	'Private timeLimit3 As Integer
 
 
 	''' <summary>
@@ -89,11 +57,6 @@ Public Class Form1
 	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
 		'name taken from register form
 		'Dim lvl1 = New MyGameManager("John") 'name or name,life,score,item
-
-
-
-
-
 
 		Console.WriteLine("clear main list of objects")
 		ClassMyPublicShared.allPictureBoxes.Clear()
@@ -108,11 +71,23 @@ Public Class Form1
 
 
 
-
-
-
 		Console.WriteLine("updating the lists")
-		updateAllLists()
+		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
+			'seperating randomPictureBoxes to specific ones
+			If activePictureBox.Name.Contains("ground") Then
+				grounds.Add(activePictureBox) 'push to list
+			ElseIf activePictureBox.Name.Contains("wall") Then
+				walls.Add(activePictureBox) 'push to list
+			ElseIf activePictureBox.Name.Contains("enemy") Then
+				enemies.Add(activePictureBox)
+			ElseIf activePictureBox.Name.Contains("boss") OrElse activePictureBox.Name.Contains("player") OrElse activePictureBox.Name.Contains("instruction") Then 'all pictureboxes to exclude here
+			End If
+		Next
+
+
+
+
+
 
 	End Sub
 
@@ -172,8 +147,10 @@ Public Class Form1
 		Select Case e.KeyValue
 			Case Keys.Right
 				posRight = True
+
 			Case Keys.Left
 				posLeft = True
+
 			Case Keys.Up
 				If Not playerIsFalling Then
 					player1.Top -= jumpHeight
@@ -181,26 +158,10 @@ Public Class Form1
 				End If
 
 			Case Keys.Q
-
 				Dim bullet As New ClassBullets(player1)
 				Dim bulletpb As PictureBox = bullet.generateBullet()
 				Me.Controls.Add(bulletpb)
 				bullets.Add(bulletpb)
-
-
-				'If allowToshotShotGUNl = True And Item_Collected >= 2 Then
-				'	ReDim Preserve bullet1(count1)
-				'	Dim boulette As New PistoleBullet1(player1)
-				'	Controls.Add(boulette)
-				'	bullet1(count1) = boulette
-				'	count1 += 1
-				'	If count1 = 10 Then
-				'		allowToshotShotGUNl = False
-				'		count1 = 0
-				'		Item_Collected = 0
-				'		updateLabels()
-				'	End If
-				'End If
 
 			Case Keys.Escape
 				Me.Close()
@@ -221,14 +182,9 @@ Public Class Form1
 	''' <param name="e"></param>
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
 		collideWithStaticPictureBoxes()
+		'dynamic in seperate class
 		'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@pou re me t sa
-		'If otherPicBox.Name.Contains("enemy") Then
-		'	startLife -= 1
-		'	Console.WriteLine("new enemy")
-		'	enemies.Remove(otherPicBox)
-		'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
-		'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
-		'End If
+
 
 		'If activePictureBox.Name.Contains("boss") Then
 		'	startLife = 0
@@ -336,7 +292,7 @@ Public Class Form1
 
 
 
-	'------------------------------------------------------------------------------------pa bon
+	'----pa bon will be deleted when bon
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
 			bossAndEnemiesMoveTowardPlayer(boss)
@@ -364,6 +320,30 @@ Public Class Form1
 
 
 
+
+
+
+
+
+
+	'''''######################################################################################
+	'''will be deleted - will be In classboss
+	Public Sub bossCollision()
+		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+			If activePictureBox IsNot boss AndAlso boss.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+				If activePictureBox.Name.Contains("wall") Then
+					If boss.Left + boss.Width > player1.Left Then
+						boss.Left += 1
+					End If
+					If boss.Left + boss.Width < player1.Left Then
+						boss.Left -= 1
+					End If
+				End If
+			End If
+		Next
+	End Sub
+
+
 	'for enemy and boss
 	Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As Object)
 		If contaminer.left + contaminer.Width > player1.Left Then
@@ -383,45 +363,7 @@ Public Class Form1
 	End Sub
 
 
-
-
-
-
-
-
-	'''''######################################################################################will be deleted
-	Public Sub updateAllLists()
-		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
-			'seperating randomPictureBoxes to specific ones
-			If activePictureBox.Name.Contains("ground") Then
-				grounds.Add(activePictureBox) 'push to list
-			ElseIf activePictureBox.Name.Contains("wall") Then
-				walls.Add(activePictureBox) 'push to list
-			ElseIf activePictureBox.Name.Contains("enemy") Then
-				enemies.Add(activePictureBox)
-			ElseIf activePictureBox.Name.Contains("boss") OrElse activePictureBox.Name.Contains("player") OrElse activePictureBox.Name.Contains("instruction") Then 'all pictureboxes to exclude here
-			End If
-		Next
-	End Sub
-
-	'''''######################################################################################will be in classboss
-	Public Sub bossCollision()
-		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
-			If activePictureBox IsNot boss AndAlso boss.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-				If activePictureBox.Name.Contains("wall") Then
-					If boss.Left + boss.Width > player1.Left Then
-						boss.Left += 1
-					End If
-					If boss.Left + boss.Width < player1.Left Then
-						boss.Left -= 1
-					End If
-				End If
-			End If
-		Next
-	End Sub
-
-
-
+	'''''######################################################################################
 
 
 
@@ -467,14 +409,6 @@ Public Class Form1
 						Score += 5
 					End If
 					Console.WriteLine("new gun")
-					'If activePictureBox.Enabled Then
-					'	Score += scoreGun
-					'	allowToshotShotGUNl = True
-					'End If
-					'If supergun0.Enabled = True Then
-					'	allowToshotShotGUNl = True
-					'	Item_Collected = 2 '?????????????????????????????????????????????????????????????????????????????????????????? score + 100 ??????????? pa pli bon ????????
-					'End If
 					removeOtherPictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
 				End If
@@ -495,11 +429,6 @@ Public Class Form1
 			End If
 		Next
 	End Sub
-
-
-
-
-
 
 
 
@@ -524,9 +453,23 @@ Public Class Form1
 		Label1.Visible = False
 		Label1.Enabled = False
 		boss.Enabled = False
+		HorizontalScroll.Visible = False
 
-		ProgressBar1.Value = 18 '??????????????????????????????????????????????????????????????????????????????????????????????ki li fr sa
-		'My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop) 
+
+		ProgressBar1.Value = 18
+		My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop)
+
+		playerIsFalling = True
+		playerSpeed = 5
+		gravitySpeed = 3
+		jumpHeight = 100
+		waitBeforeFight = ClassMyPublicShared.waitBeforeFight
+
+		Score = 0
+		scoreGun = 5
+		scoreEnemy = 10
+		startLife = 3
+		enemyScore = 5
 
 		ClassMyPublicShared.level = 1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
