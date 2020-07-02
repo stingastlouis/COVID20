@@ -4,16 +4,10 @@ Public Class Form1
 	'list
 	Dim walls As New List(Of PictureBox)
 	Dim grounds As New List(Of PictureBox)
-	Dim coins As New List(Of PictureBox)
-	Dim lifes As New List(Of PictureBox)
-	Dim guns As New List(Of PictureBox)
-	Dim adns As New List(Of PictureBox)
 
 
 	Dim enemies As New List(Of PictureBox)
 	Dim enemiesSpeed As New List(Of Integer)
-	'Dim allMyControls As New List(Of Control)
-	'Dim allPictureBoxes As New List(Of PictureBox)
 
 
 	'player vars
@@ -104,10 +98,7 @@ Public Class Form1
 		itm.scanPredefineItem()
 
 
-		'Console.WriteLine("try with classbullet()")
-		'Dim bullet As New ClassBullets(player1)
-		'Dim bulletpb As PictureBox = bullet.generateBullet()
-		'Me.Controls.Add(bulletpb)
+
 
 
 
@@ -194,6 +185,13 @@ Public Class Form1
 						Item_Collected = 0
 						updateLabels()
 					End If
+
+
+
+					'Console.WriteLine("try with classbullet()")
+					'Dim bullet As New ClassBullets(player1)
+					'Dim bulletpb As PictureBox = bullet.generateBullet()
+					'Me.Controls.Add(bulletpb)
 				End If
 
 			Case Keys.Escape
@@ -217,7 +215,23 @@ Public Class Form1
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
-		collisionChecker()
+		collideWithStaticPictureBoxes()
+		'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@pou re me t sa
+		'If otherPicBox.Name.Contains("enemy") Then
+		'	startLife -= 1
+		'	Console.WriteLine("new enemy")
+		'	enemies.Remove(otherPicBox)
+		'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
+		'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
+		'End If
+
+		'If activePictureBox.Name.Contains("boss") Then
+		'	startLife = 0
+		'	Console.WriteLine("collide with boss and die")
+		'	updateLabels()
+		'	Exit For 'exit the for loop as picturebox name contains "boss" help in using less cpu power
+		'End If
+		'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	End Sub
 
 
@@ -237,10 +251,8 @@ Public Class Form1
 		Dim myGraphics As Graphics = Me.CreateGraphics
 		Dim myFont As Font
 		Dim myBrush As Brush
-
 		myBrush = New SolidBrush(Color.Red)
 		myFont = New Font("Verdana", 25, FontStyle.Italic)
-
 		If waitBeforeFight <= 0 Then
 			Timer1000ms.Enabled = False
 			myGraphics.DrawString("Go", myFont, myBrush, Me.Width / 2, Me.Height / 2) 'go
@@ -253,7 +265,6 @@ Public Class Form1
 
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
-
 		If posRight Then
 			player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
 		ElseIf posLeft Then
@@ -272,7 +283,6 @@ Public Class Form1
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
 				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
 			Next
-
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
 				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
@@ -280,13 +290,13 @@ Public Class Form1
 				Me.Controls.Add(en)
 				enemiesSpeed.Add(enemy.MoveSpeed1)
 				enemies.Add(en)
-
 				noOfEnemies -= 1
 			End While
 			FastestTimer.Enabled = False
 			Timer1000ms.Enabled = True
 		End If
 
+		enemyMovement()
 
 
 	End Sub
@@ -311,7 +321,56 @@ Public Class Form1
 			moveTheBoss = True
 		End If
 
+
+
+
+
+		Dim eneC As New ClassEnemy
+		eneC.getLives(startLife)
+		eneC.collisionPlayer(player1, enemies)
+
+
+		startLife = eneC.submitLives()
+
+
+
+		'Dim mono As New PistoleBullet1(player1)
+		'mono.bulletManager(bullet1, player1, boss, enemies, coins, lifes, adns)
+
+		'Score = mono.setScore(Score)
+
+
+
+		'mono.bosslifeRequire(ProgressBar1)
+		'ProgressBar1.Value = mono.setBossLife(ProgressBar1)
+		'updateLabels()
+
+
+	End Sub
+
+
+
+
+
+
+
+
+
+
+	Public Sub enemyMovement()
 		For en As Integer = 0 To enemies.Count - 1
+			'For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
+			'		'	If activePictureBox IsNot ene AndAlso ene.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+			'		'		If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+			'		'			Console.WriteLine("wall/ground")
+
+			'		'			If ene.Top > activePictureBox.Top - ene.Height Then 'to stay on top of ground and wall
+			'		'				ene.Location = New Point(ene.Location.X, activePictureBox.Top - ene.Height)
+			'		'			End If
+			'		'			Exit For
+			'		'		End If
+			'		'	End If
+			'		'Next
 			If enemies(en).Left > player1.Left Then
 				enemies(en).Left -= enemiesSpeed(en)
 			ElseIf enemies(en).Left < player1.Left Then
@@ -322,46 +381,9 @@ Public Class Form1
 			ElseIf enemies(en).Top < player1.Top Then
 				enemies(en).Top += enemiesSpeed(en)
 			End If
-
 		Next
-		Dim eneC As New ClassEnemy
-		eneC.getLives(startLife)
-		eneC.collisionPlayer(player1, enemies)
-
-
-		startLife = eneC.submitLives()
-
-
-
-
-
-
-
-		Dim mono As New PistoleBullet1(player1)
-		mono.bulletManager(bullet1, player1, boss, enemies, coins, lifes, adns)
-
-		Score = mono.setScore(Score)
-
-
-
-		mono.bosslifeRequire(ProgressBar1)
-		ProgressBar1.Value = mono.setBossLife(ProgressBar1)
-		updateLabels()
-
 
 	End Sub
-
-
-	'ohh makarena  bam bam ====
-
-
-	'+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++pren la jus k lot++++++sa banlamm ki p fr zoue la lourd la====248-370
-
-
-
-
-
-	'+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++jus k la++++++
 
 
 
@@ -385,12 +407,6 @@ Public Class Form1
 
 
 
-	''' <summary>
-	''' return true if the 2 obj collide else return false
-	''' </summary>
-	''' <param name="ob1"></param>
-	''' <param name="ob2"></param>
-	''' <returns></returns>
 
 
 
@@ -400,15 +416,7 @@ Public Class Form1
 	Public Sub updateAllLists()
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
 			'seperating randomPictureBoxes to specific ones
-			If activePictureBox.Name.Contains("adn") Then
-				adns.Add(activePictureBox)
-			ElseIf activePictureBox.Name.Contains("coin") Then
-				coins.Add(activePictureBox)
-			ElseIf activePictureBox.Name.Contains("life") Then
-				lifes.Add(activePictureBox)
-			ElseIf activePictureBox.Name.Contains("gun") Then
-				guns.Add(activePictureBox)
-			ElseIf activePictureBox.Name.Contains("ground") Then
+			If activePictureBox.Name.Contains("ground") Then
 				grounds.Add(activePictureBox) 'push to list
 			ElseIf activePictureBox.Name.Contains("wall") Then
 				walls.Add(activePictureBox) 'push to list
@@ -443,11 +451,16 @@ Public Class Form1
 
 
 
+
+
+
+
+
 	''' <summary>
 	''' used in timer
 	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
 	''' </summary>
-	Public Sub collisionChecker()
+	Public Sub collideWithStaticPictureBoxes()
 		playerIsFalling = True
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
@@ -460,31 +473,11 @@ Public Class Form1
 					End If
 					Exit For
 				End If
-
-
-				'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@pou re me t sa
-				'If otherPicBox.Name.Contains("enemy") Then
-				'	startLife -= 1
-				'	Console.WriteLine("new enemy")
-				'	enemies.Remove(otherPicBox)
-				'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
-				'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
-				'End If
-
-				'If activePictureBox.Name.Contains("boss") Then
-				'	startLife = 0
-				'	Console.WriteLine("collide with boss and die")
-				'	updateLabels()
-				'	Exit For 'exit the for loop as picturebox name contains "boss" help in using less cpu power
-				'End If
-				'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 				If activePictureBox.Name.Contains("life") Then
 					Item_Collected += 1
 					startLife += 1
 					Score += 1
 					Console.WriteLine("new life")
-					lifes.Remove(activePictureBox)
 					removeOtherPictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "life" help in using less cpu power
 				End If
@@ -499,7 +492,6 @@ Public Class Form1
 						allowToshotShotGUNl = True
 						Item_Collected = 2 '?????????????????????????????????????????????????????????????????????????????????????????? score + 100 ??????????? pa pli bon ????????
 					End If
-					guns.Remove(activePictureBox)
 					removeOtherPictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
 				End If
@@ -507,7 +499,6 @@ Public Class Form1
 					Item_Collected += 1
 					Score += 5
 					Console.WriteLine("new adn")
-					adns.Remove(activePictureBox)
 					removeOtherPictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "adn" help in using less cpu power
 				End If
@@ -515,13 +506,14 @@ Public Class Form1
 					Item_Collected += 1
 					Score += 3
 					Console.WriteLine("new coin")
-					coins.Remove(activePictureBox)
 					removeOtherPictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
 				End If
 			End If
 		Next
 	End Sub
+
+
 
 
 
@@ -579,10 +571,6 @@ Public Class Form1
 		pScore.Text = "Score :" + CStr(Score)
 		pLife.Text = "X" + CStr(startLife)
 		pItem.Text = "Item :" + CStr(Item_Collected)
-		'Dim winOrlose As New Label
-		'Dim btnSucess As New Button
-		'Dim btnExit As New Button
-		Debug.WriteLine("progress bar :" + CStr(ProgressBar1.Value))
 
 		If ProgressBar1.Value <= 0 Then
 			ProgressBar1.Value = 0
@@ -607,7 +595,6 @@ Public Class Form1
 			extbtn.BringToFront()
 
 		ElseIf startLife <= 0 Then
-
 			winorloseTxt.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
 			winorloseTxt.Visible = True
 
@@ -625,109 +612,6 @@ Public Class Form1
 			extbtn.Top = Me.Height / 2 + 30
 			extbtn.Left = Me.Width / 2
 			extbtn.BringToFront()
-
-
-
 		End If
-
-		'If (progressbar1.Value <= 0) Then
-		'	progressbar1.Value = 0
-		'	Timer75ms.Enabled = False
-
-
-		'	'	With winOrlose
-		'	'		.Width = 165
-		'	'		.Height = 65
-		'	'		.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
-		'	'		.Visible = True
-		'	'		.Enabled = True
-
-		'	'		.Top = Me.Height / 2 - 60
-		'	'		.Left = Me.Width / 2 - 15
-		'	'		.BringToFront()
-
-		'	'	End With
-		'	'	Me.Controls.Add(winOrlose)
-
-		'	'	With btnSucess
-		'	'		.Width = 165
-		'	'		.Height = 65
-		'	'		.Text = "Continue"
-		'	'		.Visible = True
-		'	'		.Enabled = True
-
-
-		'	'		.Top = Me.Height / 2
-		'	'		.Left = Me.Width / 2
-		'	'		.BringToFront()
-		'	'	End With
-		'	'	Me.Controls.Add(btnSucess)
-
-
-		'	'	With btnExit
-		'	'		.Text = "Abandon Mission"
-		'	'		.Width = 165
-		'	'		.Height = 65
-		'	'		.Top = Me.Height / 2 + 30
-		'	'		.Left = Me.Width / 2
-		'	'		.BringToFront()
-		'	'		.Enabled = True
-		'	'		.Visible = True
-		'	'	End With
-		'	'	Me.Controls.Add(btnExit)
-
-
-
-
-		'	'ElseIf (startLife <= 0) Then
-
-		'	'	With winOrlose
-		'	'		.Width = 165
-		'	'		.Height = 65
-		'	'		.Text = "You Lose!!" + vbNewLine + "Try better Next Time"
-		'	'		.Visible = True
-		'	'		.Enabled = True
-
-		'	'		.Top = Me.Height / 2 - 60
-		'	'		.Left = Me.Width / 2 - 15
-		'	'		.BringToFront()
-
-		'	'	End With
-		'	'	Me.Controls.Add(winOrlose)
-		' btnSucess.Click,addressOf btn_naame
-
-
-		'	'	With btnSucess
-		'	'		.Width = 165
-		'	'		.Height = 65
-		'	'		.Text = "Restart"
-		'	'		.Visible = True
-		'	'		.Enabled = True
-		'	'		.Top = Me.Height / 2
-		'	'		.Left = Me.Width / 2
-		'	'		.BringToFront()
-		'	'	End With
-		'	'	Me.Controls.Add(btnSucess)
-		'	'	AddHandler btnSucess.Click,addressOf btn_naame 
-
-
-		'	'	With btnExit
-		'	'		.Text = "Abandon Mission"
-		'	'		.Width = 165
-		'	'		.Height = 65
-		'	'		.Top = Me.Height / 2 + 30
-		'	'		.Left = Me.Width / 2
-		'	'		.BringToFront()
-		'	'		.Enabled = True
-		'	'		.Visible = True
-		'	'	End With
-		'	'	Me.Controls.Add(btnExit)
-		'AddHandler btnSucess.Click,addressOf btn_naame
-
-		'End If
 	End Sub
-
-
-
-
 End Class
