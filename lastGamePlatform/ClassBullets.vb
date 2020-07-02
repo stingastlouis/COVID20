@@ -10,9 +10,16 @@
 
 
 
+	Public Sub New()
+		Me.width = 15
+		Me.height = 25
+		Me.name = "bullet"
+		Me.moveSpeed = 10
+		Me.img = My.Resources._5a3719ae33d594_4783473215135604942123
+	End Sub
 	Public Sub New(player As PictureBox)
-		Me.width = 10
-		Me.height = 30
+		Me.width = 15
+		Me.height = 25
 		Me.xPosition = player.Location.X
 		Me.yPosition = player.Location.Y
 		Me.name = "bullet"

@@ -23,6 +23,7 @@ Public Class Form1
 	Dim scoreGun As Integer = 5
 	Dim scoreEnemy As Integer = 10
 	Dim startLife As Integer = 3
+	Dim enemyScore As Integer = 5
 
 
 	'boss vars
@@ -33,10 +34,13 @@ Public Class Form1
 
 
 	'bullet vars
-	Dim bulletNumber As Integer = -1
-	Dim bullet1(-1) As PistoleBullet1
+	Dim bullets As New List(Of PictureBox)
+	Dim bulletMoveSpeed As Integer
 
-	'
+
+
+
+	'no of sec to wait 
 	Dim waitBeforeFight As Integer = ClassMyPublicShared.waitBeforeFight
 
 
@@ -49,6 +53,10 @@ Public Class Form1
 
 
 	'Dim shotGun() As PictureBox
+	'Dim bulletNumber As Integer = -1
+	'Dim bullet1(-1) As PistoleBullet1
+
+
 	'--------------------------
 
 	'---------VARIABLE-----------
@@ -173,26 +181,27 @@ Public Class Form1
 				End If
 
 			Case Keys.Q
-				If allowToshotShotGUNl = True And Item_Collected >= 2 Then
-					ReDim Preserve bullet1(count1)
-					Dim boulette As New PistoleBullet1(player1)
-					Controls.Add(boulette)
-					bullet1(count1) = boulette
-					count1 += 1
-					If count1 = 10 Then
-						allowToshotShotGUNl = False
-						count1 = 0
-						Item_Collected = 0
-						updateLabels()
-					End If
+				Console.WriteLine("try with classbullet()")
+				Dim bullet As New ClassBullets(player1)
+				Dim bulletpb As PictureBox = bullet.generateBullet()
+				Me.Controls.Add(bulletpb)
+				bullets.Add(bulletpb)
+				Console.WriteLine(player1.Location)
 
 
-
-					'Console.WriteLine("try with classbullet()")
-					'Dim bullet As New ClassBullets(player1)
-					'Dim bulletpb As PictureBox = bullet.generateBullet()
-					'Me.Controls.Add(bulletpb)
-				End If
+				'If allowToshotShotGUNl = True And Item_Collected >= 2 Then
+				'	ReDim Preserve bullet1(count1)
+				'	Dim boulette As New PistoleBullet1(player1)
+				'	Controls.Add(boulette)
+				'	bullet1(count1) = boulette
+				'	count1 += 1
+				'	If count1 = 10 Then
+				'		allowToshotShotGUNl = False
+				'		count1 = 0
+				'		Item_Collected = 0
+				'		updateLabels()
+				'	End If
+				'End If
 
 			Case Keys.Escape
 				Me.Close()
@@ -276,6 +285,12 @@ Public Class Form1
 		End If
 
 		If (player1.Left + player1.Width > Me.Width) Then
+			For Each enemy In enemies
+				ClassMyPublicShared.allPictureBoxes.Remove(enemy)
+			Next
+			For Each bullet In bullets
+				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
+			Next
 			enemies.Clear()
 			enemiesSpeed.Clear()
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
@@ -285,7 +300,7 @@ Public Class Form1
 			Next
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
-				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
+				Dim enemy As New ClassEnemies(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
 				Dim en As PictureBox = enemy.generateEnemy()
 				Me.Controls.Add(en)
 				enemiesSpeed.Add(enemy.MoveSpeed1)
@@ -325,7 +340,7 @@ Public Class Form1
 
 
 
-		Dim eneC As New ClassEnemy
+		Dim eneC As New ClassEnemies
 		eneC.getLives(startLife)
 		eneC.collisionPlayer(player1, enemies)
 
@@ -345,13 +360,47 @@ Public Class Form1
 		'ProgressBar1.Value = mono.setBossLife(ProgressBar1)
 		'updateLabels()
 
-
+		bulletMovement()
 	End Sub
 
 
 
+	Public Sub bulletMovement()
+		For Each bullet In bullets
+			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+				If activePictureBox IsNot bullet AndAlso bullet.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+						bullets.Remove(bullet)
+						removeOtherPictureBoxAndUpdateScore(bullet)
+						Exit For
+					End If
+
+				End If
+			Next
+
+			For Each enemy In enemies 'list all controls in the form
+				If enemy IsNot bullet AndAlso bullet.Bounds.IntersectsWith(enemy.Bounds) Then 'if player picturebox intersects with other pictureboxes
+					Console.WriteLine("bullet intersect enemy")
+					Score += enemyScore
+					enemies.Remove(enemy)
+					removeOtherPictureBoxAndUpdateScore(bullet)
+					removeOtherPictureBoxAndUpdateScore(enemy)
+					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
+
+				End If
+			Next
 
 
+
+			If bullet.Location.X > Me.Width Then
+				bullets.Remove(bullet)
+				Exit For
+			Else
+				bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y)
+				Exit For
+			End If
+		Next
+	End Sub
 
 
 
@@ -359,18 +408,18 @@ Public Class Form1
 
 	Public Sub enemyMovement()
 		For en As Integer = 0 To enemies.Count - 1
-			'For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
-			'		'	If activePictureBox IsNot ene AndAlso ene.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-			'		'		If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-			'		'			Console.WriteLine("wall/ground")
+			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
+				If activePictureBox IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+						Console.WriteLine("wall/ground")
 
-			'		'			If ene.Top > activePictureBox.Top - ene.Height Then 'to stay on top of ground and wall
-			'		'				ene.Location = New Point(ene.Location.X, activePictureBox.Top - ene.Height)
-			'		'			End If
-			'		'			Exit For
-			'		'		End If
-			'		'	End If
-			'		'Next
+						If enemies(en).Top > activePictureBox.Top - enemies(en).Height Then 'to stay on top of ground and wall
+							enemies(en).Location = New Point(enemies(en).Location.X, activePictureBox.Top - enemies(en).Height)
+						End If
+						Exit For
+					End If
+				End If
+			Next
 			If enemies(en).Left > player1.Left Then
 				enemies(en).Left -= enemiesSpeed(en)
 			ElseIf enemies(en).Left < player1.Left Then
@@ -382,7 +431,6 @@ Public Class Form1
 				enemies(en).Top += enemiesSpeed(en)
 			End If
 		Next
-
 	End Sub
 
 
@@ -547,6 +595,8 @@ Public Class Form1
 
 		ClassMyPublicShared.level = 1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
+		Dim bullet As New ClassBullets()
+		bulletMoveSpeed = bullet.MoveSpeed1
 	End Sub
 
 

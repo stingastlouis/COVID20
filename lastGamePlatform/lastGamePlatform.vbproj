@@ -90,7 +90,7 @@
     </Compile>
     <Compile Include="ClassBoss.vb" />
     <Compile Include="ClassBullets.vb" />
-    <Compile Include="ClassEnemy.vb" />
+    <Compile Include="ClassEnemies.vb" />
     <Compile Include="ClassItems.vb" />
     <Compile Include="ClassPictureBox.vb" />
     <Compile Include="Form1.vb">

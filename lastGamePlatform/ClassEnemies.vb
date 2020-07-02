@@ -1,4 +1,4 @@
-﻿Public Class ClassEnemy
+﻿Public Class ClassEnemies
 	Private width As Integer
 	Private height As Integer
 	Private xPosition As Integer
