@@ -10,6 +10,8 @@
 
 
 
+
+	'constructors
 	Public Sub New()
 		Me.width = 15
 		Me.height = 25
@@ -33,7 +35,7 @@
 
 
 
-
+	'setters getters
 	Public Property Width1 As Integer
 		Get
 			Return width
@@ -105,21 +107,19 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 	'functions
 	Public Function generateBullet()
 		Dim pb As New ClassPictureBox(Width1, Height1, Name1, XPosition1, YPosition1, Img1)
 		Return pb.showPictureBox()
 	End Function
+
+	Public Sub bulletMovement(bullets As List(Of PictureBox))
+		For Each bullet In bullets
+			bullet.Location = New Point(bullet.Location.X + MoveSpeed1, bullet.Location.Y)
+			If bullet.Location.X > Me.width Then
+				bullets.Remove(bullet)
+				Exit For
+			End If
+		Next
+	End Sub
 End Class

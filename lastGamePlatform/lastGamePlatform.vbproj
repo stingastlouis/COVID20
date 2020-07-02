@@ -149,9 +149,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ClassMyPublicShared.vb" />
-    <Compile Include="PistoleBullet1.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ClassPlayer.vb" />
     <Compile Include="ModuleRandomiser.vb" />
     <Compile Include="register.Designer.vb">

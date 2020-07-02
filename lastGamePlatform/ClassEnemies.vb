@@ -6,12 +6,16 @@
 	Private name As String
 	Private moveSpeed As Integer
 	Private image As Bitmap
-	Dim playerlives As Integer = 0
+
+
+
+
+
+
 
 
 	'constructors
-	Sub New()
-
+	Public Sub New()
 	End Sub
 	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
 		Me.width = 87
@@ -22,10 +26,8 @@
 		Me.yPosition = yPosition
 		Me.name = name
 		Me.moveSpeed = moveSpeed
-
-		'Controls.Add(pb)
 	End Sub
-	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap)
+	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
 		Me.width = 87
 		Me.height = 62
 		Me.image = image
@@ -34,9 +36,13 @@
 		Me.yPosition = yPosition
 		Me.name = name
 		Me.moveSpeed = moveSpeed
-
-
 	End Sub
+
+
+
+
+
+
 
 
 	'setters and getters
@@ -109,59 +115,42 @@
 
 
 
+
+
+
+
+
 	'functions
 	Public Function generateEnemy()
 		Dim pb As New ClassPictureBox(Width1, Height1, Name1, XPosition1, YPosition1, Image1)
 		Return pb.showPictureBox()
 	End Function
 
-
-	'Public Sub makeEnemyMoves(enemy As List(Of PictureBox), player1 As PictureBox)
-	'	Dim speed As Integer = 1
-	'	For Each ene As PictureBox In enemy
-	'		'For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
-	'		'	If activePictureBox IsNot ene AndAlso ene.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-	'		'		If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-	'		'			Console.WriteLine("wall/ground")
-
-	'		'			If ene.Top > activePictureBox.Top - ene.Height Then 'to stay on top of ground and wall
-	'		'				ene.Location = New Point(ene.Location.X, activePictureBox.Top - ene.Height)
-	'		'			End If
-	'		'			Exit For
-	'		'		End If
-	'		'	End If
-	'		'Next
-	'		If ene.Left > player1.Left Then
-	'			ene.Left -= speed
-	'		ElseIf ene.Left < player1.Left Then
-	'			ene.Left += speed
-	'		End If
-	'		If ene.Top > player1.Top Then
-	'			ene.Top -= speed
-	'		ElseIf ene.Top < player1.Top Then
-	'			ene.Top += speed
-	'		End If
-	'	Next
-	'End Sub
-
-	Public Sub collisionPlayer(ByVal player As Object, ByVal enemy As List(Of PictureBox))
-		For Each x As PictureBox In enemy
-			If Module1.checkforCollision(player, x) And x.Enabled = True Then
-				x.Dispose()
-				x.Enabled = False
-				Me.playerlives -= 1
-
+	Public Sub enemyMovement(enemies, enemiesSpeed, player1)
+		For en As Integer = 0 To enemies.Count - 1
+			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
+				If activePictureBox IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+						If enemies(en).Top > activePictureBox.Top - enemies(en).Height Then 'to stay on top of ground and wall
+							enemies(en).Location = New Point(enemies(en).Location.X, activePictureBox.Top - enemies(en).Height)
+						End If
+						Exit For
+					End If
+				End If
+			Next
+			If enemies(en).Left > player1.Left Then
+				enemies(en).Left -= enemiesSpeed(en)
+			ElseIf enemies(en).Left < player1.Left Then
+				enemies(en).Left += enemiesSpeed(en)
+			End If
+			If enemies(en).Top > player1.Top Then
+				enemies(en).Top -= enemiesSpeed(en)
+			ElseIf enemies(en).Top < player1.Top Then
+				enemies(en).Top += enemiesSpeed(en)
 			End If
 		Next
-
 	End Sub
 
-	Public Sub getLives(ByRef life As Integer)
-		Me.playerlives = life
-	End Sub
-	Public Function submitLives() As Integer
-		Return Me.playerlives
-	End Function
 
 
 End Class
