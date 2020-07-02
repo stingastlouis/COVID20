@@ -1,21 +1,24 @@
 ﻿Public Class PistoleBullet1
 
-    Inherits PictureBox
-    Dim bmp As Bitmap = My.Resources._5a3719ae33d594_4783473215135604942123
+	Inherits PictureBox
+	Dim bmp As Bitmap = My.Resources._5a3719ae33d594_4783473215135604942123
 	Dim shootSpeed As Integer = 20
 	Dim shootEnemy As Integer = 5
 	Dim shootBoss As Integer = 10
+	Dim score As Integer = 0
+	Dim hitBoss As Integer = 0
+	Dim maxHit As Integer
 	Public Sub New(ByVal ob As Object)
-        With Me
-            .Size = New Size(10, 30)
-            .Location = New Point(ob.Width + ob.Left, ob.Top + 12)
-            .BackgroundImage = bmp
-            .BackgroundImageLayout = ImageLayout.Stretch
-            .BringToFront()
-        End With
+		With Me
+			.Size = New Size(10, 30)
+			.Location = New Point(ob.Width + ob.Left, ob.Top + 12)
+			.BackgroundImage = bmp
+			.BackgroundImageLayout = ImageLayout.Stretch
+			.BringToFront()
+		End With
 
 
-    End Sub
+	End Sub
 	'Public Sub player1(ByVal ob1 As Object)
 	'    With ob1
 	'        .Size = New Size(10, 30)
@@ -33,10 +36,10 @@
 	End Sub
 	Public Sub Shoot2(ByVal aa As Object)
 
-        Me.Left -= shootSpeed
-    End Sub
+		Me.Left -= shootSpeed
+	End Sub
 
-	Public Sub bulletManager(ByRef Score As Integer, ByRef ProgressBar1 As ProgressBar, ByVal bullet1 As Array, ByVal player1 As Object, ByVal boss As Object, ByRef enemies As List(Of PictureBox), ByVal coins As List(Of PictureBox), ByVal lifes As List(Of PictureBox), ByVal adns As List(Of PictureBox))
+	Public Sub bulletManager(ByVal bullet1 As Array, ByVal player1 As Object, ByVal boss As Object, ByRef enemies As List(Of PictureBox), ByVal coins As List(Of PictureBox), ByVal lifes As List(Of PictureBox), ByVal adns As List(Of PictureBox))
 
 
 
@@ -44,15 +47,15 @@
 			bullet1(x).Shoot(player1)
 
 			If Module1.checkforCollision(bullet1(x), boss) And boss.Enabled = True And bullet1(x).Enabled = True Then
-				ProgressBar1.Value -= 1 '???????????????????????????????????????????????????????????????????p ggn exception kan boss mor
-				If ProgressBar1.Value <= 0 Then
-					ProgressBar1.Value = 0
-				End If
-				Score += shootBoss
+				Me.hitBoss += 1 '???????????????????????????????????????????????????????????????????p ggn exception kan boss mor
+				'If Me.hitBoss >= maxHit Then
+				'	Me.hitBoss = 20
+				'End If
+				Me.score += shootBoss
 
 				bullet1(x).Enabled = False
 				bullet1(x).Dispose()
-				boss.Enabled = False
+
 			End If
 
 			For Each coin As PictureBox In coins
@@ -64,12 +67,12 @@
 			Next
 			For Each enemy As PictureBox In enemies
 				If checkforCollision(bullet1(x), enemy) And bullet1(x).Enabled And enemy.Enabled Then
-					Score += shootEnemy
+					Me.score += shootEnemy
 					bullet1(x).Dispose()
 					bullet1(x).Enabled = False
-					'enemy.Enabled = False
+					enemy.Enabled = False
 					Me.Controls.Remove(enemy)
-
+					enemy.Dispose()
 					ClassMyPublicShared.allPictureBoxes.Remove(enemy)
 
 					Exit For ''----------------------------------------------------------------------------kifer exit----?mem zafr r break sa
@@ -98,5 +101,27 @@
 		Next
 
 
+	End Sub
+
+
+
+
+	Function setScore(ByVal value) As Integer
+		Return value + Me.score
+
+	End Function
+
+
+	Function setBossLife(ByRef boss As ProgressBar) As Integer
+
+		If hitBoss >= Me.maxHit Then
+			Return boss.Value = -1
+		End If
+		Return boss.Value - hitBoss
+
+
+	End Function
+	Public Sub bosslifeRequire(ByRef boss As ProgressBar)
+		maxHit = boss.Maximum
 	End Sub
 End Class

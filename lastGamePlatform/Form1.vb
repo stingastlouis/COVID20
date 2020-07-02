@@ -12,8 +12,6 @@ Public Class Form1
 
 	Dim enemies As New List(Of PictureBox)
 	Dim enemiesSpeed As New List(Of Integer)
-
-
 	'Dim allMyControls As New List(Of Control)
 	'Dim allPictureBoxes As New List(Of PictureBox)
 
@@ -42,7 +40,7 @@ Public Class Form1
 
 	'bullet vars
 	Dim bulletNumber As Integer = -1
-
+	Dim bullet1(-1) As PistoleBullet1
 
 	'
 	Dim waitBeforeFight As Integer = ClassMyPublicShared.waitBeforeFight
@@ -54,7 +52,7 @@ Public Class Form1
 
 	Public Score As Integer = 0
 
-	Dim bullet1(-1) As PistoleBullet1
+
 
 	'Dim shotGun() As PictureBox
 	'--------------------------
@@ -277,7 +275,7 @@ Public Class Form1
 
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
-				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(Me.Height / 2, ground1.Top - 62 - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
+				Dim enemy As New ClassEnemy(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
 				Dim en As PictureBox = enemy.generateEnemy()
 				Me.Controls.Add(en)
 				enemiesSpeed.Add(enemy.MoveSpeed1)
@@ -313,36 +311,43 @@ Public Class Form1
 			moveTheBoss = True
 		End If
 
-
-		For x As Integer = 0 To enemies.Count - 1
-			If enemies(x).Left > player1.Left Then
-				enemies(x).Left -= enemiesSpeed(x)
-			ElseIf enemies(x).Left < player1.Left Then
-				enemies(x).Left += enemiesSpeed(x)
+		For en As Integer = 0 To enemies.Count - 1
+			If enemies(en).Left > player1.Left Then
+				enemies(en).Left -= enemiesSpeed(en)
+			ElseIf enemies(en).Left < player1.Left Then
+				enemies(en).Left += enemiesSpeed(en)
+			End If
+			If enemies(en).Top > player1.Top Then
+				enemies(en).Top -= enemiesSpeed(en)
+			ElseIf enemies(en).Top < player1.Top Then
+				enemies(en).Top += enemiesSpeed(en)
 			End If
 
-			If enemies(x).Top > player1.Top Then
-				enemies(x).Top -= enemiesSpeed(x)
-			ElseIf enemies(x).Top < player1.Top Then
-				enemies(x).Top += enemiesSpeed(x)
-			End If
 		Next
+		Dim eneC As New ClassEnemy
+		eneC.getLives(startLife)
+		eneC.collisionPlayer(player1, enemies)
+
+
+		startLife = eneC.submitLives()
 
 
 
 
 
 
-		'For Each en In enemies
-		'	Console.WriteLine(en.Name)
-		'Next
 
-		'Dim enemy As New ClassEnemy()
-		'enemy.makeEnemyMoves(enemies, player1) ''''movespeed pa p marC recheck sa
+		Dim mono As New PistoleBullet1(player1)
+		mono.bulletManager(bullet1, player1, boss, enemies, coins, lifes, adns)
+
+		Score = mono.setScore(Score)
 
 
-		'Dim mono As New PistoleBullet1(player1)
-		'mono.bulletManager(Score, ProgressBar1, bullet1, player1, boss, enemies, coins, lifes, adns)
+
+		mono.bosslifeRequire(ProgressBar1)
+		ProgressBar1.Value = mono.setBossLife(ProgressBar1)
+		updateLabels()
+
 
 	End Sub
 
@@ -545,7 +550,7 @@ Public Class Form1
 		Label1.Enabled = False
 		boss.Enabled = False
 
-		ProgressBar1.Value = 20 '??????????????????????????????????????????????????????????????????????????????????????????????ki li fr sa
+		ProgressBar1.Value = 18 '??????????????????????????????????????????????????????????????????????????????????????????????ki li fr sa
 		'My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop) 
 
 		ClassMyPublicShared.level = 1
@@ -577,7 +582,7 @@ Public Class Form1
 		'Dim winOrlose As New Label
 		'Dim btnSucess As New Button
 		'Dim btnExit As New Button
-
+		Debug.WriteLine("progress bar :" + CStr(ProgressBar1.Value))
 
 		If ProgressBar1.Value <= 0 Then
 			ProgressBar1.Value = 0
