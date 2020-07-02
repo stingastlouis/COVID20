@@ -181,12 +181,11 @@ Public Class Form1
 				End If
 
 			Case Keys.Q
-				Console.WriteLine("try with classbullet()")
+
 				Dim bullet As New ClassBullets(player1)
 				Dim bulletpb As PictureBox = bullet.generateBullet()
 				Me.Controls.Add(bulletpb)
 				bullets.Add(bulletpb)
-				Console.WriteLine(player1.Location)
 
 
 				'If allowToshotShotGUNl = True And Item_Collected >= 2 Then
@@ -207,9 +206,6 @@ Public Class Form1
 				Me.Close()
 				startHere.Show()
 		End Select
-		'redim = li p redeclare aray la . to rappele la haut ti 0 ?
-		'???????????????????????????????????????????servi list<> pou boucoup pli facil pa bizin redeclar li chack foi li fr moins travail???????????????????????????????????????????????????
-
 	End Sub
 
 
@@ -312,7 +308,7 @@ Public Class Form1
 		End If
 
 		enemyMovement()
-
+		bulletMovement()
 
 	End Sub
 
@@ -360,49 +356,47 @@ Public Class Form1
 		'ProgressBar1.Value = mono.setBossLife(ProgressBar1)
 		'updateLabels()
 
-		bulletMovement()
+
 	End Sub
 
 
 
 	Public Sub bulletMovement()
 		For Each bullet In bullets
-			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
-				If activePictureBox IsNot bullet AndAlso bullet.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-						bullets.Remove(bullet)
-						removeOtherPictureBoxAndUpdateScore(bullet)
-						Exit For
-					End If
-
-				End If
-			Next
-
-			For Each enemy In enemies 'list all controls in the form
-				If enemy IsNot bullet AndAlso bullet.Bounds.IntersectsWith(enemy.Bounds) Then 'if player picturebox intersects with other pictureboxes
-					Console.WriteLine("bullet intersect enemy")
-					Score += enemyScore
-					enemies.Remove(enemy)
-					removeOtherPictureBoxAndUpdateScore(bullet)
-					removeOtherPictureBoxAndUpdateScore(enemy)
-					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
-
-				End If
-			Next
-
-
-
+			bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y)
 			If bullet.Location.X > Me.Width Then
 				bullets.Remove(bullet)
-				Exit For
-			Else
-				bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y)
 				Exit For
 			End If
 		Next
 	End Sub
 
+	'Sub qqqqq()
+	'	For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+	'		If activePictureBox IsNot bullet AndAlso bullet.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+	'			If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+	'				bullets.Remove(bullet)
+	'				removeOtherPictureBoxAndUpdateScore(bullet)
+	'				Exit For
+	'			End If
 
+	'		End If
+	'	Next
+
+	'	For Each enemy In enemies 'list all controls in the form
+	'		If enemy IsNot bullet AndAlso bullet.Bounds.IntersectsWith(enemy.Bounds) Then 'if player picturebox intersects with other pictureboxes
+	'			Console.WriteLine("bullet intersect enemy")
+	'			Score += enemyScore
+	'			enemies.Remove(enemy)
+	'			removeOtherPictureBoxAndUpdateScore(bullet)
+	'			removeOtherPictureBoxAndUpdateScore(enemy)
+	'			Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
+
+	'		End If
+	'	Next
+
+
+	'End Sub
 
 
 
@@ -411,8 +405,6 @@ Public Class Form1
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
 				If activePictureBox IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-						Console.WriteLine("wall/ground")
-
 						If enemies(en).Top > activePictureBox.Top - enemies(en).Height Then 'to stay on top of ground and wall
 							enemies(en).Location = New Point(enemies(en).Location.X, activePictureBox.Top - enemies(en).Height)
 						End If
@@ -530,16 +522,20 @@ Public Class Form1
 					Exit For 'exit the for loop as picturebox name contains "life" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("gun") Then
-					Item_Collected += 1
+					If activePictureBox.Name.Contains("supergun") Then
+						Item_Collected += 100
+					Else
+						Item_Collected += 1
+					End If
 					Console.WriteLine("new gun")
-					If activePictureBox.Enabled Then
-						Score += scoreGun
-						allowToshotShotGUNl = True
-					End If
-					If supergun0.Enabled = True Then
-						allowToshotShotGUNl = True
-						Item_Collected = 2 '?????????????????????????????????????????????????????????????????????????????????????????? score + 100 ??????????? pa pli bon ????????
-					End If
+					'If activePictureBox.Enabled Then
+					'	Score += scoreGun
+					'	allowToshotShotGUNl = True
+					'End If
+					'If supergun0.Enabled = True Then
+					'	allowToshotShotGUNl = True
+					'	Item_Collected = 2 '?????????????????????????????????????????????????????????????????????????????????????????? score + 100 ??????????? pa pli bon ????????
+					'End If
 					removeOtherPictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
 				End If
