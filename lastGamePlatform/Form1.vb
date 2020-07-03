@@ -367,28 +367,14 @@ Public Class Form1
 	'Dim mrBoss As New ClassBoss()
 
 	'----pa bon will be deleted when bon
-	Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As PictureBox, ByRef player As Object)
-		If contaminer.Left + contaminer.Width > player.Left Then
-			contaminer.Left -= 4
-		End If
-		If contaminer.Left + contaminer.Width < player.Left Then
-			contaminer.Left += 4
-		End If
 
-	End Sub
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
-			Dim thelast As New ClassBoss(boss)
-			thelast.bossImage = My.Resources._0_Ogre_Idle_000
-			thelast.bossWidth = 100
-			thelast.bossHeight = 100
-			thelast.bossName = "boss"
-			thelast.bossPosX = Me.Width / 2
-			thelast.bossPosY = Me.Height / 2
-			boss = thelast.generateBoss()
+			Dim bbc As New ClassBoss(boss, 200, 100, 10, My.Resources._0_Ogre_Idle_000, 20)
+			bbc.bossPosX = Me.Width / 2
+			bbc.bossPosY = Me.Height / 2
+			boss.Location = New Point(bbc.bossPosX, bbc.bossPosY)
 			Me.Controls.Add(boss)
-
-
 
 
 		End If
@@ -543,6 +529,10 @@ Public Class Form1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
 		Dim bullet As New ClassBullets()
 		bulletMoveSpeed = bullet.MoveSpeed1
+
+
+
+
 
 	End Sub
 

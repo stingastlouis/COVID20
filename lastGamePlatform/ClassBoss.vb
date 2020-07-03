@@ -1,30 +1,37 @@
 ﻿Public Class ClassBoss
     Private width As Integer
     Private height As Integer
-    Private name As String
+
     Private life As Integer
     Private pos_X As Integer
     Private pos_Y As Integer
     Private bossFace As Bitmap
     Private moveSpeed As Integer
-    Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
-        Me.width = 87
-        Me.height = 62
-        Me.bossFace = My.Resources._0_Ogre_Idle_000
+    Sub New()
 
-        Me.pos_X = xPosition
-        Me.pos_Y = yPosition
-        Me.name = name
-        Me.moveSpeed = moveSpeed
     End Sub
-    Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
+    Public Sub New(ByRef pic As PictureBox, width As Integer, height As Integer, speed As Integer, img As Bitmap, life As Integer)
+        Me.width = width
+        Me.height = height
+        Me.bossFace = img
+        Me.pos_X = pos_X
+        Me.pos_Y = pos_Y
+        Me.moveSpeed = moveSpeed
+
+        pic.Image = Me.bossFace
+        pic.Width = Me.width
+        pic.Height = Me.height
+        pic.Location = New Point(pos_X, pos_Y)
+
+    End Sub
+    Public Sub New(xPosition As Integer, yPosition As Integer, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
         Me.width = 87
         Me.height = 62
         Me.bossFace = image
 
         Me.pos_X = xPosition
         Me.pos_Y = yPosition
-        Me.name = name
+
         Me.moveSpeed = moveSpeed
     End Sub
 
@@ -49,14 +56,7 @@
 
 
 
-    Public Property bossName As String
-        Set(value As String)
-            Me.name = value
-        End Set
-        Get
-            Return name
-        End Get
-    End Property
+
 
     Public Property bossLife As Integer
         Set(value As Integer)
@@ -103,12 +103,20 @@
     End Property
 
     Public Function generateBoss()
-        Dim bossPb As New ClassPictureBox(Me.width, Me.height, Me.name, Me.pos_X, Me.pos_Y, Me.bossFace)
+        Dim bossPb As New ClassPictureBox(Me.width, Me.height, "boss", Me.pos_X, Me.pos_Y, Me.bossFace)
         Return bossPb.showPictureBox()
     End Function
 
 
+    Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As PictureBox, ByRef player As Object)
+        If contaminer.Left + contaminer.Width > player.Left Then
+            contaminer.Left -= 4
+        End If
+        If contaminer.Left + contaminer.Width < player.Left Then
+            contaminer.Left += 4
+        End If
 
+    End Sub
 
 
 
