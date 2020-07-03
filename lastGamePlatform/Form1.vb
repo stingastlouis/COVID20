@@ -370,11 +370,11 @@ Public Class Form1
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
-			Dim bbc As New ClassBoss(boss, 200, 100, 10, My.Resources._0_Ogre_Idle_000, 20)
-			bbc.bossPosX = Me.Width / 2
-			bbc.bossPosY = Me.Height / 2
-			boss.Location = New Point(bbc.bossPosX, bbc.bossPosY)
-			Me.Controls.Add(boss)
+			'Dim bbc As New ClassBoss(boss, 200, 100, 10, My.Resources._0_Ogre_Idle_000, 20)
+			'bbc.bossPosX = Me.Width / 2
+			'bbc.bossPosY = Me.Height / 2
+			'boss.Location = New Point(bbc.bossPosX, bbc.bossPosY)
+			'Me.Controls.Add(boss)
 
 
 		End If
