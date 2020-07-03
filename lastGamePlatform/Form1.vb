@@ -331,29 +331,66 @@ Public Class Form1
 
 
 
-			If enemies(en).Left > player1.Left Then
+			'If enemies(en).Left > player1.Left Then
+			'	enemies(en).Left -= enemiesSpeed(en)
+			'ElseIf enemies(en).Left < player1.Left Then
+			'	enemies(en).Left += enemiesSpeed(en)
+			'End If
+			'If enemies(en).Top > player1.Top Then
+			'	enemies(en).Top -= enemiesSpeed(en)
+			'ElseIf enemies(en).Top < player1.Top Then
+			'	enemies(en).Top += enemiesSpeed(en)
+			'End If
+			If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top < player1.Top Then
 				enemies(en).Left -= enemiesSpeed(en)
-			ElseIf enemies(en).Left < player1.Left Then
+				enemies(en).Top += enemiesSpeed(en)
+			ElseIf enemies(en).Left > player1.Left + player1.Width And enemies(en).Top > player1.Top Then
+				enemies(en).Left -= enemiesSpeed(en)
+				enemies(en).Top -= enemiesSpeed(en)
+			ElseIf enemies(en).Left < player1.Left And enemies(en).Top < player1.Top Then
+				enemies(en).Left += enemiesSpeed(en)
+				enemies(en).Top += enemiesSpeed(en)
+			ElseIf enemies(en).Left < player1.Left And enemies(en).Top > player1.Top Then
+				enemies(en).Left += enemiesSpeed(en)
+				enemies(en).Top -= enemiesSpeed(en)
+			ElseIf enemies(en).Left > player1.Left And enemies(en).Top = player1.Top Then
+				enemies(en).Left -= enemiesSpeed(en)
+			ElseIf enemies(en).Left < player1.Left And enemies(en).Top = player1.Top Then
 				enemies(en).Left += enemiesSpeed(en)
 			End If
-			If enemies(en).Top > player1.Top Then
-				enemies(en).Top -= enemiesSpeed(en)
-			ElseIf enemies(en).Top < player1.Top Then
-				enemies(en).Top += enemiesSpeed(en)
-			End If
-
 
 		Next
 	End Sub
 
 
 
-
+	'Dim mrBoss As New ClassBoss()
 
 	'----pa bon will be deleted when bon
+	Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As PictureBox, ByRef player As Object)
+		If contaminer.Left + contaminer.Width > player.Left Then
+			contaminer.Left -= 4
+		End If
+		If contaminer.Left + contaminer.Width < player.Left Then
+			contaminer.Left += 4
+		End If
+
+	End Sub
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
-			bossAndEnemiesMoveTowardPlayer(boss)
+			Dim thelast As New ClassBoss(boss)
+			thelast.bossImage = My.Resources._0_Ogre_Idle_000
+			thelast.bossWidth = 100
+			thelast.bossHeight = 100
+			thelast.bossName = "boss"
+			thelast.bossPosX = Me.Width / 2
+			thelast.bossPosY = Me.Height / 2
+			boss = thelast.generateBoss()
+			Me.Controls.Add(boss)
+
+
+
+
 		End If
 
 		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then '?????????????????????????????????????bizin recheck sa la
@@ -386,39 +423,11 @@ Public Class Form1
 
 	'''''######################################################################################
 	'''will be deleted - will be In classboss
-	Public Sub bossCollision()
-		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
-			If activePictureBox IsNot boss AndAlso boss.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-				If activePictureBox.Name.Contains("wall") Then
-					If boss.Left + boss.Width > player1.Left Then
-						boss.Left += 1
-					End If
-					If boss.Left + boss.Width < player1.Left Then
-						boss.Left -= 1
-					End If
-				End If
-			End If
-		Next
-	End Sub
+
 
 
 	'for enemy and boss
-	Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As Object)
-		If contaminer.left + contaminer.Width > player1.Left Then
-			contaminer.left -= 1
-		End If
-		If contaminer.left + contaminer.Width < player1.Left Then
-			contaminer.left += 1
-		End If
 
-
-		'li p checker cote player la eT par rapport a enemy . si player dans droite li pou vers li . si li dans gauche li pou al vers li 
-		'aster le temps li p bouger si li ggn un wall devant li, li pas pou kav passer . 
-		'?????????????????????????????????????????????????????'makeEnemyMove() pa rent ladan????????????????
-		'b sem la bas em mo p servi la . li p suivre player mais en meme temps dans makemyenemymove li p donne li gravity et cheK si pendant gravity 
-		'li p collide ek un wall lerla. li faire li reste lor wall la
-
-	End Sub
 
 
 	'''''######################################################################################
@@ -534,6 +543,7 @@ Public Class Form1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
 		Dim bullet As New ClassBullets()
 		bulletMoveSpeed = bullet.MoveSpeed1
+
 	End Sub
 
 
