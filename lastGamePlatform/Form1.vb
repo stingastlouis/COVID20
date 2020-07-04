@@ -239,7 +239,7 @@ Public Class Form1
 
 		If (player1.Left + player1.Width > Me.Width) Then
 			For Each enemy In enemies
-				ClassMyPublicShared.allPictureBoxes.Remove(enemy)
+				ClassMyPublicShared.allPictureBoxes.Remove(boss)
 			Next
 			For Each bullet In bullets
 				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
@@ -280,13 +280,13 @@ Public Class Form1
 		For Each enemy In enemies
 			For Each bullet In bullets
 
-				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if player picturebox 
+				If bullet IsNot boss AndAlso boss.Bounds.IntersectsWith(bullet.Bounds) Then 'if player picturebox 
 					Console.WriteLine("bullet intersect enemy")
 					Score += enemyScore
 					bullets.Remove(bullet)
-					enemies.Remove(enemy)
+					enemies.Remove(boss)
 					removeOtherPictureBoxAndUpdateScore(bullet)
-					removeOtherPictureBoxAndUpdateScore(enemy)
+					removeOtherPictureBoxAndUpdateScore(boss)
 					Exit For
 				End If
 			Next
@@ -335,12 +335,14 @@ Public Class Form1
 			'	enemies(en).Left -= enemiesSpeed(en)
 			'ElseIf enemies(en).Left < player1.Left Then
 			'	enemies(en).Left += enemiesSpeed(en)
-			'End If
+			'End If' 
 			'If enemies(en).Top > player1.Top Then
 			'	enemies(en).Top -= enemiesSpeed(en)
 			'ElseIf enemies(en).Top < player1.Top Then
 			'	enemies(en).Top += enemiesSpeed(en)
 			'End If
+
+
 			If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top < player1.Top Then
 				enemies(en).Left -= enemiesSpeed(en)
 				enemies(en).Top += enemiesSpeed(en)
@@ -367,15 +369,16 @@ Public Class Form1
 	'Dim mrBoss As New ClassBoss()
 
 	'----pa bon will be deleted when bon
-	Dim boss As New PictureBox
+
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
-			Dim bossy As New ClassBoss(Me.Width / 5, Me.Width - (door2.Width / 2) - 1, "enemy", enemyMoveSpeed())
-			boss = bossy.generateBoss()
+
+			Dim cc As New ClassEnemies(Me.Width / 2, Me.Height / 2, "enemy", 10, My.Resources._0_Ogre_Idle_000)
+			boss = cc.generateEnemy
 			Me.Controls.Add(boss)
-			enemiesSpeed.Add(bossy.MoveSpeed1)
 			enemies.Add(boss)
-			'll
+
+
 		End If
 
 		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then '?????????????????????????????????????bizin recheck sa la
@@ -481,7 +484,7 @@ Public Class Form1
 		HorizontalScroll.Enabled = False
 		HorizontalScroll.Visible = False
 
-
+		enemies.Add(boss)
 		ProgressBar1.Value = 18
 		My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop)
 
