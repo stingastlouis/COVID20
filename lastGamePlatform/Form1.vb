@@ -401,33 +401,6 @@ Public Class Form1
 
 
 
-
-
-
-
-
-
-	'''''######################################################################################
-	'''will be deleted - will be In classboss
-
-
-
-	'for enemy and boss
-
-
-
-	'''''######################################################################################
-
-
-
-
-
-
-
-
-
-
-
 	''' <summary>
 	''' used in timer
 	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
@@ -541,7 +514,6 @@ Public Class Form1
 	''' <summary>
 	''' remove the pictureboxes that the player collided with and update the labels
 	''' </summary>
-	''' <param name="otherPicBox">picturebox to remove</param>
 	Private Sub removeOtherPictureBoxAndUpdateScore(picBox As PictureBox)
 		'removing the control
 		ClassMyPublicShared.allPictureBoxes.Remove(picBox)
