@@ -373,7 +373,7 @@ Public Class Form1
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
 
-			Dim cc As New ClassEnemies(Me.Width / 2, Me.Height / 2, "enemy", 10, My.Resources._0_Ogre_Idle_000)
+			Dim cc As New ClassEnemies(200, 200, Me.Width / 2, Me.Height / 2, "enemy111", 10, My.Resources._0_Ogre_Idle_000)
 			boss = cc.generateEnemy
 			Me.Controls.Add(boss)
 			enemies.Add(boss)
@@ -484,7 +484,6 @@ Public Class Form1
 		HorizontalScroll.Enabled = False
 		HorizontalScroll.Visible = False
 
-		enemies.Add(boss)
 		ProgressBar1.Value = 18
 		My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop)
 
