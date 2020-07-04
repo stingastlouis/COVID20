@@ -1,114 +1,135 @@
 ﻿Public Class ClassBoss
-    Private width As Integer
-    Private height As Integer
-
-    Private life As Integer
-    Private pos_X As Integer
-    Private pos_Y As Integer
-    Private bossFace As Bitmap
-    Private moveSpeed As Integer
-    Sub New()
-
-    End Sub
-    Public Sub New(ByRef pic As PictureBox, width As Integer, height As Integer, speed As Integer, img As Bitmap, life As Integer)
-        Me.width = width
-        Me.height = height
-        Me.bossFace = img
-        Me.pos_X = pos_X
-        Me.pos_Y = pos_Y
-        Me.moveSpeed = moveSpeed
-
-        pic.Image = Me.bossFace
-        pic.Width = Me.width
-        pic.Height = Me.height
-        pic.Location = New Point(pos_X, pos_Y)
-
-    End Sub
-    Public Sub New(xPosition As Integer, yPosition As Integer, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
-        Me.width = 87
-        Me.height = 62
-        Me.bossFace = image
-
-        Me.pos_X = xPosition
-        Me.pos_Y = yPosition
-
-        Me.moveSpeed = moveSpeed
-    End Sub
-
-
-
-    Public Property bossWidth As Integer
-        Set(value As Integer)
-            Me.width = value
-        End Set
-        Get
-            Return width
-        End Get
-    End Property
-    Public Property bossHeight As Integer
-        Set(value As Integer)
-            Me.height = value
-        End Set
-        Get
-            Return height
-        End Get
-    End Property
+	Private width As Integer
+	Private height As Integer
+	Private xPosition As Integer
+	Private yPosition As Integer
+	Private name As String
+	Private moveSpeed As Integer
+	Private image As Bitmap
 
 
 
 
 
-    Public Property bossLife As Integer
-        Set(value As Integer)
-            Me.life = value
-        End Set
-        Get
-            Return life
-        End Get
-    End Property
 
 
-    Public Property bossPosX As Integer
-        Set(value As Integer)
-            Me.pos_X = value
-        End Set
-        Get
-            Return pos_X
-        End Get
-    End Property
-    Public Property bossPosY As Integer
-        Set(value As Integer)
-            Me.pos_Y = value
-        End Set
-        Get
-            Return pos_Y
-        End Get
-    End Property
-    Public Property bossImage As Image
-        Set(value As Image)
-            Me.bossFace = value
-        End Set
-        Get
-            Return bossFace
-        End Get
-    End Property
 
-    Public Property bossSpeed As Integer
-        Set(value As Integer)
-            Me.moveSpeed = value
-        End Set
-        Get
-            Return moveSpeed
-        End Get
-    End Property
+	'constructors
+	Public Sub New()
+	End Sub
+	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
+		Me.width = 87
+		Me.height = 62
+		Me.image = My.Resources._0_Ogre_Idle_000
 
-    Public Function generateBoss()
-        Dim bossPb As New ClassPictureBox(Me.width, Me.height, "boss", Me.pos_X, Me.pos_Y, Me.bossFace)
-        Return bossPb.showPictureBox()
-    End Function
+		Me.xPosition = xPosition
+		Me.yPosition = yPosition
+		Me.name = name
+		Me.moveSpeed = moveSpeed
+	End Sub
+	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
+		Me.width = 87
+		Me.height = 62
+		Me.image = image
+
+		Me.xPosition = xPosition
+		Me.yPosition = yPosition
+		Me.name = name
+		Me.moveSpeed = moveSpeed
+	End Sub
 
 
-    Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As PictureBox, ByRef player As Object)
+
+
+
+
+
+
+	'setters and getters
+	Public Property Width1 As Integer
+		Get
+			Return width
+		End Get
+		Set(value As Integer)
+			width = value
+		End Set
+	End Property
+
+	Public Property Height1 As Integer
+		Get
+			Return height
+		End Get
+		Set(value As Integer)
+			height = value
+		End Set
+	End Property
+
+	Public Property XPosition1 As Integer
+		Get
+			Return xPosition
+		End Get
+		Set(value As Integer)
+			xPosition = value
+		End Set
+	End Property
+
+	Public Property YPosition1 As Integer
+		Get
+			Return yPosition
+		End Get
+		Set(value As Integer)
+			yPosition = value
+		End Set
+	End Property
+
+	Public Property Name1 As String
+		Get
+			Return name
+		End Get
+		Set(value As String)
+			name = value
+		End Set
+	End Property
+
+	Public Property MoveSpeed1 As Integer
+		Get
+			Return moveSpeed
+		End Get
+		Set(value As Integer)
+			moveSpeed = value
+		End Set
+	End Property
+
+	Public Property Image1 As Bitmap
+		Get
+			Return image
+		End Get
+		Set(value As Bitmap)
+			image = value
+		End Set
+	End Property
+
+
+
+
+
+
+
+
+
+
+
+
+	'functions
+	Public Function generateBoss()
+		Dim pb As New ClassPictureBox(Width1, Height1, Name1, XPosition1, YPosition1, Image1)
+		Return pb.showPictureBox()
+	End Function
+
+
+
+
+	Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As PictureBox, ByRef player As Object)
         If contaminer.Left + contaminer.Width > player.Left Then
             contaminer.Left -= 4
         End If

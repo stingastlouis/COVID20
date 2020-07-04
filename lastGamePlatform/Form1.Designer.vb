@@ -49,7 +49,7 @@ Partial Class Form1
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.lastLife = New System.Windows.Forms.PictureBox()
         Me.instruction = New System.Windows.Forms.PictureBox()
-        Me.boss = New System.Windows.Forms.PictureBox()
+        Me.enemyBoss = New System.Windows.Forms.PictureBox()
         Me.bonus13 = New System.Windows.Forms.PictureBox()
         Me.enemy12 = New System.Windows.Forms.PictureBox()
         Me.gun2 = New System.Windows.Forms.PictureBox()
@@ -76,7 +76,7 @@ Partial Class Form1
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lastLife, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.boss, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.enemyBoss, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bonus13, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.enemy12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gun2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -351,16 +351,16 @@ Partial Class Form1
         Me.instruction.TabStop = False
         Me.instruction.Tag = "content"
         '
-        'boss
+        'enemyBoss
         '
-        Me.boss.BackColor = System.Drawing.Color.Olive
-        Me.boss.Location = New System.Drawing.Point(2050, 305)
-        Me.boss.Name = "boss"
-        Me.boss.Size = New System.Drawing.Size(130, 95)
-        Me.boss.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.boss.TabIndex = 90
-        Me.boss.TabStop = False
-        Me.boss.Tag = "content"
+        Me.enemyBoss.BackColor = System.Drawing.Color.Olive
+        Me.enemyBoss.Location = New System.Drawing.Point(2050, 305)
+        Me.enemyBoss.Name = "enemyBoss"
+        Me.enemyBoss.Size = New System.Drawing.Size(130, 95)
+        Me.enemyBoss.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.enemyBoss.TabIndex = 90
+        Me.enemyBoss.TabStop = False
+        Me.enemyBoss.Tag = "content"
         '
         'bonus13
         '
@@ -538,7 +538,7 @@ Partial Class Form1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(855, 473)
+        Me.ClientSize = New System.Drawing.Size(855, 490)
         Me.Controls.Add(Me.supergun0)
         Me.Controls.Add(Me.wall24)
         Me.Controls.Add(Me.door1)
@@ -556,7 +556,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ProgressBar1)
-        Me.Controls.Add(Me.boss)
+        Me.Controls.Add(Me.enemyBoss)
         Me.Controls.Add(Me.bonus13)
         Me.Controls.Add(Me.enemy12)
         Me.Controls.Add(Me.gun2)
@@ -593,7 +593,7 @@ Partial Class Form1
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lastLife, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.instruction, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.boss, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.enemyBoss, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bonus13, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.enemy12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gun2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -652,7 +652,7 @@ Partial Class Form1
 	Friend WithEvents door2 As PictureBox
 	Friend WithEvents FastestTimer As Timer
 	Friend WithEvents beforeBoss As PictureBox
-	Friend WithEvents boss As PictureBox
+	Friend WithEvents enemyBoss As PictureBox
 	Friend WithEvents lastLife As PictureBox
 	Friend WithEvents lastItem1 As PictureBox
 	Friend WithEvents door1 As PictureBox
