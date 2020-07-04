@@ -374,7 +374,7 @@ Public Class Form1
 			Dim enemyBoss As PictureBox = bossy.generateBoss()
 			Me.Controls.Add(enemyBoss)
 			'enemiesSpeed.Add(boss.MoveSpeed1)
-			enemies.Add(enemyBoss)
+			enemies.Add(enemyBoss) 'uhhii
 
 
 		End If
