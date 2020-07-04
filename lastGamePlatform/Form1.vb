@@ -370,11 +370,11 @@ Public Class Form1
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
-			Dim bossy As New ClassBoss()
-			Dim enemyBoss As PictureBox = bossy.generateBoss()
-			Me.Controls.Add(enemyBoss)
-			'enemiesSpeed.Add(boss.MoveSpeed1)
-			enemies.Add(enemyBoss) 'uhhii
+			'Dim bbc As New ClassBoss(boss, 200, 100, 10, My.Resources._0_Ogre_Idle_000, 20)
+			'bbc.bossPosX = Me.Width / 2
+			'bbc.bossPosY = Me.Height / 2
+			'boss.Location = New Point(bbc.bossPosX, bbc.bossPosY)
+			'Me.Controls.Add(boss)
 
 
 		End If
@@ -384,7 +384,7 @@ Public Class Form1
 			Label1.Enabled = True
 			ProgressBar1.Enabled = True
 			ProgressBar1.Visible = True
-			enemyBoss.Enabled = True
+			boss.Enabled = True
 			supergun0.Enabled = True
 			supergun0.Visible = True
 			moveTheBoss = True
@@ -505,7 +505,7 @@ Public Class Form1
 		ProgressBar1.Visible = False
 		Label1.Visible = False
 		Label1.Enabled = False
-		enemyBoss.Enabled = False
+		boss.Enabled = False
 		HorizontalScroll.Enabled = False
 		HorizontalScroll.Visible = False
 

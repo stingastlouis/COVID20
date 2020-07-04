@@ -131,10 +131,10 @@
 
 	Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As PictureBox, ByRef player As Object)
         If contaminer.Left + contaminer.Width > player.Left Then
-            contaminer.Left -= 4
+            contaminer.Left -= moveSpeed
         End If
         If contaminer.Left + contaminer.Width < player.Left Then
-            contaminer.Left += 4
+            contaminer.Left += moveSpeed
         End If
 
     End Sub
