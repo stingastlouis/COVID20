@@ -191,13 +191,15 @@ Public Class Form1
 			Label1.Enabled = True
 			ProgressBar1.Enabled = True
 			ProgressBar1.Visible = True
-			Dim img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
-			Dim boss1 As New ClassEnemies(100, 100, 400, 100, "boss1", 2, img)
-			Dim bosspb As PictureBox = boss1.generateEnemy()
-			boss = bosspb
-			Console.WriteLine("boss appearing")
-		End If
 
+			boss.BackColor = Color.Empty
+			boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
+			boss.BringToFront()
+			enemies.Add(boss)
+			Dim bossMoveSpeed As Int16 = 1
+			enemiesSpeed.Add(bossMoveSpeed)
+			boss.Visible = True
+		End If
 	End Sub
 
 
@@ -271,10 +273,13 @@ Public Class Form1
 		End If
 
 
-		enemyMovement() 'bizin re check to code logic
 
 
 
+
+		If enemies.Count > 0 Then
+			enemyMovement() 'bizin re check to code logic
+		End If
 
 		If bullets.Count > 0 Then
 			bulletMovement()
@@ -285,8 +290,10 @@ Public Class Form1
 	Public Sub bulletIntersectWithEnemy()
 		For Each enemy In enemies
 			For Each bullet In bullets
-
 				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if player picturebox 
+					If enemy.Name.Contains("boss") Then
+						Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
+					End If
 					Console.WriteLine("bullet intersect enemy")
 					Score += enemyScore
 					bullets.Remove(bullet)
@@ -295,6 +302,7 @@ Public Class Form1
 					removeOtherPictureBoxAndUpdateScore(enemy)
 					Exit For
 				End If
+
 			Next
 			Exit For
 		Next
@@ -464,9 +472,7 @@ Public Class Form1
 	''' </summary>
 	Private Sub setGame()
 		RestartBtn.Enabled = False
-		supergun0.Visible = False
 		lastItem1.Visible = False
-		supergun0.Enabled = False
 		lastItem1.Enabled = False
 		pScore.Text = "Item :" + CStr(Score)
 		RestartBtn.Visible = False
