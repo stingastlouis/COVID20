@@ -345,7 +345,7 @@ Public Class Form1
 			'	enemies(en).Top += enemiesSpeed(en)
 			'End If
 
-
+			'--------------------------------------------------------------------------------------------enkor tremblee mm
 			If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top < player1.Top Then
 				enemies(en).Left -= enemiesSpeed(en)
 				enemies(en).Top += enemiesSpeed(en)
@@ -376,15 +376,10 @@ Public Class Form1
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
-
 			boss = bosspb
 			Console.WriteLine(boss.Location)
 			enemiesSpeed.Add(boss1.MoveSpeed1)
 			enemies.Add(boss)
-
-
-
-
 		End If
 
 		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then '?????????????????????????????????????bizin recheck sa la

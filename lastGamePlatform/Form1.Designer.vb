@@ -364,7 +364,6 @@ Partial Class Form1
 		Me.boss.TabIndex = 90
 		Me.boss.TabStop = False
 		Me.boss.Tag = "content"
-		Me.boss.WaitOnLoad = True
 		'
 		'bonus13
 		'
@@ -552,7 +551,7 @@ Partial Class Form1
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
-		Me.ClientSize = New System.Drawing.Size(855, 524)
+		Me.ClientSize = New System.Drawing.Size(855, 507)
 		Me.Controls.Add(Me.AxWindowsMediaPlayer1)
 		Me.Controls.Add(Me.supergun0)
 		Me.Controls.Add(Me.wall24)

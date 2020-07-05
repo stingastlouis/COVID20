@@ -1,4 +1,6 @@
 ﻿Public Class ClassBoss
+	Inherits ClassEnemies
+
 	Private width As Integer
 	Private height As Integer
 	Private xPosition As Integer
@@ -45,75 +47,6 @@
 
 
 
-	'setters and getters
-	Public Property Width1 As Integer
-		Get
-			Return width
-		End Get
-		Set(value As Integer)
-			width = value
-		End Set
-	End Property
-
-	Public Property Height1 As Integer
-		Get
-			Return height
-		End Get
-		Set(value As Integer)
-			height = value
-		End Set
-	End Property
-
-	Public Property XPosition1 As Integer
-		Get
-			Return xPosition
-		End Get
-		Set(value As Integer)
-			xPosition = value
-		End Set
-	End Property
-
-	Public Property YPosition1 As Integer
-		Get
-			Return yPosition
-		End Get
-		Set(value As Integer)
-			yPosition = value
-		End Set
-	End Property
-
-	Public Property Name1 As String
-		Get
-			Return name
-		End Get
-		Set(value As String)
-			name = value
-		End Set
-	End Property
-
-	Public Property MoveSpeed1 As Integer
-		Get
-			Return moveSpeed
-		End Get
-		Set(value As Integer)
-			moveSpeed = value
-		End Set
-	End Property
-
-	Public Property Image1 As Bitmap
-		Get
-			Return image
-		End Get
-		Set(value As Bitmap)
-			image = value
-		End Set
-	End Property
-
-
-
-
-
-
 
 
 
@@ -130,16 +63,14 @@
 
 
 	Public Sub bossAndEnemiesMoveTowardPlayer(ByRef contaminer As PictureBox, ByRef player As Object)
-        If contaminer.Left + contaminer.Width > player.Left Then
-            contaminer.Left -= moveSpeed
-        End If
-        If contaminer.Left + contaminer.Width < player.Left Then
-            contaminer.Left += moveSpeed
-        End If
+		If contaminer.Left + contaminer.Width > player.Left Then
+			contaminer.Left -= moveSpeed
+		End If
+		If contaminer.Left + contaminer.Width < player.Left Then
+			contaminer.Left += moveSpeed
+		End If
 
-    End Sub
-
-
+	End Sub
 
 
 
@@ -152,21 +83,23 @@
 
 
 
-    'Public Sub bossCollision(ByRef boss As PictureBox, ByRef player As PictureBox)
-    '    bossAndEnemiesMoveTowardPlayer(boss, player)
-    '    For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
-    '        If activePictureBox IsNot boss AndAlso boss.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-    '            If activePictureBox.Name.Contains("wall") Then
-    '                If boss.Left + boss.Width > player.Left Then
-    '                    boss.Left += 1
-    '                End If
-    '                If boss.Left + boss.Width < player.Left Then
-    '                    boss.Left -= 1
-    '                End If
-    '            End If
-    '        End If
-    '    Next
-    'End Sub
+
+
+	'Public Sub bossCollision(ByRef boss As PictureBox, ByRef player As PictureBox)
+	'    bossAndEnemiesMoveTowardPlayer(boss, player)
+	'    For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+	'        If activePictureBox IsNot boss AndAlso boss.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+	'            If activePictureBox.Name.Contains("wall") Then
+	'                If boss.Left + boss.Width > player.Left Then
+	'                    boss.Left += 1
+	'                End If
+	'                If boss.Left + boss.Width < player.Left Then
+	'                    boss.Left -= 1
+	'                End If
+	'            End If
+	'        End If
+	'    Next
+	'End Sub
 
 
 
