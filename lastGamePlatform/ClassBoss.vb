@@ -77,7 +77,12 @@
 
 
 
-
+	'If activePictureBox.Name.Contains("boss") Then
+	'	startLife = 0
+	'	Console.WriteLine("collide with boss and die")
+	'	updateLabels()
+	'	Exit For 'exit the for loop as picturebox name contains "boss" help in using less cpu power
+	'End If
 
 
 

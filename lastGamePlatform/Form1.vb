@@ -184,17 +184,20 @@ Public Class Form1
 	''' <param name="e"></param>
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
 		collideWithStaticPictureBoxes()
-		'dynamic in seperate class
-		'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@pou re me t sa
 
 
-		'If activePictureBox.Name.Contains("boss") Then
-		'	startLife = 0
-		'	Console.WriteLine("collide with boss and die")
-		'	updateLabels()
-		'	Exit For 'exit the for loop as picturebox name contains "boss" help in using less cpu power
-		'End If
-		'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		If (player1.Left >= supergun0.Left) Then '?????????????????????????????????????bizin recheck sa la
+			Label1.Visible = True
+			Label1.Enabled = True
+			ProgressBar1.Enabled = True
+			ProgressBar1.Visible = True
+			Dim img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
+			Dim boss1 As New ClassEnemies(100, 100, 400, 100, "boss1", 2, img)
+			Dim bosspb As PictureBox = boss1.generateEnemy()
+			boss = bosspb
+			Console.WriteLine("boss appearing")
+		End If
+
 	End Sub
 
 
@@ -240,7 +243,7 @@ Public Class Form1
 
 		If (player1.Left + player1.Width > Me.Width) Then
 			For Each enemy In enemies
-				ClassMyPublicShared.allPictureBoxes.Remove(boss)
+				ClassMyPublicShared.allPictureBoxes.Remove(enemy)
 			Next
 			For Each bullet In bullets
 				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
@@ -283,13 +286,13 @@ Public Class Form1
 		For Each enemy In enemies
 			For Each bullet In bullets
 
-				If bullet IsNot boss AndAlso boss.Bounds.IntersectsWith(bullet.Bounds) Then 'if player picturebox 
+				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if player picturebox 
 					Console.WriteLine("bullet intersect enemy")
 					Score += enemyScore
 					bullets.Remove(bullet)
-					enemies.Remove(boss)
+					enemies.Remove(enemy)
 					removeOtherPictureBoxAndUpdateScore(bullet)
-					removeOtherPictureBoxAndUpdateScore(boss)
+					removeOtherPictureBoxAndUpdateScore(enemy)
 					Exit For
 				End If
 			Next
@@ -368,29 +371,19 @@ Public Class Form1
 	End Sub
 
 
-	Dim img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
-	Dim boss1 As New ClassEnemies(100, 100, 400, 100, "boss1", 2, img)
-	Dim bosspb As PictureBox = boss1.generateEnemy()
+
 
 	'----pa bon will be deleted when bon
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
-		If moveTheBoss Then
-			boss = bosspb
-			Console.WriteLine(boss.Location)
-			enemiesSpeed.Add(boss1.MoveSpeed1)
-			enemies.Add(boss)
-		End If
+		'If moveTheBoss Then
 
-		If (player1.Left >= beforeBoss.Left + beforeBoss.Width) Then '?????????????????????????????????????bizin recheck sa la
-			Label1.Visible = True
-			Label1.Enabled = True
-			ProgressBar1.Enabled = True
-			ProgressBar1.Visible = True
-			supergun0.Enabled = True
-			supergun0.Visible = True
-			moveTheBoss = True
-		End If
+		'	Console.WriteLine(boss.Location)
+		'	enemiesSpeed.Add(boss1.MoveSpeed1)
+		'	enemies.Add(boss)
+		'End If
+
+
 
 
 	End Sub
