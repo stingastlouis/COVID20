@@ -21,7 +21,6 @@
 		Me.width = 87
 		Me.height = 62
 		Me.image = My.Resources._0_Ogre_Idle_000
-
 		Me.xPosition = xPosition
 		Me.yPosition = yPosition
 		Me.name = name
@@ -31,20 +30,11 @@
 		Me.width = 87
 		Me.height = 62
 		Me.image = image
-
-
-
-
-
-
-
-
 		Me.xPosition = xPosition
 		Me.yPosition = yPosition
 		Me.name = name
 		Me.moveSpeed = moveSpeed
 	End Sub
-
 
 	Public Sub New(width As Integer, height As Integer, xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
 		Me.width = width

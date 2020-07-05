@@ -160,8 +160,6 @@ Public Class Form1
 					Dim bulletpb As PictureBox = bullet.generateBullet()
 					Me.Controls.Add(bulletpb)
 					bullets.Add(bulletpb)
-
-
 					My.Computer.Audio.Play(My.Resources._1, AudioPlayMode.Background)
 				End If
 
@@ -254,9 +252,11 @@ Public Class Form1
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
 				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
 			Next
+			door1.BringToFront()
+			door2.BringToFront()
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
-				Dim enemy As New ClassEnemies(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
+				Dim enemy As New ClassEnemies(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 62 - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
 				Dim en As PictureBox = enemy.generateEnemy()
 				Me.Controls.Add(en)
 				enemiesSpeed.Add(enemy.MoveSpeed1)
@@ -368,19 +368,21 @@ Public Class Form1
 	End Sub
 
 
-
-	'Dim mrBoss As New ClassBoss()
+	Dim img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
+	Dim boss1 As New ClassEnemies(100, 100, 400, 100, "boss1", 2, img)
+	Dim bosspb As PictureBox = boss1.generateEnemy()
 
 	'----pa bon will be deleted when bon
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
 
-			Dim cc As New ClassEnemies(boss.Width, boss.Height, boss.Location.X, boss.Location.Y, "boss1", 2, My.Resources._0_Ogre_Idle_000)
-			boss = cc.generateEnemy()
-			Me.Controls.Add(boss)
+			boss = bosspb
+			Console.WriteLine(boss.Location)
+			enemiesSpeed.Add(boss1.MoveSpeed1)
 			enemies.Add(boss)
-			enemiesSpeed.Add(cc.MoveSpeed1)
+
+
 
 
 		End If
@@ -390,7 +392,6 @@ Public Class Form1
 			Label1.Enabled = True
 			ProgressBar1.Enabled = True
 			ProgressBar1.Visible = True
-			boss.Enabled = True
 			supergun0.Enabled = True
 			supergun0.Visible = True
 			moveTheBoss = True
@@ -487,7 +488,7 @@ Public Class Form1
 		ProgressBar1.Visible = False
 		Label1.Visible = False
 		Label1.Enabled = False
-		boss.Enabled = False
+		boss.Visible = False
 		Me.HorizontalScroll.Enabled = False
 		Me.HorizontalScroll.Visible = False
 
