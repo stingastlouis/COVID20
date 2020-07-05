@@ -46,9 +46,6 @@ Public Class Form1
 
 
 
-
-
-
 	''' <summary>
 	''' when the form is loading
 	''' </summary>
@@ -158,17 +155,23 @@ Public Class Form1
 				End If
 
 			Case Keys.Q
-				Dim bullet As New ClassBullets(player1)
-				Dim bulletpb As PictureBox = bullet.generateBullet()
-				Me.Controls.Add(bulletpb)
-				bullets.Add(bulletpb)
-				My.Computer.Audio.Play(My.Resources._1, AudioPlayMode.Background)
+				If (bullets.Count <= 10) Then
+					Dim bullet As New ClassBullets(player1)
+					Dim bulletpb As PictureBox = bullet.generateBullet()
+					Me.Controls.Add(bulletpb)
+					bullets.Add(bulletpb)
+
+
+					My.Computer.Audio.Play(My.Resources._1, AudioPlayMode.Background)
+				End If
+
 
 			Case Keys.Escape
 				Me.Close()
 				startHere.Show()
 		End Select
 	End Sub
+
 
 
 
@@ -373,10 +376,11 @@ Public Class Form1
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
 		If moveTheBoss Then
 
-			Dim cc As New ClassEnemies(200, 200, Me.Width / 2, Me.Height / 2, "enemy111", 10, My.Resources._0_Ogre_Idle_000)
-			boss = cc.generateEnemy
+			Dim cc As New ClassEnemies(boss.Width, boss.Height, boss.Location.X, boss.Location.Y, "boss1", 2, My.Resources._0_Ogre_Idle_000)
+			boss = cc.generateEnemy()
 			Me.Controls.Add(boss)
 			enemies.Add(boss)
+			enemiesSpeed.Add(cc.MoveSpeed1)
 
 
 		End If
@@ -396,7 +400,10 @@ Public Class Form1
 	End Sub
 
 
-
+	Private Sub bgSound()
+		AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Dosseh - Le bruit du silence (Clip Officiel).wav")
+		AxWindowsMediaPlayer1.settings.setMode("Loop", True)
+	End Sub
 
 
 
@@ -481,11 +488,13 @@ Public Class Form1
 		Label1.Visible = False
 		Label1.Enabled = False
 		boss.Enabled = False
-		HorizontalScroll.Enabled = False
-		HorizontalScroll.Visible = False
+		Me.HorizontalScroll.Enabled = False
+		Me.HorizontalScroll.Visible = False
 
 		ProgressBar1.Value = 18
-		My.Computer.Audio.Play(My.Resources.Dosseh___Le_bruit_du_silence__Clip_Officiel_, AudioPlayMode.BackgroundLoop)
+		Dim backSoundThread As Threading.Thread
+		backSoundThread = New Threading.Thread(AddressOf bgSound)
+		backSoundThread.Start()
 
 		playerIsFalling = True
 		playerSpeed = 5
@@ -501,13 +510,9 @@ Public Class Form1
 
 		ClassMyPublicShared.level = 1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
+		door2.BringToFront()
 		Dim bullet As New ClassBullets()
 		bulletMoveSpeed = bullet.MoveSpeed1
-
-
-
-
-
 	End Sub
 
 
