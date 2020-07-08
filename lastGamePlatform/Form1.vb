@@ -186,7 +186,7 @@ Public Class Form1
 		collideWithStaticPictureBoxes()
 
 
-		If (player1.Left >= supergun0.Left) AndAlso (boss.Visible = False) Then '?????????????????????????????????????bizin recheck sa la
+		If (player1.Left >= supergun0.Left) AndAlso (boss.Visible = False) Then
 			Label1.Visible = True
 			Label1.Enabled = True
 			ProgressBar1.Enabled = True
@@ -356,7 +356,7 @@ Public Class Form1
 			'	enemies(en).Top += enemiesSpeed(en)
 			'End If
 
-			'----------------------------------------------------------00000..----------------------------------enkor tremblee mm
+			'--------------------------------------------------------------------------------------------enkor tremblee mm
 			If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top < player1.Top Then
 				enemies(en).Left -= enemiesSpeed(en)
 				enemies(en).Top += enemiesSpeed(en)
