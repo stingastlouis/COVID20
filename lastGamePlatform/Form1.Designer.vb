@@ -43,21 +43,9 @@ Partial Class Form1
 		Me.Timer1000ms = New System.Windows.Forms.Timer(Me.components)
 		Me.wall24 = New System.Windows.Forms.PictureBox()
 		Me.door1 = New System.Windows.Forms.PictureBox()
-		Me.lastItem1 = New System.Windows.Forms.PictureBox()
 		Me.door2 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-		Me.lastLife = New System.Windows.Forms.PictureBox()
 		Me.instruction = New System.Windows.Forms.PictureBox()
 		Me.boss = New System.Windows.Forms.PictureBox()
-		Me.bonus13 = New System.Windows.Forms.PictureBox()
-		Me.enemy12 = New System.Windows.Forms.PictureBox()
-		Me.gun2 = New System.Windows.Forms.PictureBox()
-		Me.beforeBoss = New System.Windows.Forms.PictureBox()
-		Me.life1 = New System.Windows.Forms.PictureBox()
-		Me.Item2 = New System.Windows.Forms.PictureBox()
-		Me.Item1 = New System.Windows.Forms.PictureBox()
 		Me.wall12 = New System.Windows.Forms.PictureBox()
 		Me.wall11 = New System.Windows.Forms.PictureBox()
 		Me.wall9 = New System.Windows.Forms.PictureBox()
@@ -71,21 +59,9 @@ Partial Class Form1
 		Me.AxWindowsMediaPlayer1 = New AxWMPLib.AxWindowsMediaPlayer()
 		CType(Me.wall24, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.door1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.door2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.lastLife, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.boss, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.bonus13, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.enemy12, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.gun2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.beforeBoss, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.life1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.Item2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.Item1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall12, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall11, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -283,16 +259,6 @@ Partial Class Form1
 		Me.door1.TabIndex = 118
 		Me.door1.TabStop = False
 		'
-		'lastItem1
-		'
-		Me.lastItem1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-		Me.lastItem1.Location = New System.Drawing.Point(1179, 171)
-		Me.lastItem1.Name = "lastItem1"
-		Me.lastItem1.Size = New System.Drawing.Size(88, 28)
-		Me.lastItem1.TabIndex = 117
-		Me.lastItem1.TabStop = False
-		Me.lastItem1.Tag = "content"
-		'
 		'door2
 		'
 		Me.door2.BackColor = System.Drawing.SystemColors.MenuHighlight
@@ -301,46 +267,6 @@ Partial Class Form1
 		Me.door2.Size = New System.Drawing.Size(59, 360)
 		Me.door2.TabIndex = 116
 		Me.door2.TabStop = False
-		'
-		'PictureBox4
-		'
-		Me.PictureBox4.BackColor = System.Drawing.Color.Yellow
-		Me.PictureBox4.Location = New System.Drawing.Point(562, 183)
-		Me.PictureBox4.Name = "PictureBox4"
-		Me.PictureBox4.Size = New System.Drawing.Size(65, 50)
-		Me.PictureBox4.TabIndex = 115
-		Me.PictureBox4.TabStop = False
-		Me.PictureBox4.Tag = "content"
-		'
-		'PictureBox3
-		'
-		Me.PictureBox3.BackColor = System.Drawing.Color.Yellow
-		Me.PictureBox3.Location = New System.Drawing.Point(475, 183)
-		Me.PictureBox3.Name = "PictureBox3"
-		Me.PictureBox3.Size = New System.Drawing.Size(65, 50)
-		Me.PictureBox3.TabIndex = 114
-		Me.PictureBox3.TabStop = False
-		Me.PictureBox3.Tag = "content"
-		'
-		'PictureBox2
-		'
-		Me.PictureBox2.BackColor = System.Drawing.Color.Yellow
-		Me.PictureBox2.Location = New System.Drawing.Point(142, 350)
-		Me.PictureBox2.Name = "PictureBox2"
-		Me.PictureBox2.Size = New System.Drawing.Size(65, 50)
-		Me.PictureBox2.TabIndex = 113
-		Me.PictureBox2.TabStop = False
-		Me.PictureBox2.Tag = "content"
-		'
-		'lastLife
-		'
-		Me.lastLife.BackColor = System.Drawing.Color.Fuchsia
-		Me.lastLife.Location = New System.Drawing.Point(1112, 285)
-		Me.lastLife.Name = "lastLife"
-		Me.lastLife.Size = New System.Drawing.Size(41, 43)
-		Me.lastLife.TabIndex = 112
-		Me.lastLife.TabStop = False
-		Me.lastLife.Tag = "content"
 		'
 		'instruction
 		'
@@ -357,83 +283,13 @@ Partial Class Form1
 		'boss
 		'
 		Me.boss.BackColor = System.Drawing.Color.Olive
-		Me.boss.Location = New System.Drawing.Point(2050, 305)
+		Me.boss.Location = New System.Drawing.Point(2013, 108)
 		Me.boss.Name = "boss"
 		Me.boss.Size = New System.Drawing.Size(130, 95)
 		Me.boss.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.boss.TabIndex = 90
 		Me.boss.TabStop = False
 		Me.boss.Tag = "content"
-		'
-		'bonus13
-		'
-		Me.bonus13.BackColor = System.Drawing.Color.Yellow
-		Me.bonus13.Location = New System.Drawing.Point(562, 323)
-		Me.bonus13.Name = "bonus13"
-		Me.bonus13.Size = New System.Drawing.Size(65, 50)
-		Me.bonus13.TabIndex = 74
-		Me.bonus13.TabStop = False
-		Me.bonus13.Tag = "content"
-		'
-		'enemy12
-		'
-		Me.enemy12.BackColor = System.Drawing.Color.Olive
-		Me.enemy12.Location = New System.Drawing.Point(695, 125)
-		Me.enemy12.Name = "enemy12"
-		Me.enemy12.Size = New System.Drawing.Size(65, 50)
-		Me.enemy12.TabIndex = 52
-		Me.enemy12.TabStop = False
-		Me.enemy12.Tag = "content"
-		'
-		'gun2
-		'
-		Me.gun2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
-		Me.gun2.Location = New System.Drawing.Point(308, 371)
-		Me.gun2.Name = "gun2"
-		Me.gun2.Size = New System.Drawing.Size(31, 29)
-		Me.gun2.TabIndex = 41
-		Me.gun2.TabStop = False
-		Me.gun2.Tag = "content"
-		'
-		'beforeBoss
-		'
-		Me.beforeBoss.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-		Me.beforeBoss.Location = New System.Drawing.Point(1514, 339)
-		Me.beforeBoss.Name = "beforeBoss"
-		Me.beforeBoss.Size = New System.Drawing.Size(65, 28)
-		Me.beforeBoss.TabIndex = 36
-		Me.beforeBoss.TabStop = False
-		Me.beforeBoss.Tag = "content"
-		'
-		'life1
-		'
-		Me.life1.BackColor = System.Drawing.Color.Fuchsia
-		Me.life1.Location = New System.Drawing.Point(682, 191)
-		Me.life1.Name = "life1"
-		Me.life1.Size = New System.Drawing.Size(51, 42)
-		Me.life1.TabIndex = 31
-		Me.life1.TabStop = False
-		Me.life1.Tag = "content"
-		'
-		'Item2
-		'
-		Me.Item2.BackColor = System.Drawing.Color.DarkGray
-		Me.Item2.Location = New System.Drawing.Point(220, 360)
-		Me.Item2.Name = "Item2"
-		Me.Item2.Size = New System.Drawing.Size(53, 40)
-		Me.Item2.TabIndex = 24
-		Me.Item2.TabStop = False
-		Me.Item2.Tag = "content"
-		'
-		'Item1
-		'
-		Me.Item1.BackColor = System.Drawing.Color.DarkGray
-		Me.Item1.Location = New System.Drawing.Point(749, 245)
-		Me.Item1.Name = "Item1"
-		Me.Item1.Size = New System.Drawing.Size(57, 40)
-		Me.Item1.TabIndex = 23
-		Me.Item1.TabStop = False
-		Me.Item1.Tag = "content"
 		'
 		'wall12
 		'
@@ -556,12 +412,7 @@ Partial Class Form1
 		Me.Controls.Add(Me.supergun0)
 		Me.Controls.Add(Me.wall24)
 		Me.Controls.Add(Me.door1)
-		Me.Controls.Add(Me.lastItem1)
 		Me.Controls.Add(Me.door2)
-		Me.Controls.Add(Me.PictureBox4)
-		Me.Controls.Add(Me.PictureBox3)
-		Me.Controls.Add(Me.PictureBox2)
-		Me.Controls.Add(Me.lastLife)
 		Me.Controls.Add(Me.Label6)
 		Me.Controls.Add(Me.Label5)
 		Me.Controls.Add(Me.Label4)
@@ -571,16 +422,9 @@ Partial Class Form1
 		Me.Controls.Add(Me.Label1)
 		Me.Controls.Add(Me.ProgressBar1)
 		Me.Controls.Add(Me.boss)
-		Me.Controls.Add(Me.bonus13)
-		Me.Controls.Add(Me.enemy12)
-		Me.Controls.Add(Me.gun2)
 		Me.Controls.Add(Me.extbtn)
 		Me.Controls.Add(Me.RestartBtn)
 		Me.Controls.Add(Me.winorloseTxt)
-		Me.Controls.Add(Me.beforeBoss)
-		Me.Controls.Add(Me.life1)
-		Me.Controls.Add(Me.Item2)
-		Me.Controls.Add(Me.Item1)
 		Me.Controls.Add(Me.pScore)
 		Me.Controls.Add(Me.pLife)
 		Me.Controls.Add(Me.pItem)
@@ -600,21 +444,9 @@ Partial Class Form1
 		Me.Text = "Form1"
 		CType(Me.wall24, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.door1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.lastItem1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.door2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.lastLife, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.instruction, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.boss, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.bonus13, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.enemy12, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.gun2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.beforeBoss, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.life1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.Item2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.Item1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall12, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall11, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall9, System.ComponentModel.ISupportInitialize).EndInit()
@@ -646,8 +478,6 @@ Partial Class Form1
 	Friend WithEvents winorloseTxt As Label
 	Friend WithEvents RestartBtn As Button
 	Friend WithEvents extbtn As Button
-	Friend WithEvents gun2 As PictureBox
-	Friend WithEvents bonus13 As PictureBox
 	Friend WithEvents ground1 As PictureBox
 	Friend WithEvents ProgressBar1 As ProgressBar
 	Friend WithEvents Label1 As Label
@@ -657,19 +487,9 @@ Partial Class Form1
 	Friend WithEvents Label4 As Label
 	Friend WithEvents Label5 As Label
 	Friend WithEvents Label6 As Label
-	Friend WithEvents life1 As PictureBox
-	Friend WithEvents enemy12 As PictureBox
-	Friend WithEvents Item1 As PictureBox
-	Friend WithEvents Item2 As PictureBox
-	Friend WithEvents PictureBox2 As PictureBox
-	Friend WithEvents PictureBox3 As PictureBox
-	Friend WithEvents PictureBox4 As PictureBox
 	Friend WithEvents door2 As PictureBox
 	Friend WithEvents FastestTimer As Timer
-	Friend WithEvents beforeBoss As PictureBox
 	Friend WithEvents boss As PictureBox
-	Friend WithEvents lastLife As PictureBox
-	Friend WithEvents lastItem1 As PictureBox
 	Friend WithEvents door1 As PictureBox
 	Friend WithEvents Timer1000ms As Timer
 	Friend WithEvents wall24 As PictureBox

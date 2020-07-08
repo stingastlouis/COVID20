@@ -245,10 +245,10 @@ Public Class Form1
 
 		If (player1.Left + player1.Width > Me.Width) Then
 			For Each enemy In enemies
-				ClassMyPublicShared.allPictureBoxes.Remove(enemy)
+				removeOtherPictureBoxAndUpdateScore(enemy)
 			Next
 			For Each bullet In bullets
-				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
+				removeOtherPictureBoxAndUpdateScore(bullet)
 			Next
 			enemies.Clear()
 			enemiesSpeed.Clear()
@@ -261,7 +261,7 @@ Public Class Form1
 			door2.BringToFront()
 			Dim noOfEnemies As Integer = numberOfEnemies()
 			While noOfEnemies > 0
-				Dim enemy As New ClassEnemies(numberBetween(Me.Width / 5, Me.Width - (door2.Width / 2) - 1), numberBetween(0, ground1.Top - 62 - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
+				Dim enemy As New ClassEnemies(numberBetween(Me.Width / 5, Me.Width - (door2.Width) - 1), numberBetween(0, ground1.Top - 62 - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
 				Dim en As PictureBox = enemy.generateEnemy()
 				Me.Controls.Add(en)
 				enemiesSpeed.Add(enemy.MoveSpeed1)
@@ -397,11 +397,6 @@ Public Class Form1
 	End Sub
 
 
-	Private Sub bgSound()
-		AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Dosseh - Le bruit du silence (Clip Officiel).wav")
-		AxWindowsMediaPlayer1.settings.setMode("Loop", True)
-	End Sub
-
 
 
 
@@ -472,8 +467,6 @@ Public Class Form1
 	''' </summary>
 	Private Sub setGame()
 		RestartBtn.Enabled = False
-		lastItem1.Visible = False
-		lastItem1.Enabled = False
 		pScore.Text = "Item :" + CStr(Score)
 		RestartBtn.Visible = False
 		winorloseTxt.Visible = False
@@ -487,9 +480,8 @@ Public Class Form1
 		Me.HorizontalScroll.Visible = False
 
 		ProgressBar1.Value = 18
-		Dim backSoundThread As Threading.Thread
-		backSoundThread = New Threading.Thread(AddressOf bgSound)
-		backSoundThread.Start()
+		'AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Dosseh - Le bruit du silence (Clip Officiel).wav")
+		'AxWindowsMediaPlayer1.settings.setMode("Loop", True)
 
 		playerIsFalling = True
 		playerSpeed = 5
