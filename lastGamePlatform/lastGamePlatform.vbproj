@@ -64,10 +64,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B068643B8E1324BA96309E4D7BB1742F6D4E0F05</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>B142FC9F227B1065C2EEBF8973BC31A7BB4F67C8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>lastGamePlatform_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>lastGamePlatform_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -240,6 +240,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="lastGamePlatform_1_TemporaryKey.pfx" />
     <None Include="lastGamePlatform_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

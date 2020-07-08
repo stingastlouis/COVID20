@@ -199,6 +199,7 @@ Public Class Form1
 			'Dim bossMoveSpeed As Int16 = 1
 			'enemiesSpeed.Add(bossMoveSpeed)
 			boss.Visible = True
+
 		End If
 	End Sub
 
@@ -230,7 +231,7 @@ Public Class Form1
 		End If
 		myGraphics.DrawString(waitBeforeFight.ToString(), myFont, myBrush, Me.Width / 2, Me.Height / 2)  '3,2,1
 		waitBeforeFight -= 1
-		tmWeird += 1
+
 	End Sub
 
 
@@ -286,8 +287,11 @@ Public Class Form1
 		If bullets.Count > 0 Then
 			bulletMovement()
 			bulletIntersectWithEnemy()
-		End If
 
+		End If
+		'If ProgressBar1.Visible Then
+		'	bulletIntersectsWithBoss()
+		'End If
 
 
 	End Sub
@@ -324,28 +328,28 @@ Public Class Form1
 	End Sub
 	Public Sub enemyMovement()
 		For en As Integer = 0 To enemies.Count - 1
-			If player1 IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(player1.Bounds) Then
-				Console.WriteLine("player intersect with enemy")
-				Exit For
-			End If
-			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
-				If activePictureBox IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-					If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-						If enemies(en).Top > activePictureBox.Top - enemies(en).Height Then 'to stay on top of ground and wall
-							enemies(en).Location = New Point(enemies(en).Location.X, activePictureBox.Top - enemies(en).Height)
-						End If
-						Exit For
-					End If
-					'If otherPicBox.Name.Contains("enemy") Then
-					'	startLife -= 1
-					'	Console.WriteLine("new enemy")
-					'	enemies.Remove(otherPicBox)
-					'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
-					'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
-					'End If
+			'	If player1 IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(player1.Bounds) Then
+			'		Console.WriteLine("player intersect with enemy")
+			'		Exit For
+			'	End If
+			'	For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes  'list all controls in the form
+			'		If activePictureBox IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+			'			If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+			'				If enemies(en).Top > activePictureBox.Top - enemies(en).Height Then 'to stay on top of ground and wall
+			'					enemies(en).Location = New Point(enemies(en).Location.X, activePictureBox.Top - enemies(en).Height)
+			'				End If
+			'				Exit For
+			'			End If
+			'			'If otherPicBox.Name.Contains("enemy") Then
+			'			'	startLife -= 1
+			'			'	Console.WriteLine("new enemy")
+			'			'	enemies.Remove(otherPicBox)
+			'			'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
+			'			'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
+			'			'End If
 
-				End If
-			Next
+			'		End If
+			'	Next
 
 
 
@@ -420,41 +424,79 @@ Public Class Form1
 		Next
 	End Sub
 
-	Private Sub goWeird()
-		If tmWeird > 2 And tmWeird < 50 Then
-			boss.Location = New Point(boss.Location.X - 1, boss.Location.Y + 1)
 
-		End If
-		If tmWeird > 50 And tmWeird < 100 Then
-			boss.Location = New Point(boss.Location.X - 1, boss.Location.Y - 1)
-
-		End If
-		If tmWeird = 99 Then
-			tmWeird = 0
-		End If
-
+	Private Sub bulletIntersectsWithBoss()
+		For Each bullet In bullets
+			If bullet.Bounds.IntersectsWith(boss.Bounds) And bullet.Enabled = True And boss.Visible Then
+				ProgressBar1.Value -= 1
+				If ProgressBar1.Value <= 0 Then
+					ProgressBar1.Value = 0
+					boss.Dispose()
+				End If
+				bullet.Dispose()
+				bullet.Enabled = False
+			End If
+		Next
 	End Sub
 
-
+	Dim returnTOposition As Integer = 0
+	Dim randomSpeed As Integer = 1
 	Private Sub makeBossMove()
+		returnTOposition += 1
 		'Step 1:at start make player go backward and forward. 
 		'STep 2: after 2 second make it go weird . go in diagonal way to player
 		'Step 3: if boss hit boss make it do step number 1 
 		'Dim bossSpeed As Integer = 2
 		'Dim temp As String = bosstimer
+		Dim BackwardSpeed As Integer = 5
+		Dim gen As New Random
 
-		If Not boss.Location = player1.Location Then
-			boss.Location = New Point(boss.Location.X - 2, boss.Location.Y + 2)
-			If boss.Bounds.IntersectsWith(player1.Bounds) Then
-				boss.Location = New Point(boss.Location.X - 2, boss.Location.Y)
-			End If
+
+
+
+		If returnTOposition > 2 And returnTOposition < 100 Then
+
+
+			boss.Location = New Point(boss.Location.X - randomSpeed, boss.Location.Y)
+
+		ElseIf returnTOposition > 100 And returnTOposition < 200 And Not boss.Left + boss.Width > door2.Left Then
+			boss.Location = New Point(boss.Location.X + BackwardSpeed, boss.Location.Y)
+
+		End If
+		If returnTOposition = 199 Then
+			returnTOposition = 0
+			randomSpeed += gen.Next(1, 5)
+		End If
+
+		If boss.Location.X + boss.Width >= door2.Location.X Then
+			boss.Location = New Point(boss.Location.X - randomSpeed, boss.Location.Y)
+		End If
+
+		If boss.Bounds.IntersectsWith(player1.Bounds) Then
+			startLife -= 1
+
+
+
 		End If
 
 
 
-		If ProgressBar1.Value < 10 Then
 
-			goWeird()
+		If ProgressBar1.Value < 10 Then
+			tmWeird += 1
+
+			If tmWeird > 2 And tmWeird < 50 Then
+				boss.Location = New Point(boss.Location.X - 1, boss.Location.Y + 1)
+
+			End If
+			If tmWeird > 50 And tmWeird < 100 Then
+				boss.Location = New Point(boss.Location.X - 1, boss.Location.Y - 1)
+
+			End If
+			If tmWeird = 99 Then
+				tmWeird = 0
+			End If
+
 		End If
 
 
@@ -478,7 +520,9 @@ Public Class Form1
 		'End If
 
 		'makeBossMove()
-
+		If ProgressBar1.Visible Then
+			makeBossMove()
+		End If
 
 	End Sub
 
