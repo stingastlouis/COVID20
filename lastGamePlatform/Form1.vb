@@ -357,23 +357,47 @@ Public Class Form1
 			'End If
 
 			'--------------------------------------------------------------------------------------------enkor tremblee mm
-			If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top < player1.Top Then
+			'If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top < player1.Top Then
+			'	enemies(en).Left -= enemiesSpeed(en)
+			'	enemies(en).Top += enemiesSpeed(en)
+			'ElseIf enemies(en).Left > player1.Left + player1.Width And enemies(en).Top > player1.Top Then
+			'	enemies(en).Left -= enemiesSpeed(en)
+			'	enemies(en).Top -= enemiesSpeed(en)
+			'ElseIf enemies(en).Left < player1.Left And enemies(en).Top < player1.Top Then
+			'	enemies(en).Left += enemiesSpeed(en)
+			'	enemies(en).Top += enemiesSpeed(en)
+			'ElseIf enemies(en).Left < player1.Left And enemies(en).Top > player1.Top Then
+			'	enemies(en).Left += enemiesSpeed(en)
+			'	enemies(en).Top -= enemiesSpeed(en)
+			'ElseIf enemies(en).Left > player1.Left And enemies(en).Top = player1.Top Then
+			'	enemies(en).Left -= enemiesSpeed(en)
+			'ElseIf enemies(en).Left < player1.Left And enemies(en).Top = player1.Top Then
+			'	enemies(en).Left += enemiesSpeed(en)
+			'End If
+
+
+			'dans right 
+			If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top + enemies(en).Height < player1.Top + player1.Height Then
+				If Not enemies(en).Top + enemies(en).Height = player1.Top + player1.Height Then
+					enemies(en).Top += enemiesSpeed(en)
+
+
+				End If
+
+			Else
 				enemies(en).Left -= enemiesSpeed(en)
-				enemies(en).Top += enemiesSpeed(en)
-			ElseIf enemies(en).Left > player1.Left + player1.Width And enemies(en).Top > player1.Top Then
-				enemies(en).Left -= enemiesSpeed(en)
-				enemies(en).Top -= enemiesSpeed(en)
-			ElseIf enemies(en).Left < player1.Left And enemies(en).Top < player1.Top Then
-				enemies(en).Left += enemiesSpeed(en)
-				enemies(en).Top += enemiesSpeed(en)
-			ElseIf enemies(en).Left < player1.Left And enemies(en).Top > player1.Top Then
-				enemies(en).Left += enemiesSpeed(en)
-				enemies(en).Top -= enemiesSpeed(en)
-			ElseIf enemies(en).Left > player1.Left And enemies(en).Top = player1.Top Then
-				enemies(en).Left -= enemiesSpeed(en)
-			ElseIf enemies(en).Left < player1.Left And enemies(en).Top = player1.Top Then
-				enemies(en).Left += enemiesSpeed(en)
 			End If
+
+
+
+			'------
+
+			'dans left 
+
+			'------
+
+
+
 
 		Next
 	End Sub
