@@ -3,7 +3,7 @@
 
 
 	Function numberOfEnemies()
-		Dim noOfEnemies As Integer = 0
+		Dim noOfEnemies As Integer = 1
 		If ClassMyPublicShared.level = 1 Then
 			noOfEnemies = numberBetween(1, 3) '1-3
 		ElseIf ClassMyPublicShared.level = 2 Then
@@ -15,7 +15,7 @@
 	End Function
 
 	Function enemyMoveSpeed()
-		Dim moveSpeed As Integer = 0
+		Dim moveSpeed As Integer = 1
 		If ClassMyPublicShared.level = 1 Then
 			moveSpeed = numberBetween(1, 5)
 		ElseIf ClassMyPublicShared.level = 2 Then
