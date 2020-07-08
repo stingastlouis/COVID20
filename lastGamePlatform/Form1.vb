@@ -440,8 +440,8 @@ Public Class Form1
 		'Step 1:at start make player go backward and forward. 
 		'STep 2: after 2 second make it go weird . go in diagonal way to player
 		'Step 3: if boss hit boss make it do step number 1 
-		Dim bossSpeed As Integer = 2
-		Dim temp As String = bosstimer
+		'Dim bossSpeed As Integer = 2
+		'Dim temp As String = bosstimer
 
 		If Not boss.Location = player1.Location Then
 			boss.Location = New Point(boss.Location.X - 2, boss.Location.Y + 2)
