@@ -377,15 +377,28 @@ Public Class Form1
 
 
 			'dans right 
-			If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top + enemies(en).Height < player1.Top + player1.Height Then
-				If Not enemies(en).Top + enemies(en).Height = player1.Top + player1.Height Then
-					enemies(en).Top += enemiesSpeed(en)
+			' And enemies(en).Top + enemies(en).Height < player1.Top + player1.Height Then
+			'	If Not enemies(en).Top + enemies(en).Height = player1.Top + player1.Height Then
+			'		enemies(en).Top += enemiesSpeed(en)
 
 
-				End If
+			'	End If
 
-			Else
+			'ElseIf enemies(en).Left > player1.Left + player1.Width And enemies(en).Top + enemies(en).Height > player1.Top + player1.Height Then
+			'	enemies(en).Top -= enemiesSpeed(en)
+			'Else
+
+			'	enemies(en).Left -= enemiesSpeed(en)
+			'End If
+
+			If enemies(en).Location.Y < player1.Location.Y Then
+				enemies(en).Location = New Point(enemies(en).Location.X, enemies(en).Location.Y + enemiesSpeed(en))
+			End If
+
+			If Not enemies(en).Location.X = player1.Location.X Then
 				enemies(en).Left -= enemiesSpeed(en)
+			Else
+
 			End If
 
 
