@@ -195,9 +195,9 @@ Public Class Form1
 			boss.BackColor = Color.Empty
 			boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
 			boss.BringToFront()
-			enemies.Add(boss)
-			Dim bossMoveSpeed As Int16 = 1
-			enemiesSpeed.Add(bossMoveSpeed)
+			'enemies.Add(boss)
+			'Dim bossMoveSpeed As Int16 = 1
+			'enemiesSpeed.Add(bossMoveSpeed)
 			boss.Visible = True
 		End If
 	End Sub
