@@ -8,7 +8,7 @@
         Form1.Show()
 
     End Sub
-
+    'testing
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Me.Hide()
         multiplayerRegForm.Show()
