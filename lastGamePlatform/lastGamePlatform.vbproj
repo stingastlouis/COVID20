@@ -328,7 +328,15 @@
     <Content Include="AudioVideo\bonusScene.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
     <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
+    <None Include="Resources\whiteSingle.png" />
     <None Include="Resources\superGun.png" />
+    <None Include="Resources\3d.png" />
+    <None Include="Resources\bluedegrading.png" />
+    <None Include="Resources\greengrass.png" />
+    <None Include="Resources\greenrouiller.png" />
+    <None Include="Resources\rouiller.png" />
+    <None Include="Resources\uhum.png" />
+    <None Include="Resources\blackSingle.png" />
     <Content Include="Resources\wall2.png" />
     <Content Include="Resources\wall1.png" />
     <None Include="Resources\life.png" />
