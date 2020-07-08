@@ -356,7 +356,7 @@ Public Class Form1
 			'	enemies(en).Top += enemiesSpeed(en)
 			'End If
 
-			'--------------------------------------------------------------------------------------------enkor tremblee mm
+			'----------------------------------------------------------00000..----------------------------------enkor tremblee mm
 			If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top < player1.Top Then
 				enemies(en).Left -= enemiesSpeed(en)
 				enemies(en).Top += enemiesSpeed(en)
