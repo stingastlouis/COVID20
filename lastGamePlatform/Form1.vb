@@ -25,13 +25,19 @@ Public Class Form1
 	Dim posRight As Boolean
 
 
-	'score vars
+	'label vars
 	Public Score As Integer
-	Dim Item_Collected As Integer
+	Dim itemCollected As Integer
+	Dim startLife As Integer
+
+
+	'score vars
+	Dim scoreEnemy As Integer
 	Dim scoreGun As Integer
 	Dim scoreSuperGun As Integer
-	Dim scoreEnemy As Integer
-	Dim startLife As Integer
+	Dim scoreLife As Integer
+	Dim scoreCoin As Integer
+	Dim scoreAdn As Integer
 
 
 	'no of sec to wait normally 3
@@ -177,8 +183,39 @@ Public Class Form1
 
 
 		Console.WriteLine("setting all parameters for the game")
+		ProgressBar1.Value = 18
+		AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
+		AxWindowsMediaPlayer1.settings.setMode("Loop", True)
+
+		playerIsFalling = True
+		playerSpeed = 5
+		gravitySpeed = 3
+		jumpHeight = 100
+		waitBeforeFight = ClassMyPublicShared.waitBeforeFight
+
+		'-labels 
+		Score = 0
+		itemCollected = 0
+		startLife = 3
+
+		'-score for items
+		scoreGun = 5
+		scoreSuperGun = 10
+		scoreEnemy = 10
+		scoreLife = 3
+		scoreCoin = 5
+		scoreAdn = 5
+		scoreBoss = 50
+
+		ClassMyPublicShared.level = 1
+		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
+		door2.BringToFront()
+		door2.BackColor = Color.Empty
+		Dim bullet As New ClassBullets()
+		bulletMoveSpeed = bullet.MoveSpeed1 'get the move speed of bullets
 		RestartBtn.Enabled = False
-		pScore.Text = "Item :" + CStr(Score)
+		pScore.Text = "Score :" + CStr(Score)
+		pItem.Text = "Item :" + CStr(itemCollected)
 		RestartBtn.Visible = False
 		winorloseTxt.Visible = False
 		extbtn.Visible = False
@@ -190,29 +227,7 @@ Public Class Form1
 		Me.HorizontalScroll.Enabled = False '#################################################pa p marC
 		Me.HorizontalScroll.Visible = False '#################################################pa p marC
 
-		ProgressBar1.Value = 18
-		AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
-		AxWindowsMediaPlayer1.settings.setMode("Loop", True)
 
-		playerIsFalling = True
-		playerSpeed = 5
-		gravitySpeed = 3
-		jumpHeight = 100
-		waitBeforeFight = ClassMyPublicShared.waitBeforeFight
-
-		Score = 0
-		scoreGun = 5
-		scoreSuperGun = 10
-		scoreEnemy = 10
-		startLife = 3
-		scoreBoss = 50
-
-		ClassMyPublicShared.level = 1
-		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
-		door2.BringToFront()
-		door2.BackColor = Color.Empty
-		Dim bullet As New ClassBullets()
-		bulletMoveSpeed = bullet.MoveSpeed1 'get the move speed of bullets
 
 
 
@@ -251,28 +266,7 @@ Public Class Form1
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
 	Private Sub player1_LocationChanged(sender As Object, e As EventArgs) Handles player1.LocationChanged
-		collideWithStaticPictureBoxes()
-
-
-		If (player1.Left >= supergun0.Left) AndAlso (boss.Visible = False) Then
-			Label1.Visible = True
-			Label1.Enabled = True
-			ProgressBar1.Enabled = True
-			ProgressBar1.Visible = True
-
-			boss.BackColor = Color.Empty
-			boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
-			boss.BringToFront()
-			boss.Visible = True
-		End If
-	End Sub
-
-
-	''' <summary>
-	''' used in timer
-	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
-	''' </summary>
-	Public Sub collideWithStaticPictureBoxes()
+		'collideWithStaticPictureBoxes()
 		playerIsFalling = True
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
@@ -284,42 +278,55 @@ Public Class Form1
 					Exit For
 				End If
 				If activePictureBox.Name.Contains("life") Then
-					Item_Collected += 1
+					itemCollected += 1
 					startLife += 1
-					Score += 1
+					Score += scoreLife
 					Console.WriteLine("new life")
 					removePictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "life" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("gun") Then
 					If activePictureBox.Name.Contains("supergun") Then
-						Item_Collected += 1
 						Score += scoreSuperGun
 					Else
-						Item_Collected += 1
-						Score += 5
+						Score += scoreGun
 					End If
+					itemCollected += 1
 					Console.WriteLine("new gun")
 					removePictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("adn") Then
-					Item_Collected += 1
-					Score += 5
+					itemCollected += 1
+					Score += scoreAdn
 					Console.WriteLine("new adn")
 					removePictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "adn" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("coin") Then
-					Item_Collected += 1
-					Score += 3
+					itemCollected += 1
+					Score += scoreCoin
 					Console.WriteLine("new coin")
 					removePictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
 				End If
 			End If
 		Next
+
+		If (player1.Left >= supergun0.Left) AndAlso (boss.Visible = False) Then
+			Label1.Visible = True
+			Label1.Enabled = True
+			ProgressBar1.Enabled = True
+			ProgressBar1.Visible = True
+
+			boss.BackColor = Color.Empty
+			boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bosses\boss1.png"))
+			boss.BringToFront()
+			boss.Visible = True
+		End If
 	End Sub
+
+
 
 
 
@@ -617,7 +624,7 @@ Public Class Form1
 
 		pScore.Text = "Score :" + CStr(Score)
 		pLife.Text = "X" + CStr(startLife)
-		pItem.Text = "Item :" + CStr(Item_Collected)
+		pItem.Text = "Item :" + CStr(itemCollected)
 
 		If ProgressBar1.Value <= 0 Then
 			ProgressBar1.Value = 0
