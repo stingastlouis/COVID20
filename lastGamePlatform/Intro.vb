@@ -20,6 +20,7 @@ Public Class Intro
 		myChangingPictureBoxPath = Nothing
 		i = Nothing
 		Me.Hide()
+		Me.Dispose()
 		Form1.Show()
 	End Sub
 
@@ -46,4 +47,8 @@ Public Class Intro
 		ChangingPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
 	End Sub
 
+	Private Sub Intro_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+		Me.Dispose()
+		startHere.Show()
+	End Sub
 End Class

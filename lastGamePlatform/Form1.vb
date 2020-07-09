@@ -669,6 +669,8 @@ Public Class Form1
 		End If
 	End Sub
 
-
-
+	Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+		Me.Dispose()
+		startHere.Show()
+	End Sub
 End Class
