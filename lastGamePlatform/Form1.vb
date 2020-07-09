@@ -550,8 +550,8 @@ Public Class Form1
 		Me.HorizontalScroll.Visible = False '#################################################pa p marC
 
 		ProgressBar1.Value = 18
-		'AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
-		'AxWindowsMediaPlayer1.settings.setMode("Loop", True)
+		AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
+		AxWindowsMediaPlayer1.settings.setMode("Loop", True)
 
 		playerIsFalling = True
 		playerSpeed = 5

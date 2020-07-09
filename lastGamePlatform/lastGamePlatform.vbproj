@@ -334,9 +334,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\_0_Ogre_Idle_000.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\instruction1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
