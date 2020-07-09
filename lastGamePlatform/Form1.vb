@@ -96,7 +96,7 @@ Public Class Form1
 	''' <param name="e"></param>
 	Private Sub RestartBtn_Click(sender As Object, e As EventArgs) Handles RestartBtn.Click
 		If RestartBtn.Text = "Restart" Then
-			Me.Hide()
+			Me.Close()
 			Dim f1 = New Form1()
 			f1.Show()
 		End If
@@ -113,7 +113,7 @@ Public Class Form1
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
 	Private Sub extbtn_Click(sender As Object, e As EventArgs) Handles extbtn.Click
-		Me.Hide()
+
 		startHere.ShowDialog()
 	End Sub
 
