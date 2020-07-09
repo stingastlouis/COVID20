@@ -53,6 +53,7 @@ Partial Class Form1
 		Me.wall3 = New System.Windows.Forms.PictureBox()
 		Me.player1 = New System.Windows.Forms.PictureBox()
 		Me.ground1 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
 		CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.supergun0, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall24, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +70,7 @@ Partial Class Form1
 		CType(Me.wall3, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.player1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.ground1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'Timer75ms
@@ -349,10 +351,18 @@ Partial Class Form1
 		Me.ground1.BackColor = System.Drawing.Color.Maroon
 		Me.ground1.Location = New System.Drawing.Point(0, 406)
 		Me.ground1.Name = "ground1"
-		Me.ground1.Size = New System.Drawing.Size(2259, 50)
+		Me.ground1.Size = New System.Drawing.Size(3168, 50)
 		Me.ground1.TabIndex = 0
 		Me.ground1.TabStop = False
 		Me.ground1.Tag = "content"
+		'
+		'PictureBox1
+		'
+		Me.PictureBox1.Location = New System.Drawing.Point(209, 261)
+		Me.PictureBox1.Name = "PictureBox1"
+		Me.PictureBox1.Size = New System.Drawing.Size(56, 47)
+		Me.PictureBox1.TabIndex = 122
+		Me.PictureBox1.TabStop = False
 		'
 		'Form1
 		'
@@ -360,6 +370,7 @@ Partial Class Form1
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
 		Me.ClientSize = New System.Drawing.Size(855, 524)
+		Me.Controls.Add(Me.PictureBox1)
 		Me.Controls.Add(Me.AxWindowsMediaPlayer1)
 		Me.Controls.Add(Me.supergun0)
 		Me.Controls.Add(Me.wall24)
@@ -406,6 +417,7 @@ Partial Class Form1
 		CType(Me.wall3, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.player1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.ground1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -439,4 +451,5 @@ Partial Class Form1
 	Friend WithEvents wall24 As PictureBox
 	Friend WithEvents supergun0 As PictureBox
     Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
+	Friend WithEvents PictureBox1 As PictureBox
 End Class
