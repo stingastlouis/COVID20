@@ -16,31 +16,29 @@
 
 
 
-	'constructors
-	Public Sub New()
-	End Sub
-	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
-		Me.width = 87
-		Me.height = 62
-		Me.image = My.Resources._0_Ogre_Idle_000
+	''constructors
+	'Public Sub New()
+	'End Sub
+	'Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
+	'	Me.width = 87
+	'	Me.height = 62
+	'	Me.image = My.Resources._0_Ogre_Idle_000
 
-		Me.xPosition = xPosition
-		Me.yPosition = yPosition
-		Me.name = name
-		Me.moveSpeed = moveSpeed
-	End Sub
-	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
-		Me.width = 87
-		Me.height = 62
-		Me.image = image
+	'	Me.xPosition = xPosition
+	'	Me.yPosition = yPosition
+	'	Me.name = name
+	'	Me.moveSpeed = moveSpeed
+	'End Sub
+	'Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
+	'	Me.width = 87
+	'	Me.height = 62
+	'	Me.image = image
 
-		Me.xPosition = xPosition
-		Me.yPosition = yPosition
-		Me.name = name
-		Me.moveSpeed = moveSpeed
-	End Sub
-
-
+	'	Me.xPosition = xPosition
+	'	Me.yPosition = yPosition
+	'	Me.name = name
+	'	Me.moveSpeed = moveSpeed
+	'End Sub
 
 
 
@@ -53,11 +51,13 @@
 
 
 
-	'functions
-	Public Function generateBoss()
-		Dim pb As New ClassPictureBox(Width1, Height1, Name1, XPosition1, YPosition1, Image1)
-		Return pb.showPictureBox()
-	End Function
+
+
+	''functions
+	'Public Function generateBoss()
+	'	Dim pb As New ClassPictureBox(Width1, Height1, Name1, XPosition1, YPosition1, Image1)
+	'	Return pb.showPictureBox()
+	'End Function
 
 
 

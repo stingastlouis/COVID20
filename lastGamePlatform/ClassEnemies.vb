@@ -5,7 +5,7 @@
 	Private yPosition As Integer
 	Private name As String
 	Private moveSpeed As Integer
-	Private image As Bitmap
+	Private img As Bitmap
 
 
 
@@ -20,26 +20,26 @@
 	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
 		Me.width = 87
 		Me.height = 62
-		Me.image = My.Resources._0_Ogre_Idle_000
+		Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Enemies\Enemy1.png"))
 		Me.xPosition = xPosition - 87
 		Me.yPosition = yPosition - 62
 		Me.name = name
 		Me.moveSpeed = moveSpeed
 	End Sub
-	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
+	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, img As Bitmap) 'for new enemies img use this constructor
 		Me.width = 87
 		Me.height = 62
-		Me.image = image
+		Me.img = img
 		Me.xPosition = xPosition
 		Me.yPosition = yPosition
 		Me.name = name
 		Me.moveSpeed = moveSpeed
 	End Sub
 
-	Public Sub New(width As Integer, height As Integer, xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, image As Bitmap) 'for new enemies image use this constructor
+	Public Sub New(width As Integer, height As Integer, xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, img As Bitmap) 'for new enemies img use this constructor
 		Me.width = width
 		Me.height = height
-		Me.image = image
+		Me.img = img
 
 		Me.xPosition = xPosition
 		Me.yPosition = yPosition
@@ -106,12 +106,12 @@
 		End Set
 	End Property
 
-	Public Property Image1 As Bitmap
+	Public Property img1 As Bitmap
 		Get
-			Return image
+			Return img
 		End Get
 		Set(value As Bitmap)
-			image = value
+			img = value
 		End Set
 	End Property
 
@@ -128,7 +128,7 @@
 
 	'functions
 	Public Function generateEnemy()
-		Dim pb As New ClassPictureBox(Width1, Height1, Name1, XPosition1, YPosition1, Image1)
+		Dim pb As New ClassPictureBox(Width1, Height1, Name1, XPosition1, YPosition1, img1)
 		Return pb.showPictureBox()
 	End Function
 

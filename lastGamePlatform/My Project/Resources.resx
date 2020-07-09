@@ -121,17 +121,11 @@
   <data name="arrow_keys" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow keys.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BackgroundMaybe1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BackgroundMaybe1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="blackSingle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\blackSingle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bluedegrading" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bluedegrading.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Dosseh___Le_bruit_du_silence__Clip_Officiel_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Dosseh - Le bruit du silence (Clip Officiel).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="greengrass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greengrass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,23 +169,11 @@
   <data name="walk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\walk.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="wall1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wall1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="wall2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wall2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Webp_net_gifmaker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Webp.net-gifmaker.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="whiteSingle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\whiteSingle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_0_Ogre_Idle_000" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\0_Ogre_Idle_000.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="_3d" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\3d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

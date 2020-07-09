@@ -154,7 +154,7 @@ Public Class Form1
 					Dim bulletpb As PictureBox = bullet.generateBullet()
 					Me.Controls.Add(bulletpb)
 					bullets.Add(bulletpb)
-					My.Computer.Audio.Play(My.Resources._1, AudioPlayMode.Background)
+					My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bulletSound.wav"), AudioPlayMode.Background)
 				End If
 
 			Case Keys.Escape
@@ -549,7 +549,7 @@ Public Class Form1
 		Me.HorizontalScroll.Visible = False '#################################################pa p marC
 
 		ProgressBar1.Value = 18
-		'AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Dosseh - Le bruit du silence (Clip Officiel).wav")
+		'AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
 		'AxWindowsMediaPlayer1.settings.setMode("Loop", True)
 
 		playerIsFalling = True
