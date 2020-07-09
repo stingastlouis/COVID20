@@ -54,6 +54,10 @@ Partial Class Form1
 		Me.player1 = New System.Windows.Forms.PictureBox()
 		Me.ground1 = New System.Windows.Forms.PictureBox()
 		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox5 = New System.Windows.Forms.PictureBox()
 		CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.supergun0, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall24, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,6 +75,10 @@ Partial Class Form1
 		CType(Me.player1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.ground1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'Timer75ms
@@ -364,12 +372,48 @@ Partial Class Form1
 		Me.PictureBox1.TabIndex = 122
 		Me.PictureBox1.TabStop = False
 		'
+		'PictureBox2
+		'
+		Me.PictureBox2.Location = New System.Drawing.Point(308, 319)
+		Me.PictureBox2.Name = "PictureBox2"
+		Me.PictureBox2.Size = New System.Drawing.Size(59, 50)
+		Me.PictureBox2.TabIndex = 123
+		Me.PictureBox2.TabStop = False
+		'
+		'PictureBox3
+		'
+		Me.PictureBox3.Location = New System.Drawing.Point(308, 221)
+		Me.PictureBox3.Name = "PictureBox3"
+		Me.PictureBox3.Size = New System.Drawing.Size(56, 47)
+		Me.PictureBox3.TabIndex = 124
+		Me.PictureBox3.TabStop = False
+		'
+		'PictureBox4
+		'
+		Me.PictureBox4.Location = New System.Drawing.Point(406, 299)
+		Me.PictureBox4.Name = "PictureBox4"
+		Me.PictureBox4.Size = New System.Drawing.Size(56, 47)
+		Me.PictureBox4.TabIndex = 125
+		Me.PictureBox4.TabStop = False
+		'
+		'PictureBox5
+		'
+		Me.PictureBox5.Location = New System.Drawing.Point(484, 199)
+		Me.PictureBox5.Name = "PictureBox5"
+		Me.PictureBox5.Size = New System.Drawing.Size(56, 47)
+		Me.PictureBox5.TabIndex = 126
+		Me.PictureBox5.TabStop = False
+		'
 		'Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
 		Me.ClientSize = New System.Drawing.Size(855, 524)
+		Me.Controls.Add(Me.PictureBox5)
+		Me.Controls.Add(Me.PictureBox4)
+		Me.Controls.Add(Me.PictureBox3)
+		Me.Controls.Add(Me.PictureBox2)
 		Me.Controls.Add(Me.PictureBox1)
 		Me.Controls.Add(Me.AxWindowsMediaPlayer1)
 		Me.Controls.Add(Me.supergun0)
@@ -418,6 +462,10 @@ Partial Class Form1
 		CType(Me.player1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.ground1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -452,4 +500,8 @@ Partial Class Form1
 	Friend WithEvents supergun0 As PictureBox
     Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
 	Friend WithEvents PictureBox1 As PictureBox
+	Friend WithEvents PictureBox2 As PictureBox
+	Friend WithEvents PictureBox3 As PictureBox
+	Friend WithEvents PictureBox4 As PictureBox
+	Friend WithEvents PictureBox5 As PictureBox
 End Class
