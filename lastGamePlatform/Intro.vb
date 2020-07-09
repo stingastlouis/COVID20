@@ -8,15 +8,17 @@ Public Class Intro
 
 	Private Sub NextButton_Click(sender As Object, e As EventArgs) Handles NextButton.Click
 		i += 1
-		If i < myChangingPictureBoxPath.Count Then
-			displayTextAndImage()
-		Else
+		If i >= myChangingPictureBoxPath.Count - 1 Then
 			NextButton.Enabled = False
 		End If
+		displayTextAndImage()
 	End Sub
 
 	Private Sub GameButton_Click(sender As Object, e As EventArgs) Handles GameButton.Click
 		AxWindowsMediaPlayer1.Dispose()
+		myChangingLabel = Nothing
+		myChangingPictureBoxPath = Nothing
+		i = Nothing
 		Me.Hide()
 		Form1.Show()
 	End Sub
@@ -35,7 +37,6 @@ Public Class Intro
 
 		myChangingLabel.Add("Mr. Johny dotait de compétence technique et intellectuel est le plu taillé pour affronter ce job. Il est diplomé avec excellence du MIT(Massachusetts Institute of Technology) en 'Bioengineering And Biomedical Engineering'. Ayant aussi acquis des compétences techniques tant que meilleur agent au 'US Navy SEALs'")
 		myChangingPictureBoxPath.Add(imgPath & "player.png")
-
 		displayTextAndImage()
 	End Sub
 
