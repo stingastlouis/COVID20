@@ -75,12 +75,6 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Resources\mothrfuker.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data.EntityFramework, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
@@ -242,7 +236,6 @@
   <ItemGroup>
     <None Include="lastGamePlatform_1_TemporaryKey.pfx" />
     <None Include="lastGamePlatform_TemporaryKey.pfx" />
-    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -255,13 +248,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Dosseh - Le bruit du silence %28Clip Officiel%29.wav" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\idle_Player move.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\0_Ogre_Idle_000.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\5a3719ae33d594.4783473215135604942123.png" />
@@ -283,30 +270,6 @@
     <None Include="Resources\leftGiff.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\BackgroundMaybe1.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Rifle-Automatic-Fire-E-www.fesliyanstudios.com.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\5.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\2.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\3.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\4.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Cinematic Trailer - AShamaluevMusic.mp3" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\ground.png" />
   </ItemGroup>
   <ItemGroup>
@@ -320,18 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow keys.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ItemsImages\life.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ItemsImages\adn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ItemsImages\coin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ItemsImages\gun.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\walk.gif" />
@@ -356,9 +307,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AudioVideo\bonusScene.mp4" />
-    <Content Include="AudioVideo\tradeMark - 0.05.00-0.07.00.mp4" />
-    <Content Include="AudioVideo\tradeMark - 0.19.53-0.20.32.mp4" />
     <None Include="Resources\whiteSingle.png" />
     <None Include="Resources\superGun.png" />
     <None Include="Resources\3d.png" />
@@ -372,20 +320,6 @@
     <None Include="Resources\TITLE-White.png" />
     <None Include="Resources\PLAYHERE.png" />
     <None Include="Resources\PLAYHERE-HOVER.png" />
-    <None Include="Resources\bulletfire.png" />
-    <None Include="Resources\mothrfuker.ico" />
-    <None Include="Resources\forico.png" />
-    <Content Include="Resources\wall2.png" />
-    <Content Include="Resources\wall1.png" />
-    <None Include="Resources\life.png" />
-    <None Include="Resources\gun.png" />
-    <None Include="Resources\coin.png" />
-    <None Include="Resources\adn.png" />
-    <None Include="Resources\door2.png" />
-    <None Include="IntroImages\player.png" />
-    <Content Include="IntroImages\definition.png" />
-    <Content Include="IntroImages\introAfter.png" />
-    <Content Include="IntroImages\introBefore.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -398,6 +332,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\instruction1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -50,7 +50,7 @@
 		For Each ctrl As Control In myForm.Controls 'scan all controls present in myform
 			If TypeOf (ctrl) Is PictureBox Then 'if the control is a picturebox then
 				Dim path As String = ""
-				If ctrl.Name.Contains("boss") OrElse ctrl.Name.Contains("player") OrElse ctrl.Name.Contains("instruction") Then 'all pictureboxes to exclude here
+				If ctrl.Name.Contains("boss") OrElse ctrl.Name.Contains("player") OrElse ctrl.Name.Contains("instruction") OrElse ctrl.Name.Contains("door") Then 'all pictureboxes to exclude here
 					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
 
 				ElseIf ctrl.Name.Contains("supergun") Then 'e.g. gun1,lastgun...
@@ -63,10 +63,6 @@
 
 				ElseIf ctrl.Name.Contains("wall") Then
 					path = ClassMyPublicShared.randomWallImages(numberBetween(0, ClassMyPublicShared.randomWallImages.Count - 1)) 'path = return random image path in "classmypublicshared"
-					Dim pb As New ClassPictureBox(ctrl, path)
-
-				ElseIf ctrl.Name.Contains("door") Then
-					path = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\door2.png")
 					Dim pb As New ClassPictureBox(ctrl, path)
 
 				Else 'pictureboxes to include

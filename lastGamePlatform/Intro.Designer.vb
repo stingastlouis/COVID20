@@ -22,11 +22,14 @@ Partial Class Intro
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Intro))
 		Me.ChangingPictureBox = New System.Windows.Forms.PictureBox()
 		Me.ChangingLabel = New System.Windows.Forms.Label()
 		Me.NextButton = New System.Windows.Forms.Button()
 		Me.GameButton = New System.Windows.Forms.Button()
+		Me.AxWindowsMediaPlayer1 = New AxWMPLib.AxWindowsMediaPlayer()
 		CType(Me.ChangingPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'ChangingPictureBox
@@ -64,11 +67,22 @@ Partial Class Intro
 		Me.GameButton.Text = "Lunch Game"
 		Me.GameButton.UseVisualStyleBackColor = True
 		'
+		'AxWindowsMediaPlayer1
+		'
+		Me.AxWindowsMediaPlayer1.Enabled = True
+		Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(535, 37)
+		Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
+		Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
+		Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(75, 23)
+		Me.AxWindowsMediaPlayer1.TabIndex = 4
+		Me.AxWindowsMediaPlayer1.Visible = False
+		'
 		'Intro
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ClientSize = New System.Drawing.Size(749, 410)
+		Me.Controls.Add(Me.AxWindowsMediaPlayer1)
 		Me.Controls.Add(Me.GameButton)
 		Me.Controls.Add(Me.NextButton)
 		Me.Controls.Add(Me.ChangingLabel)
@@ -76,6 +90,7 @@ Partial Class Intro
 		Me.Name = "Intro"
 		Me.Text = "Intro"
 		CType(Me.ChangingPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 
 	End Sub
@@ -84,4 +99,5 @@ Partial Class Intro
 	Friend WithEvents ChangingLabel As Label
 	Friend WithEvents NextButton As Button
 	Friend WithEvents GameButton As Button
+	Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
 End Class

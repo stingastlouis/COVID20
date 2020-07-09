@@ -4,7 +4,7 @@ Public Class Intro
 	Dim myChangingLabel As New List(Of String)
 	Dim myChangingPictureBoxPath As New List(Of String)
 	Dim i As Integer = 0
-	Dim imgPath As String = AppDomain.CurrentDomain.BaseDirectory.Replace("\bin\Debug\", "\IntroImages\")
+	Dim imgPath As String = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Intro\")
 
 	Private Sub NextButton_Click(sender As Object, e As EventArgs) Handles NextButton.Click
 		i += 1
@@ -16,12 +16,14 @@ Public Class Intro
 	End Sub
 
 	Private Sub GameButton_Click(sender As Object, e As EventArgs) Handles GameButton.Click
+		AxWindowsMediaPlayer1.Dispose()
 		Me.Hide()
 		Form1.Show()
 	End Sub
 
 	Private Sub Intro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		My.Computer.Audio.Play(My.Resources.Cinematic_Trailer___AShamaluevMusic, AudioPlayMode.BackgroundLoop)
+		AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Intro\IntroSound.mp3")
+		AxWindowsMediaPlayer1.settings.setMode("Loop", True)
 		myChangingLabel.Add("Le 31 Dec 2019, la novel coronavirus fait son apparition, causant des crise dans le monde.")
 		myChangingPictureBoxPath.Add(imgPath & "introAfter.png")
 
