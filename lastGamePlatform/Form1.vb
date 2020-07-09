@@ -237,7 +237,6 @@ Public Class Form1
 		End If
 		'-
 
-
 		'-player pass through right door
 		If (player1.Left + player1.Width > Me.Width) Then
 			For Each enemy In enemies 'remove all enemies from form and allPictureBoxes<> before left door
@@ -253,6 +252,8 @@ Public Class Form1
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y) 'door appear on right
 				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y) 'keep same ypos and display everything before the left door
 			Next
+			door1.BackColor = Color.Empty
+			door2.BackColor = Color.Empty
 
 			'--generate random no of enemies at random position with random move speed
 			Dim noOfEnemies As Integer = ModuleRandomiser.numberOfEnemies()
@@ -568,6 +569,7 @@ Public Class Form1
 		ClassMyPublicShared.level = 1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
 		door2.BringToFront()
+		door2.BackColor = Color.Empty
 		Dim bullet As New ClassBullets()
 		bulletMoveSpeed = bullet.MoveSpeed1 'get the move speed of bullets
 	End Sub
