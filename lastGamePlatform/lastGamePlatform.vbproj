@@ -107,9 +107,7 @@
     <Compile Include="BattleMultiplayer.Designer.vb">
       <DependentUpon>BattleMultiplayer.vb</DependentUpon>
     </Compile>
-    <Compile Include="BattleMultiplayer.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="BattleMultiplayer.vb" />
     <Compile Include="bonusForm.Designer.vb">
       <DependentUpon>bonusForm.vb</DependentUpon>
     </Compile>
@@ -131,15 +129,11 @@
     <Compile Include="Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form2.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Form2.vb" />
     <Compile Include="Form3.Designer.vb">
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form3.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Form3.vb" />
     <Compile Include="Intro.Designer.vb">
       <DependentUpon>Intro.vb</DependentUpon>
     </Compile>
@@ -367,6 +361,10 @@
     <None Include="Resources\rouiller.png" />
     <None Include="Resources\uhum.png" />
     <None Include="Resources\blackSingle.png" />
+    <None Include="Resources\multi-black.png" />
+    <None Include="Resources\TITLE-White.png" />
+    <None Include="Resources\PLAYHERE.png" />
+    <None Include="Resources\PLAYHERE-HOVER.png" />
     <Content Include="Resources\wall2.png" />
     <Content Include="Resources\wall1.png" />
     <None Include="Resources\life.png" />

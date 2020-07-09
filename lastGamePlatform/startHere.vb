@@ -30,5 +30,15 @@
         bonusForm.Show()
     End Sub
 
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
 
+    End Sub
+
+    Private Sub PictureBox4_MouseHover(sender As Object, e As EventArgs) Handles PictureBox4.MouseHover
+        PictureBox4.Image = My.Resources.PLAYHERE_HOVER
+    End Sub
+
+    Private Sub PictureBox4_MouseLeave(sender As Object, e As EventArgs) Handles PictureBox4.MouseLeave
+        PictureBox4.Image = My.Resources.PLAYHERE
+    End Sub
 End Class

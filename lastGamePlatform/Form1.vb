@@ -424,7 +424,7 @@ Public Class Form1
 		Next
 	End Sub
 
-
+	'PUT THIS IN A TIMER IF YOU WANT TO SEE BOSS DANCE.
 	Private Sub bulletIntersectsWithBoss()
 		For Each bullet In bullets
 			If bullet.Bounds.IntersectsWith(boss.Bounds) And bullet.Enabled = True And boss.Visible Then
