@@ -46,6 +46,8 @@ Public Class Form1
 
 	Dim bosstimer As String
 
+
+
 	''' <summary>
 	''' when the form is loading
 	''' </summary>
@@ -65,9 +67,6 @@ Public Class Form1
 		Dim itm As New ClassItems()
 		itm.scanPredefineItem()
 
-
-
-
 		Console.WriteLine("updating the lists")
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
 			'seperating randomPictureBoxes to specific ones
@@ -77,15 +76,10 @@ Public Class Form1
 				walls.Add(activePictureBox) 'push to list
 			ElseIf activePictureBox.Name.Contains("enemy") Then
 				enemies.Add(activePictureBox)
+				enemiesSpeed.Add(1)
 			ElseIf activePictureBox.Name.Contains("boss") OrElse activePictureBox.Name.Contains("player") OrElse activePictureBox.Name.Contains("instruction") Then 'all pictureboxes to exclude here
 			End If
 		Next
-
-
-
-
-
-
 	End Sub
 
 
@@ -155,14 +149,13 @@ Public Class Form1
 				End If
 
 			Case Keys.Q
-				If (bullets.Count <= 10) Then
+				If (bullets.Count <= 10) Then 'allow to shot only 10 bullets - reduce cpu usage and lag
 					Dim bullet As New ClassBullets(player1)
 					Dim bulletpb As PictureBox = bullet.generateBullet()
 					Me.Controls.Add(bulletpb)
 					bullets.Add(bulletpb)
 					My.Computer.Audio.Play(My.Resources._1, AudioPlayMode.Background)
 				End If
-
 
 			Case Keys.Escape
 				Me.Close()
@@ -195,11 +188,7 @@ Public Class Form1
 			boss.BackColor = Color.Empty
 			boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
 			boss.BringToFront()
-			'enemies.Add(boss)
-			'Dim bossMoveSpeed As Int16 = 1
-			'enemiesSpeed.Add(bossMoveSpeed)
 			boss.Visible = True
-
 		End If
 	End Sub
 
@@ -264,8 +253,6 @@ Public Class Form1
 				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y) 'door appear on right
 				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y) 'keep same ypos and display everything before the left door
 			Next
-			door1.BringToFront()
-			door2.BringToFront()
 
 			'--generate random no of enemies at random position with random move speed
 			Dim noOfEnemies As Integer = ModuleRandomiser.numberOfEnemies()

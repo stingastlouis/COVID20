@@ -299,19 +299,6 @@ Partial Class Form2
         Me.lastLife.TabStop = False
         Me.lastLife.Tag = "content"
         '
-        'lastGun
-        '
-        Me.lastGun.BackColor = System.Drawing.Color.Transparent
-        Me.lastGun.Image = Global.lastGamePlatform.My.Resources.Resources.gun
-        Me.lastGun.Location = New System.Drawing.Point(3379, 382)
-        Me.lastGun.Margin = New System.Windows.Forms.Padding(4)
-        Me.lastGun.Name = "lastGun"
-        Me.lastGun.Size = New System.Drawing.Size(52, 44)
-        Me.lastGun.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.lastGun.TabIndex = 185
-        Me.lastGun.TabStop = False
-        Me.lastGun.Tag = "content"
-        '
         'lastItem1
         '
         Me.lastItem1.BackColor = System.Drawing.Color.Gold
