@@ -34,55 +34,31 @@ Public Class Form1
 	Dim startLife As Integer
 
 
-	'no of sec to wait 
+	'no of sec to wait normally 3
 	Dim waitBeforeFight As Integer
-	Dim tmWeird As Integer = 0 'number of sec for boss movement 
+
 
 	'boss vars
 	Dim moveTheBoss As Boolean = False
 	Dim scoreBoss As Integer
+	Dim tmWeird As Integer = 0 'number of sec for boss movement 
+	Dim returnTOposition As Integer = 0
+	Dim randomSpeed As Integer = 1
+
+	'------------------------------------------------------------------------------
 
 
 
-	Dim bosstimer As String
 
 
 
-	''' <summary>
-	''' when the form is loading
-	''' </summary>
-	''' <param name="sender"></param>
-	''' <param name="e"></param>
-	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
-		'name taken from register form
-		'Dim lvl1 = New MyGameManager("John") 'name or name,life,score,item
-
-		Console.WriteLine("clear main list of objects")
-		ClassMyPublicShared.allPictureBoxes.Clear()
-
-		Console.WriteLine("setting all parameters for the game")
-		setGame()
-
-		Console.WriteLine("pushing pictureboxes to main list of objects")
-		Dim itm As New ClassItems()
-		itm.scanPredefineItem()
-
-		Console.WriteLine("updating the lists")
-		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
-			'seperating randomPictureBoxes to specific ones
-			If activePictureBox.Name.Contains("ground") Then
-				grounds.Add(activePictureBox) 'push to list
-			ElseIf activePictureBox.Name.Contains("wall") Then
-				walls.Add(activePictureBox) 'push to list
-			ElseIf activePictureBox.Name.Contains("enemy") Then
-				enemies.Add(activePictureBox)
-				enemiesSpeed.Add(1)
-			ElseIf activePictureBox.Name.Contains("boss") OrElse activePictureBox.Name.Contains("player") OrElse activePictureBox.Name.Contains("instruction") Then 'all pictureboxes to exclude here
-			End If
-		Next
-	End Sub
 
 
+
+
+
+
+	'-buttons exit and restart
 	''' <summary>
 	''' continue or restart button
 	''' </summary>
@@ -110,8 +86,21 @@ Public Class Form1
 		Me.Hide()
 		startHere.ShowDialog()
 	End Sub
+	'-end buttons exit and restart
 
 
+
+
+
+
+
+
+
+
+
+
+
+	'-keyboard button press/release
 	''' <summary>
 	''' once key is release on keyboard
 	''' </summary>
@@ -162,11 +151,97 @@ Public Class Form1
 				startHere.Show()
 		End Select
 	End Sub
+	'-end keyboard button press/release
 
 
 
 
 
+
+
+
+
+
+	''' <summary>
+	''' when the form is loading
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+		Console.WriteLine("clear main list of objects")
+		ClassMyPublicShared.allPictureBoxes.Clear()
+
+
+
+
+
+
+		Console.WriteLine("setting all parameters for the game")
+		RestartBtn.Enabled = False
+		pScore.Text = "Item :" + CStr(Score)
+		RestartBtn.Visible = False
+		winorloseTxt.Visible = False
+		extbtn.Visible = False
+		ProgressBar1.Enabled = False
+		ProgressBar1.Visible = False
+		Label1.Visible = False
+		Label1.Enabled = False
+		boss.Visible = False
+		Me.HorizontalScroll.Enabled = False '#################################################pa p marC
+		Me.HorizontalScroll.Visible = False '#################################################pa p marC
+
+		ProgressBar1.Value = 18
+		AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
+		AxWindowsMediaPlayer1.settings.setMode("Loop", True)
+
+		playerIsFalling = True
+		playerSpeed = 5
+		gravitySpeed = 3
+		jumpHeight = 100
+		waitBeforeFight = ClassMyPublicShared.waitBeforeFight
+
+		Score = 0
+		scoreGun = 5
+		scoreSuperGun = 10
+		scoreEnemy = 10
+		startLife = 3
+		scoreBoss = 50
+
+		ClassMyPublicShared.level = 1
+		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
+		door2.BringToFront()
+		door2.BackColor = Color.Empty
+		Dim bullet As New ClassBullets()
+		bulletMoveSpeed = bullet.MoveSpeed1 'get the move speed of bullets
+
+
+
+
+
+
+		Console.WriteLine("pushing pictureboxes to main list of objects")
+		Dim itm As New ClassItems()
+		itm.scanPredefineItem()
+
+
+
+
+
+
+		Console.WriteLine("updating the lists")
+		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
+			'seperating randomPictureBoxes to specific ones
+			If activePictureBox.Name.Contains("ground") Then
+				grounds.Add(activePictureBox) 'push to list
+			ElseIf activePictureBox.Name.Contains("wall") Then
+				walls.Add(activePictureBox) 'push to list
+			ElseIf activePictureBox.Name.Contains("enemy") Then
+				enemies.Add(activePictureBox)
+				enemiesSpeed.Add(1)
+			ElseIf activePictureBox.Name.Contains("boss") OrElse activePictureBox.Name.Contains("player") OrElse activePictureBox.Name.Contains("instruction") Then 'all pictureboxes to exclude here
+			End If
+		Next
+	End Sub
 
 
 
@@ -193,6 +268,58 @@ Public Class Form1
 	End Sub
 
 
+	''' <summary>
+	''' used in timer
+	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
+	''' </summary>
+	Public Sub collideWithStaticPictureBoxes()
+		playerIsFalling = True
+		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
+				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+					If player1.Top > activePictureBox.Top - player1.Height Then 'to stay on top of ground and wall
+						player1.Location = New Point(player1.Location.X, activePictureBox.Top - player1.Height)
+						playerIsFalling = False
+					End If
+					Exit For
+				End If
+				If activePictureBox.Name.Contains("life") Then
+					Item_Collected += 1
+					startLife += 1
+					Score += 1
+					Console.WriteLine("new life")
+					removePictureBoxAndUpdateScore(activePictureBox)
+					Exit For 'exit the for loop as picturebox name contains "life" help in using less cpu power
+				End If
+				If activePictureBox.Name.Contains("gun") Then
+					If activePictureBox.Name.Contains("supergun") Then
+						Item_Collected += 1
+						Score += scoreSuperGun
+					Else
+						Item_Collected += 1
+						Score += 5
+					End If
+					Console.WriteLine("new gun")
+					removePictureBoxAndUpdateScore(activePictureBox)
+					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
+				End If
+				If activePictureBox.Name.Contains("adn") Then
+					Item_Collected += 1
+					Score += 5
+					Console.WriteLine("new adn")
+					removePictureBoxAndUpdateScore(activePictureBox)
+					Exit For 'exit the for loop as picturebox name contains "adn" help in using less cpu power
+				End If
+				If activePictureBox.Name.Contains("coin") Then
+					Item_Collected += 1
+					Score += 3
+					Console.WriteLine("new coin")
+					removePictureBoxAndUpdateScore(activePictureBox)
+					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
+				End If
+			End If
+		Next
+	End Sub
 
 
 
@@ -205,8 +332,14 @@ Public Class Form1
 
 
 
+
+	'-my timers
+	''' <summary>
+	''' display 3,2,1,go
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
 	Private Sub Timer1000ms_Tick(sender As Object, e As EventArgs) Handles Timer1000ms.Tick
-		bosstimer = CStr(DateAndTime.TimeOfDay.Second)
 		Dim myGraphics As Graphics = Me.CreateGraphics
 		Dim myFont As Font
 		Dim myBrush As Brush
@@ -220,7 +353,6 @@ Public Class Form1
 		End If
 		myGraphics.DrawString(waitBeforeFight.ToString(), myFont, myBrush, Me.Width / 2, Me.Height / 2)  '3,2,1
 		waitBeforeFight -= 1
-
 	End Sub
 
 
@@ -240,10 +372,10 @@ Public Class Form1
 		'-player pass through right door
 		If (player1.Left + player1.Width > Me.Width) Then
 			For Each enemy In enemies 'remove all enemies from form and allPictureBoxes<> before left door
-				removeOtherPictureBoxAndUpdateScore(enemy)
+				removePictureBoxAndUpdateScore(enemy)
 			Next
 			For Each bullet In bullets 'remove all bullets from form and allPictureBoxes<>  before left door
-				removeOtherPictureBoxAndUpdateScore(bullet)
+				removePictureBoxAndUpdateScore(bullet)
 			Next
 			enemies.Clear() 'remove everything in enemies<>
 			enemiesSpeed.Clear() 'remove everything in enemiesSpeed<>
@@ -295,36 +427,21 @@ Public Class Form1
 	End Sub
 
 
-
-
-	Public Sub bulletIntersectWithEnemy()
-		For Each enemy In enemies
-			For Each bullet In bullets
-				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
-					Console.WriteLine("bullet intersect enemy")
-					Score += scoreEnemy
-					bullets.Remove(bullet)
-					enemies.Remove(enemy)
-					removeOtherPictureBoxAndUpdateScore(bullet)
-					removeOtherPictureBoxAndUpdateScore(enemy)
-					Exit For 'break as current <> has been modified
-				End If
-			Next
-			Exit For 'break as current <> has been modified
-		Next
+	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '----pa bon will be deleted when bon
+		If ProgressBar1.Visible Then
+			makeBossMove()
+		End If
 	End Sub
+	'-end my timers
 
 
-	Public Sub bulletMovement()
-		For Each bullet In bullets
-			bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y) 'move the bullets
-			If bullet.Location.X > Me.Width Then 'delete the bullets that goes after the right door
-				bullets.Remove(bullet)
-				removeOtherPictureBoxAndUpdateScore(bullet)
-				Exit For 'break as current <> has been modified
-			End If
-		Next
-	End Sub
+
+
+
+
+
+
+
 
 
 
@@ -346,7 +463,7 @@ Public Class Form1
 			'			'	startLife -= 1
 			'			'	Console.WriteLine("new enemy")
 			'			'	enemies.Remove(otherPicBox)
-			'			'	removeOtherPictureBoxAndUpdateScore(otherPicBox)
+			'			'	removePictureBoxAndUpdateScore(otherPicBox)
 			'			'	Exit For 'exit the for loop as picturebox name contains "enemy" help in using less cpu power
 			'			'End If
 
@@ -360,9 +477,65 @@ Public Class Form1
 			enemies(en).Location = New Point(enemies(en).Location.X - enemiesSpeed(en), enemies(en).Location.Y)
 		Next
 	End Sub
+	Private Sub makeBossMove()
+		returnTOposition += 1
+		'Step 1:at start make player go backward and forward. 
+		'STep 2: after 2 second make it go weird . go in diagonal way to player
+		'Step 3: if boss hit boss make it do step number 1 
+		Dim BackwardSpeed As Integer = 5
+		Dim gen As New Random
+
+		If returnTOposition > 2 And returnTOposition < 100 Then
+			boss.Location = New Point(boss.Location.X - randomSpeed, boss.Location.Y)
+		ElseIf returnTOposition > 100 And returnTOposition < 200 And Not boss.Left + boss.Width > door2.Left Then
+			boss.Location = New Point(boss.Location.X + BackwardSpeed, boss.Location.Y)
+		End If
+
+
+		If returnTOposition = 199 Then
+			returnTOposition = 0
+			randomSpeed += gen.Next(1, 5)
+		End If
+
+
+		If boss.Location.X + boss.Width >= door2.Location.X Then
+			boss.Location = New Point(boss.Location.X - randomSpeed, boss.Location.Y)
+		End If
+
+
+		If boss.Bounds.IntersectsWith(player1.Bounds) Then
+			startLife -= 1
+		End If
+
+
+		If ProgressBar1.Value < 10 Then
+			tmWeird += 1
+			If tmWeird > 2 And tmWeird < 50 Then
+				boss.Location = New Point(boss.Location.X - 1, boss.Location.Y + 1)
+			End If
+
+			If tmWeird > 50 And tmWeird < 100 Then
+				boss.Location = New Point(boss.Location.X - 1, boss.Location.Y - 1)
+			End If
+
+			If tmWeird = 99 Then
+				tmWeird = 0
+			End If
+		End If
+	End Sub
 
 
 
+
+
+
+
+
+
+	'-bullets
+	''' <summary>
+	''' Remove boss health when bullet intersect with boss
+	''' </summary>
 	Private Sub bulletIntersectsWithBoss()
 		For Each bullet In bullets
 			If bullet.Bounds.IntersectsWith(boss.Bounds) AndAlso boss.Visible Then
@@ -372,227 +545,76 @@ Public Class Form1
 					ProgressBar1.Value = 0
 					Console.WriteLine("oo boss dead")
 					Score += scoreBoss
-					removeOtherPictureBoxAndUpdateScore(boss)
+					removePictureBoxAndUpdateScore(boss)
 				End If
 				bullets.Remove(bullet)
-				removeOtherPictureBoxAndUpdateScore(bullet)
+				removePictureBoxAndUpdateScore(bullet)
 				Exit For 'break as current <> has been modified
 			End If
 		Next
 	End Sub
 
-	Dim returnTOposition As Integer = 0
-	Dim randomSpeed As Integer = 1
-	Private Sub makeBossMove()
-		returnTOposition += 1
-		'Step 1:at start make player go backward and forward. 
-		'STep 2: after 2 second make it go weird . go in diagonal way to player
-		'Step 3: if boss hit boss make it do step number 1 
-		'Dim bossSpeed As Integer = 2
-		'Dim temp As String = bosstimer
-		Dim BackwardSpeed As Integer = 5
-		Dim gen As New Random
-
-
-
-
-		If returnTOposition > 2 And returnTOposition < 100 Then
-
-
-			boss.Location = New Point(boss.Location.X - randomSpeed, boss.Location.Y)
-
-		ElseIf returnTOposition > 100 And returnTOposition < 200 And Not boss.Left + boss.Width > door2.Left Then
-			boss.Location = New Point(boss.Location.X + BackwardSpeed, boss.Location.Y)
-
-		End If
-		If returnTOposition = 199 Then
-			returnTOposition = 0
-			randomSpeed += gen.Next(1, 5)
-		End If
-
-		If boss.Location.X + boss.Width >= door2.Location.X Then
-			boss.Location = New Point(boss.Location.X - randomSpeed, boss.Location.Y)
-		End If
-
-		If boss.Bounds.IntersectsWith(player1.Bounds) Then
-			startLife -= 1
-
-
-
-		End If
-
-
-
-
-		If ProgressBar1.Value < 10 Then
-			tmWeird += 1
-
-			If tmWeird > 2 And tmWeird < 50 Then
-				boss.Location = New Point(boss.Location.X - 1, boss.Location.Y + 1)
-
-			End If
-			If tmWeird > 50 And tmWeird < 100 Then
-				boss.Location = New Point(boss.Location.X - 1, boss.Location.Y - 1)
-
-			End If
-			If tmWeird = 99 Then
-				tmWeird = 0
-			End If
-
-		End If
-
-
-
-
-
-
-	End Sub
-
-
-
-
-	'----pa bon will be deleted when bon
-
-	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '50 - 20fps
-		'If moveTheBoss Then
-
-		'	Console.WriteLine(boss.Location)
-		'	enemiesSpeed.Add(boss1.MoveSpeed1)
-		'	enemies.Add(boss)
-		'End If
-
-		'makeBossMove()
-		If ProgressBar1.Visible Then
-			makeBossMove()
-		End If
-
-	End Sub
-
-
-
-
-
 
 
 	''' <summary>
-	''' used in timer
-	''' gather all controls - select all pictureboxes give a score as per proper pictureboxes - delete collided pictureboxes and update the lables
+	''' destroy pictureboxes when bullet intersect with enemy
 	''' </summary>
-	Public Sub collideWithStaticPictureBoxes()
-		playerIsFalling = True
-		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
-			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
-				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-					If player1.Top > activePictureBox.Top - player1.Height Then 'to stay on top of ground and wall
-						player1.Location = New Point(player1.Location.X, activePictureBox.Top - player1.Height)
-						playerIsFalling = False
-					End If
-					Exit For
+	Public Sub bulletIntersectWithEnemy()
+		For Each enemy In enemies
+			For Each bullet In bullets
+				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
+					Console.WriteLine("bullet intersect enemy")
+					Score += scoreEnemy
+					bullets.Remove(bullet) 'remove from bullets<>
+					enemies.Remove(enemy) 'remove from enemies<>
+					removePictureBoxAndUpdateScore(bullet)
+					removePictureBoxAndUpdateScore(enemy)
+					Exit For 'break as current <> has been modified
 				End If
-				If activePictureBox.Name.Contains("life") Then
-					Item_Collected += 1
-					startLife += 1
-					Score += 1
-					Console.WriteLine("new life")
-					removeOtherPictureBoxAndUpdateScore(activePictureBox)
-					Exit For 'exit the for loop as picturebox name contains "life" help in using less cpu power
-				End If
-				If activePictureBox.Name.Contains("gun") Then
-					If activePictureBox.Name.Contains("supergun") Then
-						Item_Collected += 1
-						Score += scoreSuperGun
-					Else
-						Item_Collected += 1
-						Score += 5
-					End If
-					Console.WriteLine("new gun")
-					removeOtherPictureBoxAndUpdateScore(activePictureBox)
-					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
-				End If
-				If activePictureBox.Name.Contains("adn") Then
-					Item_Collected += 1
-					Score += 5
-					Console.WriteLine("new adn")
-					removeOtherPictureBoxAndUpdateScore(activePictureBox)
-					Exit For 'exit the for loop as picturebox name contains "adn" help in using less cpu power
-				End If
-				If activePictureBox.Name.Contains("coin") Then
-					Item_Collected += 1
-					Score += 3
-					Console.WriteLine("new coin")
-					removeOtherPictureBoxAndUpdateScore(activePictureBox)
-					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
-				End If
-			End If
+			Next
+			Exit For 'break as current <> has been modified
 		Next
 	End Sub
 
 
 
 	''' <summary>
-	''' set all picture box
-	''' enemies
-	''' boss
-	''' randomise item to be collected
+	''' make all bullet present in bullets list
 	''' </summary>
-	Private Sub setGame()
-		RestartBtn.Enabled = False
-		pScore.Text = "Item :" + CStr(Score)
-		RestartBtn.Visible = False
-		winorloseTxt.Visible = False
-		extbtn.Visible = False
-		ProgressBar1.Enabled = False
-		ProgressBar1.Visible = False
-		Label1.Visible = False
-		Label1.Enabled = False
-		boss.Visible = False
-		Me.HorizontalScroll.Enabled = False '#################################################pa p marC
-		Me.HorizontalScroll.Visible = False '#################################################pa p marC
-
-		ProgressBar1.Value = 18
-		AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
-		AxWindowsMediaPlayer1.settings.setMode("Loop", True)
-
-		playerIsFalling = True
-		playerSpeed = 5
-		gravitySpeed = 3
-		jumpHeight = 100
-		waitBeforeFight = ClassMyPublicShared.waitBeforeFight
-
-		Score = 0
-		scoreGun = 5
-		scoreSuperGun = 10
-		scoreEnemy = 10
-		startLife = 3
-		scoreBoss = 50
-
-		ClassMyPublicShared.level = 1
-		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
-		door2.BringToFront()
-		door2.BackColor = Color.Empty
-		Dim bullet As New ClassBullets()
-		bulletMoveSpeed = bullet.MoveSpeed1 'get the move speed of bullets
+	Public Sub bulletMovement()
+		For Each bullet In bullets
+			bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y) 'move the bullets
+			If bullet.Location.X > Me.Width Then 'delete the bullets that goes after the right door
+				bullets.Remove(bullet) 'remove fro bullets<>
+				removePictureBoxAndUpdateScore(bullet)
+				Exit For 'break as current <> has been modified
+			End If
+		Next
 	End Sub
+	'-end bullets
+
+
+
+
+
+
+
+
+
+
 
 
 
 	''' <summary>
 	''' remove the pictureboxes that the player collided with and update the labels
 	''' </summary>
-	Private Sub removeOtherPictureBoxAndUpdateScore(picBox As PictureBox)
+	Private Sub removePictureBoxAndUpdateScore(picBox As PictureBox)
 		'removing the control
 		ClassMyPublicShared.allPictureBoxes.Remove(picBox)
 		Me.Controls.Remove(picBox)
 		picBox.Dispose()
-		updateLabels()
-	End Sub
 
 
-
-	''' <summary>
-	''' refresh all lables
-	''' </summary>
-	Private Sub updateLabels()
 		pScore.Text = "Score :" + CStr(Score)
 		pLife.Text = "X" + CStr(startLife)
 		pItem.Text = "Item :" + CStr(Item_Collected)
@@ -639,4 +661,7 @@ Public Class Form1
 			extbtn.BringToFront()
 		End If
 	End Sub
+
+
+
 End Class
