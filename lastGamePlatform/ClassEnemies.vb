@@ -21,8 +21,8 @@
 		Me.width = 87
 		Me.height = 62
 		Me.image = My.Resources._0_Ogre_Idle_000
-		Me.xPosition = xPosition
-		Me.yPosition = yPosition
+		Me.xPosition = xPosition - 87
+		Me.yPosition = yPosition - 62
 		Me.name = name
 		Me.moveSpeed = moveSpeed
 	End Sub

@@ -29,9 +29,9 @@ Public Class Form1
 	Public Score As Integer
 	Dim Item_Collected As Integer
 	Dim scoreGun As Integer
+	Dim scoreSuperGun As Integer
 	Dim scoreEnemy As Integer
 	Dim startLife As Integer
-	Dim enemyScore As Integer
 
 
 	'no of sec to wait 
@@ -40,7 +40,7 @@ Public Class Form1
 
 	'boss vars
 	Dim moveTheBoss As Boolean = False
-
+	Dim scoreBoss As Integer
 
 
 
@@ -236,6 +236,7 @@ Public Class Form1
 
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs) Handles FastestTimer.Tick
+		'-player move
 		If posRight Then
 			player1.Location = New Point(player1.Location.X + playerSpeed, player1.Location.Y)
 		ElseIf posLeft Then
@@ -245,87 +246,100 @@ Public Class Form1
 		If playerIsFalling Then
 			player1.Location = New Point(player1.Location.X, player1.Location.Y + gravitySpeed)
 		End If
+		'-
 
+
+		'-player pass through right door
 		If (player1.Left + player1.Width > Me.Width) Then
-			For Each enemy In enemies
+			For Each enemy In enemies 'remove all enemies from form and allPictureBoxes<> before left door
 				removeOtherPictureBoxAndUpdateScore(enemy)
 			Next
-			For Each bullet In bullets
+			For Each bullet In bullets 'remove all bullets from form and allPictureBoxes<>  before left door
 				removeOtherPictureBoxAndUpdateScore(bullet)
 			Next
-			enemies.Clear()
-			enemiesSpeed.Clear()
+			enemies.Clear() 'remove everything in enemies<>
+			enemiesSpeed.Clear() 'remove everything in enemiesSpeed<>
 			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
-				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y)
-				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y)
-				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y)
+				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y) 'door appear on left
+				door2.Location = New Point(Me.Width - (door2.Width), door2.Location.Y) 'door appear on right
+				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - Me.Width, activePictureBox.Location.Y) 'keep same ypos and display everything before the left door
 			Next
 			door1.BringToFront()
 			door2.BringToFront()
-			Dim noOfEnemies As Integer = numberOfEnemies()
+
+			'--generate random no of enemies at random position with random move speed
+			Dim noOfEnemies As Integer = ModuleRandomiser.numberOfEnemies()
 			While noOfEnemies > 0
-				Dim enemy As New ClassEnemies(numberBetween(Me.Width / 5, Me.Width - (door2.Width) - 1), numberBetween(0, ground1.Top - 62 - 1), "enemy" & noOfEnemies, enemyMoveSpeed())
-				Dim en As PictureBox = enemy.generateEnemy()
-				Me.Controls.Add(en)
-				enemiesSpeed.Add(enemy.MoveSpeed1)
-				enemies.Add(en)
-				noOfEnemies -= 1
+				Dim xpos As Integer = ModuleRandomiser.numberBetween(Me.Width / 5, Me.Width - (door2.Width) - 1) 'from 20% of the form to the right door
+				Dim ypos As Integer = ModuleRandomiser.numberBetween(0, ground1.Top - 62 - 1) 'from top of the form to the top of the ground
+
+				Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, ModuleRandomiser.enemyMoveSpeed()) 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
+				Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
+				Me.Controls.Add(en) 'add the enemy generated to form
+				enemiesSpeed.Add(enemy.MoveSpeed1) 'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
+				enemies.Add(en) 'add the picturebox to enemies<>
+				noOfEnemies -= 1 'decrement the no of enemies
 			End While
+			'--
+
+			'--stop the time for 3 seconds to let the player prepare for the coming enemies
 			FastestTimer.Enabled = False
 			Timer1000ms.Enabled = True
+			'--
 		End If
+		'-
 
-
-
-
-
-
+		'-move the enemies only when there is/are enemies in the list
 		If enemies.Count > 0 Then
-			enemyMovement() 'bizin re check to code logic
+			enemyMovement()
 		End If
+		'-
 
+		'-move the bullets when bullet is shot and check if bullet intersect with enemy or boss
 		If bullets.Count > 0 Then
 			bulletMovement()
 			bulletIntersectWithEnemy()
-
+			If boss.Visible Then
+				bulletIntersectsWithBoss()
+			End If
 		End If
-		'If ProgressBar1.Visible Then
-		'	bulletIntersectsWithBoss()
-		'End If
-
-
+		'-
 	End Sub
+
+
+
 
 	Public Sub bulletIntersectWithEnemy()
 		For Each enemy In enemies
 			For Each bullet In bullets
-				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if player picturebox 
-					If enemy.Name.Contains("boss") Then
-						Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
-					End If
+				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
 					Console.WriteLine("bullet intersect enemy")
-					Score += enemyScore
+					Score += scoreEnemy
 					bullets.Remove(bullet)
 					enemies.Remove(enemy)
 					removeOtherPictureBoxAndUpdateScore(bullet)
 					removeOtherPictureBoxAndUpdateScore(enemy)
-					Exit For
+					Exit For 'break as current <> has been modified
 				End If
-
 			Next
-			Exit For
+			Exit For 'break as current <> has been modified
 		Next
 	End Sub
+
+
 	Public Sub bulletMovement()
 		For Each bullet In bullets
-			bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y)
-			If bullet.Location.X > Me.Width Then
+			bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y) 'move the bullets
+			If bullet.Location.X > Me.Width Then 'delete the bullets that goes after the right door
 				bullets.Remove(bullet)
 				removeOtherPictureBoxAndUpdateScore(bullet)
-				Exit For
+				Exit For 'break as current <> has been modified
 			End If
 		Next
 	End Sub
+
+
+
 	Public Sub enemyMovement()
 		For en As Integer = 0 To enemies.Count - 1
 			'	If player1 IsNot enemies(en) AndAlso enemies(en).Bounds.IntersectsWith(player1.Bounds) Then
@@ -352,89 +366,29 @@ Public Class Form1
 			'	Next
 
 
-
-
-			'If enemies(en).Left > player1.Left Then
-			'	enemies(en).Left -= enemiesSpeed(en)
-			'ElseIf enemies(en).Left < player1.Left Then
-			'	enemies(en).Left += enemiesSpeed(en)
-			'End If' 
-			'If enemies(en).Top > player1.Top Then
-			'	enemies(en).Top -= enemiesSpeed(en)
-			'ElseIf enemies(en).Top < player1.Top Then
-			'	enemies(en).Top += enemiesSpeed(en)
-			'End If
-
-			'--------------------------------------------------------------------------------------------enkor tremblee mm
-			'If enemies(en).Left > player1.Left + player1.Width And enemies(en).Top < player1.Top Then
-			'	enemies(en).Left -= enemiesSpeed(en)
-			'	enemies(en).Top += enemiesSpeed(en)
-			'ElseIf enemies(en).Left > player1.Left + player1.Width And enemies(en).Top > player1.Top Then
-			'	enemies(en).Left -= enemiesSpeed(en)
-			'	enemies(en).Top -= enemiesSpeed(en)
-			'ElseIf enemies(en).Left < player1.Left And enemies(en).Top < player1.Top Then
-			'	enemies(en).Left += enemiesSpeed(en)
-			'	enemies(en).Top += enemiesSpeed(en)
-			'ElseIf enemies(en).Left < player1.Left And enemies(en).Top > player1.Top Then
-			'	enemies(en).Left += enemiesSpeed(en)
-			'	enemies(en).Top -= enemiesSpeed(en)
-			'ElseIf enemies(en).Left > player1.Left And enemies(en).Top = player1.Top Then
-			'	enemies(en).Left -= enemiesSpeed(en)
-			'ElseIf enemies(en).Left < player1.Left And enemies(en).Top = player1.Top Then
-			'	enemies(en).Left += enemiesSpeed(en)
-			'End If
-
-
-			'dans right 
-			' And enemies(en).Top + enemies(en).Height < player1.Top + player1.Height Then
-			'	If Not enemies(en).Top + enemies(en).Height = player1.Top + player1.Height Then
-			'		enemies(en).Top += enemiesSpeed(en)
-
-
-			'	End If
-
-			'ElseIf enemies(en).Left > player1.Left + player1.Width And enemies(en).Top + enemies(en).Height > player1.Top + player1.Height Then
-			'	enemies(en).Top -= enemiesSpeed(en)
-			'Else
-
-			'	enemies(en).Left -= enemiesSpeed(en)
-			'End If
-
 			If enemies(en).Location.Y < player1.Location.Y Then
 				enemies(en).Location = New Point(enemies(en).Location.X, enemies(en).Location.Y + enemiesSpeed(en))
 			End If
-
-			If Not enemies(en).Location.X = player1.Location.X Then
-				enemies(en).Left -= enemiesSpeed(en)
-			Else
-
-			End If
-
-
-
-			'------
-
-			'dans left 
-
-			'------
-
-
-
-
+			enemies(en).Location = New Point(enemies(en).Location.X - enemiesSpeed(en), enemies(en).Location.Y)
 		Next
 	End Sub
 
-	'PUT THIS IN A TIMER IF YOU WANT TO SEE BOSS DANCE.
+
+
 	Private Sub bulletIntersectsWithBoss()
 		For Each bullet In bullets
-			If bullet.Bounds.IntersectsWith(boss.Bounds) And bullet.Enabled = True And boss.Visible Then
+			If bullet.Bounds.IntersectsWith(boss.Bounds) AndAlso boss.Visible Then
+				Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
 				ProgressBar1.Value -= 1
 				If ProgressBar1.Value <= 0 Then
 					ProgressBar1.Value = 0
-					boss.Dispose()
+					Console.WriteLine("oo boss dead")
+					Score += scoreBoss
+					removeOtherPictureBoxAndUpdateScore(boss)
 				End If
-				bullet.Dispose()
-				bullet.Enabled = False
+				bullets.Remove(bullet)
+				removeOtherPictureBoxAndUpdateScore(bullet)
+				Exit For 'break as current <> has been modified
 			End If
 		Next
 	End Sub
@@ -541,8 +495,6 @@ Public Class Form1
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
 			If activePictureBox IsNot player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
-					'Console.WriteLine("wall/ground")
-					'????????????????????????????bizin dreC???????this code allow to pass through wall???? 1 zafr width sa???
 					If player1.Top > activePictureBox.Top - player1.Height Then 'to stay on top of ground and wall
 						player1.Location = New Point(player1.Location.X, activePictureBox.Top - player1.Height)
 						playerIsFalling = False
@@ -559,8 +511,8 @@ Public Class Form1
 				End If
 				If activePictureBox.Name.Contains("gun") Then
 					If activePictureBox.Name.Contains("supergun") Then
-						Item_Collected += 100
-						Score += 500
+						Item_Collected += 1
+						Score += scoreSuperGun
 					Else
 						Item_Collected += 1
 						Score += 5
@@ -606,8 +558,8 @@ Public Class Form1
 		Label1.Visible = False
 		Label1.Enabled = False
 		boss.Visible = False
-		Me.HorizontalScroll.Enabled = False
-		Me.HorizontalScroll.Visible = False
+		Me.HorizontalScroll.Enabled = False '#################################################pa p marC
+		Me.HorizontalScroll.Visible = False '#################################################pa p marC
 
 		ProgressBar1.Value = 18
 		'AxWindowsMediaPlayer1.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Dosseh - Le bruit du silence (Clip Officiel).wav")
@@ -621,15 +573,16 @@ Public Class Form1
 
 		Score = 0
 		scoreGun = 5
+		scoreSuperGun = 10
 		scoreEnemy = 10
 		startLife = 3
-		enemyScore = 5
+		scoreBoss = 50
 
 		ClassMyPublicShared.level = 1
 		door2.Location = New Point(Me.Width - door2.Width / 2, door2.Location.Y)
 		door2.BringToFront()
 		Dim bullet As New ClassBullets()
-		bulletMoveSpeed = bullet.MoveSpeed1
+		bulletMoveSpeed = bullet.MoveSpeed1 'get the move speed of bullets
 	End Sub
 
 
