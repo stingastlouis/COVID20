@@ -427,7 +427,7 @@ Public Class Form1
 			bulletMovement()
 			bulletIntersectWithEnemy()
 			If boss.Visible Then
-				bulletIntersectsWithBoss()
+				'bulletIntersectsWithBoss()
 			End If
 		End If
 		'-
@@ -496,13 +496,13 @@ Public Class Form1
 	''' <summary>
 	''' Remove boss health when bullet intersect with boss
 	''' </summary>
-	Private Sub bulletIntersectsWithBoss()
+	Private Sub bulletIntersectsWithBoss(ByRef pro As ProgressBar, ByRef bullets As List(Of PictureBox))
 		For Each bullet In bullets
 			If bullet.Bounds.IntersectsWith(boss.Bounds) AndAlso boss.Visible Then
 				Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
 				ProgressBar1.Value -= 1
-				If ProgressBar1.Value <= 0 Then
-					ProgressBar1.Value = 0
+				If pro.Value <= 0 Then
+					pro.Value = 0
 					Console.WriteLine("oo boss dead")
 					Score += scoreBoss
 					removePictureBoxAndUpdateScore(boss)
@@ -519,17 +519,30 @@ Public Class Form1
 	''' <summary>
 	''' destroy pictureboxes when bullet intersect with enemy
 	''' </summary>
+	''' 
+	Dim waitOn As Integer = 0
 	Public Sub bulletIntersectWithEnemy()
+
 		For Each enemy In enemies
 			For Each bullet In bullets
-				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
+				'If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
+				If bullet.Enabled And enemy.Enabled And bullet.Bounds.IntersectsWith(enemy.Bounds) Then
+					waitOn += 1
 					Console.WriteLine("bullet intersect enemy")
 					Score += scoreEnemy
-					bullets.Remove(bullet) 'remove from bullets<>
-					enemies.Remove(enemy) 'remove from enemies<>
-					removePictureBoxAndUpdateScore(bullet)
-					removePictureBoxAndUpdateScore(enemy)
-					Exit For 'break as current <> has been modified
+
+					enemy.Image = My.Resources.boom
+					If waitOn > 3 Then
+						bullet.Enabled = False
+						enemy.Enabled = False
+						bullets.Remove(bullet) 'remove from bullets<>
+						enemies.Remove(enemy) 'remove from enemies<>
+						removePictureBoxAndUpdateScore(bullet)
+						waitOn = 0
+						removePictureBoxAndUpdateScore(enemy)
+						Exit For 'break as current <> has been modified
+					End If
+
 				End If
 			Next
 			Exit For 'break as current <> has been modified
