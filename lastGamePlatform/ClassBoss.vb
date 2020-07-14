@@ -159,7 +159,31 @@
 
 	End Sub
 
+	Public Sub bulletIntersectsWithBoss(ByRef pro As ProgressBar, ByRef bullets As List(Of PictureBox), ByVal boss As Object)
 
+
+
+		For Each bullet In bullets
+			If bullet.Bounds.IntersectsWith(boss.Bounds) AndAlso boss.Visible Then
+				ClassPlayer.score += ClassItems.scoreBoss
+				If pro.Value > 0 Then
+					pro.Value -= 1
+					Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
+				End If
+				If pro.Value <= 0 Then
+					pro.Value = 0
+					Console.WriteLine("oo boss dead")
+					ClassPlayer.score += ClassItems.scoreBoss
+					ClassMyPublicShared.allPictureBoxes.Remove(boss)
+
+				End If
+				bullets.Remove(bullet)
+				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
+				bullet.Dispose()
+				Exit For 'break as current <> has been modified
+			End If
+		Next
+	End Sub
 
 
 

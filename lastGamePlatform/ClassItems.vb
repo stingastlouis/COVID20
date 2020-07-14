@@ -2,6 +2,16 @@
 	'vars
 	Private itemName As String
 	Private itemImageLocation As String
+	Public Shared scoreGun As Integer = 5
+	Public Shared scoreSuperGun As Integer = 5
+	Public Shared scoreEnemy As Integer = 10
+	Public Shared scoreLife As Integer = 3
+	Public Shared scoreCoin As Integer = 5
+	Public Shared scoreAdn As Integer = 5
+	Public Shared scoreBoss As Integer = 50
+
+
+
 
 
 

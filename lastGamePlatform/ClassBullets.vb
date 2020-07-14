@@ -6,7 +6,7 @@
 	Private name As String
 	Private moveSpeed As Integer
 	Private img As Bitmap
-
+	Dim waitOn As Integer = 0
 
 
 
@@ -100,11 +100,69 @@
 	End Property
 
 
+	Public Property waitOntoboom As Integer
+		Get
+			Return waitOn
+		End Get
+		Set(value As Integer)
+			waitOn = value
+		End Set
+	End Property
+
+
+	Public Sub bulletIntersectWithEnemy(ByVal enemies As List(Of PictureBox), ByVal bullets As List(Of PictureBox))
 
 
 
 
 
+
+		For Each enemy In enemies
+			For Each bullet In bullets
+				'If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
+				If bullet.Enabled And enemy.Enabled And bullet.Bounds.IntersectsWith(enemy.Bounds) Then
+					waitOn += 1
+					Console.WriteLine("bullet intersect enemy")
+					ClassPlayer.score += ClassItems.scoreEnemy
+
+					enemy.Image = My.Resources.boom
+					If waitOn > 2 Then
+
+						bullets.Remove(bullet) 'remove from bullets<>
+						enemies.Remove(enemy) 'remove from enemies<>
+
+						ClassMyPublicShared.allPictureBoxes.Remove(bullet)
+						bullet.Dispose()
+
+						ClassMyPublicShared.allPictureBoxes.Remove(enemy)
+						bullet.Dispose()
+						bullet.Enabled = False
+						enemy.Enabled = False
+						Exit For 'break as current <> has been modified
+					End If
+
+				End If
+			Next
+			Exit For 'break as current <> has been modified
+		Next
+	End Sub
+
+
+
+	''' <summary>
+	''' make all bullet present in bullets list
+	''' </summary>
+	Public Sub bulletMovement(ByRef bullets As List(Of PictureBox), ByVal fo As Form)
+		For Each bullet In bullets
+			bullet.Location = New Point(bullet.Location.X + moveSpeed, bullet.Location.Y) 'move the bullets
+			If bullet.Location.X > fo.Width Then 'delete the bullets that goes after the right door
+				bullets.Remove(bullet) 'remove fro bullets<>
+				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
+				Exit For 'break as current <> has been modified
+			End If
+		Next
+	End Sub
+	'-end bullets
 
 
 	'functions
