@@ -48,7 +48,7 @@ Public Class Form1
 	Dim moveTheBoss As Boolean = False
 	Dim scoreBoss As Integer
 	Dim tmWeird As Integer = 0 'number of sec for boss movement 
-	Dim returnTOposition As Integer = 0
+
 	Dim randomSpeed As Integer = 1
 
 	'------------------------------------------------------------------------------
@@ -436,7 +436,9 @@ Public Class Form1
 
 	Private Sub Timer75ms_Tick(sender As Object, e As EventArgs) Handles Timer75ms.Tick '----pa bon will be deleted when bon
 		If ProgressBar1.Visible Then
-			makeBossMove()
+			Dim cB As New ClassBoss
+			cB.howtomoveBoss = 2
+			cB.makeBossMove(player1, boss, ground1, door2)
 		End If
 	End Sub
 	'-end my timers
@@ -484,55 +486,6 @@ Public Class Form1
 			enemies(en).Location = New Point(enemies(en).Location.X - enemiesSpeed(en), enemies(en).Location.Y)
 		Next
 	End Sub
-	Private Sub makeBossMove()
-		returnTOposition += 1
-		'Step 1:at start make player go backward and forward. 
-		'STep 2: after 2 second make it go weird . go in diagonal way to player
-		'Step 3: if boss hit boss make it do step number 1 
-		Dim BackwardSpeed As Integer = 5
-		Dim gen As New Random
-
-		If returnTOposition > 2 And returnTOposition < 100 Then
-			boss.Location = New Point(boss.Location.X - randomSpeed, boss.Location.Y)
-		ElseIf returnTOposition > 100 And returnTOposition < 200 And Not boss.Left + boss.Width > door2.Left Then
-			boss.Location = New Point(boss.Location.X + BackwardSpeed, boss.Location.Y)
-		End If
-
-
-		If returnTOposition = 199 Then
-			returnTOposition = 0
-			randomSpeed += gen.Next(1, 5)
-		End If
-
-
-		If boss.Location.X + boss.Width >= door2.Location.X Then
-			boss.Location = New Point(boss.Location.X - randomSpeed, boss.Location.Y)
-		End If
-
-
-		If boss.Bounds.IntersectsWith(player1.Bounds) Then
-			startLife -= 1
-		End If
-
-
-		If ProgressBar1.Value < 10 Then
-			tmWeird += 1
-			If tmWeird > 2 And tmWeird < 50 Then
-				boss.Location = New Point(boss.Location.X - 1, boss.Location.Y + 1)
-			End If
-
-			If tmWeird > 50 And tmWeird < 100 Then
-				boss.Location = New Point(boss.Location.X - 1, boss.Location.Y - 1)
-			End If
-
-			If tmWeird = 99 Then
-				tmWeird = 0
-			End If
-		End If
-	End Sub
-
-
-
 
 
 

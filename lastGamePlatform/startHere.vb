@@ -6,7 +6,7 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ButtonSinglePlayerPlay.Click
         Me.Hide()
         Intro.Show()
-        'jkjp;
+        'jkjp;0
     End Sub
     'testing
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles ButtonMultiPlayerPlay.Click
