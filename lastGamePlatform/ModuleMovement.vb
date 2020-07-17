@@ -1,6 +1,6 @@
 ﻿Module ModuleMovement
 	Private bulletMoveSpeed As Integer = 10
-
+	Private moveOp As Integer = 0
 
 
 
@@ -92,19 +92,20 @@
 
 	Dim returnTOposition As Integer = 0
 	Dim randomSpeed As Integer = 1
-	Public Sub makeBossMove(ByVal player As Object, ByRef boss As Object, ByVal ground As Object, ByVal door As Object)
-
+	Public Sub makeBossMove(ByVal player As Object, ByRef boss As Object, ByVal ground As Object, ByVal door As Object, ByVal movementOperation As Integer)
+		moveOp = 2
 		returnTOposition += 1
+
 		'Step 1:at start make player go backward and forward. 
 		'STep 2: after 2 second make it go weird . go in diagonal way to player
 		'Step 3: if boss hit boss make it do step number 1 
 		Dim BackwardSpeed As Integer = 5
 		Dim gen As New Random
 
-		Dim moveOp As Integer = -1
+
 		'moveOp = gen.Next(2)
 
-		Select Case boss.moveOp
+		Select Case moveOp
 			Case 0
 				'go forward and backward on ground. 
 
