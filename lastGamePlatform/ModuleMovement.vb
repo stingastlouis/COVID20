@@ -93,7 +93,7 @@
 	Dim returnTOposition As Integer = 0
 	Dim randomSpeed As Integer = 1
 	Public Sub makeBossMove(ByVal player As Object, ByRef boss As Object, ByVal ground As Object, ByVal door As Object, ByVal movementOperation As Integer)
-		moveOp = 2
+		moveOp = 0
 		returnTOposition += 1
 
 		'Step 1:at start make player go backward and forward. 

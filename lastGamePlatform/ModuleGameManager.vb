@@ -131,7 +131,8 @@
 			.Name = "instruction"
 			.Size = New Size(420, 172)
 			.SizeMode = PictureBoxSizeMode.StretchImage
-			.ImageLocation = "C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Resources\instruction1.png"
+
+			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\instruction1.png"))
 			.AutoSize = True
 			.Visible = True
 			.BringToFront()
@@ -170,7 +171,8 @@
 			.Name = "player1"
 			.Size = New Size(87, 62)
 			.SizeMode = PictureBoxSizeMode.StretchImage
-			.ImageLocation = "C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Resources\player1Mov.png"
+
+			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))
 			.BringToFront()
 			.Visible = True
 			.Enabled = True
@@ -185,20 +187,21 @@
 		'=========Ground==================
 		Dim gg As New PictureBox
 		With gg
+			.SendToBack()
 			.Location = New Point(0, 400)
 			.BackColor = Color.Empty
 			.Name = "ground1"
 			.Size = New Size(3950, 62)
 			.SizeMode = PictureBoxSizeMode.StretchImage
-			.ImageLocation = "C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Resources\ground.png"
+			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\ground.png"))
 
 			.Visible = True
 			.Enabled = True
-			.CreateControl()
+
 		End With
 		ground1 = gg
 		myForm.Controls.Add(ground1)
-		ground1.SendToBack()
+
 		'=================================
 		'=========Door2==================
 		Dim d2 As New PictureBox
@@ -208,7 +211,8 @@
 			.Name = "door2"
 			.Size = New Size(79, 443)
 			.SizeMode = PictureBoxSizeMode.StretchImage
-			.ImageLocation = "C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Resources\ground.png"
+			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\ground.png"))
+
 			.BringToFront()
 			.Visible = True
 			.Enabled = True
@@ -225,7 +229,7 @@
 			.Name = "door2"
 			.Size = New Size(79, 443)
 			.SizeMode = PictureBoxSizeMode.StretchImage
-			.ImageLocation = "C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Resources\ground.png"
+			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\ground.png"))
 
 			.Visible = True
 			.Enabled = True
@@ -243,8 +247,9 @@
 			.Name = "boss"
 			.Size = New Size(173, 117)
 			.SizeMode = PictureBoxSizeMode.StretchImage
-			.ImageLocation = "C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Resources\download.jpg"
-			.BringToFront()
+
+			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
+
 			.Visible = True
 			.Enabled = True
 			.CreateControl()
@@ -257,13 +262,14 @@
 		'=========SuperGun==================
 		Dim sG As New PictureBox
 		With sG
-			.Location = New Point(3060, 243)
+			.Location = New Point(3099, 243)
 			.BackColor = Color.Empty
 			.Name = "supergun0"
 			.Size = New Size(101, 81)
 			.SizeMode = PictureBoxSizeMode.StretchImage
 			.ImageLocation = "C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Resources\superGun.png"
-			.BringToFront()
+			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\superGun.png"))
+
 			.Visible = True
 			.Enabled = True
 			.CreateControl()
@@ -401,41 +407,108 @@
 		pItem.Text = "Item :" + CStr(ClassPlayer.item)
 
 		If progressBar.Value <= 0 Then
-			progressBar.Value = 0
+
 			myTimer.Enabled = False
 
 			With winorlosetText
-				.Text = "You win!!" + vbNewLine + "Ready For Next Level?"
+				.Text = Space(10) + "You win!!" + vbNewLine + "Ready For Next Level?"
 				.Visible = True
-				.Top = myForm.Height / 2 - 60
-				.Left = myForm.Width / 2 - 15
+				.Top = myForm.Height / 2 - 180
+				.Left = myForm.Width / 2 - 230
 				.Enabled = True
 				.BringToFront()
-
+				.AutoSize = True
+				.BackColor = Color.Empty
+				.Name = "winorlosetText"
+				.Font = New Font("Agency FB", 50)
+				.CreateControl()
 			End With
 			With restBtn
 				.Text = "Continue"
 				.Visible = True
 				.Enabled = True
 				.Top = myForm.Height / 2
-				.Left = myForm.Width / 2
+				.Left = myForm.Width / 2 - 150
 				.BringToFront()
-
+				.Font = New Font("Agency FB", 16)
+				.BackColor = Color.Empty
+				.AutoSize = True
+				.CreateControl()
 			End With
 			With exitBtn
 				.Text = "Abandon Mission"
 				.Visible = True
 				.Enabled = True
-				.Top = myForm.Height / 2 + 30
-				.Left = myForm.Width / 2
+
+				.Top = myForm.Height / 2 + 40
+				.Left = myForm.Width / 2 - 170
+				.Font = New Font("Agency FB", 16)
+				.BackColor = Color.Empty
 				.BringToFront()
+				.AutoSize = True
+				.CreateControl()
+
 			End With
+
 			myForm.Controls.Add(winorlosetText)
 			myForm.Controls.Add(restBtn)
 			myForm.Controls.Add(exitBtn)
 			AddHandler restBtn.Click, AddressOf RestartBtn_Click
 			AddHandler exitBtn.Click, AddressOf extbtn_Click
 		End If
+
+		If ClassPlayer.life <= 0 Then
+			ClassPlayer.life = 0
+			myTimer.Enabled = False
+
+			With winorlosetText
+				.Text = "You lose!!" + vbNewLine + "Try better next Time"
+				.Visible = True
+				.Top = myForm.Height / 2 - 50
+				.Left = myForm.Width / 2 - 15
+				.Enabled = True
+				.BringToFront()
+				.AutoSize = True
+				.BackColor = Color.Empty
+				.Name = "winorlosetText"
+				.Font = New Font("Agency FB", 16)
+				.CreateControl()
+			End With
+			With restBtn
+				.Text = "Restart"
+				.Visible = True
+				.Enabled = True
+				.Top = myForm.Height / 2
+				.Left = myForm.Width / 2
+				.BringToFront()
+				.Font = New Font("Agency FB", 16)
+				.BackColor = Color.Empty
+				.AutoSize = True
+				.CreateControl()
+			End With
+			With exitBtn
+				.Text = "Abandon Mission"
+				.Visible = True
+				.Enabled = True
+
+				.Top = myForm.Height / 2 + 40
+				.Left = myForm.Width / 2
+				.Font = New Font("Agency FB", 16)
+				.BackColor = Color.Empty
+				.BringToFront()
+				.AutoSize = True
+				.CreateControl()
+
+			End With
+
+			myForm.Controls.Add(winorlosetText)
+			myForm.Controls.Add(restBtn)
+			myForm.Controls.Add(exitBtn)
+			AddHandler restBtn.Click, AddressOf RestartBtn_Click
+			AddHandler exitBtn.Click, AddressOf extbtn_Click
+		End If
+
+
 	End Sub
 
 
@@ -490,6 +563,7 @@
 		Else : countdownLabel.Text = waitBeforeFight.ToString()  '3,2,1
 		End If
 		waitBeforeFight -= 1
+		ModuleIntersection.bulletIntersectWithEnemy()
 	End Sub
 
 

@@ -73,7 +73,7 @@ Partial Class Form1
         'wall24
         '
         Me.wall24.BackColor = System.Drawing.Color.Maroon
-        Me.wall24.Location = New System.Drawing.Point(1772, 459)
+        Me.wall24.Location = New System.Drawing.Point(1772, 448)
         Me.wall24.Margin = New System.Windows.Forms.Padding(4)
         Me.wall24.Name = "wall24"
         Me.wall24.Size = New System.Drawing.Size(87, 41)
@@ -84,7 +84,7 @@ Partial Class Form1
         'wall12
         '
         Me.wall12.BackColor = System.Drawing.Color.Maroon
-        Me.wall12.Location = New System.Drawing.Point(927, 418)
+        Me.wall12.Location = New System.Drawing.Point(927, 407)
         Me.wall12.Margin = New System.Windows.Forms.Padding(4)
         Me.wall12.Name = "wall12"
         Me.wall12.Size = New System.Drawing.Size(87, 86)
@@ -95,7 +95,7 @@ Partial Class Form1
         'wall11
         '
         Me.wall11.BackColor = System.Drawing.Color.Maroon
-        Me.wall11.Location = New System.Drawing.Point(757, 467)
+        Me.wall11.Location = New System.Drawing.Point(757, 456)
         Me.wall11.Margin = New System.Windows.Forms.Padding(4)
         Me.wall11.Name = "wall11"
         Me.wall11.Size = New System.Drawing.Size(87, 38)
@@ -106,7 +106,7 @@ Partial Class Form1
         'wall9
         '
         Me.wall9.BackColor = System.Drawing.Color.Maroon
-        Me.wall9.Location = New System.Drawing.Point(1933, 459)
+        Me.wall9.Location = New System.Drawing.Point(1933, 448)
         Me.wall9.Margin = New System.Windows.Forms.Padding(4)
         Me.wall9.Name = "wall9"
         Me.wall9.Size = New System.Drawing.Size(87, 43)
@@ -128,7 +128,7 @@ Partial Class Form1
         'wall6
         '
         Me.wall6.BackColor = System.Drawing.Color.Maroon
-        Me.wall6.Location = New System.Drawing.Point(1013, 393)
+        Me.wall6.Location = New System.Drawing.Point(1013, 382)
         Me.wall6.Margin = New System.Windows.Forms.Padding(4)
         Me.wall6.Name = "wall6"
         Me.wall6.Size = New System.Drawing.Size(87, 112)
@@ -139,7 +139,7 @@ Partial Class Form1
         'wall5
         '
         Me.wall5.BackColor = System.Drawing.Color.Maroon
-        Me.wall5.Location = New System.Drawing.Point(844, 443)
+        Me.wall5.Location = New System.Drawing.Point(844, 432)
         Me.wall5.Margin = New System.Windows.Forms.Padding(4)
         Me.wall5.Name = "wall5"
         Me.wall5.Size = New System.Drawing.Size(87, 62)
@@ -150,7 +150,7 @@ Partial Class Form1
         'wall3
         '
         Me.wall3.BackColor = System.Drawing.Color.Maroon
-        Me.wall3.Location = New System.Drawing.Point(2019, 441)
+        Me.wall3.Location = New System.Drawing.Point(2019, 430)
         Me.wall3.Margin = New System.Windows.Forms.Padding(4)
         Me.wall3.Name = "wall3"
         Me.wall3.Size = New System.Drawing.Size(87, 62)
