@@ -154,7 +154,7 @@ Partial Class Form1
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
-		Me.ClientSize = New System.Drawing.Size(855, 458)
+		Me.ClientSize = New System.Drawing.Size(780, 419)
 		Me.Controls.Add(Me.wall11)
 		Me.Controls.Add(Me.wall24)
 		Me.Controls.Add(Me.winorloseTxt)

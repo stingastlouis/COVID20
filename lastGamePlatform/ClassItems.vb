@@ -23,26 +23,6 @@
 	'constructors
 	Public Sub New()
 	End Sub
-	Public Sub New(itemName As String, itemImageLocation As String)
-		Me.itemName = itemName
-		Me.itemImageLocation = itemImageLocation
-	End Sub
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	'fn
 	Public Sub itemsInForm(myForm As Form)
@@ -50,24 +30,20 @@
 		For Each ctrl As Control In myForm.Controls 'scan all controls present in myform
 			If TypeOf (ctrl) Is PictureBox Then 'if the control is a picturebox then
 				Dim path As String = ""
-				If ctrl.Name.Contains("boss") OrElse ctrl.Name.Contains("player") OrElse ctrl.Name.Contains("instruction") OrElse ctrl.Name.Contains("door") Then 'all pictureboxes to exclude here
-					ClassMyPublicShared.allPictureBoxes.Add(ctrl) 'push to list
+				If ctrl.Name.Contains("boss") OrElse ctrl.Name.Contains("player") OrElse ctrl.Name.Contains("instruction") OrElse ctrl.Name.Contains("ground") OrElse ctrl.Name.Contains("door") Then 'all pictureboxes to exclude here
+					ModuleGameManager.allPictureBoxes.Add(ctrl) 'push to list
 
 				ElseIf ctrl.Name.Contains("supergun") Then 'e.g. gun1,lastgun...
 					path = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\superGun.png")
 					Dim pb As New ClassPictureBox(ctrl, path)
 
-				ElseIf ctrl.Name.Contains("ground") Then
-					path = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\ground.png")
-					Dim pb As New ClassPictureBox(ctrl, path)
-
 				ElseIf ctrl.Name.Contains("wall") Then
-					path = ClassMyPublicShared.randomWallImages(NumberBetween(0, ClassMyPublicShared.randomWallImages.Count - 1)) 'path = return random image path in "classmypublicshared"
+					path = ModuleRandomiser.randomWallImages(NumberBetween(0, ModuleRandomiser.randomWallImages.Count - 1)) 'path = return random image path in "classmypublicshared"
 					Dim pb As New ClassPictureBox(ctrl, path)
 
 				Else 'pictureboxes to include
 					i += 1
-					path = ClassMyPublicShared.randomItemImages(NumberBetween(0, ClassMyPublicShared.randomItemImages.Count - 1)) 'path = return random image path in "classmypublicshared" i.e. C:\...\lastGamePlatform\Images\coin.png for example
+					path = ModuleRandomiser.randomItemImages(NumberBetween(0, ModuleRandomiser.randomItemImages.Count - 1)) 'path = return random image path in "classmypublicshared" i.e. C:\...\lastGamePlatform\Images\coin.png for example
 					Dim result As String = (IO.Path.GetFileNameWithoutExtension(path) & i).ToString() 'result = return the image name only with "i" added. e.g.coin1,adn2,coin3,...
 					ctrl.Name = result 'give a new name the pictureboxes that need to have randomised items 
 					Dim pb As New ClassPictureBox(ctrl, path)
@@ -76,7 +52,16 @@
 			End If
 		Next
 	End Sub
-
-
+	Public Sub updateLists(walls, enemies, enemiesSpeed)
+		For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes
+			'seperating randomPictureBoxes to specific ones
+			If activePictureBox.Name.Contains("wall") Then
+				walls.Add(activePictureBox) 'push to list
+			ElseIf activePictureBox.Name.Contains("enemy") Then
+				enemies.Add(activePictureBox)
+				enemiesSpeed.Add(1)
+			End If
+		Next
+	End Sub
 
 End Class

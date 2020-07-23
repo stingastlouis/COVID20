@@ -7,14 +7,16 @@
 	Public bullets As New List(Of PictureBox)
 
 	Public level As Integer = 0
-
+	Public universalScore As Integer
+	Public allPictureBoxes As New List(Of PictureBox)
+	Public waitBeforeFight As Integer = 3 'number of second to wait before fight
 
 	Private pScore As Label
 	Private pLife As Label
 	Private pItem As Label
 	Private walls As New List(Of PictureBox)
 	Private mediaPlayer
-	Private waitBeforeFight As Integer
+	Private waitTime As Integer
 	Private LabelBossLife As Label
 	Private door2 As PictureBox
 	Private instruction As PictureBox
@@ -45,7 +47,7 @@
 
 	Public Sub formLoader(currentForm As Form, myLevel As Int16)
 		myForm = currentForm
-		myForm.Width = 871
+		myForm.Width = 71
 		myForm.Height = 520
 
 		level = myLevel
@@ -161,30 +163,22 @@
 		'=================================
 
 
-
-
 		''============Timer 1 ===============
-
-		Dim tm1 As New Timer With {
-			.Enabled = False,
-			.Interval = 1000
-		}
-		timer3sec = tm1
-		''=================================
-
-		''============Timer 2 ===============
-
-		Dim tm2 As New Timer With {
+		Dim tm As New Timer With {
 			.Enabled = True,
 			.Interval = 10
 		}
-		myTimer = tm2
+		myTimer = tm
 		''=================================
 
+		''============Timer 2 ===============
+		Dim tm3sec As New Timer With {
+			.Enabled = False,
+			.Interval = 1000
+		}
+		timer3sec = tm3sec
 
-
-		'myTimer = fTimer
-		'timer3sec = sTimer
+		''=================================
 
 		ClassPlayer.playerIsFalling = True
 		gameLoader()
@@ -193,14 +187,14 @@
 
 	Private Sub gameLoader()
 		Console.WriteLine("clear main list of objects")
-		ClassMyPublicShared.allPictureBoxes.Clear()
+		ModuleGameManager.allPictureBoxes.Clear()
 
 		Console.WriteLine("setting all parameters for the game")
 
 		mediaPlayer.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
 		mediaPlayer.settings.setMode("Loop", True)
 
-		waitBeforeFight = ClassMyPublicShared.waitBeforeFight
+		waitTime = ModuleGameManager.waitBeforeFight
 
 		door2.Location = New Point(myForm.Width - door2.Width / 2, door2.Location.Y)
 		door2.BackColor = Color.Empty
@@ -222,16 +216,8 @@
 		itm.itemsInForm(myForm)
 
 		Console.WriteLine("updating the lists")
-		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
-			'seperating randomPictureBoxes to specific ones
-			If activePictureBox.Name.Contains("wall") Then
-				walls.Add(activePictureBox) 'push to list
-			ElseIf activePictureBox.Name.Contains("enemy") Then
-				enemies.Add(activePictureBox)
-				enemiesSpeed.Add(1)
-			ElseIf activePictureBox.Name.Contains("boss") OrElse activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("player") OrElse activePictureBox.Name.Contains("instruction") Then 'all pictureboxes to exclude here
-			End If
-		Next
+		itm.updateLists(walls, enemies, enemiesSpeed)
+
 		'adding handlers
 		AddHandler timer3sec.Tick, AddressOf Timer1000ms_Tick
 		AddHandler myTimer.Tick, AddressOf FastestTimer_Tick
@@ -253,7 +239,7 @@
 
 	Public Sub RemovePictureBoxAndUpdateScore(picBox)
 		'removing the control
-		ClassMyPublicShared.allPictureBoxes.Remove(picBox)
+		ModuleGameManager.allPictureBoxes.Remove(picBox)
 		myForm.Controls.Remove(picBox)
 		picBox.Dispose()
 
@@ -420,18 +406,18 @@
 
 
 	Private Sub Timer1000ms_Tick(sender As Object, e As EventArgs)
-		If waitBeforeFight <= 0 Then
+		If waitTime <= 0 Then
 			countdownLabel.Text = "Go" 'go
-			If waitBeforeFight < 0 Then
-				waitBeforeFight = ClassMyPublicShared.waitBeforeFight
+			If waitTime < 0 Then
 				myForm.Controls.Remove(countdownLabel)
+				waitTime = ModuleGameManager.waitBeforeFight
 				ClassPlayer.canShoot = True
 				timer3sec.Enabled = False
 				myTimer.Enabled = True
 			End If
-		Else : countdownLabel.Text = waitBeforeFight.ToString()  '3,2,1
+		Else : countdownLabel.Text = waitTime.ToString()  '3,2,1
 		End If
-		waitBeforeFight -= 1
+		waitTime -= 1
 		ModuleIntersection.bulletIntersectWithEnemy()
 	End Sub
 
@@ -459,7 +445,7 @@
 			Next
 			ModuleGameManager.enemies.Clear() 'remove everything in enemies<>
 			ModuleGameManager.enemiesSpeed.Clear() 'remove everything in enemiesSpeed<>
-			For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+			For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes 'list all controls in the form
 				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y) 'door appear on left
 				door2.Location = New Point(myForm.Width - (door2.Width), door2.Location.Y) 'door appear on right
 				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - myForm.Width, activePictureBox.Location.Y) 'keep same ypos and display everything before the left door

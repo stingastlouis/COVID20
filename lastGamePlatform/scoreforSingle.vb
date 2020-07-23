@@ -12,7 +12,7 @@ Public Class scoreforSingle
 
     Private Sub scoreforSingle_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        you.Text = CStr(Form1.Score)
+        you.Text = CStr(ModuleGameManager.universalScore)
         Try
             conn = New MySqlConnection
             conn.ConnectionString = "server=db4free.net;userid=stinga_pascal;password=Alphaetomega123;database=jojo_3499;port=3306;pooling=true;old guids= true"

@@ -1,29 +1,30 @@
 ﻿Public Class ClassBoss
-	Inherits ClassEnemies
-	Dim returnTOposition As Integer = 0
-	Dim moveOp As Integer
-	Dim randomSpeed As Integer
-	Sub New()
-		moveOp = 1
-	End Sub
-	Public Property startTime As Integer
-		Set(value As Integer)
-			returnTOposition = value
-		End Set
-		Get
-			Return returnTOposition
-		End Get
-	End Property
+	'Inherits ClassEnemies
+	'Dim returnTOposition As Integer = 0
+	'Dim moveOp As Integer
+	'Dim randomSpeed As Integer
+
+	'Sub New()
+	'	moveOp = 1
+	'End Sub
+	'Public Property startTime As Integer
+	'	Set(value As Integer)
+	'		returnTOposition = value
+	'	End Set
+	'	Get
+	'		Return returnTOposition
+	'	End Get
+	'End Property
 
 
-	Public Property howtomoveBoss As Integer
-		Set(value As Integer)
-			moveOp = value
-		End Set
-		Get
-			Return moveOp
-		End Get
-	End Property
+	'Public Property howtomoveBoss As Integer
+	'	Set(value As Integer)
+	'		moveOp = value
+	'	End Set
+	'	Get
+	'		Return moveOp
+	'	End Get
+	'End Property
 
 
 	'Public Sub makeBossMove(ByVal player As Object, ByRef boss As Object, ByVal ground As Object, ByVal door As Object)

@@ -1,15 +1,4 @@
-﻿
-
-Public Class Form1
-
-
-
-
-
-
-	'Public Score As Int16
-
-
+﻿Public Class Form1
 
 	''' <summary>
 	''' when the form is loading
@@ -26,8 +15,4 @@ Public Class Form1
 		Me.Dispose()
 		startHere.Show()
 	End Sub
-
-
-
-
 End Class

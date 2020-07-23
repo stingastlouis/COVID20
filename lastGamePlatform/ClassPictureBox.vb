@@ -64,8 +64,6 @@
 
 
 	'constructors
-	Public Sub New()
-	End Sub
 	Public Sub New(width As Integer, height As Integer, name As String, xPosition As Integer, yPosition As Integer, img As Bitmap)
 		Me.width = width
 		Me.height = height
@@ -97,7 +95,7 @@
 		pb.BackColor = Color.Transparent
 		pb.SizeMode = PictureBoxSizeMode.StretchImage
 		pb.BringToFront()
-		ClassMyPublicShared.allPictureBoxes.Add(pb) 'push to list
+		ModuleGameManager.allPictureBoxes.Add(pb) 'push to list
 		Return pb
 	End Function
 
@@ -113,7 +111,7 @@
 			.SizeMode = PictureBoxSizeMode.StretchImage
 		}
 		pb.BringToFront()
-		ClassMyPublicShared.allPictureBoxes.Add(pb) 'push to list
+		ModuleGameManager.allPictureBoxes.Add(pb) 'push to list
 		Return pb
 	End Function
 
