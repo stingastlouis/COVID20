@@ -126,16 +126,6 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form2.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form3.Designer.vb">
-      <DependentUpon>Form3.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form3.vb" />
     <Compile Include="Intro.Designer.vb">
       <DependentUpon>Intro.vb</DependentUpon>
     </Compile>
@@ -207,12 +197,6 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Intro.resx">
       <DependentUpon>Intro.vb</DependentUpon>
     </EmbeddedResource>
@@ -253,38 +237,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\idle_Player move.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\explosion.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mysql-connector-net-8.0.20.msi" />
-    <None Include="Resources\Webp.net-gifmaker.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\3rdPlayer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\3rdPlayerLfet.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\leftGiff.gif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ground.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\player1Mov.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\player1Mov2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\walk.gif" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxWMPLib">

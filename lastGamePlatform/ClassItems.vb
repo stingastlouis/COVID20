@@ -45,17 +45,7 @@
 
 
 	'fn
-	Public Sub scanPredefineItem()
-		If ClassMyPublicShared.level = 1 Then
-			itemsInForm(Form1)
-		ElseIf ClassMyPublicShared.level = 2 Then
-			itemsInForm(Form2)
-		ElseIf ClassMyPublicShared.level = 3 Then
-			itemsInForm(Form3)
-		End If
-	End Sub
-
-	Private Sub itemsInForm(myForm As Form)
+	Public Sub itemsInForm(myForm As Form)
 		Dim i As Integer = 0
 		For Each ctrl As Control In myForm.Controls 'scan all controls present in myform
 			If TypeOf (ctrl) Is PictureBox Then 'if the control is a picturebox then
@@ -72,12 +62,12 @@
 					Dim pb As New ClassPictureBox(ctrl, path)
 
 				ElseIf ctrl.Name.Contains("wall") Then
-					path = ClassMyPublicShared.randomWallImages(numberBetween(0, ClassMyPublicShared.randomWallImages.Count - 1)) 'path = return random image path in "classmypublicshared"
+					path = ClassMyPublicShared.randomWallImages(NumberBetween(0, ClassMyPublicShared.randomWallImages.Count - 1)) 'path = return random image path in "classmypublicshared"
 					Dim pb As New ClassPictureBox(ctrl, path)
 
 				Else 'pictureboxes to include
 					i += 1
-					path = ClassMyPublicShared.randomItemImages(numberBetween(0, ClassMyPublicShared.randomItemImages.Count - 1)) 'path = return random image path in "classmypublicshared" i.e. C:\...\lastGamePlatform\Images\coin.png for example
+					path = ClassMyPublicShared.randomItemImages(NumberBetween(0, ClassMyPublicShared.randomItemImages.Count - 1)) 'path = return random image path in "classmypublicshared" i.e. C:\...\lastGamePlatform\Images\coin.png for example
 					Dim result As String = (IO.Path.GetFileNameWithoutExtension(path) & i).ToString() 'result = return the image name only with "i" added. e.g.coin1,adn2,coin3,...
 					ctrl.Name = result 'give a new name the pictureboxes that need to have randomised items 
 					Dim pb As New ClassPictureBox(ctrl, path)

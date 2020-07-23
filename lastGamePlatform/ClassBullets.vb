@@ -19,7 +19,7 @@
 		Me.xPosition = player.Location.X + (player.Width - 15)
 		Me.yPosition = player.Location.Y + (player.Height / 2)
 		Me.name = "bullet"
-		Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bullet.png"))
+		Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bullet.png"))
 	End Sub
 
 

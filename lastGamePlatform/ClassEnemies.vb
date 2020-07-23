@@ -20,17 +20,7 @@
 	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
 		Me.width = 87
 		Me.height = 62
-		Select Case ClassMyPublicShared.level
-			Case 1
-				Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Enemies\Enemy1.png"))
-				Exit Select
-			Case 2
-				Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Enemies\Enemy2.png"))
-				Exit Select
-			Case 3
-				Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Enemies\Enemy3.png"))
-				Exit Select
-		End Select
+		Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Enemies\Enemy" & level & ".png"))
 		Me.xPosition = xPosition - 87
 		Me.yPosition = yPosition - 62
 		Me.name = name

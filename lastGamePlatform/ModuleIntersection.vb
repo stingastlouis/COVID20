@@ -23,7 +23,7 @@ Module ModuleIntersection
 					Console.WriteLine("oo boss dead")
 
 
-					ModuleGameManager.removePictureBoxAndUpdateScore(boss)
+					ModuleGameManager.RemovePictureBoxAndUpdateScore(boss)
 				End If
 				bullets.Remove(bullet)
 				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
@@ -54,7 +54,7 @@ Module ModuleIntersection
 					ClassPlayer.life += 1 'updated
 					ClassPlayer.score += ClassItems.scoreLife
 					Console.WriteLine("new life")
-					ModuleGameManager.removePictureBoxAndUpdateScore(activePictureBox)
+					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
 					'Module1.removePictureBoxandUpdateScore(activePictureBox, Me, pScore, pLife, pItem)
 					Exit For 'exit the for loop as picturebox name contains "life" help in using less cpu power
 				End If
@@ -66,21 +66,21 @@ Module ModuleIntersection
 					End If
 					ClassPlayer.item += 1
 					Console.WriteLine("new gun")
-					ModuleGameManager.removePictureBoxAndUpdateScore(activePictureBox)
+					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("adn") Then
 					ClassPlayer.item += 1
 					ClassPlayer.score += ClassItems.scoreAdn
 					Console.WriteLine("new adn")
-					ModuleGameManager.removePictureBoxAndUpdateScore(activePictureBox)
+					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "adn" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("coin") Then
 					ClassPlayer.item += 1
 					ClassPlayer.score += ClassItems.scoreCoin
 					Console.WriteLine("new coin")
-					ModuleGameManager.removePictureBoxAndUpdateScore(activePictureBox)
+					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
 				End If
 			End If
@@ -112,8 +112,8 @@ Module ModuleIntersection
 					ModuleGameManager.bullets.Remove(bullet) 'remove from bullets<>
 
 					ModuleGameManager.enemies.Remove(enemy) 'remove from enemies<>
-					ModuleGameManager.removePictureBoxAndUpdateScore(bullet)
-					ModuleGameManager.removePictureBoxAndUpdateScore(enemy)
+					ModuleGameManager.RemovePictureBoxAndUpdateScore(bullet)
+					ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
 					waitOn = 0
 					getTime = 0
 					Exit For 'break as current <> has been modified
@@ -132,7 +132,7 @@ Module ModuleIntersection
 				ClassPlayer.life -= 1
 				Console.WriteLine("player intersect with enemy")
 				ModuleGameManager.enemies.Remove(enemy)
-				ModuleGameManager.removePictureBoxAndUpdateScore(enemy)
+				ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
 				enemy.Dispose()
 				Exit For
 			End If

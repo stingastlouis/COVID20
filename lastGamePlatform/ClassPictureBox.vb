@@ -117,7 +117,19 @@
 		Return pb
 	End Function
 
-
+	Public Function showPictureBoxNoAdd()
+		Dim pb As New PictureBox With {
+			.Width = Width1,
+			.Height = Height1,
+			.Name = Name1,
+			.Location = New Point(XPosition1, YPosition1),
+			.Image = Img1,
+			.BackColor = Color.Transparent,
+			.SizeMode = PictureBoxSizeMode.StretchImage
+		}
+		pb.BringToFront()
+		Return pb
+	End Function
 
 
 

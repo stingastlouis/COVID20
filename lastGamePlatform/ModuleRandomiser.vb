@@ -1,32 +1,32 @@
 ﻿Module ModuleRandomiser
-	Dim random As New Random()
+	ReadOnly random As New Random()
 
 
-	Function numberOfEnemies()
+	Function NumberOfEnemies()
 		Dim noOfEnemies As Integer = 1
-		If ClassMyPublicShared.level = 1 Then
-			noOfEnemies = numberBetween(1, 3) '1-3
-		ElseIf ClassMyPublicShared.level = 2 Then
-			noOfEnemies = numberBetween(3, 5) '3-5
-		ElseIf ClassMyPublicShared.level = 3 Then
-			noOfEnemies = numberBetween(5, 8) '5-8
+		If level = 1 Then
+			noOfEnemies = NumberBetween(1, 3) '1-3
+		ElseIf level = 2 Then
+			noOfEnemies = NumberBetween(3, 5) '3-5
+		ElseIf level = 3 Then
+			noOfEnemies = NumberBetween(5, 8) '5-8
 		End If
 		Return noOfEnemies
 	End Function
 
-	Function enemyMoveSpeed()
+	Function EnemyMoveSpeed()
 		Dim moveSpeed As Integer = 1
-		If ClassMyPublicShared.level = 1 Then
-			moveSpeed = numberBetween(1, 5)
-		ElseIf ClassMyPublicShared.level = 2 Then
-			moveSpeed = numberBetween(5, 6)
-		ElseIf ClassMyPublicShared.level = 3 Then
-			moveSpeed = numberBetween(6, 10)
+		If level = 1 Then
+			moveSpeed = NumberBetween(1, 5)
+		ElseIf level = 2 Then
+			moveSpeed = NumberBetween(5, 6)
+		ElseIf level = 3 Then
+			moveSpeed = NumberBetween(6, 10)
 		End If
 		Return moveSpeed
 	End Function
 
-	Function numberBetween(a As Integer, b As Integer)
+	Function NumberBetween(a As Integer, b As Integer)
 		Return random.Next(a, b + 1)
 	End Function
 End Module

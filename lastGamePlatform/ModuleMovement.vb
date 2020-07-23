@@ -76,7 +76,7 @@
 
 			Case Keys.Q
 				If (bullets.Count <= 10) AndAlso ClassPlayer.canShoot Then 'allow to shot only 10 bullets - reduce cpu usage and lag
-					generateNewBullet(player1)
+					GenerateNewBullet(player1)
 				End If
 
 			Case Keys.Escape

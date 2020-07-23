@@ -1,26 +1,28 @@
 ﻿Module ModuleGameManager
-	Public myForm As Form 'done
-	Public player1 As PictureBox 'done 
-	Public boss As PictureBox 'done
+	Public myForm As Form
+	Public player1 As PictureBox
+	Public boss As PictureBox
 	Public enemies As New List(Of PictureBox)
 	Public enemiesSpeed As New List(Of Integer)
 	Public bullets As New List(Of PictureBox)
 
+	Public level As Integer = 0
 
 
-	Private pScore As Label 'DONE
-	Private pLife As Label 'DONE
-	Private pItem As Label 'DONE
+	Private pScore As Label
+	Private pLife As Label
+	Private pItem As Label
 	Private walls As New List(Of PictureBox)
 	Private mediaPlayer
 	Private waitBeforeFight As Integer
-	Private LabelBossLife As Label 'DONE
-	Private door2 As PictureBox 'done
-	Private instruction As PictureBox 'DONE
-	Private door1 As PictureBox  'done
+	Private LabelBossLife As Label
+	Private door2 As PictureBox
+	Private instruction As PictureBox
+	Private door1 As PictureBox
 	Private supergun0 As PictureBox
-	Private ground1 As PictureBox 'done
-	Private progressBar As ProgressBar 'DONE
+	Private ground1 As PictureBox
+	Private progressBar As ProgressBar
+
 	Private myTimer As Timer
 	Private timer3sec As Timer
 
@@ -41,107 +43,18 @@
 
 
 
-	Public Sub formLoader(currentForm As Form, fTimer As Timer, sTimer As Timer)
+	Public Sub formLoader(currentForm As Form, myLevel As Int16)
 		myForm = currentForm
+		myForm.Width = 871
+		myForm.Height = 520
 
-
-
+		level = myLevel
 
 		Dim mp As New AxWMPLib.AxWindowsMediaPlayer
 		mp.CreateControl()
 		mp.uiMode = "invisible"
 		mediaPlayer = mp
 
-
-		'=========Life====================
-		Dim life As New Label
-		With life
-			.Location = New Point(30, 12)
-			.BackColor = Color.Empty
-			.Name = "pLife"
-			.Font = New Font("Agency FB", 16)
-			.Visible = True
-			.Enabled = True
-			.Text = "Johny X 3"
-			.AutoSize = True
-			.CreateControl()
-		End With
-		pLife = life
-		myForm.Controls.Add(pLife)
-		'=================================
-
-		'=========Score===================
-		Dim score As New Label
-		With score
-			.Location = New Point(140, 12)
-			.BackColor = Color.Empty
-			.Name = "pScore"
-			.Font = New Font("Agency FB", 16)
-			.Text = "Score :"
-			.AutoSize = True
-			.Visible = True
-			.Enabled = True
-			.CreateControl()
-		End With
-		pScore = score
-		myForm.Controls.Add(pScore)
-		'=================================
-
-		'=========Item===================
-		Dim item As New Label
-		With item
-			.Location = New Point(250, 12)
-			.BackColor = Color.Empty
-			.Name = "pItem"
-			.Font = New Font("Agency FB", 16)
-			.Text = "Score :"
-			.Visible = True
-			.Enabled = True
-			.AutoSize = True
-			.CreateControl()
-		End With
-		pItem = item
-		myForm.Controls.Add(item)
-
-		'================================
-
-		'=========boss=label===================
-		Dim lblBoss As New Label
-		With lblBoss
-			.Location = New Point(350, 13)
-			.BackColor = Color.Empty
-			.Name = "lblBoss"
-			.Font = New Font("Agency FB", 16)
-			.Text = "Boss Life  :"
-			.AutoSize = True
-			.BringToFront()
-			.Visible = True
-			.Enabled = True
-			.CreateControl()
-		End With
-		LabelBossLife = lblBoss
-		myForm.Controls.Add(LabelBossLife)
-		'=================================
-
-		'=========instruction=to=user===================
-		Dim instruc As New PictureBox
-		With instruc
-			.Location = New Point(215, 80)
-			.BackColor = Color.Empty
-			.Name = "instruction"
-			.Size = New Size(420, 172)
-			.SizeMode = PictureBoxSizeMode.StretchImage
-
-			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\instruction1.png"))
-			.AutoSize = True
-			.Visible = True
-			.BringToFront()
-			.Enabled = True
-			.CreateControl()
-		End With
-		instruction = instruc
-		myForm.Controls.Add(instruction)
-		'=================================
 
 		'=========Progress=Bar=Boss===================
 		Dim prog As New ProgressBar
@@ -153,8 +66,6 @@
 			.Minimum = 0
 			.Value = 1
 			.Size = New Size(133, 28)
-
-
 			.Visible = True
 			.Enabled = True
 			.CreateControl()
@@ -163,171 +74,117 @@
 		myForm.Controls.Add(progressBar)
 		'=================================
 
-		'=========Player==================
-		Dim ppl As New PictureBox
-		With ppl
-			.Location = New Point(40, 235)
-			.BackColor = Color.Empty
-			.Name = "player1"
-			.Size = New Size(87, 62)
-			.SizeMode = PictureBoxSizeMode.StretchImage
 
-			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))
-			.BringToFront()
-			.Visible = True
+		'=========Door1==================
+		Dim d1 As New PictureBox With {
+			.Location = New Point(2933, 49),
+			.BackColor = Color.Empty,
+			.Name = "door2",
+			.Size = New Size(2, 443),
+			.Visible = False,
 			.Enabled = True
-			.CreateControl()
-		End With
-		player1 = ppl
+		}
+		d1.SendToBack()
+		door1 = d1
+		myForm.Controls.Add(door2)
+		'=================================
+
+		'=========Door2==================
+		Dim d2 As New PictureBox With {
+			.Location = New Point(2933, 49),
+			.BackColor = Color.Empty,
+			.Name = "door2",
+			.Size = New Size(2, 443),
+			.Visible = False,
+			.Enabled = True
+		}
+		d2.SendToBack()
+		door2 = d2
+		myForm.Controls.Add(door2)
+		'=================================
+
+
+		'=========Life====================
+		pLife = CreateLabel(30, 12, "pLife", "Johny X3")
+		myForm.Controls.Add(pLife)
+		'=================================
+
+		'=========Score===================
+		pScore = CreateLabel(140, 12, "pScore", "Score : ")
+		myForm.Controls.Add(pScore)
+		'=================================
+
+		'=========Item===================
+		pItem = CreateLabel(250, 12, "pItem", "Item(s) : ")
+		myForm.Controls.Add(pItem)
+		'================================
+
+		'=========boss=label===================
+		LabelBossLife = CreateLabel(350, 13, "lblBoss", "Boss Life : ")
+		myForm.Controls.Add(LabelBossLife)
+		'=================================
+
+
+
+		'=========instruction=to=user===================
+		Dim instruct As New ClassPictureBox(420, 172, "instruction1", 215, 80, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\instruction1.png")))
+		instruction = instruct.showPictureBoxNoAdd()
+		myForm.Controls.Add(instruction)
+		'=================================
+
+
+
+		'=========Player==================
+		Dim ppl As New ClassPictureBox(87, 62, "player1", 40, 235, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Players\player1Mov.png")))
+		player1 = ppl.showPictureBoxNoAdd()
 		myForm.Controls.Add(player1)
 		'=================================
 
 
 
 		'=========Ground==================
-		Dim gg As New PictureBox
-		With gg
-			.SendToBack()
-			.Location = New Point(0, 400)
-			.BackColor = Color.Empty
-			.Name = "ground1"
-			.Size = New Size(3950, 62)
-			.SizeMode = PictureBoxSizeMode.StretchImage
-			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\ground.png"))
-
-			.Visible = True
-			.Enabled = True
-
-		End With
-		ground1 = gg
+		Dim gg As New ClassPictureBox(3950, 62, "ground1", 0, 400, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Grounds\ground" & level & ".png")))
+		ground1 = gg.showPictureBoxNoAdd()
 		myForm.Controls.Add(ground1)
-
-		'=================================
-		'=========Door2==================
-		Dim d2 As New PictureBox
-		With d2
-			.Location = New Point(2933, 49)
-			.BackColor = Color.Empty
-			.Name = "door2"
-			.Size = New Size(79, 443)
-			.SizeMode = PictureBoxSizeMode.StretchImage
-			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\ground.png"))
-
-			.BringToFront()
-			.Visible = True
-			.Enabled = True
-			.CreateControl()
-		End With
-		door2 = d2
-		myForm.Controls.Add(door2)
-		'=================================
-		'=========Door1==================
-		Dim d1 As New PictureBox
-		With d1
-			.Location = New Point(3020, 49)
-			.BackColor = Color.Empty
-			.Name = "door2"
-			.Size = New Size(79, 443)
-			.SizeMode = PictureBoxSizeMode.StretchImage
-			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\ground.png"))
-
-			.Visible = True
-			.Enabled = True
-			.CreateControl()
-		End With
-		door1 = d1
-		myForm.Controls.Add(door2)
 		'=================================
 
-		'=========boss==================
-		Dim bs As New PictureBox
-		With bs
-			.Location = New Point(3700, 200)
-			.BackColor = Color.Empty
-			.Name = "boss"
-			.Size = New Size(173, 117)
-			.SizeMode = PictureBoxSizeMode.StretchImage
+		'=========SuperGun==================
+		Dim sg As New ClassPictureBox(101, 81, "supergun0", 3099, 243, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\superGun.png")))
+		supergun0 = sg.showPictureBoxNoAdd()
+		myForm.Controls.Add(supergun0)
+		'=================================
 
-			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\download.jpg"))
-
-			.Visible = True
-			.Enabled = True
-			.CreateControl()
-		End With
-		boss = bs
+		'=========boss==================s
+		Dim bs As New ClassPictureBox(173, 117, "boss", 3700, 200, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bosses\boss" & level & ".png")))
+		boss = bs.showPictureBoxNoAdd()
 		myForm.Controls.Add(boss)
 		'=================================
 
 
-		'=========SuperGun==================
-		Dim sG As New PictureBox
-		With sG
-			.Location = New Point(3099, 243)
-			.BackColor = Color.Empty
-			.Name = "supergun0"
-			.Size = New Size(101, 81)
-			.SizeMode = PictureBoxSizeMode.StretchImage
-			.ImageLocation = "C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Resources\superGun.png"
-			.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\superGun.png"))
 
-			.Visible = True
-			.Enabled = True
-			.CreateControl()
-		End With
-		supergun0 = sG
-		myForm.Controls.Add(supergun0)
-		'=================================
 
 		''============Timer 1 ===============
 
-		'Dim tm1 As New Timer
-		'With tm1
-		'	.Enabled = False
-
-		'	.Interval = 1000
-
-		'End With
-		'timer3sec = tm1
-		'myForm.Controls.Add(tm1)
-
-
+		Dim tm1 As New Timer With {
+			.Enabled = False,
+			.Interval = 1000
+		}
+		timer3sec = tm1
 		''=================================
 
 		''============Timer 2 ===============
 
-		'Dim tm2 As New Timer
-		'With tm2
-		'	.Enabled = False
-
-		'	.Interval = 1000
-		'End With
-
-
-
+		Dim tm2 As New Timer With {
+			.Enabled = True,
+			.Interval = 10
+		}
+		myTimer = tm2
 		''=================================
 
 
 
-
-
-
-
-
-		'pScore = score
-		'pItem = item
-		'player1 = player
-		'progressBar = progBar
-		myTimer = fTimer
-		timer3sec = sTimer
-
-		'LabelBossLife = blife
-		'door1 = doorOne
-		'door2 = doorTwo
-		'boss = bossPb
-		'ground1 = ground
-
-
-
+		'myTimer = fTimer
+		'timer3sec = sTimer
 
 		ClassPlayer.playerIsFalling = True
 		gameLoader()
@@ -345,9 +202,7 @@
 
 		waitBeforeFight = ClassMyPublicShared.waitBeforeFight
 
-		ClassMyPublicShared.level = 1
 		door2.Location = New Point(myForm.Width - door2.Width / 2, door2.Location.Y)
-		door2.BringToFront()
 		door2.BackColor = Color.Empty
 		pScore.Text = "Score :" + CStr(ClassPlayer.score)
 		pItem.Text = "Item :" + CStr(ClassPlayer.item)
@@ -364,7 +219,7 @@
 
 		Console.WriteLine("pushing pictureboxes to main list of objects")
 		Dim itm As New ClassItems()
-		itm.scanPredefineItem()
+		itm.itemsInForm(myForm)
 
 		Console.WriteLine("updating the lists")
 		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes
@@ -387,24 +242,24 @@
 	End Sub
 
 
-	Public Sub generateNewBullet(player)
+	Public Sub GenerateNewBullet(player)
 		Dim bullet As New ClassBullets(player)
 		Dim bulletpb As PictureBox = bullet.generateBullet()
 		myForm.Controls.Add(bulletpb)
 		ModuleGameManager.bullets.Add(bulletpb)
-		My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bulletSound.wav"), AudioPlayMode.Background)
+		My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bulletSound.wav"), AudioPlayMode.Background)
 	End Sub
 
 
-	Public Sub removePictureBoxAndUpdateScore(picBox)
+	Public Sub RemovePictureBoxAndUpdateScore(picBox)
 		'removing the control
 		ClassMyPublicShared.allPictureBoxes.Remove(picBox)
 		myForm.Controls.Remove(picBox)
 		picBox.Dispose()
 
-		pScore.Text = "Score :" + CStr(ClassPlayer.score)
-		pLife.Text = "Johny X " + CStr(ClassPlayer.life)
-		pItem.Text = "Item :" + CStr(ClassPlayer.item)
+		pScore.Text = "Score : " + CStr(ClassPlayer.score)
+		pLife.Text = "Johny X" + CStr(ClassPlayer.life)
+		pItem.Text = "Item : " + CStr(ClassPlayer.item)
 
 		If progressBar.Value <= 0 Then
 
@@ -454,7 +309,7 @@
 			myForm.Controls.Add(restBtn)
 			myForm.Controls.Add(exitBtn)
 			AddHandler restBtn.Click, AddressOf RestartBtn_Click
-			AddHandler exitBtn.Click, AddressOf extbtn_Click
+			AddHandler exitBtn.Click, AddressOf Extbtn_Click
 		End If
 
 		If ClassPlayer.life <= 0 Then
@@ -505,7 +360,7 @@
 			myForm.Controls.Add(restBtn)
 			myForm.Controls.Add(exitBtn)
 			AddHandler restBtn.Click, AddressOf RestartBtn_Click
-			AddHandler exitBtn.Click, AddressOf extbtn_Click
+			AddHandler exitBtn.Click, AddressOf Extbtn_Click
 		End If
 
 
@@ -515,12 +370,12 @@
 	Private Sub RestartBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 		Dim btn As Button = CType(sender, Button) 'convert obj to button
 		Dim nextForm As Form = myForm
-		Select Case ClassMyPublicShared.level
+		Select Case level
 			Case 1
-				nextForm = Form2
+				'nextForm = Form2
 				Exit Select
 			Case 2
-				nextForm = Form3
+				'nextForm = Form3
 				Exit Select
 			Case 3
 				nextForm = bonusForm
@@ -537,7 +392,7 @@
 	End Sub
 
 
-	Private Sub extbtn_Click(sender As Object, e As EventArgs)
+	Private Sub Extbtn_Click(sender As Object, e As EventArgs)
 		startHere.ShowDialog()
 	End Sub
 
@@ -547,17 +402,31 @@
 	'	startHere.Show()
 	'	Console.WriteLine("close the form")
 	'End Sub
-
+	Private Function CreateLabel(x, y, Name, Text)
+		Dim lbl As New Label
+		With lbl
+			.Location = New Point(x, y)
+			.BackColor = Color.Empty
+			.Name = Name
+			.Font = New Font("Agency FB", 16)
+			.Visible = True
+			.Enabled = True
+			.Text = Text
+			.AutoSize = True
+			.CreateControl()
+		End With
+		Return lbl
+	End Function
 
 
 	Private Sub Timer1000ms_Tick(sender As Object, e As EventArgs)
 		If waitBeforeFight <= 0 Then
 			countdownLabel.Text = "Go" 'go
 			If waitBeforeFight < 0 Then
-				timer3sec.Enabled = False
 				waitBeforeFight = ClassMyPublicShared.waitBeforeFight
 				myForm.Controls.Remove(countdownLabel)
 				ClassPlayer.canShoot = True
+				timer3sec.Enabled = False
 				myTimer.Enabled = True
 			End If
 		Else : countdownLabel.Text = waitBeforeFight.ToString()  '3,2,1
@@ -583,10 +452,10 @@
 		'-player pass through right door
 		If (player1.Left + player1.Width > myForm.Width) Then
 			For Each enemy In enemies 'remove all enemies from form and allPictureBoxes<> before left door
-				removePictureBoxAndUpdateScore(enemy)
+				RemovePictureBoxAndUpdateScore(enemy)
 			Next
 			For Each bullet In bullets 'remove all bullets from form and allPictureBoxes<>  before left door
-				removePictureBoxAndUpdateScore(bullet)
+				RemovePictureBoxAndUpdateScore(bullet)
 			Next
 			ModuleGameManager.enemies.Clear() 'remove everything in enemies<>
 			ModuleGameManager.enemiesSpeed.Clear() 'remove everything in enemiesSpeed<>
@@ -599,12 +468,12 @@
 			door2.BackColor = Color.Empty
 
 			'--generate random no of enemies at random position with random move speed
-			Dim noOfEnemies As Integer = ModuleRandomiser.numberOfEnemies()
+			Dim noOfEnemies As Integer = ModuleRandomiser.NumberOfEnemies()
 			While noOfEnemies > 0
-				Dim xpos As Integer = ModuleRandomiser.numberBetween(myForm.Width / 5, myForm.Width - (door2.Width) - 1) 'from 20% of the form to the right door
-				Dim ypos As Integer = ModuleRandomiser.numberBetween(0, ground1.Top - 62 - 1) 'from top of the form to the top of the ground
+				Dim xpos As Integer = ModuleRandomiser.NumberBetween(myForm.Width / 5, myForm.Width - (door2.Width) - 1) 'from 20% of the form to the right door
+				Dim ypos As Integer = ModuleRandomiser.NumberBetween(0, ground1.Top - 62 - 1) 'from top of the form to the top of the ground
 
-				Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, ModuleRandomiser.enemyMoveSpeed()) 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
+				Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, ModuleRandomiser.EnemyMoveSpeed()) 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
 				Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
 				myForm.Controls.Add(en) 'add the enemy generated to form
 				ModuleGameManager.enemiesSpeed.Add(enemy.MoveSpeed1) 'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>

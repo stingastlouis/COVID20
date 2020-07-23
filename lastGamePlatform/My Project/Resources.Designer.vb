@@ -73,26 +73,6 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property _3rdPlayer() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("_3rdPlayer", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property _3rdPlayerLfet() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("_3rdPlayerLfet", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property blackSingle() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("blackSingle", resourceCulture)
@@ -143,16 +123,6 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property ground() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("ground", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property instruction1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("instruction1", resourceCulture)
@@ -163,39 +133,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property leftGiff() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("leftGiff", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property multi_black() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("multi_black", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property player1Mov() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("player1Mov", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property player1Mov2() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("player1Mov2", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -256,26 +196,6 @@ Namespace My.Resources
         Friend ReadOnly Property uhum() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("uhum", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property walk() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("walk", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property Webp_net_gifmaker() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Webp_net_gifmaker", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
