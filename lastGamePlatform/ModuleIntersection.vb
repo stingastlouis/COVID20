@@ -26,7 +26,7 @@ Module ModuleIntersection
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(boss)
 				End If
 				bullets.Remove(bullet)
-				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
+				ModuleGameManager.allPictureBoxes.Remove(bullet)
 				bullet.Dispose()
 				Exit For 'break as current <> has been modified
 			End If
@@ -40,7 +40,7 @@ Module ModuleIntersection
 
 	Public Sub playerIntersectWithStaticPictureBoxes()
 		ClassPlayer.playerIsFalling = True
-		For Each activePictureBox As PictureBox In ClassMyPublicShared.allPictureBoxes 'list all controls in the form
+		For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes 'list all controls in the form
 			If activePictureBox IsNot ModuleGameManager.player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds) Then 'if player picturebox intersects with other pictureboxes
 				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
 					If player1.Top > activePictureBox.Top - player1.Height Then 'to stay on top of ground and wall

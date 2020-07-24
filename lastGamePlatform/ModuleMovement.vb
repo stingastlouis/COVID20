@@ -251,7 +251,7 @@
 			bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y) 'move the bullets
 			If bullet.Location.X > ModuleGameManager.myForm.Width Then 'delete the bullets that goes after the right door
 				ModuleGameManager.bullets.Remove(bullet) 'remove fro bullets<>
-				ClassMyPublicShared.allPictureBoxes.Remove(bullet)
+				ModuleGameManager.allPictureBoxes.Remove(bullet)
 				Exit For 'break as current <> has been modified
 			End If
 		Next

@@ -7,12 +7,6 @@
 	''' <param name="e"></param>
 	''' 
 	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
-		ModuleGameManager.formLoader(Me, 1)
-	End Sub
-
-
-	Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-		Me.Dispose()
-		startHere.Show()
+		ModuleGameManager.FormLoader(Me, 1)
 	End Sub
 End Class
