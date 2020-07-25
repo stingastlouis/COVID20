@@ -56,7 +56,7 @@
 
 		Console.WriteLine("creating form")
 		myForm = currentForm
-		myForm.Width = 790
+		myForm.Width = 810
 		myForm.Height = 520
 		myForm.HorizontalScroll.Enabled = False '#################################################pa p marC
 		myForm.HorizontalScroll.Visible = False '#################################################pa p marC
@@ -67,8 +67,8 @@
 		Console.WriteLine("creating media player")
 		mediaPlayer.CreateControl()
 		mediaPlayer.uiMode = "invisible"
-		'mediaPlayer.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
-		'mediaPlayer.settings.setMode("Loop", True)
+		mediaPlayer.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
+		mediaPlayer.settings.setMode("Loop", True)
 
 
 		'progress bar
@@ -86,7 +86,7 @@
 		pScore.Text = "Score :" + CStr(ClassPlayer.score)
 		pItem = CreateLabel(250, 12, "pItem", "Item(s) : ")
 		pItem.Text = "Item :" + CStr(ClassPlayer.item)
-		LabelBossLife = CreateLabel(350, 13, "lblBoss", "Boss Life : ")
+		LabelBossLife = CreateLabel(350, 13, "lblBoss", "Boss Life: ")
 		LabelBossLife.Visible = False
 		LabelBossLife.Enabled = False
 
@@ -137,6 +137,8 @@
 	Public Sub RemovePictureBoxAndUpdateScore(picBox As PictureBox)
 		Console.WriteLine("removing the control " & picBox.Name.ToString)
 		ModuleGameManager.allPictureBoxes.Remove(picBox)
+		picBox.Enabled = False
+		picBox.Visible = False
 		myForm.Controls.Remove(picBox)
 		picBox.Dispose()
 
@@ -166,7 +168,7 @@
 		Dim noOfEnemies As Integer = ModuleRandomiser.NumberOfEnemies()
 		While noOfEnemies > 0
 			Dim xpos As Integer = ModuleRandomiser.NumberBetween(myForm.Width / 5, myForm.Width - (door2.Width) - 1) 'from 20% of the form to the right door
-			Dim ypos As Integer = ModuleRandomiser.NumberBetween(0, ground1.Top - 62 - 1) 'from top of the form to the top of the ground
+			Dim ypos As Integer = ModuleRandomiser.NumberBetween(myForm.Height / 5, 4 * myForm.Height / 5) 'from top of the form to the top of the ground
 			Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, ModuleRandomiser.EnemyMoveSpeed()) 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
 			Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
 			myForm.Controls.Add(en) 'add the enemy generated to form
@@ -337,7 +339,7 @@
 	Private Function CreateBossProgressBar(Enabled, Visible, Value)
 		Dim progBar As New ProgressBar
 		With progBar
-			.Location = New Point(450, 13)
+			.Location = New Point(460, 13)
 			.BringToFront()
 			.Name = "ProgressBar1"
 			.Maximum = 18
@@ -450,10 +452,27 @@
 		End If
 		'-
 
+		If ModuleGameManager.enemies.Count > 0 Then
+			'Console.WriteLine("move the enemies only when there is/are enemies in the list")
+			'Console.WriteLine("activate EnemyMovement() and EnemyIntersectWithPlayer()")
+			ModuleMovement.EnemyMovement()
+			'ModuleIntersection.EnemyIntersectWithPlayer()
+		End If
+		If ModuleGameManager.bullets.Count > 0 Then
+			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
+			'Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
+			ModuleMovement.BulletMovement()
+			ModuleIntersection.BulletIntersectWithEnemy()
+		End If
+
 		'-player pass through right door
 		If (player1.Left + player1.Width > myForm.Width) Then
 			Console.WriteLine("clearing enemies lists")
 			EmptyEnemyLists()
+
+			ModuleGameManager.bullets.Clear() 'remove from bullets<>
+			ModuleGameManager.enemies.Clear() 'remove from enemies<>
+
 
 			Console.WriteLine("moving the doors")
 			MoveTheDoors()
@@ -477,19 +496,8 @@
 
 
 
-		If ModuleGameManager.enemies.Count > 0 Then
-			'Console.WriteLine("move the enemies only when there is/are enemies in the list")
-			'Console.WriteLine("activate EnemyMovement() and EnemyIntersectWithPlayer()")
-			ModuleMovement.EnemyMovement()
-			'ModuleIntersection.EnemyIntersectWithPlayer()
-		End If
-		If ModuleGameManager.bullets.Count > 0 Then
-			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
-			'Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
-			ModuleMovement.BulletMovement()
-			ModuleIntersection.BulletIntersectWithEnemy()
-		End If
-		'-
+
+
 	End Sub
 	' end handlers function/sub
 

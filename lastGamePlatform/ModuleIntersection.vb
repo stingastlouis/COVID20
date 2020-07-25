@@ -75,22 +75,20 @@ Module ModuleIntersection
 	End Sub
 
 	Public Sub BulletIntersectWithEnemy()
-		For Each enemy In ModuleGameManager.enemies
-			For Each bullet In ModuleGameManager.bullets
-				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
+		For Each bullet In ModuleGameManager.bullets
+			For Each enemy In ModuleGameManager.enemies
+				If enemy.Bounds.IntersectsWith(bullet.Bounds) And enemy.Enabled Then 'if bullet intersect with enemies 
 					Dim enemyLocation As Point = enemy.Location
 					Dim enemySize As Size = enemy.Size
 					Console.WriteLine("bullet intersect enemy")
 					ClassPlayer.score += ClassItems.scoreEnemy
-					ModuleGameManager.bullets.Remove(bullet) 'remove from bullets<>
-					ModuleGameManager.enemies.Remove(enemy) 'remove from enemies<>
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(bullet)
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
 					generateExplosion(enemySize, enemyLocation)
-					Exit For 'break as current <> has been modified
+					'Exit For 'break as current <> has been modified
 				End If
 			Next
-			Exit For 'break as current <> has been modified
+			'Exit For 'break as current <> has been modified
 		Next
 	End Sub
 
