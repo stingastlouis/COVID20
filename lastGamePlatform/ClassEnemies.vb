@@ -16,11 +16,11 @@
 
 	'constructors
 	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer)
-		Me.width = 87
-		Me.height = 62
+		Me.width = 40
+		Me.height = 50
 		Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Enemies\Enemy" & ModuleGameManager.level & ".png"))
-		Me.xPosition = xPosition - 87
-		Me.yPosition = yPosition - 62
+		Me.xPosition = xPosition - Me.width
+		Me.yPosition = yPosition - Me.height
 		Me.name = name
 		Me.moveSpeed = moveSpeed
 	End Sub

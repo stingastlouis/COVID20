@@ -14,9 +14,9 @@
 	'constructors
 
 	Public Sub New(player As PictureBox)
-		Me.width = 15
-		Me.height = 25
-		Me.xPosition = player.Location.X + (player.Width - 15)
+		Me.width = 13
+		Me.height = 7
+		Me.xPosition = player.Location.X + (player.Width - 13)
 		Me.yPosition = player.Location.Y + (player.Height / 2)
 		Me.name = "bullet"
 		Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bullet.png"))

@@ -1,4 +1,5 @@
-﻿Imports System.DateTime
+﻿
+
 Module ModuleIntersection
 
 	Public Sub bulletIntersectsWithBoss(ByRef pro As ProgressBar, ByRef bullets As List(Of PictureBox), ByVal boss As Object)
@@ -73,19 +74,19 @@ Module ModuleIntersection
 		Next
 	End Sub
 
-
 	Public Sub BulletIntersectWithEnemy()
 		For Each enemy In ModuleGameManager.enemies
 			For Each bullet In ModuleGameManager.bullets
 				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
 					Dim enemyLocation As Point = enemy.Location
+					Dim enemySize As Size = enemy.Size
 					Console.WriteLine("bullet intersect enemy")
 					ClassPlayer.score += ClassItems.scoreEnemy
 					ModuleGameManager.bullets.Remove(bullet) 'remove from bullets<>
 					ModuleGameManager.enemies.Remove(enemy) 'remove from enemies<>
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(bullet)
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
-					generateExplosion(enemyLocation)
+					generateExplosion(enemySize, enemyLocation)
 					Exit For 'break as current <> has been modified
 				End If
 			Next
@@ -93,9 +94,15 @@ Module ModuleIntersection
 		Next
 	End Sub
 
-
-
-
+	Private Sub generateExplosion(enemySize As Size, enemyLocation As Point)
+		Dim pb As New PictureBox With {
+			.Size = enemySize,
+			.Name = "EneExplosion",
+			.Location = enemyLocation
+		}
+		Dim explosion As New ClassAnimation(pb)
+		myForm.Controls.Add(pb)
+	End Sub
 
 	Public Sub EnemyIntersectWithPlayer()
 		For Each enemy In ModuleGameManager.enemies
@@ -127,4 +134,5 @@ Module ModuleIntersection
 		'	End If
 		'Next
 	End Sub
+
 End Module

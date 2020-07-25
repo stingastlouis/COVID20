@@ -435,7 +435,6 @@
 		Else : countdownLabel.Text = waitTime.ToString()  '3,2,1
 		End If
 		waitTime -= 1
-		ModuleIntersection.BulletIntersectWithEnemy()
 	End Sub
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs)
@@ -469,7 +468,7 @@
 
 		'-if  supergun is present boss appear
 		If supergun0.Left < myForm.Width Then
-			Console.WriteLine("make the boss appear")
+			'Console.WriteLine("make the boss appear")
 			MakeBossAppear()
 			If player1.Left > myForm.Width Then
 				ClassPlayer.posRight = False
@@ -479,14 +478,14 @@
 
 
 		If ModuleGameManager.enemies.Count > 0 Then
-			Console.WriteLine("move the enemies only when there is/are enemies in the list")
-			Console.WriteLine("activate EnemyMovement() and EnemyIntersectWithPlayer()")
+			'Console.WriteLine("move the enemies only when there is/are enemies in the list")
+			'Console.WriteLine("activate EnemyMovement() and EnemyIntersectWithPlayer()")
 			ModuleMovement.EnemyMovement()
 			'ModuleIntersection.EnemyIntersectWithPlayer()
 		End If
 		If ModuleGameManager.bullets.Count > 0 Then
-			Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
-			Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
+			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
+			'Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
 			ModuleMovement.BulletMovement()
 			ModuleIntersection.BulletIntersectWithEnemy()
 		End If

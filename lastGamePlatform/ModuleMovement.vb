@@ -70,6 +70,7 @@
 			Case Keys.Left
 				If player1.Left > 0 Then
 					ClassPlayer.posLeft = True
+				Else : ClassPlayer.posLeft = True
 				End If
 
 			Case Keys.Up
@@ -236,11 +237,10 @@
 	''' </summary>
 	Public Sub EnemyMovement()
 		For en As Integer = 0 To ModuleGameManager.enemies.Count - 1
+			ModuleGameManager.enemies(en).Location = New Point(ModuleGameManager.enemies(en).Location.X - ModuleGameManager.enemiesSpeed(en), ModuleGameManager.enemies(en).Location.Y)
 			If ModuleGameManager.enemies(en).Location.Y < ModuleGameManager.player1.Location.Y Then
 				ModuleGameManager.enemies(en).Location = New Point(ModuleGameManager.enemies(en).Location.X, ModuleGameManager.enemies(en).Location.Y + ModuleGameManager.enemiesSpeed(en))
-				Exit For
 			End If
-			ModuleGameManager.enemies(en).Location = New Point(ModuleGameManager.enemies(en).Location.X - ModuleGameManager.enemiesSpeed(en), ModuleGameManager.enemies(en).Location.Y)
 		Next
 	End Sub
 
