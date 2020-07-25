@@ -1,13 +1,5 @@
 ﻿Imports System.DateTime
 Module ModuleIntersection
-	Private waitOn As Integer = 0
-
-
-
-
-
-
-
 
 	Public Sub bulletIntersectsWithBoss(ByRef pro As ProgressBar, ByRef bullets As List(Of PictureBox), ByVal boss As Object)
 		For Each bullet In bullets
@@ -32,12 +24,6 @@ Module ModuleIntersection
 			End If
 		Next
 	End Sub
-
-
-
-
-
-
 	Public Sub playerIntersectWithStaticPictureBoxes()
 		ClassPlayer.playerIsFalling = True
 		For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes 'list all controls in the form
@@ -88,36 +74,24 @@ Module ModuleIntersection
 	End Sub
 
 
-	Public Sub bulletIntersectWithEnemy()
-
-		waitOn += 1
-		Dim getTime As Integer
-		Console.WriteLine(waitOn)
+	Public Sub BulletIntersectWithEnemy()
 		For Each enemy In ModuleGameManager.enemies
 			For Each bullet In ModuleGameManager.bullets
 				If bullet IsNot enemy AndAlso enemy.Bounds.IntersectsWith(bullet.Bounds) Then 'if bullet intersect with enemies 
-					'waitOn = DateAndTime.Now.Second
-					getTime = waitOn
-					enemy.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\boom.gif"))
+					Dim enemyLocation As Point = enemy.Location
+					enemy.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Enemies\Enemy" & ModuleGameManager.level & "Explosion.gif"))
 					Console.WriteLine("bullet intersect enemy")
-				End If
-				If waitOn - getTime >= 50 Then
 
-					'enemy.Image = My.Resources.boom
 
 					Console.WriteLine("disapear enemy")
 					ClassPlayer.score += ClassItems.scoreEnemy
 
 
 					ModuleGameManager.bullets.Remove(bullet) 'remove from bullets<>
-
 					ModuleGameManager.enemies.Remove(enemy) 'remove from enemies<>
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(bullet)
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
-					waitOn = 0
-					getTime = 0
 					Exit For 'break as current <> has been modified
-
 				End If
 			Next
 			Exit For 'break as current <> has been modified
@@ -126,14 +100,13 @@ Module ModuleIntersection
 
 
 
-	Public Sub enemyIntersectWithPlayer()
+	Public Sub EnemyIntersectWithPlayer()
 		For Each enemy In ModuleGameManager.enemies
-			If ModuleGameManager.player1 IsNot enemy AndAlso enemy.Bounds.IntersectsWith(player1.Bounds) Then
+			If ModuleGameManager.player1 IsNot enemy AndAlso enemy.Bounds.IntersectsWith(ModuleGameManager.player1.Bounds) Then
 				ClassPlayer.life -= 1
 				Console.WriteLine("player intersect with enemy")
 				ModuleGameManager.enemies.Remove(enemy)
 				ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
-				enemy.Dispose()
 				Exit For
 			End If
 		Next

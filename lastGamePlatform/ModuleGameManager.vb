@@ -67,8 +67,8 @@
 		Console.WriteLine("creating media player")
 		mediaPlayer.CreateControl()
 		mediaPlayer.uiMode = "invisible"
-		mediaPlayer.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
-		mediaPlayer.settings.setMode("Loop", True)
+		'mediaPlayer.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
+		'mediaPlayer.settings.setMode("Loop", True)
 
 
 		'progress bar
@@ -147,6 +147,66 @@
 
 		Console.WriteLine("Check If Win Or Lose")
 		CheckIfWinOrLose()
+	End Sub
+
+	Private Sub StartCountdown()
+		myTimer.Enabled = False
+		ClassPlayer.canShoot = False
+		myForm.Controls.Add(countdownLabel)
+		countdownLabel.Font = New Font("Verdana", 25, FontStyle.Italic)
+		countdownLabel.ForeColor = Color.Red
+		waitTime = ModuleGameManager.waitBeforeFight
+		countdownLabel.Text = waitTime.ToString
+		countdownLabel.AutoSize = True
+		countdownLabel.Location = New Point(myForm.Width / 2, myForm.Height / 2)
+		timer3sec.Enabled = True
+	End Sub
+
+	Private Sub GenerateNewEnemies()
+		Dim noOfEnemies As Integer = ModuleRandomiser.NumberOfEnemies()
+		While noOfEnemies > 0
+			Dim xpos As Integer = ModuleRandomiser.NumberBetween(myForm.Width / 5, myForm.Width - (door2.Width) - 1) 'from 20% of the form to the right door
+			Dim ypos As Integer = ModuleRandomiser.NumberBetween(0, ground1.Top - 62 - 1) 'from top of the form to the top of the ground
+			Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, ModuleRandomiser.EnemyMoveSpeed()) 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
+			Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
+			myForm.Controls.Add(en) 'add the enemy generated to form
+			ModuleGameManager.enemiesSpeed.Add(enemy.MoveSpeed1) 'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
+			ModuleGameManager.enemies.Add(en) 'add the picturebox to enemies<>
+			noOfEnemies -= 1 'decrement the no of enemies
+		End While
+	End Sub
+
+	Private Sub MoveTheDoors()
+		For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes 'list all controls in the form
+			door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y) 'door appear on left
+			door2.Location = New Point(myForm.Width - (door2.Width), door2.Location.Y) 'door appear on right
+			activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - myForm.Width, activePictureBox.Location.Y) 'keep same ypos and display everything before the left door
+		Next
+		door1.BackColor = Color.Empty
+		door2.BackColor = Color.Empty
+	End Sub
+
+	Private Sub EmptyEnemyLists()
+		For Each enemy In enemies 'remove all enemies from form and allPictureBoxes<> before left door
+			RemovePictureBoxAndUpdateScore(enemy)
+		Next
+		ModuleGameManager.enemies.Clear() 'remove everything in enemies<>
+		ModuleGameManager.enemiesSpeed.Clear()
+	End Sub
+
+	Private Sub MakeBossAppear()
+		LabelBossLife.Visible = True
+		LabelBossLife.Enabled = True
+		progressBar.Enabled = True
+		progressBar.Visible = True
+		boss.Visible = True
+		boss.Enabled = True
+
+		'Dim bulletBoss As New ClassBoss
+		ModuleMovement.MakeBossMove(player1, boss, ground1, door2, 2)
+		ModuleIntersection.bulletIntersectsWithBoss(progressBar, bullets, boss)
+
+		pScore.Text = "Score :" + CStr(ClassPlayer.score)
 	End Sub
 
 	Private Sub CheckIfWinOrLose()
@@ -368,7 +428,6 @@
 			countdownLabel.Text = "Go" 'go
 			If waitTime < 0 Then
 				myForm.Controls.Remove(countdownLabel)
-				waitTime = ModuleGameManager.waitBeforeFight
 				ClassPlayer.canShoot = True
 				timer3sec.Enabled = False
 				myTimer.Enabled = True
@@ -376,7 +435,7 @@
 		Else : countdownLabel.Text = waitTime.ToString()  '3,2,1
 		End If
 		waitTime -= 1
-		ModuleIntersection.bulletIntersectWithEnemy()
+		ModuleIntersection.BulletIntersectWithEnemy()
 	End Sub
 
 	Private Sub FastestTimer_Tick(sender As Object, e As EventArgs)
@@ -394,78 +453,46 @@
 
 		'-player pass through right door
 		If (player1.Left + player1.Width > myForm.Width) Then
-			For Each enemy In enemies 'remove all enemies from form and allPictureBoxes<> before left door
-				RemovePictureBoxAndUpdateScore(enemy)
-			Next
-			For Each bullet In bullets 'remove all bullets from form and allPictureBoxes<>  before left door
-				RemovePictureBoxAndUpdateScore(bullet)
-			Next
-			ModuleGameManager.enemies.Clear() 'remove everything in enemies<>
-			ModuleGameManager.enemiesSpeed.Clear() 'remove everything in enemiesSpeed<>
-			For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes 'list all controls in the form
-				door1.Location = New Point(0 - (door1.Width / 2), door1.Location.Y) 'door appear on left
-				door2.Location = New Point(myForm.Width - (door2.Width), door2.Location.Y) 'door appear on right
-				activePictureBox.Location = New Point(activePictureBox.Location.X + player1.Width + door1.Width / 2 - myForm.Width, activePictureBox.Location.Y) 'keep same ypos and display everything before the left door
-			Next
-			door1.BackColor = Color.Empty
-			door2.BackColor = Color.Empty
+			Console.WriteLine("clearing enemies lists")
+			EmptyEnemyLists()
 
-			'--generate random no of enemies at random position with random move speed
-			Dim noOfEnemies As Integer = ModuleRandomiser.NumberOfEnemies()
-			While noOfEnemies > 0
-				Dim xpos As Integer = ModuleRandomiser.NumberBetween(myForm.Width / 5, myForm.Width - (door2.Width) - 1) 'from 20% of the form to the right door
-				Dim ypos As Integer = ModuleRandomiser.NumberBetween(0, ground1.Top - 62 - 1) 'from top of the form to the top of the ground
+			Console.WriteLine("moving the doors")
+			MoveTheDoors()
 
-				Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, ModuleRandomiser.EnemyMoveSpeed()) 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
-				Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
-				myForm.Controls.Add(en) 'add the enemy generated to form
-				ModuleGameManager.enemiesSpeed.Add(enemy.MoveSpeed1) 'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
-				ModuleGameManager.enemies.Add(en) 'add the picturebox to enemies<>
-				noOfEnemies -= 1 'decrement the no of enemies
-			End While
-			'--
+			Console.WriteLine("generate random no of enemies at random position with random move speed")
+			GenerateNewEnemies()
 
-			'--stop the time for 3 seconds to let the player prepare for the coming enemies
-			myTimer.Enabled = False
-			ClassPlayer.canShoot = False
-			myForm.Controls.Add(countdownLabel)
-			countdownLabel.Font = New Font("Verdana", 25, FontStyle.Italic)
-			countdownLabel.ForeColor = Color.Red
-			countdownLabel.AutoSize = True
-			countdownLabel.Location = New Point(myForm.Width / 2, myForm.Height / 2)
-			timer3sec.Enabled = True
-			'--
+			Console.WriteLine("stop the time for 3 seconds to let the player prepare for the coming enemies")
+			StartCountdown()
 		End If
 		'-
 
-		'-move the enemies only when there is/are enemies in the list
+		'-if  supergun is present boss appear
+		If supergun0.Left < myForm.Width Then
+			Console.WriteLine("make the boss appear")
+			MakeBossAppear()
+			If player1.Left > myForm.Width Then
+				ClassPlayer.posRight = False
+			End If
+		End If
+
+
+
 		If ModuleGameManager.enemies.Count > 0 Then
-			ModuleMovement.enemyMovement()
+			Console.WriteLine("move the enemies only when there is/are enemies in the list")
+			Console.WriteLine("activate EnemyMovement() and EnemyIntersectWithPlayer()")
+			ModuleMovement.EnemyMovement()
+			ModuleIntersection.EnemyIntersectWithPlayer()
 		End If
-		'-
-		'-if boss collects supergun. 
-		If player1.Left > supergun0.Left Then
-			LabelBossLife.Visible = True
-			LabelBossLife.Enabled = True
-			progressBar.Enabled = True
-			progressBar.Visible = True
-			boss.Visible = True
-			boss.Enabled = True
-
-			'Dim bulletBoss As New ClassBoss
-			ModuleMovement.makeBossMove(player1, boss, ground1, door2, 2)
-			ModuleIntersection.bulletIntersectsWithBoss(progressBar, bullets, boss)
-
-			pScore.Text = "Score :" + CStr(ClassPlayer.score)
-		End If
-
-		'-move the bullets when bullet is shot and check if bullet intersect with enemy or boss
 		If ModuleGameManager.bullets.Count > 0 Then
-			ModuleMovement.bulletMovement()
-			ModuleIntersection.bulletIntersectWithEnemy()
+			Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
+			Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
+			ModuleMovement.BulletMovement()
+			ModuleIntersection.BulletIntersectWithEnemy()
 		End If
 		'-
 	End Sub
 	' end handlers function/sub
+
 
 End Module

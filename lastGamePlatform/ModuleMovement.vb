@@ -1,6 +1,8 @@
 ﻿Module ModuleMovement
 	Private bulletMoveSpeed As Integer = 10
 	Private moveOp As Integer = 0
+	Dim returnTOposition As Integer = 0
+	Dim randomSpeed As Integer = 1
 
 
 
@@ -66,7 +68,9 @@
 				ClassPlayer.posRight = True
 
 			Case Keys.Left
-				ClassPlayer.posLeft = True
+				If player1.Left > 0 Then
+					ClassPlayer.posLeft = True
+				End If
 
 			Case Keys.Up
 				If Not ClassPlayer.playerIsFalling Then
@@ -88,11 +92,7 @@
 
 
 
-
-
-	Dim returnTOposition As Integer = 0
-	Dim randomSpeed As Integer = 1
-	Public Sub makeBossMove(ByVal player As Object, ByRef boss As Object, ByVal ground As Object, ByVal door As Object, ByVal movementOperation As Integer)
+	Public Sub MakeBossMove(ByVal player As Object, ByRef boss As Object, ByVal ground As Object, ByVal door As Object, ByVal movementOperation As Integer)
 		moveOp = 0
 		returnTOposition += 1
 
@@ -234,10 +234,11 @@
 	''' <summary>
 	''' makes all enemies move with there respective speed
 	''' </summary>
-	Public Sub enemyMovement()
+	Public Sub EnemyMovement()
 		For en As Integer = 0 To ModuleGameManager.enemies.Count - 1
 			If ModuleGameManager.enemies(en).Location.Y < ModuleGameManager.player1.Location.Y Then
 				ModuleGameManager.enemies(en).Location = New Point(ModuleGameManager.enemies(en).Location.X, ModuleGameManager.enemies(en).Location.Y + ModuleGameManager.enemiesSpeed(en))
+				Exit For
 			End If
 			ModuleGameManager.enemies(en).Location = New Point(ModuleGameManager.enemies(en).Location.X - ModuleGameManager.enemiesSpeed(en), ModuleGameManager.enemies(en).Location.Y)
 		Next
@@ -246,7 +247,7 @@
 	''' <summary>
 	''' make all bullet present in bullets list
 	''' </summary>
-	Public Sub bulletMovement()
+	Public Sub BulletMovement()
 		For Each bullet In ModuleGameManager.bullets
 			bullet.Location = New Point(bullet.Location.X + bulletMoveSpeed, bullet.Location.Y) 'move the bullets
 			If bullet.Location.X > ModuleGameManager.myForm.Width Then 'delete the bullets that goes after the right door
