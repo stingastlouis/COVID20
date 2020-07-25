@@ -482,7 +482,7 @@
 			Console.WriteLine("move the enemies only when there is/are enemies in the list")
 			Console.WriteLine("activate EnemyMovement() and EnemyIntersectWithPlayer()")
 			ModuleMovement.EnemyMovement()
-			ModuleIntersection.EnemyIntersectWithPlayer()
+			'ModuleIntersection.EnemyIntersectWithPlayer()
 		End If
 		If ModuleGameManager.bullets.Count > 0 Then
 			Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
