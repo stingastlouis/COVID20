@@ -23,9 +23,9 @@ Partial Class FormListBox
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
 		Me.Panel1 = New System.Windows.Forms.Panel()
-		Me.ListBox1 = New System.Windows.Forms.ListBox()
-		Me.HScrollBar1 = New System.Windows.Forms.HScrollBar()
 		Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
+		Me.HScrollBar1 = New System.Windows.Forms.HScrollBar()
+		Me.ListBox1 = New System.Windows.Forms.ListBox()
 		Me.Panel1.SuspendLayout()
 		Me.SuspendLayout()
 		'
@@ -40,14 +40,13 @@ Partial Class FormListBox
 		Me.Panel1.Size = New System.Drawing.Size(817, 448)
 		Me.Panel1.TabIndex = 0
 		'
-		'ListBox1
+		'VScrollBar1
 		'
-		Me.ListBox1.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.ListBox1.FormattingEnabled = True
-		Me.ListBox1.Location = New System.Drawing.Point(0, 0)
-		Me.ListBox1.Name = "ListBox1"
-		Me.ListBox1.Size = New System.Drawing.Size(817, 448)
-		Me.ListBox1.TabIndex = 2
+		Me.VScrollBar1.Dock = System.Windows.Forms.DockStyle.Right
+		Me.VScrollBar1.Location = New System.Drawing.Point(800, 0)
+		Me.VScrollBar1.Name = "VScrollBar1"
+		Me.VScrollBar1.Size = New System.Drawing.Size(17, 431)
+		Me.VScrollBar1.TabIndex = 4
 		'
 		'HScrollBar1
 		'
@@ -57,13 +56,14 @@ Partial Class FormListBox
 		Me.HScrollBar1.Size = New System.Drawing.Size(817, 17)
 		Me.HScrollBar1.TabIndex = 3
 		'
-		'VScrollBar1
+		'ListBox1
 		'
-		Me.VScrollBar1.Dock = System.Windows.Forms.DockStyle.Right
-		Me.VScrollBar1.Location = New System.Drawing.Point(800, 0)
-		Me.VScrollBar1.Name = "VScrollBar1"
-		Me.VScrollBar1.Size = New System.Drawing.Size(17, 431)
-		Me.VScrollBar1.TabIndex = 4
+		Me.ListBox1.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.ListBox1.FormattingEnabled = True
+		Me.ListBox1.Location = New System.Drawing.Point(0, 0)
+		Me.ListBox1.Name = "ListBox1"
+		Me.ListBox1.Size = New System.Drawing.Size(817, 448)
+		Me.ListBox1.TabIndex = 2
 		'
 		'FormListBox
 		'
@@ -72,7 +72,7 @@ Partial Class FormListBox
 		Me.ClientSize = New System.Drawing.Size(817, 448)
 		Me.Controls.Add(Me.Panel1)
 		Me.Name = "FormListBox"
-		Me.Text = "FormListBox"
+		Me.Text = "Output in ListBox"
 		Me.Panel1.ResumeLayout(False)
 		Me.ResumeLayout(False)
 

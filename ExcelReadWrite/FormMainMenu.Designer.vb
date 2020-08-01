@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormMenu
+Partial Class FormMainMenu
 	Inherits System.Windows.Forms.Form
 
 	'Form overrides dispose to clean up the component list.
@@ -24,21 +24,20 @@ Partial Class FormMenu
 	Private Sub InitializeComponent()
 		Me.Panel1 = New System.Windows.Forms.Panel()
 		Me.LabelTitle = New System.Windows.Forms.Label()
-		Me.ButtonTextboxes = New System.Windows.Forms.Button()
-		Me.ButtonListBox = New System.Windows.Forms.Button()
-		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+		Me.ButtonReader = New System.Windows.Forms.Button()
+		Me.ButtonWriter = New System.Windows.Forms.Button()
 		Me.Panel1.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'Panel1
 		'
+		Me.Panel1.Controls.Add(Me.ButtonWriter)
+		Me.Panel1.Controls.Add(Me.ButtonReader)
 		Me.Panel1.Controls.Add(Me.LabelTitle)
-		Me.Panel1.Controls.Add(Me.ButtonTextboxes)
-		Me.Panel1.Controls.Add(Me.ButtonListBox)
 		Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.Panel1.Location = New System.Drawing.Point(0, 0)
 		Me.Panel1.Name = "Panel1"
-		Me.Panel1.Size = New System.Drawing.Size(585, 270)
+		Me.Panel1.Size = New System.Drawing.Size(588, 294)
 		Me.Panel1.TabIndex = 0
 		'
 		'LabelTitle
@@ -47,51 +46,47 @@ Partial Class FormMenu
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.LabelTitle.AutoSize = True
 		Me.LabelTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LabelTitle.Location = New System.Drawing.Point(49, 18)
+		Me.LabelTitle.Location = New System.Drawing.Point(51, 50)
 		Me.LabelTitle.Name = "LabelTitle"
 		Me.LabelTitle.Size = New System.Drawing.Size(486, 55)
-		Me.LabelTitle.TabIndex = 2
+		Me.LabelTitle.TabIndex = 3
 		Me.LabelTitle.Text = "Excel Reader/ Writer"
 		Me.LabelTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
-		'ButtonTextboxes
+		'ButtonReader
 		'
-		Me.ButtonTextboxes.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+		Me.ButtonReader.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.ButtonTextboxes.AutoSize = True
-		Me.ButtonTextboxes.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.ButtonTextboxes.Location = New System.Drawing.Point(335, 219)
-		Me.ButtonTextboxes.Name = "ButtonTextboxes"
-		Me.ButtonTextboxes.Size = New System.Drawing.Size(238, 39)
-		Me.ButtonTextboxes.TabIndex = 1
-		Me.ButtonTextboxes.Text = "View in TextBoxes"
-		Me.ButtonTextboxes.UseVisualStyleBackColor = True
+		Me.ButtonReader.AutoSize = True
+		Me.ButtonReader.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.ButtonReader.Location = New System.Drawing.Point(48, 203)
+		Me.ButtonReader.Name = "ButtonReader"
+		Me.ButtonReader.Size = New System.Drawing.Size(235, 39)
+		Me.ButtonReader.TabIndex = 4
+		Me.ButtonReader.Text = "Excel Reader"
+		Me.ButtonReader.UseVisualStyleBackColor = True
 		'
-		'ButtonListBox
+		'ButtonWriter
 		'
-		Me.ButtonListBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+		Me.ButtonWriter.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.ButtonListBox.AutoSize = True
-		Me.ButtonListBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.ButtonListBox.Location = New System.Drawing.Point(12, 219)
-		Me.ButtonListBox.Name = "ButtonListBox"
-		Me.ButtonListBox.Size = New System.Drawing.Size(235, 39)
-		Me.ButtonListBox.TabIndex = 0
-		Me.ButtonListBox.Text = "View in List Boxes"
-		Me.ButtonListBox.UseVisualStyleBackColor = True
+		Me.ButtonWriter.AutoSize = True
+		Me.ButtonWriter.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.ButtonWriter.Location = New System.Drawing.Point(306, 203)
+		Me.ButtonWriter.Name = "ButtonWriter"
+		Me.ButtonWriter.Size = New System.Drawing.Size(235, 39)
+		Me.ButtonWriter.TabIndex = 5
+		Me.ButtonWriter.Text = "Excel Writer"
+		Me.ButtonWriter.UseVisualStyleBackColor = True
 		'
-		'OpenFileDialog1
-		'
-		Me.OpenFileDialog1.FileName = "Excel.xlsx"
-		'
-		'FormMenu
+		'FormMainMenu
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(585, 270)
+		Me.ClientSize = New System.Drawing.Size(588, 294)
 		Me.Controls.Add(Me.Panel1)
-		Me.Name = "FormMenu"
-		Me.Text = "Menu"
+		Me.Name = "FormMainMenu"
+		Me.Text = "Excel Reader/ Writer Main Menu "
 		Me.Panel1.ResumeLayout(False)
 		Me.Panel1.PerformLayout()
 		Me.ResumeLayout(False)
@@ -100,7 +95,6 @@ Partial Class FormMenu
 
 	Friend WithEvents Panel1 As Panel
 	Friend WithEvents LabelTitle As Label
-	Friend WithEvents ButtonTextboxes As Button
-	Friend WithEvents ButtonListBox As Button
-	Friend WithEvents OpenFileDialog1 As OpenFileDialog
+	Friend WithEvents ButtonWriter As Button
+	Friend WithEvents ButtonReader As Button
 End Class

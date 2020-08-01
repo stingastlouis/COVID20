@@ -90,11 +90,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassHeaderRow.vb" />
-    <Compile Include="Form1.vb">
+    <Compile Include="FormMainMenu.Designer.vb">
+      <DependentUpon>FormMainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="FormReader.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReader.Designer.vb">
+      <DependentUpon>FormReader.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormExcelWriter.Designer.vb">
+      <DependentUpon>FormExcelWriter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormExcelWriter.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormListBox.Designer.vb">
@@ -127,8 +139,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="FormExcelWriter.resx">
+      <DependentUpon>FormExcelWriter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMainMenu.resx">
+      <DependentUpon>FormMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReader.resx">
+      <DependentUpon>FormReader.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormListBox.resx">
       <DependentUpon>FormListBox.vb</DependentUpon>

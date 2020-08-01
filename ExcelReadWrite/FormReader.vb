@@ -1,4 +1,4 @@
-﻿Public Class FormMenu
+﻿Public Class FormExcelReader
 
 	Public Shared excelFile As String
 	Private Sub ButtonListBox_Click(sender As Object, e As EventArgs) Handles ButtonListBox.Click
@@ -18,8 +18,9 @@
 	End Sub
 	Private Function ChooseExcel()
 		Dim excelFile As String = ""
+		OpenFileDialog1.FileName = "Ajit_Rishi.xlsx" ' Default file name
 		OpenFileDialog1.Filter = "Excel Worksheets|*.xlsx"
-		OpenFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+		OpenFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory
 		OpenFileDialog1.Title = "Please select an Excel document."
 		If (OpenFileDialog1.ShowDialog() = DialogResult.OK) Then
 			ButtonTextboxes.Enabled = True

@@ -3,11 +3,13 @@ Imports SpreadsheetLight
 Imports DocumentFormat.OpenXml.Packaging
 
 Public Class FormListBox
-    Private sheetDocList As New List(Of SLDocument)
+
     Private Sub FormListBox_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        PopulateListBox(FormMenu.excelFile, ListBox1)
+        PopulateListBox(FormExcelReader.excelFile, ListBox1)
     End Sub
     Private Sub PopulateListBox(myfile As String, myListBox As ListBox)
+        Dim sheetDocList As New List(Of SLDocument)
+
         Dim totalColumn As Integer = 0
         Dim lastRow As Integer = 0 'use to know how many lines there will be in listbox
         Dim lastColumn As Integer = 0
