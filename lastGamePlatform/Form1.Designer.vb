@@ -22,11 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-		Me.components = New System.ComponentModel.Container()
-		Me.Timer75ms = New System.Windows.Forms.Timer(Me.components)
 		Me.winorloseTxt = New System.Windows.Forms.Label()
-		Me.FastestTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.Timer1000ms = New System.Windows.Forms.Timer(Me.components)
 		Me.wall24 = New System.Windows.Forms.PictureBox()
 		Me.wall12 = New System.Windows.Forms.PictureBox()
 		Me.wall11 = New System.Windows.Forms.PictureBox()
@@ -45,10 +41,6 @@ Partial Class Form1
 		CType(Me.wall3, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
-		'Timer75ms
-		'
-		Me.Timer75ms.Enabled = True
-		'
 		'winorloseTxt
 		'
 		Me.winorloseTxt.AutoSize = True
@@ -59,15 +51,6 @@ Partial Class Form1
 		Me.winorloseTxt.TabIndex = 37
 		Me.winorloseTxt.Text = "Label1"
 		Me.winorloseTxt.Visible = False
-		'
-		'FastestTimer
-		'
-		Me.FastestTimer.Enabled = True
-		Me.FastestTimer.Interval = 10
-		'
-		'Timer1000ms
-		'
-		Me.Timer1000ms.Interval = 1000
 		'
 		'wall24
 		'
@@ -180,16 +163,13 @@ Partial Class Form1
 		Me.PerformLayout()
 
 	End Sub
-	Friend WithEvents Timer75ms As Timer
-    Friend WithEvents wall3 As PictureBox
-    Friend WithEvents wall5 As PictureBox
-    Friend WithEvents wall6 As PictureBox
-    Friend WithEvents wall7 As PictureBox
-    Friend WithEvents wall9 As PictureBox
-    Friend WithEvents wall11 As PictureBox
-    Friend WithEvents wall12 As PictureBox
-    Friend WithEvents winorloseTxt As Label
-    Friend WithEvents FastestTimer As Timer
-    Friend WithEvents Timer1000ms As Timer
-    Friend WithEvents wall24 As PictureBox
+	Friend WithEvents wall3 As PictureBox
+	Friend WithEvents wall5 As PictureBox
+	Friend WithEvents wall6 As PictureBox
+	Friend WithEvents wall7 As PictureBox
+	Friend WithEvents wall9 As PictureBox
+	Friend WithEvents wall11 As PictureBox
+	Friend WithEvents wall12 As PictureBox
+	Friend WithEvents winorloseTxt As Label
+	Friend WithEvents wall24 As PictureBox
 End Class
