@@ -3,7 +3,8 @@
 	Private moveOp As Integer = 0
 	Dim returnTOposition As Integer = 0
 	Dim randomSpeed As Integer = 1
-
+	Dim move1 As Boolean = True
+	Dim move2 As Boolean = False
 
 
 	''' <summary>
@@ -192,18 +193,25 @@
 		End Select
 	End Sub
 	'-end keyboard button press/release
+
 	Public Sub makemultibossMove(ByVal wall1 As PictureBox, ByVal wall2 As PictureBox, ByRef boss As PictureBox)
-		Dim move1 As Boolean = True
-		Dim move2 As Boolean = True
 
 
-		boss.Location = New Point(boss.Location.X - 5, boss.Location.Y)
-		If boss.Bounds.IntersectsWith(wall1.Bounds) Then
+		If move1 Then
+			boss.Location = New Point(boss.Location.X - 5, boss.Location.Y)
+			If boss.Bounds.IntersectsWith(wall1.Bounds) Then
+
+				move1 = False
+				move2 = True
+			End If
+		ElseIf move2 Then
 			boss.Location = New Point(boss.Location.X + 10, boss.Location.Y)
+			If boss.Bounds.IntersectsWith(wall2.Bounds) Then
+				move2 = False
+				move1 = True
+			End If
 		End If
-		If boss.Bounds.IntersectsWith(wall1.Bounds) Then
-			boss.Location = New Point(boss.Location.X + 20, boss.Location.Y)
-		End If
+
 	End Sub
 
 

@@ -281,19 +281,19 @@
 			noOfEnemies -= 1 'decrement the no of enemies
 		End While
 	End Sub
-	Private Sub GenerateNewEnemiesMultiPlayer()
-		Dim ran As New System.Random
+	Public Sub GenerateNewEnemiesMultiPlayer()
 
-		Dim noOfEnemies As Integer = ran.Next(1, 2)
+
+		Dim noOfEnemies As Integer = 2
 		While noOfEnemies > 0
 			Dim xpos As Integer = boss.Left + boss.Width
-		Dim ypos As Integer = boss.Top + boss.Height / 2
+			Dim ypos As Integer = boss.Top + boss.Height / 2
 			Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, 5, "ground.png") 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
 			Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
-		myForm.Controls.Add(en) 'add the enemy generated to form
-		ModuleGameManager.enemiesSpeed.Add(5) 'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
-		ModuleGameManager.enemies.Add(en) 'add the picturebox to enemies<>
-		noOfEnemies -= 1 'decrement the no of enemies
+			myForm.Controls.Add(en) 'add the enemy generated to form
+			'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
+			ModuleGameManager.enemies.Add(en) 'add the picturebox to enemies<>
+			'noOfEnemies -= 1 'decrement the no of enemies
 		End While
 	End Sub
 
@@ -344,7 +344,7 @@
 				.BackColor = Color.Empty
 				.Name = "winorlosetText"
 				.Font = New Font("Agency FB", 50)
-				.CreateControl()
+
 			End With
 			With restBtn
 				.Text = "Continue"
@@ -356,7 +356,7 @@
 				.Font = New Font("Agency FB", 16)
 				.BackColor = Color.Empty
 				.AutoSize = True
-				.CreateControl()
+
 			End With
 			With exitBtn
 				.Text = "Abandon Mission"
@@ -368,7 +368,7 @@
 				.BackColor = Color.Empty
 				.BringToFront()
 				.AutoSize = True
-				.CreateControl()
+
 			End With
 
 			myForm.Controls.Add(winorlosetText)
@@ -546,6 +546,7 @@
 			restartForm.Show()
 			myForm.Close()
 		ElseIf btn.Text = "Continue" Then
+			myForm.Close()
 			nextForm.Show()
 		End If
 	End Sub
@@ -702,7 +703,6 @@
 		LabelBossLife.Enabled = True
 		ModuleIntersection.bulletIntersectsWithBossMultiP1(progressBar, bullets, boss)
 		ModuleIntersection.bulletIntersectsWithBossMultiP2(progressBar, bullets2, boss)
-
 		'ModuleMovement.MakeBossMove(player1, boss, ground1, door2, 2)
 		ModuleMovement.makemultibossMove(wall1, wall2, boss)
 
