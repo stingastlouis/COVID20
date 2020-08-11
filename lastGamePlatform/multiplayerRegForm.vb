@@ -6,60 +6,73 @@
     Dim bool1 As Boolean
     Dim bool2 As Boolean
     Public p1Name, p2Name As String
-
-    Private Sub multiplayerRegForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        checkContent.Enabled = True
-        pl1 = My.Resources.player1Mov
-        pl2 = My.Resources._3rdPlayer
-
-
-        pl3 = My.Resources._3rdPlayerLfet
-        pl4 = My.Resources.player1Mov2
-
-        player1Box.Image = pl1
-        bool1 = True
-        player2Box.Image = pl3
-        bool2 = True
-    End Sub
+    Public p1 As New mulPLayerClass
+    Public p2 As New mulPLayerClass
 
     Private Sub player1Box_Click(sender As Object, e As EventArgs) Handles player1Box.Click
+
+
+
         If bool1 = True Then
-            player1Box.Image = pl2
+            player1Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\3rdPlayer.png"))
             bool1 = False
         Else
-            player1Box.Image = pl1
+            player1Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))
             bool1 = True
         End If
-
-
-
+        p1.playerImage = player1Box.Image
     End Sub
 
     Private Sub player2Box_Click(sender As Object, e As EventArgs) Handles player2Box.Click
+
         If bool2 = True Then
-            player2Box.Image = pl3
+            player2Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\3rdPlayerLfet.png"))
             bool2 = False
         Else
-            player2Box.Image = pl4
+            player2Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov2.png"))
             bool2 = True
         End If
+        p2.playerImage = player2Box.Image
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub player2_TextChanged(sender As Object, e As EventArgs) Handles player2.TextChanged
+
+    End Sub
+
+    Private Sub multiplayerRegForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        player1Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))
+        p1.playerImage = player1Box.Image
+        bool1 = True
+
+        player2Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov2.png"))
+        p2.playerImage = player2Box.Image
+        bool2 = True
+
+    End Sub
+
+    Private Sub submit_Click(sender As Object, e As EventArgs) Handles submit.Click
+        p1.playerImage = player1Box.Image
+        p2.playerImage = player2Box.Image
+        p1.playerName = player1.Text.Trim
+        p2.playerName = player2.Text.Trim
+
+        p1.playerScore = 0
+        p2.playerScore = 0
+        p1.playerLife = 3
+        p2.playerLife = 3
+        p1.playerItem = 0
+        p2.playerItem = 0
+
+        Dim battle As New multiPlayerPLayForm
         Me.Hide()
-        ground.Show()
+        battle.Show()
+
+
+
+
     End Sub
 
-    Private Sub checkContent_Tick(sender As Object, e As EventArgs) Handles checkContent.Tick
-        If player1.Text = Nothing Or player2.Text = Nothing Then
-            Button1.Enabled = False
-        Else
-            p1Name = player1.Text
-            p2Name = player2.Text
-            Button1.Enabled = True
 
-        End If
-    End Sub
 
 
 

@@ -23,7 +23,7 @@ Partial Class multiplayerRegForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.submit = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.player1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -38,40 +38,44 @@ Partial Class multiplayerRegForm
         CType(Me.player2Box, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Button1
+        'submit
         '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(92, 380)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(123, 40)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Validate"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.submit.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.submit.Location = New System.Drawing.Point(123, 468)
+        Me.submit.Margin = New System.Windows.Forms.Padding(4)
+        Me.submit.Name = "submit"
+        Me.submit.Size = New System.Drawing.Size(164, 49)
+        Me.submit.TabIndex = 0
+        Me.submit.Text = "Validate"
+        Me.submit.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Algerian", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(24, 34)
+        Me.Label1.Location = New System.Drawing.Point(32, 42)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(273, 24)
+        Me.Label1.Size = New System.Drawing.Size(356, 30)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Choose Your Character "
         '
         'player1
         '
-        Me.player1.Location = New System.Drawing.Point(162, 82)
+        Me.player1.Location = New System.Drawing.Point(216, 101)
+        Me.player1.Margin = New System.Windows.Forms.Padding(4)
         Me.player1.Name = "player1"
-        Me.player1.Size = New System.Drawing.Size(100, 20)
+        Me.player1.Size = New System.Drawing.Size(132, 22)
         Me.player1.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Agency FB", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(33, 76)
+        Me.Label2.Location = New System.Drawing.Point(44, 94)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(99, 24)
+        Me.Label2.Size = New System.Drawing.Size(129, 28)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "PLayer 1 Name :"
         '
@@ -79,24 +83,27 @@ Partial Class multiplayerRegForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Agency FB", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(33, 230)
+        Me.Label3.Location = New System.Drawing.Point(44, 283)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(104, 24)
+        Me.Label3.Size = New System.Drawing.Size(134, 28)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "PLayer 2 Name :"
         '
         'player2
         '
-        Me.player2.Location = New System.Drawing.Point(162, 236)
+        Me.player2.Location = New System.Drawing.Point(216, 290)
+        Me.player2.Margin = New System.Windows.Forms.Padding(4)
         Me.player2.Name = "player2"
-        Me.player2.Size = New System.Drawing.Size(100, 20)
+        Me.player2.Size = New System.Drawing.Size(132, 22)
         Me.player2.TabIndex = 4
         '
         'player1Box
         '
-        Me.player1Box.Location = New System.Drawing.Point(162, 108)
+        Me.player1Box.Location = New System.Drawing.Point(216, 133)
+        Me.player1Box.Margin = New System.Windows.Forms.Padding(4)
         Me.player1Box.Name = "player1Box"
-        Me.player1Box.Size = New System.Drawing.Size(83, 72)
+        Me.player1Box.Size = New System.Drawing.Size(111, 89)
         Me.player1Box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.player1Box.TabIndex = 6
         Me.player1Box.TabStop = False
@@ -105,9 +112,10 @@ Partial Class multiplayerRegForm
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Agency FB", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(33, 108)
+        Me.Label4.Location = New System.Drawing.Point(44, 133)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(76, 24)
+        Me.Label4.Size = New System.Drawing.Size(97, 28)
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "Character :"
         '
@@ -115,17 +123,19 @@ Partial Class multiplayerRegForm
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Agency FB", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(33, 266)
+        Me.Label5.Location = New System.Drawing.Point(44, 327)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(76, 24)
+        Me.Label5.Size = New System.Drawing.Size(97, 28)
         Me.Label5.TabIndex = 9
         Me.Label5.Text = "Character :"
         '
         'player2Box
         '
-        Me.player2Box.Location = New System.Drawing.Point(162, 266)
+        Me.player2Box.Location = New System.Drawing.Point(216, 327)
+        Me.player2Box.Margin = New System.Windows.Forms.Padding(4)
         Me.player2Box.Name = "player2Box"
-        Me.player2Box.Size = New System.Drawing.Size(83, 72)
+        Me.player2Box.Size = New System.Drawing.Size(111, 89)
         Me.player2Box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.player2Box.TabIndex = 8
         Me.player2Box.TabStop = False
@@ -136,10 +146,10 @@ Partial Class multiplayerRegForm
         '
         'multiplayerRegForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.PaleGreen
-        Me.ClientSize = New System.Drawing.Size(309, 432)
+        Me.ClientSize = New System.Drawing.Size(412, 532)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.player2Box)
         Me.Controls.Add(Me.Label4)
@@ -149,7 +159,8 @@ Partial Class multiplayerRegForm
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.player1)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.submit)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "multiplayerRegForm"
         Me.Text = "multiplayerRegForm"
         CType(Me.player1Box, System.ComponentModel.ISupportInitialize).EndInit()
@@ -159,7 +170,7 @@ Partial Class multiplayerRegForm
 
     End Sub
 
-    Friend WithEvents Button1 As Button
+    Friend WithEvents submit As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label

@@ -35,6 +35,30 @@
 		'	ModuleGameManager.boss.Visible = True
 		'End If
 	End Sub
+	Public Sub player2_LocationChanged(sender As Object, e As EventArgs) ' Handles player1.LocationChanged
+		ModuleIntersection.playerIntersectWithStaticPictureBoxes2()
+		'If (player1.Left >= supergun0.Left) AndAlso (boss.Visible = False) Then
+		'	LabelBossLife.Visible = True
+		'	LabelBossLife.Enabled = True
+		'	ProgressBar1.Enabled = True
+		'	ProgressBar1.Visible = True
+
+		'	ModuleGameManager.boss.BackColor = Color.Empty
+		'	Select Case ClassMyPublicShared.level
+		'		Case 1
+		'			ModuleGameManager.boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bosses\boss1.png"))
+		'			Exit Select
+		'		Case 2
+		'			ModuleGameManager.boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bosses\boss2.png"))
+		'			Exit Select
+		'		Case 3
+		'			ModuleGameManager.boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bosses\boss3.png"))
+		'			Exit Select
+		'	End Select
+		'	ModuleGameManager.boss.BringToFront()
+		'	ModuleGameManager.boss.Visible = True
+		'End If
+	End Sub
 
 
 
@@ -51,9 +75,11 @@
 		Select Case e.KeyValue
 			Case Keys.Right
 				ClassPlayer.posRight = False
+
 				Exit Select
 			Case Keys.Left
 				ClassPlayer.posLeft = False
+
 				Exit Select 'same as break
 		End Select
 	End Sub
@@ -67,9 +93,12 @@
 			Case Keys.Right
 				ClassPlayer.posRight = True
 
+
+
 			Case Keys.Left
 				If player1.Left > 0 Then
 					ClassPlayer.posLeft = True
+
 				Else : ClassPlayer.posLeft = True
 				End If
 
@@ -79,10 +108,78 @@
 					ClassPlayer.playerIsFalling = True
 				End If
 
+
 			Case Keys.Q
 				If (bullets.Count <= 10) AndAlso ClassPlayer.canShoot Then 'allow to shot only 10 bullets - reduce cpu usage and lag
 					GenerateNewBullet(player1)
 				End If
+
+
+
+			Case Keys.Escape
+				myForm.Close()
+				startHere.Show()
+		End Select
+	End Sub
+	Public Sub myForm_KeyUpMulti(sender As Object, e As KeyEventArgs)
+		Select Case e.KeyValue
+
+			Case Keys.D
+
+				multiplayerRegForm.p2.playerMoveRight = False '=======================================
+				Exit Select
+			Case Keys.A
+
+				multiplayerRegForm.p2.playerMoveLeft = False  '=======================================
+				Exit Select '
+		End Select
+	End Sub
+	Public Sub myFormMulti_KeyDown(sender As Object, e As KeyEventArgs)
+		Select Case e.KeyValue
+			Case Keys.Right
+
+				multiplayerRegForm.p1.playerMoveRight = True'=======================================
+
+
+			Case Keys.Left
+				If player1.Left > 0 Then
+
+					multiplayerRegForm.p1.playerMoveLeft = True '=======================================
+				Else : multiplayerRegForm.p1.playerMoveLeft = True '=======================================
+				End If
+
+			Case Keys.Up
+
+
+				'=======================================
+				If Not multiplayerRegForm.p1.playerFall Then
+					player1.Top -= multiplayerRegForm.p1.playerjump
+					multiplayerRegForm.p1.playerFall = True
+				End If
+				'=======================================
+			Case Keys.M
+
+				'=======================================
+				If (bullets.Count <= 10) AndAlso multiplayerRegForm.p1.playerShoot Then 'allow to shot only 10 bullets - reduce cpu usage and lag
+					GenerateNewBullet(player1)
+				End If
+				'=======================================
+			Case Keys.W
+				'=======================================
+				If Not multiplayerRegForm.p2.playerFall Then
+					player2.Top -= multiplayerRegForm.p2.playerjump
+					multiplayerRegForm.p2.playerFall = True
+				End If
+				'=======================================
+			Case Keys.A
+				If player2.Left > 0 Then
+					multiplayerRegForm.p2.playerMoveLeft = True '=======================================
+				Else : multiplayerRegForm.p2.playerMoveLeft = True '=======================================
+				End If
+			Case Keys.D
+				multiplayerRegForm.p2.playerMoveRight = True'=======================================
+			Case Keys.Tab
+				GenerateNewBullet2(player2)
 
 			Case Keys.Escape
 				myForm.Close()
@@ -257,4 +354,19 @@
 			End If
 		Next
 	End Sub
+
+	Public Sub BulletMovement2()
+		For Each bulleta In ModuleGameManager.bullets2
+			bulleta.Location = New Point(bulleta.Location.X - bulletMoveSpeed, bulleta.Location.Y) 'move the bullets
+			If bulleta.Location.X < 0 Then 'delete the bullets that goes after the right door
+				ModuleGameManager.bullets2.Remove(bulleta) 'remove fro bullets<>
+				ModuleGameManager.allPictureBoxes.Remove(bulleta)
+				myForm.Controls.Remove(bulleta)
+				Exit For 'break as current <> has been modified
+			End If
+		Next
+	End Sub
+
+
+
 End Module
