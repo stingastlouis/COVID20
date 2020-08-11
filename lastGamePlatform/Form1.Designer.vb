@@ -22,11 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-		Me.components = New System.ComponentModel.Container()
-		Me.Timer75ms = New System.Windows.Forms.Timer(Me.components)
 		Me.winorloseTxt = New System.Windows.Forms.Label()
-		Me.FastestTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.Timer1000ms = New System.Windows.Forms.Timer(Me.components)
 		Me.wall24 = New System.Windows.Forms.PictureBox()
 		Me.wall12 = New System.Windows.Forms.PictureBox()
 		Me.wall11 = New System.Windows.Forms.PictureBox()
@@ -35,6 +31,14 @@ Partial Class Form1
 		Me.wall6 = New System.Windows.Forms.PictureBox()
 		Me.wall5 = New System.Windows.Forms.PictureBox()
 		Me.wall3 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox5 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox6 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox7 = New System.Windows.Forms.PictureBox()
+		Me.PictureBox8 = New System.Windows.Forms.PictureBox()
 		CType(Me.wall24, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall12, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall11, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -43,11 +47,15 @@ Partial Class Form1
 		CType(Me.wall6, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall5, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.wall3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
-		'
-		'Timer75ms
-		'
-		Me.Timer75ms.Enabled = True
 		'
 		'winorloseTxt
 		'
@@ -59,15 +67,6 @@ Partial Class Form1
 		Me.winorloseTxt.TabIndex = 37
 		Me.winorloseTxt.Text = "Label1"
 		Me.winorloseTxt.Visible = False
-		'
-		'FastestTimer
-		'
-		Me.FastestTimer.Enabled = True
-		Me.FastestTimer.Interval = 10
-		'
-		'Timer1000ms
-		'
-		Me.Timer1000ms.Interval = 1000
 		'
 		'wall24
 		'
@@ -149,12 +148,92 @@ Partial Class Form1
 		Me.wall3.TabStop = False
 		Me.wall3.Tag = "content"
 		'
+		'PictureBox2
+		'
+		Me.PictureBox2.BackColor = System.Drawing.Color.BlueViolet
+		Me.PictureBox2.Location = New System.Drawing.Point(595, 142)
+		Me.PictureBox2.Name = "PictureBox2"
+		Me.PictureBox2.Size = New System.Drawing.Size(72, 59)
+		Me.PictureBox2.TabIndex = 120
+		Me.PictureBox2.TabStop = False
+		'
+		'PictureBox1
+		'
+		Me.PictureBox1.BackColor = System.Drawing.Color.BlueViolet
+		Me.PictureBox1.Location = New System.Drawing.Point(353, 280)
+		Me.PictureBox1.Name = "PictureBox1"
+		Me.PictureBox1.Size = New System.Drawing.Size(72, 59)
+		Me.PictureBox1.TabIndex = 121
+		Me.PictureBox1.TabStop = False
+		'
+		'PictureBox3
+		'
+		Me.PictureBox3.BackColor = System.Drawing.Color.BlueViolet
+		Me.PictureBox3.Location = New System.Drawing.Point(561, 305)
+		Me.PictureBox3.Name = "PictureBox3"
+		Me.PictureBox3.Size = New System.Drawing.Size(72, 59)
+		Me.PictureBox3.TabIndex = 122
+		Me.PictureBox3.TabStop = False
+		'
+		'PictureBox4
+		'
+		Me.PictureBox4.BackColor = System.Drawing.Color.BlueViolet
+		Me.PictureBox4.Location = New System.Drawing.Point(887, 245)
+		Me.PictureBox4.Name = "PictureBox4"
+		Me.PictureBox4.Size = New System.Drawing.Size(72, 59)
+		Me.PictureBox4.TabIndex = 123
+		Me.PictureBox4.TabStop = False
+		'
+		'PictureBox5
+		'
+		Me.PictureBox5.BackColor = System.Drawing.Color.BlueViolet
+		Me.PictureBox5.Location = New System.Drawing.Point(1308, 172)
+		Me.PictureBox5.Name = "PictureBox5"
+		Me.PictureBox5.Size = New System.Drawing.Size(72, 59)
+		Me.PictureBox5.TabIndex = 124
+		Me.PictureBox5.TabStop = False
+		'
+		'PictureBox6
+		'
+		Me.PictureBox6.BackColor = System.Drawing.Color.BlueViolet
+		Me.PictureBox6.Location = New System.Drawing.Point(1651, 331)
+		Me.PictureBox6.Name = "PictureBox6"
+		Me.PictureBox6.Size = New System.Drawing.Size(72, 59)
+		Me.PictureBox6.TabIndex = 125
+		Me.PictureBox6.TabStop = False
+		'
+		'PictureBox7
+		'
+		Me.PictureBox7.BackColor = System.Drawing.Color.BlueViolet
+		Me.PictureBox7.Location = New System.Drawing.Point(1782, 297)
+		Me.PictureBox7.Name = "PictureBox7"
+		Me.PictureBox7.Size = New System.Drawing.Size(72, 59)
+		Me.PictureBox7.TabIndex = 126
+		Me.PictureBox7.TabStop = False
+		'
+		'PictureBox8
+		'
+		Me.PictureBox8.BackColor = System.Drawing.Color.BlueViolet
+		Me.PictureBox8.Location = New System.Drawing.Point(2218, 331)
+		Me.PictureBox8.Name = "PictureBox8"
+		Me.PictureBox8.Size = New System.Drawing.Size(72, 59)
+		Me.PictureBox8.TabIndex = 127
+		Me.PictureBox8.TabStop = False
+		'
 		'Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoScroll = True
 		Me.ClientSize = New System.Drawing.Size(780, 419)
+		Me.Controls.Add(Me.PictureBox8)
+		Me.Controls.Add(Me.PictureBox7)
+		Me.Controls.Add(Me.PictureBox6)
+		Me.Controls.Add(Me.PictureBox5)
+		Me.Controls.Add(Me.PictureBox4)
+		Me.Controls.Add(Me.PictureBox3)
+		Me.Controls.Add(Me.PictureBox1)
+		Me.Controls.Add(Me.PictureBox2)
 		Me.Controls.Add(Me.wall11)
 		Me.Controls.Add(Me.wall24)
 		Me.Controls.Add(Me.winorloseTxt)
@@ -176,20 +255,33 @@ Partial Class Form1
 		CType(Me.wall6, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall5, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.wall3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
 	End Sub
-	Friend WithEvents Timer75ms As Timer
-    Friend WithEvents wall3 As PictureBox
-    Friend WithEvents wall5 As PictureBox
-    Friend WithEvents wall6 As PictureBox
-    Friend WithEvents wall7 As PictureBox
-    Friend WithEvents wall9 As PictureBox
-    Friend WithEvents wall11 As PictureBox
-    Friend WithEvents wall12 As PictureBox
-    Friend WithEvents winorloseTxt As Label
-    Friend WithEvents FastestTimer As Timer
-    Friend WithEvents Timer1000ms As Timer
-    Friend WithEvents wall24 As PictureBox
+	Friend WithEvents wall3 As PictureBox
+	Friend WithEvents wall5 As PictureBox
+	Friend WithEvents wall6 As PictureBox
+	Friend WithEvents wall7 As PictureBox
+	Friend WithEvents wall9 As PictureBox
+	Friend WithEvents wall11 As PictureBox
+	Friend WithEvents wall12 As PictureBox
+	Friend WithEvents winorloseTxt As Label
+	Friend WithEvents wall24 As PictureBox
+	Friend WithEvents PictureBox2 As PictureBox
+	Friend WithEvents PictureBox1 As PictureBox
+	Friend WithEvents PictureBox3 As PictureBox
+	Friend WithEvents PictureBox4 As PictureBox
+	Friend WithEvents PictureBox5 As PictureBox
+	Friend WithEvents PictureBox6 As PictureBox
+	Friend WithEvents PictureBox7 As PictureBox
+	Friend WithEvents PictureBox8 As PictureBox
 End Class
