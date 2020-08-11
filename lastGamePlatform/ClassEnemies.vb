@@ -25,7 +25,16 @@
 		Me.moveSpeed = moveSpeed
 	End Sub
 
+	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, path As String)
+		Me.width = 40
+		Me.height = 50
+		Me.img = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\" + path))
+		Me.xPosition = xPosition - Me.width
+		Me.yPosition = yPosition - Me.height
+		Me.name = name
+		Me.moveSpeed = moveSpeed
 
+	End Sub
 
 
 

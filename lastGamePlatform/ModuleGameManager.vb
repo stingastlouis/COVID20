@@ -1,20 +1,22 @@
 ﻿Module ModuleGameManager
 	Public myForm As Form
 	Public player1 As PictureBox
+	Public player2 As PictureBox
 	Public boss As PictureBox
 	Public enemies As New List(Of PictureBox)
 	Public enemiesSpeed As New List(Of Integer)
 	Public bullets As New List(Of PictureBox)
+	Public bullets2 As New List(Of PictureBox)
 
 	Public level As Integer = 0
 	Public universalScore As Integer
 	Public allPictureBoxes As New List(Of PictureBox)
 	Public waitBeforeFight As Integer = 3 'number of second to wait before fight
+	Dim tm As DateTime
 
 
 
-
-
+	'----single player--------------------------------------
 	Private pScore As Label
 	Private pLife As Label
 	Private pItem As Label
@@ -30,11 +32,18 @@
 	Private progressBar As ProgressBar
 	Private myTimer As Timer
 	Private timer3sec As Timer
+	Private multiTimer1 As Timer
+	'-------------------------------
 
+	'multi player--------
+	Private p1Life As Label
+	Private p2Life As Label
+	Private p1Score As Label
+	Private p2Score As Label
+	Private p1Name As Label
+	Private p2Name As Label
 
-
-
-
+	'---------------------
 
 	'------------delete unnessesary
 	Private restBtn As New Button
@@ -121,8 +130,71 @@
 		Console.WriteLine("form fully set!!!")
 	End Sub
 
+	Public Sub load_multiPlayer(currentForm As Form)
+
+		tm = DateAndTime.Now.AddMinutes(1)
+		myForm = currentForm
+		myForm.Width = 1000
+		myForm.Height = 520
+		myForm.HorizontalScroll.Enabled = False
+		myForm.HorizontalScroll.Visible = False
+
+		boss = CreatePicBoxes(200, 200, "boss", 390, 190, "ground")
+		CreatePicBoxes(70, 62, "wall1", 100, 350, "ground")
+		CreatePicBoxes(70, 62, "wall2", 800, 350, "ground")
+
+		CreatePicBoxes(1000, 62, "ground1", 0, 400, "ground")
+		boss.Visible = False
+		Console.WriteLine("creating media player")
+		mediaPlayer.CreateControl()
+		mediaPlayer.uiMode = "invisible"
+		mediaPlayer.URL = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\bgSound.wav")
+		mediaPlayer.settings.setMode("Loop", True)
+
+		'progress bar
+		progressBar = CreateBossProgressBar(False, False, 30)
+		LabelBossLife = CreateLabel(360, 13, "lblBoss", "Boss Life: ")
+		LabelBossLife.Visible = False
+		LabelBossLife.Enabled = False
+
+		player1 = CreatePicBoxesMulti(87, 62, "player1", 50, 235, multiplayerRegForm.p1.playerImage) 'get image from class selected from reg form 
+		player2 = CreatePicBoxesMulti(87, 62, "player2", 800, 235, multiplayerRegForm.p2.playerImage) 'get image from class selected from reg form 
+		p1Life = CreateLabel(130, 10, "p1Life", "LIFE :" + CStr(multiplayerRegForm.p1.playerLife))
+		p2Life = CreateLabel(700, 10, "p2Life", "LIFE :" + CStr(multiplayerRegForm.p2.playerLife))
+		p1Score = CreateLabel(230, 10, "p1score", "SCORE :" + CStr(multiplayerRegForm.p1.playerScore))
+		p2Score = CreateLabel(800, 10, "p2score", "SCORE :" + CStr(multiplayerRegForm.p2.playerScore))
+		p1Name = CreateLabel(30, 10, "p1name", multiplayerRegForm.p1.playerName)
+		p2Name = CreateLabel(600, 10, "p2name", multiplayerRegForm.p2.playerName)
 
 
+
+
+		'boss.Location = New Point(325, 350)
+		'timers
+
+
+		'Console.WriteLine("creating timers")
+		'myTimer = CreateTimer(True, 10)
+		'timer3sec = CreateTimer(False, 1000)
+		multiTimer1 = CreateTimer(True, 10)
+		multiplayerRegForm.p1.playerFall = True
+		multiplayerRegForm.p2.playerFall = True
+
+		'Console.WriteLine("other setting")
+
+		'ClassPlayer.playerIsFalling = True
+
+		Console.WriteLine("pushing pictureboxes to main list of objects")
+		Dim itm As New ClassItems()
+		itm.itemsInForm(myForm)
+
+		Console.WriteLine("updating the lists")
+		itm.updateLists(walls, enemies, enemiesSpeed)
+
+		'Console.WriteLine("adding handlers to present gameobjects")
+		'AddHandlers()
+		addMultiHandler()
+	End Sub
 
 
 	'-functions
@@ -131,6 +203,13 @@
 		Dim bulletpb As PictureBox = bullet.generateBullet()
 		myForm.Controls.Add(bulletpb)
 		ModuleGameManager.bullets.Add(bulletpb)
+		My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bulletSound.wav"), AudioPlayMode.Background)
+	End Sub
+	Public Sub GenerateNewBullet2(player)
+		Dim bullet As New ClassBullets(player)
+		Dim bulletpb As PictureBox = bullet.generateBullet()
+		myForm.Controls.Add(bulletpb)
+		ModuleGameManager.bullets2.Add(bulletpb)
 		My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bulletSound.wav"), AudioPlayMode.Background)
 	End Sub
 
@@ -149,6 +228,29 @@
 
 		Console.WriteLine("Check If Win Or Lose")
 		CheckIfWinOrLose()
+	End Sub
+
+	Public Sub RemovePictureBoxAndUpdateScoremulti(picBox As PictureBox)
+		Console.WriteLine("removing the control " & picBox.Name.ToString)
+		ModuleGameManager.allPictureBoxes.Remove(picBox)
+
+		picBox.Enabled = False
+		picBox.Visible = False
+		myForm.Controls.Remove(picBox)
+		picBox.Dispose()
+
+		Console.WriteLine("update lables")
+
+		p1Life.Text = "LIFE :" + CStr(multiplayerRegForm.p1.playerLife)
+		p2Life.Text = "LIFE :" + CStr(multiplayerRegForm.p2.playerLife)
+		p1Score.Text = "SCORE : " + CStr(multiplayerRegForm.p1.playerScore)
+		p2Score.Text = "SCORE : " + CStr(multiplayerRegForm.p2.playerScore)
+
+		Console.WriteLine("Check If Win Or Lose")
+		CheckIfWinOrLose()
+
+
+
 	End Sub
 
 	Private Sub StartCountdown()
@@ -175,6 +277,21 @@
 			ModuleGameManager.enemiesSpeed.Add(enemy.MoveSpeed1) 'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
 			ModuleGameManager.enemies.Add(en) 'add the picturebox to enemies<>
 			noOfEnemies -= 1 'decrement the no of enemies
+		End While
+	End Sub
+	Private Sub GenerateNewEnemiesMultiPlayer()
+		Dim ran As New System.Random
+
+		Dim noOfEnemies As Integer = ran.Next(1, 2)
+		While noOfEnemies > 0
+			Dim xpos As Integer = boss.Left + boss.Width
+		Dim ypos As Integer = boss.Top + boss.Height / 2
+			Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, 5, "ground.png") 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
+			Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
+		myForm.Controls.Add(en) 'add the enemy generated to form
+		ModuleGameManager.enemiesSpeed.Add(5) 'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
+		ModuleGameManager.enemies.Add(en) 'add the picturebox to enemies<>
+		noOfEnemies -= 1 'decrement the no of enemies
 		End While
 	End Sub
 
@@ -207,7 +324,7 @@
 		'Dim bulletBoss As New ClassBoss
 		ModuleMovement.MakeBossMove(player1, boss, ground1, door2, 2)
 		ModuleIntersection.bulletIntersectsWithBoss(progressBar, bullets, boss)
-
+		'bullets2 FOR PLAYER2 
 		pScore.Text = "Score :" + CStr(ClassPlayer.score)
 	End Sub
 
@@ -330,9 +447,19 @@
 	Private Sub AddHandlers()
 		AddHandler timer3sec.Tick, AddressOf Timer1000ms_Tick
 		AddHandler myTimer.Tick, AddressOf FastestTimer_Tick
+
 		AddHandler myForm.KeyUp, AddressOf ModuleMovement.myForm_KeyUp
 		AddHandler myForm.KeyDown, AddressOf ModuleMovement.myForm_KeyDown
 		AddHandler player1.LocationChanged, AddressOf ModuleMovement.player1_LocationChanged
+		AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
+	End Sub
+	Private Sub addMultiHandler()
+		'AddHandler timer3sec.Tick, AddressOf Timer1000ms_Tick
+		AddHandler multiTimer1.Tick, AddressOf FastestTimerMulti_Tick '===============
+		AddHandler myForm.KeyUp, AddressOf ModuleMovement.myForm_KeyUpMulti
+		AddHandler myForm.KeyDown, AddressOf ModuleMovement.myFormMulti_KeyDown
+		AddHandler player1.LocationChanged, AddressOf ModuleMovement.player1_LocationChanged
+		AddHandler player2.LocationChanged, AddressOf ModuleMovement.player2_LocationChanged
 		AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
 	End Sub
 
@@ -342,7 +469,7 @@
 			.Location = New Point(460, 13)
 			.BringToFront()
 			.Name = "ProgressBar1"
-			.Maximum = 18
+			.Maximum = Value
 			.Minimum = 0
 			.Value = Value
 			.Size = New Size(133, 28)
@@ -372,6 +499,12 @@
 
 	Private Function CreatePicBoxes(width, height, name, x, y, path)
 		Dim pb As New ClassPictureBox(width, height, name, x, y, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\" & path & ".png")))
+		Dim picbox As PictureBox = pb.showPictureBoxNoAdd()
+		myForm.Controls.Add(picbox)
+		Return picbox
+	End Function
+	Private Function CreatePicBoxesMulti(width, height, name, x, y, path)
+		Dim pb As New ClassPictureBox(width, height, name, x, y, path)
 		Dim picbox As PictureBox = pb.showPictureBoxNoAdd()
 		myForm.Controls.Add(picbox)
 		Return picbox
@@ -494,6 +627,76 @@
 			End If
 		End If
 
+
+
+
+
+	End Sub
+
+	Private Sub FastestTimerMulti_Tick(sender As Object, e As EventArgs)
+		ModuleIntersection.bulletIntersectsWithMultiP2(bullets, player2)
+		ModuleIntersection.bulletIntersectsWithMultiP1(bullets2, player1)
+
+		'-player move
+		If multiplayerRegForm.p1.playerMoveRight Then
+			player1.Location = New Point(player1.Location.X + multiplayerRegForm.p1.playerSpeed, player1.Location.Y)
+		ElseIf multiplayerRegForm.p1.playerMoveLeft Then
+			player1.Location = New Point(player1.Location.X - multiplayerRegForm.p1.playerSpeed, player1.Location.Y)
+		End If
+
+		If multiplayerRegForm.p1.playerFall Then
+			player1.Location = New Point(player1.Location.X, player1.Location.Y + multiplayerRegForm.p1.playerGravitySpeed)
+		End If
+		'-
+
+		If multiplayerRegForm.p2.playerMoveRight Then
+			player2.Location = New Point(player2.Location.X + multiplayerRegForm.p2.playerSpeed, player2.Location.Y)
+		ElseIf multiplayerRegForm.p2.playerMoveLeft Then
+			player2.Location = New Point(player2.Location.X - multiplayerRegForm.p2.playerSpeed, player2.Location.Y)
+		End If
+
+		If multiplayerRegForm.p2.playerFall Then
+			player2.Location = New Point(player2.Location.X, player2.Location.Y + multiplayerRegForm.p2.playerGravitySpeed)
+		End If
+		'-
+
+		If ModuleGameManager.bullets.Count > 0 Then
+			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
+			'Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
+			ModuleMovement.BulletMovement()
+			'ModuleIntersection.BulletIntersectWithEnemy()
+
+
+
+		End If
+
+
+		'==============player2 
+		If ModuleGameManager.bullets2.Count > 0 Then
+			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
+			'Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
+			ModuleMovement.BulletMovement2()
+			'ModuleIntersection.BulletIntersectWithEnemy()
+
+		End If
+		If DateAndTime.Now >= tm Then
+			activateGame()
+		End If
+
+	End Sub
+
+	Dim mt As DateTime
+
+	Private Sub activateGame()
+
+
+		boss.Visible = True
+		progressBar.Visible = True
+		progressBar.Enabled = True
+		LabelBossLife.Visible = True
+		LabelBossLife.Enabled = True
+		ModuleIntersection.bulletIntersectsWithBossMultiP1(progressBar, bullets, boss)
+		ModuleIntersection.bulletIntersectsWithBossMultiP2(progressBar, bullets2, boss)
 
 
 

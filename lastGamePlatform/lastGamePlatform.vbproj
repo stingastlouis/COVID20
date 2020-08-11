@@ -107,7 +107,9 @@
     <Compile Include="BattleMultiplayer.Designer.vb">
       <DependentUpon>BattleMultiplayer.vb</DependentUpon>
     </Compile>
-    <Compile Include="BattleMultiplayer.vb" />
+    <Compile Include="BattleMultiplayer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="bonusForm.Designer.vb">
       <DependentUpon>bonusForm.vb</DependentUpon>
     </Compile>
@@ -148,6 +150,13 @@
     <Compile Include="ModuleGameManager.vb" />
     <Compile Include="ModuleIntersection.vb" />
     <Compile Include="ModuleMovement.vb" />
+    <Compile Include="mulPLayerClass.vb" />
+    <Compile Include="multiPlayerPLayForm.Designer.vb">
+      <DependentUpon>multiPlayerPLayForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="multiPlayerPLayForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="multiplayerRegForm.Designer.vb">
       <DependentUpon>multiplayerRegForm.vb</DependentUpon>
     </Compile>
@@ -215,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Intro.resx">
       <DependentUpon>Intro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="multiPlayerPLayForm.resx">
+      <DependentUpon>multiPlayerPLayForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="multiplayerRegForm.resx">
       <DependentUpon>multiplayerRegForm.vb</DependentUpon>

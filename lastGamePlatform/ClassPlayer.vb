@@ -12,6 +12,27 @@
     Public Shared canShoot As Boolean = True
 
 
+    Private multiplayername As String
+    Private multiplayerScore As Integer
+    Private multiplayerLife As Integer
+    Private multiplayerItem As Integer
+    Private multiplayerFalling As Boolean = True
+    Private multiplayerShoot As Boolean = True
+    Private multiplayerRight As Boolean
+    Private multiplayerLeft As Boolean
+    Private multiplayerUp As Boolean
+    Private multiplayerjumpHeight As Integer = 100
+    Private multiplayerSpeed As Integer = 5
+    Private multiplayerGravitySpeed As Integer = 3
+
+
+
+
+
+
+
+
+
 
 
 
