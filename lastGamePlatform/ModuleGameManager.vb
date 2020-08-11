@@ -28,6 +28,8 @@
 	Private instruction As PictureBox
 	Private door1 As PictureBox
 	Private supergun0 As PictureBox
+	Private wall1 As PictureBox
+	Private wall2 As PictureBox
 	Private ground1 As PictureBox
 	Private progressBar As ProgressBar
 	Private myTimer As Timer
@@ -140,8 +142,8 @@
 		myForm.HorizontalScroll.Visible = False
 
 		boss = CreatePicBoxes(200, 200, "boss", 390, 190, "ground")
-		CreatePicBoxes(70, 62, "wall1", 100, 350, "ground")
-		CreatePicBoxes(70, 62, "wall2", 800, 350, "ground")
+		wall1 = CreatePicBoxes(70, 62, "wall1", 100, 350, "ground")
+		wall2 = CreatePicBoxes(70, 62, "wall2", 800, 350, "ground")
 
 		CreatePicBoxes(1000, 62, "ground1", 0, 400, "ground")
 		boss.Visible = False
@@ -664,6 +666,8 @@
 			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
 			'Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
 			ModuleMovement.BulletMovement()
+			ModuleIntersection.bulletIntersectStaticItem1()
+
 			'ModuleIntersection.BulletIntersectWithEnemy()
 
 
@@ -676,6 +680,7 @@
 			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
 			'Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
 			ModuleMovement.BulletMovement2()
+			ModuleIntersection.bulletIntersectStaticItem2()
 			'ModuleIntersection.BulletIntersectWithEnemy()
 
 		End If
@@ -697,6 +702,9 @@
 		LabelBossLife.Enabled = True
 		ModuleIntersection.bulletIntersectsWithBossMultiP1(progressBar, bullets, boss)
 		ModuleIntersection.bulletIntersectsWithBossMultiP2(progressBar, bullets2, boss)
+
+		'ModuleMovement.MakeBossMove(player1, boss, ground1, door2, 2)
+		ModuleMovement.makemultibossMove(wall1, wall2, boss)
 
 
 

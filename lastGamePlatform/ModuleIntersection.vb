@@ -84,15 +84,16 @@ Module ModuleIntersection
 
 				bullet.Visible = False
 				bullet.Enabled = False
-				multiplayerRegForm.p2.playerLife -= 1
+
 				bullet.Dispose()
 				'ClassPlayer.score += ClassItems.scoreBoss
 				'multiplayerRegForm.p2.playerScore += 5
 				If multiplayerRegForm.p2.playerLife > 0 Then
-
+					multiplayerRegForm.p2.playerLife -= 1
 					Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
-					ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(bullet)
+
 					multiplayerRegForm.p1.playerScore += 5
+					ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(bullet)
 				End If
 				If multiplayerRegForm.p2.playerLife <= 0 Then
 
@@ -317,4 +318,55 @@ Module ModuleIntersection
 		'Next
 	End Sub
 
+	Public Sub bulletIntersectStaticItem1()
+		For Each bullet In ModuleGameManager.bullets
+			For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes
+				If activePictureBox.Name.Contains("wall2") Then 'if bullet intersect with enemies 
+					If bullet.Bounds.IntersectsWith(activePictureBox.Bounds) Then
+						ModuleGameManager.bullets.Remove(bullet) 'remove fro bullets<>
+						ModuleGameManager.allPictureBoxes.Remove(bullet)
+						bullet.Dispose()
+						bullet.Visible = False
+					End If
+
+
+					'Exit For 'break as current <> has been modified
+					Exit For
+				End If
+			Next
+			'Exit For 'break as current <> has been modified
+			Exit For
+		Next
+
+
+
+
+
+	End Sub
+
+	Public Sub bulletIntersectStaticItem2()
+		For Each bullet In ModuleGameManager.bullets2
+			For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes
+				If activePictureBox.Name.Contains("wall1") Then 'if bullet intersect with enemies 
+					If bullet.Bounds.IntersectsWith(activePictureBox.Bounds) Then
+						ModuleGameManager.bullets2.Remove(bullet) 'remove fro bullets<>
+						ModuleGameManager.allPictureBoxes.Remove(bullet)
+						bullet.Visible = False
+						bullet.Dispose()
+					End If
+
+
+					'Exit For 'break as current <> has been modified
+					Exit For
+				End If
+			Next
+			'Exit For 'break as current <> has been modified
+			Exit For
+		Next
+
+
+
+
+
+	End Sub
 End Module

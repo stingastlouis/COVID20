@@ -123,7 +123,12 @@
 	End Sub
 	Public Sub myForm_KeyUpMulti(sender As Object, e As KeyEventArgs)
 		Select Case e.KeyValue
+			Case Keys.Right
+				multiplayerRegForm.p1.playerMoveRight = False '=======================================
 
+				Exit Select
+			Case Keys.Left
+				multiplayerRegForm.p1.playerMoveLeft = False  '=======================================
 			Case Keys.D
 
 				multiplayerRegForm.p2.playerMoveRight = False '=======================================
@@ -187,7 +192,19 @@
 		End Select
 	End Sub
 	'-end keyboard button press/release
+	Public Sub makemultibossMove(ByVal wall1 As PictureBox, ByVal wall2 As PictureBox, ByRef boss As PictureBox)
+		Dim move1 As Boolean = True
+		Dim move2 As Boolean = True
 
+
+		boss.Location = New Point(boss.Location.X - 5, boss.Location.Y)
+		If boss.Bounds.IntersectsWith(wall1.Bounds) Then
+			boss.Location = New Point(boss.Location.X + 10, boss.Location.Y)
+		End If
+		If boss.Bounds.IntersectsWith(wall1.Bounds) Then
+			boss.Location = New Point(boss.Location.X + 20, boss.Location.Y)
+		End If
+	End Sub
 
 
 	Public Sub MakeBossMove(ByVal player As Object, ByRef boss As Object, ByVal ground As Object, ByVal door As Object, ByVal movementOperation As Integer)
