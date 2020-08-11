@@ -529,10 +529,10 @@
 		Dim nextForm As Form = myForm
 		Select Case level
 			Case 1
-				'nextForm = Form2
+				nextForm = Form2
 				Exit Select
 			Case 2
-				'nextForm = Form3
+				nextForm = Form3
 				Exit Select
 			Case 3
 				nextForm = bonusForm
