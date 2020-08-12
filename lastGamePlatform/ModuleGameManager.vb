@@ -45,6 +45,10 @@
 	Private p1Name As Label
 	Private p2Name As Label
 	Dim pic1 As New PictureBox
+	Dim pic2 As New PictureBox
+	Dim pic3 As New PictureBox
+	Dim pic4 As New PictureBox
+	Dim pic5 As New PictureBox
 	'---------------------
 
 	'------------delete unnessesary
@@ -165,9 +169,21 @@
 		With pic1
 			.Width = 50
 			.Height = 50
-			.Location = New Point(650, 190)
+			.Location = New Point(300, 250)
+		End With
+		With pic2
+			.Width = 50
+			.Height = 50
+			.Location = New Point(450, 200)
+		End With
+		With pic3
+			.Width = 50
+			.Height = 50
+			.Location = New Point(650, 350)
 		End With
 		myForm.Controls.Add(pic1)
+		myForm.Controls.Add(pic2)
+		myForm.Controls.Add(pic3)
 		'get image from class selected from reg form 
 		p1Life = CreateLabel(130, 10, "p1Life", "LIFE :" + CStr(multiplayerRegForm.p1.playerLife))
 		p2Life = CreateLabel(700, 10, "p2Life", "LIFE :" + CStr(multiplayerRegForm.p2.playerLife))
@@ -264,15 +280,19 @@
 	End Sub
 	Dim random As New Random
 	Public Sub removeItemPictureMBoxMulti(picbox As PictureBox)
-		Dim int As Integer = random.Next(160, 600)
+		Dim intx As Integer = random.Next(250, 600)
+		Dim inty As Integer = random.Next(280, 350)
 		Console.WriteLine("removing the control " & picbox.Name.ToString)
-		'Dim pic As New PictureBox
+		'Dim pic As New PictureBo
+
+
+
 		With picbox
 			.Height = 50
 			.Width = 50
-			.Location = New Point(int, 190)
+			.Location = New Point(intx, inty)
+			.BringToFront()
 		End With
-		pic1 = picbox
 
 
 		Console.WriteLine("update lables")
@@ -736,6 +756,23 @@
 		ModuleIntersection.bulletIntersectsWithBossMultiP2(progressBar, bullets2, boss)
 		'ModuleMovement.MakeBossMove(player1, boss, ground1, door2, 2)
 		ModuleMovement.makemultibossMove(wall1, wall2, boss)
+		myForm.Controls.Remove(pic1)
+		myForm.Controls.Remove(pic2)
+		myForm.Controls.Remove(pic3)
+		pic1.Dispose()
+		pic2.Dispose()
+		pic3.Dispose()
+		With pic4
+			.Width = 50
+			.Height = 50
+			.Location = New Point(250, 350)
+		End With
+
+		With pic5
+			.Width = 50
+			.Height = 50
+			.Location = New Point(650, 350)
+		End With
 
 
 

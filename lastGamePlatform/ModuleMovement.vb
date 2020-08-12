@@ -200,7 +200,7 @@
 		If move1 Then
 			boss.Location = New Point(boss.Location.X - 5, boss.Location.Y)
 			If boss.Bounds.IntersectsWith(wall1.Bounds) Then
-
+				throwSomevirus(boss)
 				move1 = False
 				move2 = True
 			End If
@@ -213,7 +213,13 @@
 		End If
 
 	End Sub
+	Private Sub throwSomevirus(ByRef boss As PictureBox)
+		Dim ene As New ClassEnemies(boss.Left, boss.Height / 2, "enemy", 5, "ground.png")
+		Dim enemy As PictureBox = ene.generateEnemy
+		myForm.Controls.Add(enemy)
+		ModuleGameManager.bullets.Add(enemy)
 
+	End Sub
 
 	Public Sub MakeBossMove(ByVal player As Object, ByRef boss As Object, ByVal ground As Object, ByVal door As Object, ByVal movementOperation As Integer)
 		moveOp = 0
