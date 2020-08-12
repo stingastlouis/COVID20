@@ -12,7 +12,7 @@
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles ButtonMultiPlayerPlay.Click
         Me.Hide()
         Dim np As New multiplayerRegForm
-        np.Show()
+        np.ShowDialog()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles ButtonMultiPlayerScore.Click

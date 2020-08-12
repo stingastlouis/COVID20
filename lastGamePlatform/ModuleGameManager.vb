@@ -139,6 +139,8 @@
 	End Sub
 
 	Public Sub load_multiPlayer(currentForm As Form)
+		multiplayerRegForm.p1.playgame = True
+		multiplayerRegForm.p2.playgame = True
 
 		tm = DateAndTime.Now.AddMinutes(1)
 		myForm = currentForm
@@ -614,7 +616,7 @@
 
 	Private Sub Extbtn_Click(sender As Object, e As EventArgs)
 
-		startHere.ShowDialog()
+		startHere.Show()
 
 		myForm.Close()
 	End Sub
@@ -800,22 +802,32 @@
 
 		If multiplayerRegForm.p1.playerLife <= 0 Then
 			multiplayerRegForm.p1.playerLife = 0
-
+			multiplayerRegForm.p1.playgame = False
 			myForm.Controls.Remove(player1)
 			player1.Visible = True
 			player1.Enabled = False
+			multiplayerRegForm.p1.playerShoot = False
+			multiplayerRegForm.p1.playerMoveLeft = False
+			multiplayerRegForm.p1.playerMoveRight = False
+			multiplayerRegForm.p1.playerMoveUp = False
 		End If
 
 		If multiplayerRegForm.p2.playerLife <= 0 Then
-
+			multiplayerRegForm.p2.playgame = False
 			multiplayerRegForm.p2.playerLife = 0
 
 			myForm.Controls.Remove(player2)
 			player2.Visible = True
 			player2.Enabled = False
+			multiplayerRegForm.p2.playerShoot = False
+			multiplayerRegForm.p2.playerMoveLeft = False
+			multiplayerRegForm.p2.playerMoveRight = False
+			multiplayerRegForm.p2.playerMoveUp = False
 		End If
 
 		If progressBar.Value <= 0 Then
+
+
 			multiTimer1.Enabled = False
 			With winorlosetText
 				.Text = Space(10) + "You win!!"
@@ -828,7 +840,7 @@
 				.BackColor = Color.Empty
 				.Name = "winorlosetText"
 				.Font = New Font("Agency FB", 50)
-
+				.CreateControl()
 			End With
 			With restBtn
 				.Text = "Restart"
@@ -840,7 +852,7 @@
 				.Font = New Font("Agency FB", 16)
 				.BackColor = Color.Empty
 				.AutoSize = True
-
+				.CreateControl()
 			End With
 			With exitBtn
 				.Text = "Main Menu"
@@ -852,7 +864,7 @@
 				.BackColor = Color.Empty
 				.BringToFront()
 				.AutoSize = True
-
+				.CreateControl()
 			End With
 			boss.SendToBack()
 			myForm.Controls.Add(winorlosetText)
@@ -863,6 +875,8 @@
 		End If
 
 		If multiplayerRegForm.p1.playerLife <= 0 And multiplayerRegForm.p2.playerLife <= 0 Then
+			multiplayerRegForm.Close()
+			multiplayerRegForm.Dispose()
 			multiplayerRegForm.p1.playerLife = 0
 			multiplayerRegForm.p2.playerLife = 0
 			multiTimer1.Enabled = False
@@ -914,9 +928,10 @@
 
 	End Sub
 	Private Sub RestartBtnMulti_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-		Dim nplat As New multiplayerRegForm
-		nplat.Show()
-		myForm.Close()
+		'Dim nplat As New multiplayerRegForm
+		myForm.Hide()
+		'nplat.Show()
+
 
 
 	End Sub

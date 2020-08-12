@@ -151,69 +151,90 @@
 	Public Sub myForm_KeyUpMulti(sender As Object, e As KeyEventArgs)
 		Select Case e.KeyValue
 			Case Keys.Right
-				multiplayerRegForm.p1.playerMoveRight = False '=======================================
+				If multiplayerRegForm.p1.playgame Then
+					multiplayerRegForm.p1.playerMoveRight = False '=======================================
 
-				Exit Select
+					Exit Select
+				End If
+
 			Case Keys.Left
-				multiplayerRegForm.p1.playerMoveLeft = False  '=======================================
+				If multiplayerRegForm.p1.playgame Then
+					multiplayerRegForm.p1.playerMoveLeft = False  '=======================================
+					Exit Select
+				End If
 			Case Keys.D
+				If multiplayerRegForm.p2.playgame Then
+					multiplayerRegForm.p2.playerMoveRight = False '=======================================
 
-				multiplayerRegForm.p2.playerMoveRight = False '=======================================
-				Exit Select
+					Exit Select
+				End If
 			Case Keys.A
+				If multiplayerRegForm.p2.playgame Then
+					multiplayerRegForm.p2.playerMoveLeft = False  '=======================================
 
-				multiplayerRegForm.p2.playerMoveLeft = False  '=======================================
-				Exit Select '
+					Exit Select
+				End If
 		End Select
 	End Sub
 	Public Sub myFormMulti_KeyDown(sender As Object, e As KeyEventArgs)
 		Select Case e.KeyValue
 			Case Keys.Right
+				If multiplayerRegForm.p1.playgame Then
+					multiplayerRegForm.p1.playerMoveRight = True '=======================================
 
-				multiplayerRegForm.p1.playerMoveRight = True'=======================================
-
-
+				End If
 			Case Keys.Left
-				If player1.Left > 0 Then
+				If multiplayerRegForm.p1.playgame Then
+					If player1.Left > 0 Then
 
-					multiplayerRegForm.p1.playerMoveLeft = True '=======================================
-				Else : multiplayerRegForm.p1.playerMoveLeft = True '=======================================
+						multiplayerRegForm.p1.playerMoveLeft = True '=======================================
+					Else : multiplayerRegForm.p1.playerMoveLeft = True '=======================================
+					End If
 				End If
 
 			Case Keys.Up
 
-
-				'=======================================
-				If Not multiplayerRegForm.p1.playerFall Then
-					player1.Top -= multiplayerRegForm.p1.playerjump
-					multiplayerRegForm.p1.playerFall = True
+				If multiplayerRegForm.p1.playgame Then
+					'=======================================
+					If Not multiplayerRegForm.p1.playerFall Then
+						player1.Top -= multiplayerRegForm.p1.playerjump
+						multiplayerRegForm.p1.playerFall = True
+					End If
 				End If
 				'=======================================
 			Case Keys.M
-
-				'=======================================
-				If (bullets.Count <= 10) AndAlso multiplayerRegForm.p1.playerShoot Then 'allow to shot only 10 bullets - reduce cpu usage and lag
-					GenerateNewBullet(player1)
+				If multiplayerRegForm.p1.playgame Then
+					'=======================================
+					If (bullets.Count <= 10) AndAlso multiplayerRegForm.p1.playerShoot Then 'allow to shot only 10 bullets - reduce cpu usage and lag
+						GenerateNewBullet(player1)
+					End If
 				End If
 				'=======================================
 			Case Keys.W
-				'=======================================
-				If Not multiplayerRegForm.p2.playerFall Then
-					player2.Top -= multiplayerRegForm.p2.playerjump
-					multiplayerRegForm.p2.playerFall = True
+				If multiplayerRegForm.p2.playgame Then
+
+					If Not multiplayerRegForm.p2.playerFall Then
+						player2.Top -= multiplayerRegForm.p2.playerjump
+						multiplayerRegForm.p2.playerFall = True
+					End If
 				End If
 				'=======================================
 			Case Keys.A
-				If player2.Left > 0 Then
-					multiplayerRegForm.p2.playerMoveLeft = True '=======================================
-				Else : multiplayerRegForm.p2.playerMoveLeft = True '=======================================
+				If multiplayerRegForm.p2.playgame Then
+					If player2.Left > 0 Then
+						multiplayerRegForm.p2.playerMoveLeft = True '=======================================
+					Else : multiplayerRegForm.p2.playerMoveLeft = True '=======================================
+					End If
 				End If
 			Case Keys.D
-				multiplayerRegForm.p2.playerMoveRight = True'=======================================
+				If multiplayerRegForm.p2.playgame Then
+					multiplayerRegForm.p2.playerMoveRight = True '=======================================
+				End If
 			Case Keys.Tab
-				GenerateNewBullet2(player2)
-
-			Case Keys.Escape
+					If multiplayerRegForm.p2.playgame Then
+						GenerateNewBullet2(player2)
+					End If
+					Case Keys.Escape
 				myForm.Close()
 				startHere.Show()
 		End Select

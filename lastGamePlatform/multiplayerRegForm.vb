@@ -3,8 +3,8 @@
     Dim bool1 As Boolean
     Dim bool2 As Boolean
 
-    Public p1 As New mulPLayerClass
-    Public p2 As New mulPLayerClass
+    Public p1 As New mulPLayerClass()
+    Public p2 As New mulPLayerClass()
 
     Private Sub player1Box_Click(sender As Object, e As EventArgs) Handles player1Box.Click
 
@@ -37,6 +37,7 @@
     End Sub
 
     Private Sub multiplayerRegForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        multiPlayerPLayForm.Close()
         player1Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))
         p1.playerImage = player1Box.Image
         bool1 = True
@@ -52,17 +53,16 @@
         p2.playerImage = player2Box.Image
         p1.playerName = player1.Text.Trim
         p2.playerName = player2.Text.Trim
-
-        p1.playerScore = 0
-        p2.playerScore = 0
-        p1.playerLife = 3
-        p2.playerLife = 3
-        p1.playerItem = 0
-        p2.playerItem = 0
+        If player1.Text.Trim = Nothing Then
+            p1.playerName = "Timon"
+        End If
+        If player2.Text.Trim = Nothing Then
+            p2.playerName = "Pumba"
+        End If
 
         Dim battle As New multiPlayerPLayForm
         Me.Hide()
-        battle.Show()
+        battle.ShowDialog()
 
 
 

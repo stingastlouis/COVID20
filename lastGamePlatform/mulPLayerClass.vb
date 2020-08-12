@@ -11,15 +11,29 @@
     Private multiplayerjumpHeight As Integer = 100
     Private multiplayerSpeed As Integer = 5
     Private multiplayerGravitySpeed As Integer = 3
-
+    Private multicanplay As Boolean
     Private multiPlayerimg As Image
 
+    Sub New()
+
+    End Sub
+    Sub New(name As String)
+        multiplayername = name
+    End Sub
     Public Property playerFall As Boolean
         Set(value As Boolean)
             multiplayerFalling = value
         End Set
         Get
             Return multiplayerFalling
+        End Get
+    End Property
+    Public Property playgame As Boolean
+        Set(value As Boolean)
+            multicanplay = value
+        End Set
+        Get
+            Return multicanplay
         End Get
     End Property
     Public Property playerShoot As Boolean
