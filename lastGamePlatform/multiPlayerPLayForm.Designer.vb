@@ -28,6 +28,7 @@ Partial Class multiPlayerPLayForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.DeepSkyBlue
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Name = "multiPlayerPLayForm"
         Me.Text = "multiPlayerPLayForm"

@@ -1,11 +1,8 @@
 ﻿Public Class multiplayerRegForm
-    Public pl1 As Bitmap
-    Public pl2 As Bitmap
-    Public pl3 As Bitmap
-    Public pl4 As Bitmap
+
     Dim bool1 As Boolean
     Dim bool2 As Boolean
-    Public p1Name, p2Name As String
+
     Public p1 As New mulPLayerClass
     Public p2 As New mulPLayerClass
 

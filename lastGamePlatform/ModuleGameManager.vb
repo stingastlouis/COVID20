@@ -7,6 +7,8 @@
 	Public enemiesSpeed As New List(Of Integer)
 	Public bullets As New List(Of PictureBox)
 	Public bullets2 As New List(Of PictureBox)
+	Public bulletsEnemy As New List(Of PictureBox)
+	Public bulletsEnemy2 As New List(Of PictureBox)
 
 	Public level As Integer = 0
 	Public universalScore As Integer
@@ -38,10 +40,10 @@
 	'-------------------------------
 
 	'multi player--------
-	Private p1Life As Label
-	Private p2Life As Label
-	Private p1Score As Label
-	Private p2Score As Label
+	Public p1Life As Label
+	Public p2Life As Label
+	Public p1Score As Label
+	Public p2Score As Label
 	Private p1Name As Label
 	Private p2Name As Label
 	Dim pic1 As New PictureBox
@@ -181,6 +183,7 @@
 			.Height = 50
 			.Location = New Point(650, 350)
 		End With
+
 		myForm.Controls.Add(pic1)
 		myForm.Controls.Add(pic2)
 		myForm.Controls.Add(pic3)
@@ -238,6 +241,13 @@
 		ModuleGameManager.bullets2.Add(bulletpb)
 		My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bulletSound.wav"), AudioPlayMode.Background)
 	End Sub
+	Public Sub GenerateNewBulletEnemy(boss)
+		Dim bullet As New ClassBullets(boss)
+		Dim bulletpb As PictureBox = bullet.generateBullet()
+		myForm.Controls.Add(bulletpb)
+		ModuleGameManager.bulletsEnemy.Add(bulletpb)
+		My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bulletSound.wav"), AudioPlayMode.Background)
+	End Sub
 
 	Public Sub RemovePictureBoxAndUpdateScore(picBox As PictureBox)
 		Console.WriteLine("removing the control " & picBox.Name.ToString)
@@ -273,7 +283,7 @@
 		p2Score.Text = "SCORE : " + CStr(multiplayerRegForm.p2.playerScore)
 
 		Console.WriteLine("Check If Win Or Lose")
-		CheckIfWinOrLose()
+		CheckIfWinOrLoseMulti()
 
 
 
@@ -603,7 +613,10 @@
 	End Sub
 
 	Private Sub Extbtn_Click(sender As Object, e As EventArgs)
+
 		startHere.ShowDialog()
+
+		myForm.Close()
 	End Sub
 
 	Private Sub MyForm_FormClosed(sender As Object, e As FormClosedEventArgs)
@@ -694,8 +707,10 @@
 		'-player move
 		If multiplayerRegForm.p1.playerMoveRight Then
 			player1.Location = New Point(player1.Location.X + multiplayerRegForm.p1.playerSpeed, player1.Location.Y)
+
 		ElseIf multiplayerRegForm.p1.playerMoveLeft Then
 			player1.Location = New Point(player1.Location.X - multiplayerRegForm.p1.playerSpeed, player1.Location.Y)
+			outofscreen()
 		End If
 
 		If multiplayerRegForm.p1.playerFall Then
@@ -705,6 +720,7 @@
 
 		If multiplayerRegForm.p2.playerMoveRight Then
 			player2.Location = New Point(player2.Location.X + multiplayerRegForm.p2.playerSpeed, player2.Location.Y)
+			outofscreen2()
 		ElseIf multiplayerRegForm.p2.playerMoveLeft Then
 			player2.Location = New Point(player2.Location.X - multiplayerRegForm.p2.playerSpeed, player2.Location.Y)
 		End If
@@ -721,7 +737,7 @@
 			ModuleIntersection.bulletIntersectStaticItem1()
 
 			'ModuleIntersection.BulletIntersectWithEnemy()
-
+			BulletIntersectWithEnenyBullet1()
 
 
 		End If
@@ -733,9 +749,20 @@
 			'Console.WriteLine("activate BulletMovement() and BulletIntersectWithEnemy()")
 			ModuleMovement.BulletMovement2()
 			ModuleIntersection.bulletIntersectStaticItem2()
+			BulletIntersectWithEnenyBullet2()
 			'ModuleIntersection.BulletIntersectWithEnemy()
 
 		End If
+		If ModuleGameManager.bulletsEnemy.Count > 0 Then
+			EnemyMovementtoright()
+			EnemyIntersectPlayer2()
+		End If
+		If ModuleGameManager.bulletsEnemy2.Count > 0 Then
+			EnemyMovementtoLeft()
+			EnemyIntersectPlayer1()
+
+		End If
+
 		If DateAndTime.Now >= tm Then
 			activateGame()
 		End If
@@ -762,22 +789,138 @@
 		pic1.Dispose()
 		pic2.Dispose()
 		pic3.Dispose()
-		With pic4
-			.Width = 50
-			.Height = 50
-			.Location = New Point(250, 350)
-		End With
-
-		With pic5
-			.Width = 50
-			.Height = 50
-			.Location = New Point(650, 350)
-		End With
-
+		ModuleIntersection.player1hitBoss()
+		ModuleIntersection.player2hitBoss()
 
 
 
 	End Sub
+
+	Public Sub CheckIfWinOrLoseMulti()
+
+		If multiplayerRegForm.p1.playerLife <= 0 Then
+			multiplayerRegForm.p1.playerLife = 0
+
+			myForm.Controls.Remove(player1)
+			player1.Visible = True
+			player1.Enabled = False
+		End If
+
+		If multiplayerRegForm.p2.playerLife <= 0 Then
+
+			multiplayerRegForm.p2.playerLife = 0
+
+			myForm.Controls.Remove(player2)
+			player2.Visible = True
+			player2.Enabled = False
+		End If
+
+		If progressBar.Value <= 0 Then
+			multiTimer1.Enabled = False
+			With winorlosetText
+				.Text = Space(10) + "You win!!"
+				.Visible = True
+				.Top = myForm.Height / 2 - 180
+				.Left = myForm.Width / 2 - 230
+				.Enabled = True
+				.BringToFront()
+				.AutoSize = True
+				.BackColor = Color.Empty
+				.Name = "winorlosetText"
+				.Font = New Font("Agency FB", 50)
+
+			End With
+			With restBtn
+				.Text = "Restart"
+				.Visible = True
+				.Enabled = True
+				.Top = myForm.Height / 2
+				.Left = myForm.Width / 2 - 150
+				.BringToFront()
+				.Font = New Font("Agency FB", 16)
+				.BackColor = Color.Empty
+				.AutoSize = True
+
+			End With
+			With exitBtn
+				.Text = "Main Menu"
+				.Visible = True
+				.Enabled = True
+				.Top = myForm.Height / 2 + 40
+				.Left = myForm.Width / 2 - 170
+				.Font = New Font("Agency FB", 16)
+				.BackColor = Color.Empty
+				.BringToFront()
+				.AutoSize = True
+
+			End With
+			boss.SendToBack()
+			myForm.Controls.Add(winorlosetText)
+			myForm.Controls.Add(restBtn)
+			myForm.Controls.Add(exitBtn)
+			AddHandler restBtn.Click, AddressOf RestartBtnMulti_Click
+			AddHandler exitBtn.Click, AddressOf Extbtn_Click
+		End If
+
+		If multiplayerRegForm.p1.playerLife <= 0 And multiplayerRegForm.p2.playerLife <= 0 Then
+			multiplayerRegForm.p1.playerLife = 0
+			multiplayerRegForm.p2.playerLife = 0
+			multiTimer1.Enabled = False
+
+			With winorlosetText
+				.Text = "You lose!!" + vbNewLine + "Try better next Time"
+				.Visible = True
+				.Top = myForm.Height / 2 - 50
+				.Left = myForm.Width / 2 - 15
+				.Enabled = True
+				.BringToFront()
+				.AutoSize = True
+				.BackColor = Color.Empty
+				.Name = "winorlosetText"
+				.Font = New Font("Agency FB", 16)
+				.CreateControl()
+			End With
+			With restBtn
+				.Text = "Restart"
+				.Visible = True
+				.Enabled = True
+				.Top = myForm.Height / 2
+				.Left = myForm.Width / 2
+				.BringToFront()
+				.Font = New Font("Agency FB", 16)
+				.BackColor = Color.Empty
+				.AutoSize = True
+				.CreateControl()
+			End With
+			With exitBtn
+				.Text = "Main Menu"
+				.Visible = True
+				.Enabled = True
+				.Top = myForm.Height / 2 + 40
+				.Left = myForm.Width / 2
+				.Font = New Font("Agency FB", 16)
+				.BackColor = Color.Empty
+				.BringToFront()
+				.AutoSize = True
+				.CreateControl()
+			End With
+			boss.SendToBack()
+			myForm.Controls.Add(winorlosetText)
+			myForm.Controls.Add(restBtn)
+			myForm.Controls.Add(exitBtn)
+			AddHandler restBtn.Click, AddressOf RestartBtnMulti_Click
+			AddHandler exitBtn.Click, AddressOf Extbtn_Click
+		End If
+
+	End Sub
+	Private Sub RestartBtnMulti_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+		Dim nplat As New multiplayerRegForm
+		nplat.Show()
+		myForm.Close()
+
+
+	End Sub
+
 	' end handlers function/sub
 
 

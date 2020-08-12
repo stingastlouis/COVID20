@@ -15,6 +15,14 @@ Public Class ClassAnimation
 		AddHandler picBox.Paint, AddressOf picBox_Paint
 		ImageAnimator.Animate(gIFAnim, AddressOf paintFrame)
 	End Sub
+	Public Sub New(picBox As PictureBox, name As String)
+
+		Me.picBox = picBox
+		Me.gIFAnim = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Enemies\Enemy" + "1Explosion.gif"))
+		Me.frames = gIFAnim.GetFrameCount(Imaging.FrameDimension.Time)
+		AddHandler picBox.Paint, AddressOf picBox_Paint
+		ImageAnimator.Animate(gIFAnim, AddressOf paintFrame)
+	End Sub
 
 	Private Sub paintFrame(ByVal sender As Object, ByVal e As EventArgs)
 		If Me.frames > 0 Then Me.picBox.Invalidate() Else ImageAnimator.StopAnimate(gIFAnim, AddressOf StopAnim)

@@ -200,24 +200,36 @@
 		If move1 Then
 			boss.Location = New Point(boss.Location.X - 5, boss.Location.Y)
 			If boss.Bounds.IntersectsWith(wall1.Bounds) Then
-				throwSomevirus(boss)
+				throwSomevirustoRight(boss)
 				move1 = False
 				move2 = True
 			End If
 		ElseIf move2 Then
 			boss.Location = New Point(boss.Location.X + 10, boss.Location.Y)
 			If boss.Bounds.IntersectsWith(wall2.Bounds) Then
+				throwSomevirustoLeft(boss)
 				move2 = False
 				move1 = True
 			End If
 		End If
 
 	End Sub
-	Private Sub throwSomevirus(ByRef boss As PictureBox)
-		Dim ene As New ClassEnemies(boss.Left, boss.Height / 2, "enemy", 5, "ground.png")
+	Private Sub throwSomevirustoRight(ByRef boss As PictureBox)
+		Dim gen As New Random
+		Dim ran As Integer = gen.Next((boss.Height + boss.Top / 2 - 50), (boss.Height + boss.Top / 2 + 50))
+		Dim ene As New ClassEnemies(boss.Left, ran, "enemy", 5, "ground.png")
 		Dim enemy As PictureBox = ene.generateEnemy
 		myForm.Controls.Add(enemy)
-		ModuleGameManager.bullets.Add(enemy)
+		ModuleGameManager.bulletsEnemy.Add(enemy)
+
+	End Sub
+	Private Sub throwSomevirustoLeft(ByRef boss As PictureBox)
+		Dim gen As New Random
+		Dim ran As Integer = gen.Next((boss.Height + boss.Top / 2 - 50), (boss.Height + boss.Top / 2 + 50))
+		Dim ene As New ClassEnemies(boss.Left + boss.Width + 25, ran, "enemy", 5, "ground.png")
+		Dim enemy2 As PictureBox = ene.generateEnemy
+		myForm.Controls.Add(enemy2)
+		ModuleGameManager.bulletsEnemy2.Add(enemy2)
 
 	End Sub
 
@@ -398,6 +410,29 @@
 		Next
 	End Sub
 
+	Public Sub EnemyMovementtoright()
+		For Each bouletas In ModuleGameManager.bulletsEnemy
+			bouletas.Location = New Point(bouletas.Location.X + bulletMoveSpeed, bouletas.Location.Y) 'move the bullets
+			If bouletas.Location.X > ModuleGameManager.myForm.Width Then 'delete the bullets that goes after the right door
+				ModuleGameManager.bulletsEnemy.Remove(bouletas) 'remove fro bullets<>
+				ModuleGameManager.allPictureBoxes.Remove(bouletas)
+				myForm.Controls.Remove(bouletas)
+				Exit For 'break as current <> has been modified
+			End If
+		Next
+	End Sub
 
+
+	Public Sub EnemyMovementtoLeft()
+		For Each bouletas In ModuleGameManager.bulletsEnemy2
+			bouletas.Location = New Point(bouletas.Location.X - bulletMoveSpeed, bouletas.Location.Y) 'move the bullets
+			If bouletas.Location.X < 0 Then 'delete the bullets that goes after the right door
+				ModuleGameManager.bulletsEnemy2.Remove(bouletas) 'remove fro bullets<>
+				ModuleGameManager.allPictureBoxes.Remove(bouletas)
+				myForm.Controls.Remove(bouletas)
+				Exit For 'break as current <> has been modified
+			End If
+		Next
+	End Sub
 
 End Module

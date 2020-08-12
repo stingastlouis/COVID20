@@ -36,6 +36,7 @@ Module ModuleIntersection
 					Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
 					'ClassPlayer.score += ClassItems.scoreBoss
 					multiplayerRegForm.p1.playerScore += ClassItems.scoreBoss
+					ModuleGameManager.p1Score.Text = "score " + CStr(multiplayerRegForm.p1.playerScore)
 				End If
 				If pro.Value <= 0 Then
 
@@ -62,6 +63,7 @@ Module ModuleIntersection
 					Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
 					'ClassPlayer.score += ClassItems.scoreBoss
 					multiplayerRegForm.p2.playerScore += ClassItems.scoreBoss
+					ModuleGameManager.p2Score.Text = "score " + CStr(multiplayerRegForm.p2.playerScore)
 				End If
 				If pro.Value <= 0 Then
 
@@ -89,6 +91,9 @@ Module ModuleIntersection
 				'ClassPlayer.score += ClassItems.scoreBoss
 				'multiplayerRegForm.p2.playerScore += 5
 				If multiplayerRegForm.p2.playerLife > 0 Then
+
+					player2.Location = New Point(player2.Location.X + 10, player2.Location.Y)
+
 					multiplayerRegForm.p2.playerLife -= 1
 					Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
 
@@ -119,6 +124,9 @@ Module ModuleIntersection
 				'ClassPlayer.score += ClassItems.scoreBoss
 				'multiplayerRegForm.p2.playerScore += ClassItems.scoreBoss
 				If multiplayerRegForm.p1.playerLife > 0 Then
+					player1.Location = New Point(player1.Location.X - 10, player1.Location.Y)
+
+
 					multiplayerRegForm.p1.playerLife -= 1
 					Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
 					'ClassPlayer.score += ClassItems.scoreBoss
@@ -129,8 +137,6 @@ Module ModuleIntersection
 				If multiplayerRegForm.p1.playerLife <= 0 Then
 
 					Console.WriteLine("oo boss dead")
-
-
 					ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(player)
 				End If
 				bullets.Remove(bullet)
@@ -191,10 +197,19 @@ Module ModuleIntersection
 					ModuleGameManager.removeItemPictureMBoxMulti(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
 				End If
-				If activePictureBox.Name.Contains("Player2") Then
-
-					multiplayerRegForm.p1.playerScore -= 30
+				If activePictureBox.Name.Contains("player2") Then
+					player1.Location = New Point(player1.Location.X - 10, player1.Location.Y)
+					player2.Location = New Point(player2.Location.X + 10, player2.Location.Y)
+					multiplayerRegForm.p1.playerScore -= 5
 					multiplayerRegForm.p1.playerLife -= 1
+					multiplayerRegForm.p2.playerScore -= 5
+					multiplayerRegForm.p2.playerLife -= 1
+					ModuleGameManager.p1Score.Text = "SCORE: " + CStr(multiplayerRegForm.p1.playerScore)
+					ModuleGameManager.p2Score.Text = "SCORE: " + CStr(multiplayerRegForm.p2.playerScore)
+					ModuleGameManager.p1Life.Text = "LIFE: " + CStr(multiplayerRegForm.p1.playerLife)
+					ModuleGameManager.p2Life.Text = "LIFE: " + CStr(multiplayerRegForm.p2.playerLife)
+
+
 					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
 				End If
 			End If
@@ -255,11 +270,6 @@ Module ModuleIntersection
 				End If
 				If activePictureBox.Name.Contains("Player1") Then
 
-					multiplayerRegForm.p1.playerScore -= 2
-					multiplayerRegForm.p2.playerScore -= 2
-					multiplayerRegForm.p1.playerLife -= 1
-					multiplayerRegForm.p2.playerLife -= 1
-
 					'p1Life.Text = "LIFE :" + CStr(multiplayerRegForm.p1.playerLife)
 					'p2Life.Text = "LIFE :" + CStr(multiplayerRegForm.p2.playerLife)
 					'p1Score.Text = "SCORE : " + CStr(multiplayerRegForm.p1.playerScore)
@@ -295,6 +305,15 @@ Module ModuleIntersection
 			.Location = enemyLocation
 		}
 		Dim explosion As New ClassAnimation(pb)
+		myForm.Controls.Add(pb)
+	End Sub
+	Private Sub generateExplosionmulti(enemySize As Size, enemyLocation As Point)
+		Dim pb As New PictureBox With {
+			.Size = enemySize,
+			.Name = "EneExplosion",
+			.Location = enemyLocation
+		}
+		Dim explosion As New ClassAnimation(pb, "gotyou")
 		myForm.Controls.Add(pb)
 	End Sub
 
@@ -379,5 +398,122 @@ Module ModuleIntersection
 
 
 
+	End Sub
+	Public Sub BulletIntersectWithEnenyBullet1()
+		For Each bullet In ModuleGameManager.bullets
+			For Each enemy In ModuleGameManager.bulletsEnemy2
+				If enemy.Bounds.IntersectsWith(bullet.Bounds) And enemy.Enabled Then 'if bullet intersect with enemies 
+					Dim enemyLocation As Point = enemy.Location
+					Dim enemySize As Size = enemy.Size
+					Console.WriteLine("bullet intersect enemy")
+					multiplayerRegForm.p1.playerScore += ClassItems.scoreEnemy
+
+					ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(bullet)
+					ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(enemy)
+					generateExplosionmulti(enemySize, enemyLocation)
+
+					'Exit For 'break as current <> has been modified
+				End If
+				Exit For
+			Next
+			'Exit For 'break as current <> has been modified
+			Exit For
+		Next
+	End Sub
+	Public Sub BulletIntersectWithEnenyBullet2()
+		For Each bullet In ModuleGameManager.bullets2
+			For Each enemy In ModuleGameManager.bulletsEnemy
+				If enemy.Bounds.IntersectsWith(bullet.Bounds) And enemy.Enabled Then 'if bullet intersect with enemies 
+					Dim enemyLocation As Point = enemy.Location
+					Dim enemySize As Size = enemy.Size
+					Console.WriteLine("bullet intersect enemy")
+					multiplayerRegForm.p1.playerScore += ClassItems.scoreEnemy
+
+					ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(bullet)
+					ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(enemy)
+					generateExplosionmulti(enemySize, enemyLocation)
+
+					'Exit For 'break as current <> has been modified
+				End If
+				Exit For
+			Next
+			'Exit For 'break as current <> has been modified
+			Exit For
+		Next
+	End Sub
+	Public Sub EnemyIntersectPlayer2()
+
+		For Each enemy In ModuleGameManager.bulletsEnemy
+			If enemy.Bounds.IntersectsWith(player2.Bounds) And enemy.Enabled Then 'if bullet intersect with enemies 
+
+				Console.WriteLine("bullet intersect enemy")
+				multiplayerRegForm.p2.playerLife -= 1
+
+
+				ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(enemy)
+
+				'Exit For 'break as current <> has been modified
+			End If
+			Exit For
+		Next
+		'Exit For 'break as current <> has been modified
+
+	End Sub
+	Public Sub EnemyIntersectPlayer1()
+
+		For Each enemy In ModuleGameManager.bulletsEnemy2
+			If enemy.Bounds.IntersectsWith(player1.Bounds) And enemy.Enabled Then 'if bullet intersect with enemies 
+
+				Console.WriteLine("bullet intersect enemy")
+				multiplayerRegForm.p1.playerLife -= 1
+
+
+				ModuleGameManager.RemovePictureBoxAndUpdateScoremulti(enemy)
+
+				'Exit For 'break as current <> has been modified
+			End If
+			Exit For
+		Next
+		'Exit For 'break as current <> has been modified
+
+	End Sub
+
+
+	Public Sub player1hitBoss()
+
+
+		If boss.Bounds.IntersectsWith(player1.Bounds) And boss.Enabled Then
+
+
+			multiplayerRegForm.p1.playerLife -= 1
+
+			ModuleGameManager.p1Life.Text = "LIFE: " + CStr(multiplayerRegForm.p1.playerLife)
+			ModuleGameManager.CheckIfWinOrLoseMulti()
+		End If
+
+	End Sub
+	Public Sub player2hitBoss()
+
+
+		If boss.Bounds.IntersectsWith(player2.Bounds) And boss.Enabled Then
+
+
+			multiplayerRegForm.p2.playerLife -= 1
+
+			ModuleGameManager.p2Life.Text = "LIFE: " + CStr(multiplayerRegForm.p2.playerLife)
+			ModuleGameManager.CheckIfWinOrLoseMulti()
+		End If
+
+	End Sub
+
+	Public Sub outofscreen()
+		If player1.Left <= 0 Then
+			player1.Location = New Point(player1.Location.X + 10, player1.Location.Y)
+		End If
+	End Sub
+	Public Sub outofscreen2()
+		If player2.Left + player2.Width >= myForm.Width Then
+			player2.Location = New Point(player2.Location.X - 10, player2.Location.Y)
+		End If
 	End Sub
 End Module
