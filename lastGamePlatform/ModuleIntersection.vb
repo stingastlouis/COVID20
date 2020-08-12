@@ -216,43 +216,55 @@ Module ModuleIntersection
 					Exit For
 				End If
 				If activePictureBox.Name.Contains("life") Then
-					ClassPlayer.item += 1
-					ClassPlayer.life += 1 'updated
-					ClassPlayer.score += ClassItems.scoreLife
-					Console.WriteLine("new life")
-					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
+
+					multiplayerRegForm.p2.playerLife += 1
+					multiplayerRegForm.p2.playerScore += ClassItems.scoreLife
+
+
+					ModuleGameManager.removeItemPictureMBoxMulti(activePictureBox)
 					'Module1.removePictureBoxandUpdateScore(activePictureBox, Me, pScore, pLife, pItem)
 					Exit For 'exit the for loop as picturebox name contains "life" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("gun") Then
 					If activePictureBox.Name.Contains("supergun") Then
-						ClassPlayer.score += ClassItems.scoreSuperGun
+						multiplayerRegForm.p2.playerScore += ClassItems.scoreSuperGun
 					Else
-						ClassPlayer.score += ClassItems.scoreGun
+						multiplayerRegForm.p2.playerScore += ClassItems.scoreGun
 					End If
-					ClassPlayer.item += 1
-					Console.WriteLine("new gun")
-					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
+
+
+
+					multiplayerRegForm.p2.playerScore += ClassItems.scoreGun
+
+					ModuleGameManager.removeItemPictureMBoxMulti(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("adn") Then
-					ClassPlayer.item += 1
-					ClassPlayer.score += ClassItems.scoreAdn
+
+					multiplayerRegForm.p2.playerScore += ClassItems.scoreAdn
 					Console.WriteLine("new adn")
-					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
+					ModuleGameManager.removeItemPictureMBoxMulti(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "adn" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("coin") Then
-					ClassPlayer.item += 1
-					ClassPlayer.score += ClassItems.scoreCoin
+
+
+					multiplayerRegForm.p2.playerScore += ClassItems.scoreCoin
 					Console.WriteLine("new coin")
-					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
+					ModuleGameManager.removeItemPictureMBoxMulti(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("Player1") Then
 
-					multiplayerRegForm.p2.playerScore -= 30
+					multiplayerRegForm.p1.playerScore -= 2
+					multiplayerRegForm.p2.playerScore -= 2
+					multiplayerRegForm.p1.playerLife -= 1
 					multiplayerRegForm.p2.playerLife -= 1
+
+					'p1Life.Text = "LIFE :" + CStr(multiplayerRegForm.p1.playerLife)
+					'p2Life.Text = "LIFE :" + CStr(multiplayerRegForm.p2.playerLife)
+					'p1Score.Text = "SCORE : " + CStr(multiplayerRegForm.p1.playerScore)
+					'p2Score.Text = "SCORE : " + CStr(multiplayerRegForm.p2.playerScore)
 					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
 				End If
 			End If

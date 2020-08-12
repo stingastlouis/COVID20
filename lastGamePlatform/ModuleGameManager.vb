@@ -44,7 +44,7 @@
 	Private p2Score As Label
 	Private p1Name As Label
 	Private p2Name As Label
-
+	Dim pic1 As New PictureBox
 	'---------------------
 
 	'------------delete unnessesary
@@ -160,7 +160,15 @@
 		LabelBossLife.Enabled = False
 
 		player1 = CreatePicBoxesMulti(87, 62, "player1", 50, 235, multiplayerRegForm.p1.playerImage) 'get image from class selected from reg form 
-		player2 = CreatePicBoxesMulti(87, 62, "player2", 800, 235, multiplayerRegForm.p2.playerImage) 'get image from class selected from reg form 
+		player2 = CreatePicBoxesMulti(87, 62, "player2", 800, 235, multiplayerRegForm.p2.playerImage)
+
+		With pic1
+			.Width = 50
+			.Height = 50
+			.Location = New Point(650, 190)
+		End With
+		myForm.Controls.Add(pic1)
+		'get image from class selected from reg form 
 		p1Life = CreateLabel(130, 10, "p1Life", "LIFE :" + CStr(multiplayerRegForm.p1.playerLife))
 		p2Life = CreateLabel(700, 10, "p2Life", "LIFE :" + CStr(multiplayerRegForm.p2.playerLife))
 		p1Score = CreateLabel(230, 10, "p1score", "SCORE :" + CStr(multiplayerRegForm.p1.playerScore))
@@ -253,6 +261,29 @@
 
 
 
+	End Sub
+	Dim random As New Random
+	Public Sub removeItemPictureMBoxMulti(picbox As PictureBox)
+		Dim int As Integer = random.Next(160, 600)
+		Console.WriteLine("removing the control " & picbox.Name.ToString)
+		'Dim pic As New PictureBox
+		With picbox
+			.Height = 50
+			.Width = 50
+			.Location = New Point(int, 190)
+		End With
+		pic1 = picbox
+
+
+		Console.WriteLine("update lables")
+
+		p1Life.Text = "LIFE :" + CStr(multiplayerRegForm.p1.playerLife)
+		p2Life.Text = "LIFE :" + CStr(multiplayerRegForm.p2.playerLife)
+		p1Score.Text = "SCORE : " + CStr(multiplayerRegForm.p1.playerScore)
+		p2Score.Text = "SCORE : " + CStr(multiplayerRegForm.p2.playerScore)
+
+		Console.WriteLine("Check If Win Or Lose")
+		CheckIfWinOrLose()
 	End Sub
 
 	Private Sub StartCountdown()
