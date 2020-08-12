@@ -11,7 +11,8 @@
     'testing
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles ButtonMultiPlayerPlay.Click
         Me.Hide()
-        'multiplayerRegForm.Show()
+        Dim np As New multiplayerRegForm
+        np.Show()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles ButtonMultiPlayerScore.Click

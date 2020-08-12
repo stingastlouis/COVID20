@@ -521,7 +521,7 @@
 		AddHandler multiTimer1.Tick, AddressOf FastestTimerMulti_Tick '===============
 		AddHandler myForm.KeyUp, AddressOf ModuleMovement.myForm_KeyUpMulti
 		AddHandler myForm.KeyDown, AddressOf ModuleMovement.myFormMulti_KeyDown
-		AddHandler player1.LocationChanged, AddressOf ModuleMovement.player1_LocationChanged
+		AddHandler player1.LocationChanged, AddressOf ModuleMovement.player1mul_LocationChanged
 		AddHandler player2.LocationChanged, AddressOf ModuleMovement.player2_LocationChanged
 		AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
 	End Sub

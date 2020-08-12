@@ -148,6 +148,62 @@ Module ModuleIntersection
 	End Sub
 
 
+	Public Sub playerIntersectWithStaticPictureBoxesSingle()
+		ClassPlayer.playerIsFalling = True
+
+
+		For Each activePictureBox As PictureBox In ModuleGameManager.allPictureBoxes 'list all controls in the form
+			If (activePictureBox IsNot ModuleGameManager.player1 AndAlso player1.Bounds.IntersectsWith(activePictureBox.Bounds)) Then 'if player picturebox intersects with other pictureboxes
+				If activePictureBox.Name.Contains("ground") OrElse activePictureBox.Name.Contains("wall") Then
+					If player1.Top > activePictureBox.Top - player1.Height Then 'to stay on top of ground and wall
+						player1.Location = New Point(player1.Location.X, activePictureBox.Top - player1.Height)
+						ClassPlayer.playerIsFalling = False
+
+
+					End If
+
+					Exit For
+				End If
+				If activePictureBox.Name.Contains("life") Then
+
+					ClassPlayer.score += ClassItems.scoreLife
+					ClassPlayer.life += 1
+
+					RemovePictureBoxAndUpdateScore(activePictureBox)
+
+
+					'Module1.removePictureBoxandUpdateScore(activePictureBox, Me, pScore, pLife, pItem)
+					Exit For 'exit the for loop as picturebox name contains "life" help in using less cpu power
+				End If
+				If activePictureBox.Name.Contains("gun") Then
+					If activePictureBox.Name.Contains("supergun") Then
+						ClassPlayer.score += ClassItems.scoreSuperGun
+					Else
+						ClassPlayer.score += ClassItems.scoreGun
+					End If
+
+					RemovePictureBoxAndUpdateScore(activePictureBox)
+					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
+				End If
+				If activePictureBox.Name.Contains("adn") Then
+					ClassPlayer.item += 1
+					ClassPlayer.score += ClassItems.scoreAdn
+					Console.WriteLine("new adn")
+					RemovePictureBoxAndUpdateScore(activePictureBox)
+					Exit For 'exit the for loop as picturebox name contains "adn" help in using less cpu power
+				End If
+				If activePictureBox.Name.Contains("coin") Then
+
+					ClassPlayer.score += ClassItems.scoreCoin
+					Console.WriteLine("new coin")
+					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
+					Exit For 'exit the for loop as picturebox name contains "coin" help in using less cpu power
+				End If
+
+			End If
+		Next
+	End Sub
+
 	Public Sub playerIntersectWithStaticPictureBoxes()
 		ClassPlayer.playerIsFalling = True
 		multiplayerRegForm.p1.playerFall = True '=============================

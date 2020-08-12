@@ -13,6 +13,32 @@
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
 	Public Sub player1_LocationChanged(sender As Object, e As EventArgs) ' Handles player1.LocationChanged
+		ModuleIntersection.playerIntersectWithStaticPictureBoxesSingle()
+
+		'If (player1.Left >= supergun0.Left) AndAlso (boss.Visible = False) Then
+		'	LabelBossLife.Visible = True
+		'	LabelBossLife.Enabled = True
+		'	ProgressBar1.Enabled = True
+		'	ProgressBar1.Visible = True
+
+		'	ModuleGameManager.boss.BackColor = Color.Empty
+		'	Select Case ClassMyPublicShared.level
+		'		Case 1
+		'			ModuleGameManager.boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bosses\boss1.png"))
+		'			Exit Select
+		'		Case 2
+		'			ModuleGameManager.boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bosses\boss2.png"))
+		'			Exit Select
+		'		Case 3
+		'			ModuleGameManager.boss.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bosses\boss3.png"))
+		'			Exit Select
+		'	End Select
+		'	ModuleGameManager.boss.BringToFront()
+		'	ModuleGameManager.boss.Visible = True
+		'End If
+	End Sub
+	Public Sub player1mul_LocationChanged(sender As Object, e As EventArgs) ' Handles player1.LocationChanged
+
 		ModuleIntersection.playerIntersectWithStaticPictureBoxes()
 		'If (player1.Left >= supergun0.Left) AndAlso (boss.Visible = False) Then
 		'	LabelBossLife.Visible = True
