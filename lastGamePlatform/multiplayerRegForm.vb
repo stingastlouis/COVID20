@@ -37,7 +37,7 @@
     End Sub
 
     Private Sub multiplayerRegForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        multiPlayerPLayForm.Close()
+
         player1Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))
         p1.playerImage = player1Box.Image
         bool1 = True
@@ -45,7 +45,7 @@
         player2Box.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov2.png"))
         p2.playerImage = player2Box.Image
         bool2 = True
-
+        multiPlayerPLayForm.Close()
     End Sub
 
     Private Sub submit_Click(sender As Object, e As EventArgs) Handles submit.Click

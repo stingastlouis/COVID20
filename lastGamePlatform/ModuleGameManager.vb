@@ -142,7 +142,7 @@
 		multiplayerRegForm.p1.playgame = True
 		multiplayerRegForm.p2.playgame = True
 
-		tm = DateAndTime.Now.AddMinutes(1)
+		tm = DateAndTime.Now.AddSeconds(10)
 		myForm = currentForm
 		myForm.Width = 1000
 		myForm.Height = 520
@@ -167,8 +167,8 @@
 		LabelBossLife.Visible = False
 		LabelBossLife.Enabled = False
 
-		player1 = CreatePicBoxesMulti(87, 62, "player1", 50, 235, multiplayerRegForm.p1.playerImage) 'get image from class selected from reg form 
-		player2 = CreatePicBoxesMulti(87, 62, "player2", 800, 235, multiplayerRegForm.p2.playerImage)
+		player1 = CreatePicBoxesMulti(87, 62, "player1", 50, 235, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))) 'get image from class selected from reg form 
+		player2 = CreatePicBoxesMulti(87, 62, "player2", 800, 235, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov2.png")))
 
 		With pic1
 			.Width = 50
@@ -189,6 +189,7 @@
 		myForm.Controls.Add(pic1)
 		myForm.Controls.Add(pic2)
 		myForm.Controls.Add(pic3)
+		player1.BringToFront()
 		'get image from class selected from reg form 
 		p1Life = CreateLabel(130, 10, "p1Life", "LIFE :" + CStr(multiplayerRegForm.p1.playerLife))
 		p2Life = CreateLabel(700, 10, "p2Life", "LIFE :" + CStr(multiplayerRegForm.p2.playerLife))
@@ -568,8 +569,8 @@
 		myForm.Controls.Add(picbox)
 		Return picbox
 	End Function
-	Private Function CreatePicBoxesMulti(width, height, name, x, y, path)
-		Dim pb As New ClassPictureBox(width, height, name, x, y, path)
+	Private Function CreatePicBoxesMulti(width, height, name, x, y, imag)
+		Dim pb As New ClassPictureBox(width, height, name, x, y, imag)
 		Dim picbox As PictureBox = pb.showPictureBoxNoAdd()
 		myForm.Controls.Add(picbox)
 		Return picbox

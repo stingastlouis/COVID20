@@ -15,11 +15,8 @@
     Private multiPlayerimg As Image
 
     Sub New()
+    End Sub
 
-    End Sub
-    Sub New(name As String)
-        multiplayername = name
-    End Sub
     Public Property playerFall As Boolean
         Set(value As Boolean)
             multiplayerFalling = value
