@@ -46,17 +46,11 @@
 	Public p2Score As Label
 	Private p1Name As Label
 	Private p2Name As Label
-	Dim pic1 As New PictureBox
-	Dim pic2 As New PictureBox
-	Dim pic3 As New PictureBox
-	Dim pic4 As New PictureBox
-	Dim pic5 As New PictureBox
-	'---------------------
+
+
 
 	'------------delete unnessesary
-	Private restBtn As New Button
-	Private winorlosetText As New Label
-	Private exitBtn As New Button
+
 	Private countdownLabel As New Label
 	Private ready_boss As Boolean = False
 	'------------
@@ -166,24 +160,32 @@
 		LabelBossLife = CreateLabel(360, 13, "lblBoss", "Boss Life: ")
 		LabelBossLife.Visible = False
 		LabelBossLife.Enabled = False
-
+		multiplayerRegForm.p1.playerLife = 3
+		multiplayerRegForm.p1.playerScore = 0
+		multiplayerRegForm.p2.playerLife = 3
+		multiplayerRegForm.p2.playerScore = 0
 		player1 = CreatePicBoxesMulti(87, 62, "player1", 50, 235, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))) 'get image from class selected from reg form 
 		player2 = CreatePicBoxesMulti(87, 62, "player2", 800, 235, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov2.png")))
-
+		Dim pic1 As New PictureBox
+		Dim pic2 As New PictureBox
+		Dim pic3 As New PictureBox
 		With pic1
 			.Width = 50
 			.Height = 50
 			.Location = New Point(300, 250)
+			.CreateControl()
 		End With
 		With pic2
 			.Width = 50
 			.Height = 50
 			.Location = New Point(450, 200)
+			.CreateControl()
 		End With
 		With pic3
 			.Width = 50
 			.Height = 50
 			.Location = New Point(650, 350)
+			.CreateControl()
 		End With
 
 		myForm.Controls.Add(pic1)
@@ -395,6 +397,10 @@
 	End Sub
 
 	Private Sub CheckIfWinOrLose()
+		Dim restBtn As New Button
+		Dim winorlosetText As New Label
+		Dim exitBtn As New Button
+
 		If progressBar.Value <= 0 Then
 			myTimer.Enabled = False
 			With winorlosetText
@@ -618,7 +624,7 @@
 	Private Sub Extbtn_Click(sender As Object, e As EventArgs)
 
 		startHere.Show()
-
+		startHere.SendToBack()
 		myForm.Close()
 	End Sub
 
@@ -786,12 +792,7 @@
 		ModuleIntersection.bulletIntersectsWithBossMultiP2(progressBar, bullets2, boss)
 		'ModuleMovement.MakeBossMove(player1, boss, ground1, door2, 2)
 		ModuleMovement.makemultibossMove(wall1, wall2, boss)
-		myForm.Controls.Remove(pic1)
-		myForm.Controls.Remove(pic2)
-		myForm.Controls.Remove(pic3)
-		pic1.Dispose()
-		pic2.Dispose()
-		pic3.Dispose()
+
 		ModuleIntersection.player1hitBoss()
 		ModuleIntersection.player2hitBoss()
 
@@ -800,6 +801,9 @@
 	End Sub
 
 	Public Sub CheckIfWinOrLoseMulti()
+		Dim restBtn As New Button
+		Dim winorlosetText As New Label
+		Dim exitBtn As New Button
 
 		If multiplayerRegForm.p1.playerLife <= 0 Then
 			multiplayerRegForm.p1.playerLife = 0
@@ -929,9 +933,18 @@
 
 	End Sub
 	Private Sub RestartBtnMulti_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-		'Dim nplat As New multiplayerRegForm
-		myForm.Hide()
-		'nplat.Show()
+		ModuleGameManager.enemiesSpeed.Clear()
+		ModuleGameManager.bullets.Clear()
+		ModuleGameManager.bullets2.Clear()
+		ModuleGameManager.bulletsEnemy.Clear()
+		ModuleGameManager.bulletsEnemy2.Clear()
+		Dim battle As New multiplayerRegForm()
+		battle.Show()
+
+		battle.BringToFront()
+		startHere.SendToBack()
+		startHere.Hide()
+		myForm.Dispose()
 
 
 

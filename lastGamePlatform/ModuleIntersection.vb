@@ -37,7 +37,7 @@ Module ModuleIntersection
 					Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
 					'ClassPlayer.score += ClassItems.scoreBoss
 					multiplayerRegForm.p1.playerScore += ClassItems.scoreBoss
-					ModuleGameManager.p1Score.Text = "score " + CStr(multiplayerRegForm.p1.playerScore)
+					ModuleGameManager.p1Score.Text = "SCORE " + CStr(multiplayerRegForm.p1.playerScore)
 				End If
 				If pro.Value <= 0 Then
 
@@ -64,7 +64,7 @@ Module ModuleIntersection
 					Console.WriteLine("boooooooommmmmmmm bullet touch with boss")
 					'ClassPlayer.score += ClassItems.scoreBoss
 					multiplayerRegForm.p2.playerScore += ClassItems.scoreBoss
-					ModuleGameManager.p2Score.Text = "score " + CStr(multiplayerRegForm.p2.playerScore)
+					ModuleGameManager.p2Score.Text = "SCORE " + CStr(multiplayerRegForm.p2.playerScore)
 				End If
 				If pro.Value <= 0 Then
 
