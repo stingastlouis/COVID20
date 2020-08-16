@@ -74,7 +74,7 @@ Partial Class scoreforSingle
         'lblGreater
         '
         Me.lblGreater.AutoSize = True
-        Me.lblGreater.Location = New System.Drawing.Point(90, 131)
+        Me.lblGreater.Location = New System.Drawing.Point(2, 50)
         Me.lblGreater.Name = "lblGreater"
         Me.lblGreater.Size = New System.Drawing.Size(51, 17)
         Me.lblGreater.TabIndex = 5
@@ -83,7 +83,7 @@ Partial Class scoreforSingle
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(162, 348)
+        Me.Label1.Location = New System.Drawing.Point(235, 298)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 17)
         Me.Label1.TabIndex = 6
@@ -93,13 +93,14 @@ Partial Class scoreforSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(746, 450)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(684, 324)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblGreater)
         Me.Controls.Add(Me.you)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "scoreforSingle"
-        Me.Text = "Score Form"
+        Me.Text = "Your score"
         CType(Me.Database1DataSet2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Single_TableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

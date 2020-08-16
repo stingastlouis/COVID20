@@ -35,9 +35,9 @@ Public Class scoreforSingle
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Label1.Top -= 5
+        Label1.Top -= 2
         If Label1.Top + Label1.Height <= 0 Then
-            Label1.Top = 518
+            Label1.Top = Me.Height
         End If
     End Sub
     Private Sub Single_TableBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
