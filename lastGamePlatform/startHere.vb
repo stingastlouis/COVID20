@@ -17,13 +17,16 @@
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles ButtonMultiPlayerScore.Click
         Me.Hide()
+        Dim score As New MultiScorep
+        score.Show()
         ' MultiScorep.Show()
 
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles ButtonSinglePlayerScore.Click
         Me.Hide()
-        'scoreforSingle.Show()
+
+        scoreforSingle.Show()
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles ButtonBonus.Click

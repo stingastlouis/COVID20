@@ -15,7 +15,8 @@
 	Public allPictureBoxes As New List(Of PictureBox)
 	Public waitBeforeFight As Integer = 3 'number of second to wait before fight
 	Dim tm As DateTime
-
+	Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Database1.mdf
+                    ;Integrated Security=True"
 
 
 	'----single player--------------------------------------
@@ -131,8 +132,34 @@
 
 		Console.WriteLine("form fully set!!!")
 	End Sub
-
+	Dim id_of_match As Integer
 	Public Sub load_multiPlayer(currentForm As Form)
+		Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Database1.mdf
+                    ;Integrated Security=True"
+		Dim conn As New SqlClient.SqlConnection(str)
+		Dim cmd As New SqlClient.SqlCommand
+		cmd.CommandText = "Select Id, player1_Name,player2_Name from User_Table where Id=(SELECT max(Id) FROM User_Table) "
+		cmd.Connection = conn
+
+
+		conn.Open()
+		Dim lrd As SqlClient.SqlDataReader = cmd.ExecuteReader()
+
+		If lrd.HasRows Then
+			While lrd.Read
+
+				id_of_match = lrd("Id")
+				multiplayerRegForm.p1.playerName = lrd("player1_Name").ToString()
+				multiplayerRegForm.p2.playerName = lrd("player2_Name").ToString()
+			End While
+		End If
+
+		conn.Close()
+
+
+
+		'multiplayerRegForm.p1.playerName = multiplayerRegForm.pp1
+		'multiplayerRegForm.p2.playerName = multiplayerRegForm.pp2
 		multiplayerRegForm.p1.playgame = True
 		multiplayerRegForm.p2.playgame = True
 
@@ -402,6 +429,7 @@
 		Dim exitBtn As New Button
 
 		If progressBar.Value <= 0 Then
+			getScoreforSinglePlayer()
 			myTimer.Enabled = False
 			With winorlosetText
 				.Text = Space(10) + "You win!!" + vbNewLine + "Ready For Next Level?"
@@ -449,6 +477,7 @@
 		End If
 
 		If ClassPlayer.life <= 0 Then
+			getScoreforSinglePlayer()
 			ClassPlayer.life = 0
 			myTimer.Enabled = False
 
@@ -631,6 +660,7 @@
 	Private Sub MyForm_FormClosed(sender As Object, e As FormClosedEventArgs)
 		myForm.Dispose()
 		startHere.Show()
+		startHere.SendToBack()
 		Console.WriteLine("close the form")
 	End Sub
 
@@ -805,6 +835,12 @@
 		Dim winorlosetText As New Label
 		Dim exitBtn As New Button
 
+		Dim connection As New SqlClient.SqlConnection(str)
+		Dim command As New SqlClient.SqlCommand
+
+
+
+
 		If multiplayerRegForm.p1.playerLife <= 0 Then
 			multiplayerRegForm.p1.playerLife = 0
 			multiplayerRegForm.p1.playgame = False
@@ -831,7 +867,14 @@
 		End If
 
 		If progressBar.Value <= 0 Then
-
+			command.CommandText = "UPDATE User_Table SET p1score=@score1,p2score=@score2 WHERE Id=@session_Id "
+			command.Parameters.AddWithValue("@session_Id", id_of_match)
+			command.Parameters.AddWithValue("@score1", multiplayerRegForm.p1.playerScore)
+			command.Parameters.AddWithValue("@score2", multiplayerRegForm.p2.playerScore)
+			command.Connection = connection
+			connection.Open()
+			command.ExecuteNonQuery()
+			connection.Close()
 
 			multiTimer1.Enabled = False
 			With winorlosetText
@@ -880,6 +923,14 @@
 		End If
 
 		If multiplayerRegForm.p1.playerLife <= 0 And multiplayerRegForm.p2.playerLife <= 0 Then
+			command.CommandText = "UPDATE User_Table SET p1score=@score1,p2score=@score2 WHERE Id=@session_Id "
+			command.Parameters.AddWithValue("@session_Id", id_of_match)
+			command.Parameters.AddWithValue("@score1", multiplayerRegForm.p1.playerScore)
+			command.Parameters.AddWithValue("@score2", multiplayerRegForm.p2.playerScore)
+			command.Connection = connection
+			connection.Open()
+			command.ExecuteNonQuery()
+			connection.Close()
 			multiplayerRegForm.Close()
 			multiplayerRegForm.Dispose()
 			multiplayerRegForm.p1.playerLife = 0
@@ -943,12 +994,43 @@
 
 		battle.BringToFront()
 		startHere.SendToBack()
-		startHere.Hide()
-		myForm.Dispose()
+
+
 
 
 
 	End Sub
+	Private Sub getScoreforSinglePlayer()
+		'---database
+		Dim score As Integer
+		Dim dt As DateTime
+		score = ClassPlayer.score
+		dt = DateAndTime.Now.Date
+
+		Dim con As New SqlClient.SqlConnection(str)
+		Dim cmdd As New SqlClient.SqlCommand
+		cmdd.Connection = con
+		cmdd.CommandText = "INSERT INTO single_Table VALUES(@score,@date)"
+		cmdd.Parameters.AddWithValue("@score", score)
+		cmdd.Parameters.AddWithValue("@date", dt)
+		con.Open()
+		cmdd.ExecuteNonQuery()
+		con.Close()
+		'------
+
+
+		'---file------
+		If System.IO.File.Exists("singleScore.txt") Then
+			Dim writer As System.IO.StreamWriter = System.IO.File.AppendText("singleScore.txt")
+			writer.WriteLine("Your score :" + CStr(score) + " played on " + CStr(dt))
+			writer.Close()
+		Else
+			MsgBox("The file doesn't exist or has been modified")
+		End If
+		'-----------
+
+	End Sub
+
 
 	' end handlers function/sub
 

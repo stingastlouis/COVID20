@@ -2,69 +2,48 @@
 Imports MySql.Data.MySqlClient
 
 Public Class scoreforSingle
-    Dim sall As MySqlDataReader
-    Dim conn As MySqlConnection
-    Dim cmd As MySqlCommand
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Database1.mdf
+                    ;Integrated Security=True"
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Me.Close()
         startHere.Show()
     End Sub
 
     Private Sub scoreforSingle_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'Database1DataSet2.single_Table' table. You can move, or remove it, as needed.
+        Dim con As New SqlClient.SqlConnection(Str)
+        Dim cmdd As New SqlClient.SqlCommand
+        cmdd.Connection = con
+        cmdd.CommandText = "Select max(score) AS highScore from single_Table ORDERBY  "
+        con.Open()
+        'cmdd.ExecuteReader()
+        Dim lrd As SqlClient.SqlDataReader = cmdd.ExecuteReader()
 
-        you.Text = CStr(ModuleGameManager.universalScore)
-        Try
-            conn = New MySqlConnection
-            conn.ConnectionString = "server=db4free.net;userid=stinga_pascal;password=Alphaetomega123;database=jojo_3499;port=3306;pooling=true;old guids= true"
-            If conn.State = ConnectionState.Closed Then
-                conn.Open()
+        If lrd.HasRows Then
+            While lrd.Read
+                lblGreater.Text = "YOUR HIGHER SCORE IS :" & CStr(lrd("highScore"))
 
-            End If
-            If conn.State = ConnectionState.Connecting Then
-
-            End If
-            showRecords()
-
-        Catch ex As Exception
-            Me.Show()
-            Try
-                Do While conn.State = ConnectionState.Connecting Or conn.State = ConnectionState.Closed
-                    conn.Open()
-                    showRecords()
-                Loop
-            Catch er As Exception
-
-            End Try
-
-
-
-        End Try
-    End Sub
-
-    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
-
-    End Sub
-    Sub showRecords()
-        Try
-            ListView1.Items.Clear()
-            Dim i As Integer
-            cmd = New MySqlCommand("select * from playerTable ORDER BY SCORE DESC ", conn)
-            sall = cmd.ExecuteReader
-
-            While sall.Read
-                i += 1
-                ListView1.Items.Add(New ListViewItem({sall.Item("NAME").ToString, sall.Item("SCORE").ToString}))
             End While
-            sall.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+        End If
+        con.Close()
+        Timer1.Enabled = True
+        FileOpen(1, "singleScore.txt", OpenMode.Input)
+        While Not EOF(1)
+            Label1.Text += LineInput(1) + vbNewLine
+        End While
+        FileClose(1)
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
-        If Not TextBox1.Text = Nothing Then
-            ListView1.FindItemWithText(TextBox1.Text).BackColor = Color.Red
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label1.Top -= 5
+        If Label1.Top + Label1.Height <= 0 Then
+            Label1.Top = 518
         End If
+    End Sub
+    Private Sub Single_TableBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
+        Me.Validate()
+        Me.Single_TableBindingSource.EndEdit()
+        Me.TableAdapterManager.UpdateAll(Me.Database1DataSet2)
+
     End Sub
 End Class

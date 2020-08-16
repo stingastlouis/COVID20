@@ -501,7 +501,7 @@ Module ModuleIntersection
 	Public Sub EnemyIntersectPlayer2()
 
 		For Each enemy In ModuleGameManager.bulletsEnemy
-			If enemy.Bounds.IntersectsWith(player2.Bounds) And enemy.Enabled Then 'if bullet intersect with enemies 
+			If enemy.Bounds.IntersectsWith(player2.Bounds) And enemy.Enabled And player1.Enabled Then 'if bullet intersect with enemies 
 
 				Console.WriteLine("bullet intersect enemy")
 				multiplayerRegForm.p2.playerLife -= 1
@@ -519,7 +519,7 @@ Module ModuleIntersection
 	Public Sub EnemyIntersectPlayer1()
 
 		For Each enemy In ModuleGameManager.bulletsEnemy2
-			If enemy.Bounds.IntersectsWith(player1.Bounds) And enemy.Enabled Then 'if bullet intersect with enemies 
+			If enemy.Bounds.IntersectsWith(player1.Bounds) And enemy.Enabled And player1.Enabled Then 'if bullet intersect with enemies 
 
 				Console.WriteLine("bullet intersect enemy")
 				multiplayerRegForm.p1.playerLife -= 1
@@ -539,7 +539,7 @@ Module ModuleIntersection
 	Public Sub player1hitBoss()
 
 
-		If boss.Bounds.IntersectsWith(player1.Bounds) And boss.Enabled Then
+		If boss.Bounds.IntersectsWith(player1.Bounds) And boss.Enabled And player1.Enabled Then
 
 
 			multiplayerRegForm.p1.playerLife -= 1
@@ -552,7 +552,7 @@ Module ModuleIntersection
 	Public Sub player2hitBoss()
 
 
-		If boss.Bounds.IntersectsWith(player2.Bounds) And boss.Enabled Then
+		If boss.Bounds.IntersectsWith(player2.Bounds) And boss.Enabled And player2.Enabled Then
 
 
 			multiplayerRegForm.p2.playerLife -= 1
