@@ -17,7 +17,5 @@
         startHere.Show()
     End Sub
 
-    Private Sub User_TableDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles User_TableDataGridView.CellContentClick
 
-    End Sub
 End Class

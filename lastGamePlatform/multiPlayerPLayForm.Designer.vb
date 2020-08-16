@@ -31,7 +31,6 @@ Partial Class multiPlayerPLayForm
         Me.BackColor = System.Drawing.Color.DeepSkyBlue
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Name = "multiPlayerPLayForm"
-        Me.Text = "multiPlayerPLayForm"
         Me.ResumeLayout(False)
 
     End Sub

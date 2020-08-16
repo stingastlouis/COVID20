@@ -73,9 +73,6 @@ Partial Class MultiScorep
         Me.Label1.Size = New System.Drawing.Size(0, 28)
         Me.Label1.TabIndex = 0
         '
-        'Timer1
-        '
-        '
         'Database1DataSet
         '
         Me.Database1DataSet.DataSetName = "Database1DataSet"
@@ -232,6 +229,8 @@ Partial Class MultiScorep
         '
         'User_TableDataGridView
         '
+        Me.User_TableDataGridView.AllowUserToAddRows = False
+        Me.User_TableDataGridView.AllowUserToDeleteRows = False
         Me.User_TableDataGridView.AutoGenerateColumns = False
         Me.User_TableDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.User_TableDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -239,6 +238,7 @@ Partial Class MultiScorep
         Me.User_TableDataGridView.DataSource = Me.User_TableBindingSource1
         Me.User_TableDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.User_TableDataGridView.Name = "User_TableDataGridView"
+        Me.User_TableDataGridView.ReadOnly = True
         Me.User_TableDataGridView.RowHeadersWidth = 51
         Me.User_TableDataGridView.RowTemplate.Height = 24
         Me.User_TableDataGridView.Size = New System.Drawing.Size(1030, 373)
@@ -305,7 +305,7 @@ Partial Class MultiScorep
         Me.Controls.Add(Me.Label1)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "MultiScorep"
-        Me.Text = "MultiScorep"
+        Me.Text = "Score"
         CType(Me.Database1DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.User_TableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.User_TableBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()

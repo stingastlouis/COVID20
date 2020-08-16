@@ -46,7 +46,7 @@ Partial Class startHere
         Me.ButtonSinglePlayerPlay.BackColor = System.Drawing.Color.Transparent
         Me.ButtonSinglePlayerPlay.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSinglePlayerPlay.Location = New System.Drawing.Point(20, 21)
-        Me.ButtonSinglePlayerPlay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonSinglePlayerPlay.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonSinglePlayerPlay.Name = "ButtonSinglePlayerPlay"
         Me.ButtonSinglePlayerPlay.Size = New System.Drawing.Size(248, 44)
         Me.ButtonSinglePlayerPlay.TabIndex = 0
@@ -57,7 +57,7 @@ Partial Class startHere
         '
         Me.ButtonMultiPlayerPlay.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonMultiPlayerPlay.Location = New System.Drawing.Point(20, 28)
-        Me.ButtonMultiPlayerPlay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonMultiPlayerPlay.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonMultiPlayerPlay.Name = "ButtonMultiPlayerPlay"
         Me.ButtonMultiPlayerPlay.Size = New System.Drawing.Size(248, 44)
         Me.ButtonMultiPlayerPlay.TabIndex = 2
@@ -68,7 +68,7 @@ Partial Class startHere
         '
         Me.ButtonExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonExit.Location = New System.Drawing.Point(148, 329)
-        Me.ButtonExit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonExit.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonExit.Name = "ButtonExit"
         Me.ButtonExit.Size = New System.Drawing.Size(248, 44)
         Me.ButtonExit.TabIndex = 3
@@ -79,7 +79,7 @@ Partial Class startHere
         '
         Me.ButtonMultiPlayerScore.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonMultiPlayerScore.Location = New System.Drawing.Point(20, 84)
-        Me.ButtonMultiPlayerScore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonMultiPlayerScore.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonMultiPlayerScore.Name = "ButtonMultiPlayerScore"
         Me.ButtonMultiPlayerScore.Size = New System.Drawing.Size(248, 39)
         Me.ButtonMultiPlayerScore.TabIndex = 4
@@ -91,7 +91,7 @@ Partial Class startHere
         Me.ButtonSinglePlayerScore.BackColor = System.Drawing.Color.Transparent
         Me.ButtonSinglePlayerScore.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSinglePlayerScore.Location = New System.Drawing.Point(20, 85)
-        Me.ButtonSinglePlayerScore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonSinglePlayerScore.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonSinglePlayerScore.Name = "ButtonSinglePlayerScore"
         Me.ButtonSinglePlayerScore.Size = New System.Drawing.Size(248, 39)
         Me.ButtonSinglePlayerScore.TabIndex = 5
@@ -102,7 +102,7 @@ Partial Class startHere
         '
         Me.ButtonBonus.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonBonus.Location = New System.Drawing.Point(496, 329)
-        Me.ButtonBonus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonBonus.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonBonus.Name = "ButtonBonus"
         Me.ButtonBonus.Size = New System.Drawing.Size(248, 44)
         Me.ButtonBonus.TabIndex = 6
@@ -115,7 +115,7 @@ Partial Class startHere
         Me.Panel1.Controls.Add(Me.ButtonMultiPlayerScore)
         Me.Panel1.Controls.Add(Me.ButtonMultiPlayerPlay)
         Me.Panel1.Location = New System.Drawing.Point(563, 177)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(289, 144)
         Me.Panel1.TabIndex = 7
@@ -126,7 +126,7 @@ Partial Class startHere
         Me.Panel2.Controls.Add(Me.ButtonSinglePlayerPlay)
         Me.Panel2.Controls.Add(Me.ButtonSinglePlayerScore)
         Me.Panel2.Location = New System.Drawing.Point(43, 177)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(289, 144)
         Me.Panel2.TabIndex = 8
@@ -182,9 +182,9 @@ Partial Class startHere
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel2)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "startHere"
-        Me.Text = "startHere"
+        Me.Text = "Main Menu"
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

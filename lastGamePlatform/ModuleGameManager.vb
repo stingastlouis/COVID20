@@ -193,31 +193,9 @@
 		multiplayerRegForm.p2.playerScore = 0
 		player1 = CreatePicBoxesMulti(87, 62, "player1", 50, 235, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov.png"))) 'get image from class selected from reg form 
 		player2 = CreatePicBoxesMulti(87, 62, "player2", 800, 235, Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\player1Mov2.png")))
-		Dim pic1 As New PictureBox
-		Dim pic2 As New PictureBox
-		Dim pic3 As New PictureBox
-		With pic1
-			.Width = 50
-			.Height = 50
-			.Location = New Point(300, 250)
-			.CreateControl()
-		End With
-		With pic2
-			.Width = 50
-			.Height = 50
-			.Location = New Point(450, 200)
-			.CreateControl()
-		End With
-		With pic3
-			.Width = 50
-			.Height = 50
-			.Location = New Point(650, 350)
-			.CreateControl()
-		End With
 
-		myForm.Controls.Add(pic1)
-		myForm.Controls.Add(pic2)
-		myForm.Controls.Add(pic3)
+
+
 		player1.BringToFront()
 		'get image from class selected from reg form 
 		p1Life = CreateLabel(130, 10, "p1Life", "LIFE :" + CStr(multiplayerRegForm.p1.playerLife))
