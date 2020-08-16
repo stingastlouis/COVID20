@@ -1,5 +1,7 @@
 ﻿Public Class startHere
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles ButtonExit.Click
+        multiPlayerPLayForm.Close()
+
         Me.Close()
     End Sub
 
@@ -31,6 +33,8 @@
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles ButtonBonus.Click
         Me.Hide()
-        'bonusForm.Show()
+        bonusForm.Show()
     End Sub
+
+
 End Class

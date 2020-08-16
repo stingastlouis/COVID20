@@ -652,15 +652,15 @@
 
 	Private Sub Extbtn_Click(sender As Object, e As EventArgs)
 
-		startHere.Show()
-		startHere.SendToBack()
+		startHere.ShowDialog()
+
 		myForm.Close()
 	End Sub
 
 	Private Sub MyForm_FormClosed(sender As Object, e As FormClosedEventArgs)
 		myForm.Dispose()
-		startHere.Show()
-		startHere.SendToBack()
+		startHere.ShowDialog()
+
 		Console.WriteLine("close the form")
 	End Sub
 
@@ -990,7 +990,7 @@
 		ModuleGameManager.bulletsEnemy.Clear()
 		ModuleGameManager.bulletsEnemy2.Clear()
 		Dim battle As New multiplayerRegForm()
-		battle.Show()
+		battle.ShowDialog()
 
 		battle.BringToFront()
 		startHere.SendToBack()

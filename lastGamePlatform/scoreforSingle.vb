@@ -46,4 +46,8 @@ Public Class scoreforSingle
         Me.TableAdapterManager.UpdateAll(Me.Database1DataSet2)
 
     End Sub
+
+    Private Sub scoreforSingle_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        startHere.Show()
+    End Sub
 End Class

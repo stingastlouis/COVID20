@@ -86,7 +86,7 @@ Public Class multiplayerRegForm
 
             Dim battle As New multiPlayerPLayForm
             Me.Hide()
-            battle.Show()
+            battle.ShowDialog()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
