@@ -627,11 +627,12 @@ Module ModuleGameManager
 				Exit Select
 		End Select
 		If btn.Text = "Restart" Then
-			Dim restartForm As Form
-			restartForm = myForm
-			restartForm.Show()
-			restartForm.BringToFront()
+			Dim restartfrom As New Form
+			restartfrom = myForm
+
+			restartfrom.Show()
 			myForm.Close()
+
 		ElseIf btn.Text = "Continue" Then
 			myForm.Close()
 			nextForm.Show()

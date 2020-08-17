@@ -85,9 +85,8 @@ Partial Class scoreforSingle
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(235, 298)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(51, 17)
+        Me.Label1.Size = New System.Drawing.Size(0, 17)
         Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Label1"
         '
         'scoreforSingle
         '

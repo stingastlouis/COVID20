@@ -2,7 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class scoreforSingle
-    Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True"
+
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         Me.Close()
         startHere.Show()
@@ -10,6 +10,8 @@ Public Class scoreforSingle
 
     Private Sub scoreforSingle_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'Database1DataSet2.single_Table' table. You can move, or remove it, as needed.
+        Dim path As String = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Database1.mdf")
+        Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & path & ";Integrated Security=True"
         Dim con As New SqlClient.SqlConnection(Str)
         Dim cmdd As New SqlClient.SqlCommand
         cmdd.Connection = con
