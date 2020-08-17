@@ -357,7 +357,7 @@
 		While noOfEnemies > 0
 			Dim xpos As Integer = boss.Left + boss.Width
 			Dim ypos As Integer = boss.Top + boss.Height / 2
-			Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, 5, "ground.png") 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
+			Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, 5, "Bat.gif") 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
 			Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
 			myForm.Controls.Add(en) 'add the enemy generated to form
 			'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
