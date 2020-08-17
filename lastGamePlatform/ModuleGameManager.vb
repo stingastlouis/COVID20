@@ -179,7 +179,7 @@ Module ModuleGameManager
 		myForm.HorizontalScroll.Enabled = False
 		myForm.HorizontalScroll.Visible = False
 
-		boss = CreatePicBoxes(200, 200, "boss", 390, 190, "ground")
+		boss = CreatePicBoxes(200, 200, "boss", 390, 190, "Enemies\Enemy3")
 		wall1 = CreatePicBoxes(70, 62, "wall1", 100, 350, "ground")
 		wall2 = CreatePicBoxes(70, 62, "wall2", 800, 350, "ground")
 

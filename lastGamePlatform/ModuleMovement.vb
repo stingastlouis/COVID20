@@ -264,7 +264,7 @@
 	Private Sub throwSomevirustoRight(ByRef boss As PictureBox)
 		Dim gen As New Random
 		Dim ran As Integer = gen.Next((boss.Height + boss.Top / 2 - 50), (boss.Height + boss.Top / 2 + 50))
-		Dim ene As New ClassEnemies(boss.Left, ran, "enemy", 5, "ground.png")
+		Dim ene As New ClassEnemies(boss.Left, ran, "enemy", 5, "Enemies\Enemy3.png")
 		Dim enemy As PictureBox = ene.generateEnemy
 		myForm.Controls.Add(enemy)
 		ModuleGameManager.bulletsEnemy.Add(enemy)
@@ -273,7 +273,7 @@
 	Private Sub throwSomevirustoLeft(ByRef boss As PictureBox)
 		Dim gen As New Random
 		Dim ran As Integer = gen.Next((boss.Height + boss.Top / 2 - 50), (boss.Height + boss.Top / 2 + 50))
-		Dim ene As New ClassEnemies(boss.Left + boss.Width + 25, ran, "enemy", 5, "ground.png")
+		Dim ene As New ClassEnemies(boss.Left + boss.Width + 25, ran, "enemy", 5, "Enemies\Enemy3.png")
 		Dim enemy2 As PictureBox = ene.generateEnemy
 		myForm.Controls.Add(enemy2)
 		ModuleGameManager.bulletsEnemy2.Add(enemy2)
