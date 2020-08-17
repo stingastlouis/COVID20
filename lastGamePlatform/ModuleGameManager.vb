@@ -15,8 +15,7 @@
 	Public allPictureBoxes As New List(Of PictureBox)
 	Public waitBeforeFight As Integer = 3 'number of second to wait before fight
 	Dim tm As DateTime
-	Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Database1.mdf
-                    ;Integrated Security=True"
+	Private str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True"
 
 
 	'----single player--------------------------------------
@@ -134,8 +133,7 @@
 	End Sub
 	Dim id_of_match As Integer
 	Public Sub load_multiPlayer(currentForm As Form)
-		Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Database1.mdf
-                    ;Integrated Security=True"
+
 		Dim conn As New SqlClient.SqlConnection(str)
 		Dim cmd As New SqlClient.SqlCommand
 		cmd.CommandText = "Select Id, player1_Name,player2_Name from User_Table where Id=(SELECT max(Id) FROM User_Table) "

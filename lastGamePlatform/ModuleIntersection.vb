@@ -379,6 +379,11 @@ Module ModuleIntersection
 			If ModuleGameManager.player1 IsNot enemy AndAlso enemy.Bounds.IntersectsWith(ModuleGameManager.player1.Bounds) Then
 				ClassPlayer.life -= 1
 				Console.WriteLine("player intersect with enemy")
+				Dim enemyLocation As Point = enemy.Location
+				Dim enemySize As Size = enemy.Size
+				multiplayerRegForm.p1.playerScore += ClassItems.scoreEnemy
+
+				generateExplosionmulti(enemySize, enemyLocation)
 				ModuleGameManager.enemies.Remove(enemy)
 				ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
 				Exit For
