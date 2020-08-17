@@ -539,7 +539,7 @@ Module ModuleGameManager
 		AddHandler myForm.KeyUp, AddressOf ModuleMovement.myForm_KeyUp
 		AddHandler myForm.KeyDown, AddressOf ModuleMovement.myForm_KeyDown
 		AddHandler player1.LocationChanged, AddressOf ModuleMovement.player1_LocationChanged
-		AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
+
 	End Sub
 	Private Sub addMultiHandler()
 		'AddHandler timer3sec.Tick, AddressOf Timer1000ms_Tick
@@ -548,7 +548,7 @@ Module ModuleGameManager
 		AddHandler myForm.KeyDown, AddressOf ModuleMovement.myFormMulti_KeyDown
 		AddHandler player1.LocationChanged, AddressOf ModuleMovement.player1mul_LocationChanged
 		AddHandler player2.LocationChanged, AddressOf ModuleMovement.player2_LocationChanged
-		AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
+		'AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
 	End Sub
 
 	Private Function CreateBossProgressBar(Enabled, Visible, Value)
@@ -630,6 +630,7 @@ Module ModuleGameManager
 			Dim restartForm As Form
 			restartForm = myForm
 			restartForm.Show()
+			restartForm.BringToFront()
 			myForm.Close()
 		ElseIf btn.Text = "Continue" Then
 			myForm.Close()
@@ -640,16 +641,18 @@ Module ModuleGameManager
 	Private Sub Extbtn_Click(sender As Object, e As EventArgs)
 
 		startHere.ShowDialog()
+		myForm.Hide()
+		myForm.Close()
+	End Sub
+
+	Private Sub ExtbtnMulti_Click(sender As Object, e As EventArgs)
+
+		startHere.Show()
 
 		myForm.Close()
 	End Sub
 
-	Private Sub MyForm_FormClosed(sender As Object, e As FormClosedEventArgs)
-		myForm.Dispose()
-		startHere.ShowDialog()
 
-		Console.WriteLine("close the form")
-	End Sub
 
 	Private Sub Timer1000ms_Tick(sender As Object, e As EventArgs)
 		If waitTime <= 0 Then
@@ -908,7 +911,7 @@ Module ModuleGameManager
 			myForm.Controls.Add(restBtn)
 			myForm.Controls.Add(exitBtn)
 			AddHandler restBtn.Click, AddressOf RestartBtnMulti_Click
-			AddHandler exitBtn.Click, AddressOf Extbtn_Click
+			AddHandler exitBtn.Click, AddressOf ExtbtnMulti_Click
 		End If
 
 		If multiplayerRegForm.p1.playerLife <= 0 And multiplayerRegForm.p2.playerLife <= 0 Then
@@ -968,7 +971,7 @@ Module ModuleGameManager
 			myForm.Controls.Add(restBtn)
 			myForm.Controls.Add(exitBtn)
 			AddHandler restBtn.Click, AddressOf RestartBtnMulti_Click
-			AddHandler exitBtn.Click, AddressOf Extbtn_Click
+			AddHandler exitBtn.Click, AddressOf ExtbtnMulti_Click
 		End If
 
 	End Sub
@@ -979,8 +982,8 @@ Module ModuleGameManager
 		ModuleGameManager.bulletsEnemy.Clear()
 		ModuleGameManager.bulletsEnemy2.Clear()
 		Dim battle As New multiplayerRegForm()
-		battle.ShowDialog()
-
+		battle.Show()
+		myForm.Close()
 
 
 
