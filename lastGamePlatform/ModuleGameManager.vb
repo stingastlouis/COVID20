@@ -539,7 +539,7 @@ Module ModuleGameManager
 		AddHandler myForm.KeyUp, AddressOf ModuleMovement.myForm_KeyUp
 		AddHandler myForm.KeyDown, AddressOf ModuleMovement.myForm_KeyDown
 		AddHandler player1.LocationChanged, AddressOf ModuleMovement.player1_LocationChanged
-
+		AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
 	End Sub
 	Private Sub addMultiHandler()
 		'AddHandler timer3sec.Tick, AddressOf Timer1000ms_Tick
@@ -550,7 +550,10 @@ Module ModuleGameManager
 		AddHandler player2.LocationChanged, AddressOf ModuleMovement.player2_LocationChanged
 		'AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
 	End Sub
-
+	Private Sub MyForm_FormClosed(sender As Object, e As EventArgs)
+		'myForm.Close()
+		myForm.Dispose()
+	End Sub
 	Private Function CreateBossProgressBar(Enabled, Visible, Value)
 		Dim progBar As New ProgressBar
 		With progBar
@@ -627,11 +630,13 @@ Module ModuleGameManager
 				Exit Select
 		End Select
 		If btn.Text = "Restart" Then
-			Dim restartfrom As New Form
-			restartfrom = myForm
 
-			restartfrom.Show()
 			myForm.Close()
+			AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
+			Dim f1 As New Form1
+			scoreforSingle = 0
+			ClassPlayer.item = 0
+			f1.Show()
 
 		ElseIf btn.Text = "Continue" Then
 			myForm.Close()

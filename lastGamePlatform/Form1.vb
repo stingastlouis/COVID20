@@ -1,4 +1,6 @@
-﻿Public Class Form1
+﻿Imports System.ComponentModel
+
+Public Class Form1
 
 	''' <summary>
 	''' when the form is loading
@@ -9,4 +11,6 @@
 	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
 		ModuleGameManager.FormLoader(Me, 1)
 	End Sub
+
+
 End Class
