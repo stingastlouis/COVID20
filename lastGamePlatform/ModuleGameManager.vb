@@ -1009,10 +1009,10 @@ Module ModuleGameManager
 		con.Close()
 		'------
 
-
+		Dim textpath As String = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\singleScore.txt")
 		'---file------
-		If System.IO.File.Exists("singleScore.txt") Then
-			Dim writer As System.IO.StreamWriter = System.IO.File.AppendText("singleScore.txt")
+		If System.IO.File.Exists(textpath) Then
+			Dim writer As System.IO.StreamWriter = System.IO.File.AppendText(textpath)
 			writer.WriteLine("Your score :" + CStr(score) + " played on " + CStr(dt))
 			writer.Close()
 		Else
