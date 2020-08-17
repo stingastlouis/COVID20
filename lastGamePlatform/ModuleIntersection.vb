@@ -348,7 +348,9 @@ Module ModuleIntersection
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(bullet)
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
 					generateExplosion(enemySize, enemyLocation)
-					'Exit For 'break as current <> has been modified
+
+
+					Exit For 'break as current <> has been modified
 				End If
 			Next
 			'Exit For 'break as current <> has been modified
@@ -376,7 +378,7 @@ Module ModuleIntersection
 
 	Public Sub EnemyIntersectWithPlayer()
 		For Each enemy In ModuleGameManager.enemies
-			If ModuleGameManager.player1 IsNot enemy AndAlso enemy.Bounds.IntersectsWith(ModuleGameManager.player1.Bounds) Then
+			If ModuleGameManager.player1 IsNot enemy AndAlso enemy.Bounds.IntersectsWith(ModuleGameManager.player1.Bounds) And enemy.Enabled Then
 				ClassPlayer.life -= 1
 				Console.WriteLine("player intersect with enemy")
 				Dim enemyLocation As Point = enemy.Location
