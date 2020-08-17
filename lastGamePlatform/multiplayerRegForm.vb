@@ -32,7 +32,7 @@ Public Class multiplayerRegForm
 
         conn.ConnectionString = dbSource
 
-
+        PictureBox1.Image = Image.FromFile(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\KEYS.png"))
         ' Database1DataSet.User_Table.AcceptChanges()
 
 

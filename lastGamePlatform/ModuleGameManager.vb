@@ -183,7 +183,8 @@ Module ModuleGameManager
 		boss = CreatePicBoxes(200, 200, "boss", 390, 190, "Enemies\Enemy3")
 		wall1 = CreatePicBoxes(70, 62, "wall1", 100, 350, "ground")
 		wall2 = CreatePicBoxes(70, 62, "wall2", 800, 350, "ground")
-		mulinstr = CreatePicBoxesMulti(200, 100, "mulinstr", 350, 150, "KEYS.png")
+
+
 
 		CreatePicBoxes(1000, 62, "ground1", 0, 400, "ground")
 		boss.Visible = False
@@ -726,6 +727,8 @@ Module ModuleGameManager
 		If supergun0.Left < myForm.Width Then
 			'Console.WriteLine("make the boss appear")
 			MakeBossAppear()
+			soloPlayerHitBoss()
+
 			If player1.Left > myForm.Width Then
 				ClassPlayer.posRight = False
 			End If
@@ -1032,7 +1035,19 @@ Module ModuleGameManager
 		'-----------
 
 	End Sub
+	Public Sub soloPlayerHitBoss()
 
+
+		If boss.Bounds.IntersectsWith(player1.Bounds) And boss.Enabled And player1.Enabled Then
+
+			ClassPlayer.life -= 1
+			multiplayerRegForm.p1.playerLife -= 1
+
+			ModuleGameManager.pLife.Text = "LIFE: " + CStr(ClassPlayer.life)
+			ModuleGameManager.CheckIfWinOrLoseMulti()
+		End If
+
+	End Sub
 
 	' end handlers function/sub
 
