@@ -25,7 +25,6 @@ Module ModuleGameManager
 	Public allPictureBoxes As New List(Of PictureBox)
 	Public waitBeforeFight As Integer = 3 'number of second to wait before fight
 	Dim tm As DateTime
-	Private str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True" 'detecting bin folder
 
 
 	'----single player--------------------------------------
@@ -144,6 +143,8 @@ Module ModuleGameManager
 	Dim id_of_match As Integer
 	Public Sub load_multiPlayer(currentForm As Form)
 
+		Dim path As String = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Database1.mdf")
+		Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & path & ";Integrated Security=True"
 		Dim conn As New SqlClient.SqlConnection(str)
 		Dim cmd As New SqlClient.SqlCommand
 		cmd.CommandText = "Select Id, player1_Name,player2_Name from User_Table where Id=(SELECT max(Id) FROM User_Table) "
@@ -821,6 +822,8 @@ Module ModuleGameManager
 		Dim winorlosetText As New Label
 		Dim exitBtn As New Button
 
+		Dim path As String = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Database1.mdf")
+		Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & path & ";Integrated Security=True"
 		Dim connection As New SqlClient.SqlConnection(str)
 		Dim command As New SqlClient.SqlCommand
 
@@ -993,6 +996,8 @@ Module ModuleGameManager
 		score = ClassPlayer.score
 		dt = DateAndTime.Now.Date
 
+		Dim path As String = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Database1.mdf")
+		Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & path & ";Integrated Security=True"
 		Dim con As New SqlClient.SqlConnection(str)
 		Dim cmdd As New SqlClient.SqlCommand
 		cmdd.Connection = con

@@ -388,14 +388,10 @@
     <None Include="Resources\player1Mov2.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Bat.gif" />
     <Content Include="Resources\Database1.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Database1_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Database1.mdf</DependentUpon>
-    </Content>
-    <Content Include="Resources\Bat.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

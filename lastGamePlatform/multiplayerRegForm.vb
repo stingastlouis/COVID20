@@ -27,8 +27,8 @@ Public Class multiplayerRegForm
 
     Private Sub multiplayerRegForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-        dbSource = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True"
+        Dim path As String = IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Database1.mdf")
+        dbSource = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & path & ";Integrated Security=True"
 
         conn.ConnectionString = dbSource
 
