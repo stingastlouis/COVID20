@@ -28,8 +28,7 @@ Public Class multiplayerRegForm
     Private Sub multiplayerRegForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
-        dbSource = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Database1.mdf
-                    ;Integrated Security=True"
+        dbSource = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True"
 
         conn.ConnectionString = dbSource
 

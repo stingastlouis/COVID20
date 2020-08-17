@@ -2,8 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class scoreforSingle
-    Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\sting\Source\Repos\stingastlouis\COVID20\lastGamePlatform\Database1.mdf
-                    ;Integrated Security=True"
+    Dim str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True"
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         Me.Close()
         startHere.Show()

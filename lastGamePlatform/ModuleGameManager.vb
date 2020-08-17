@@ -978,8 +978,8 @@ Module ModuleGameManager
 		Dim battle As New multiplayerRegForm()
 		battle.ShowDialog()
 
-		battle.BringToFront()
-		startHere.SendToBack()
+
+
 
 
 
