@@ -302,8 +302,6 @@
     <None Include="Database1DataSet2.xss">
       <DependentUpon>Database1DataSet2.xsd</DependentUpon>
     </None>
-    <None Include="lastGamePlatform_1_TemporaryKey.pfx" />
-    <None Include="lastGamePlatform_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
