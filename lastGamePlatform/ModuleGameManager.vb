@@ -41,6 +41,7 @@ Module ModuleGameManager
 	Private supergun0 As PictureBox
 	Private wall1 As PictureBox
 	Private wall2 As PictureBox
+	Private mulinstr As PictureBox
 	Private ground1 As PictureBox
 	Private progressBar As ProgressBar
 	Private myTimer As Timer
@@ -182,6 +183,7 @@ Module ModuleGameManager
 		boss = CreatePicBoxes(200, 200, "boss", 390, 190, "Enemies\Enemy3")
 		wall1 = CreatePicBoxes(70, 62, "wall1", 100, 350, "ground")
 		wall2 = CreatePicBoxes(70, 62, "wall2", 800, 350, "ground")
+		mulinstr = CreatePicBoxesMulti(200, 100, "mulinstr", 350, 150, "KEYS.png")
 
 		CreatePicBoxes(1000, 62, "ground1", 0, 400, "ground")
 		boss.Visible = False
@@ -631,12 +633,12 @@ Module ModuleGameManager
 		End Select
 		If btn.Text = "Restart" Then
 
-			myForm.Close()
-			AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
-			Dim f1 As New Form1
-			scoreforSingle = 0
-			ClassPlayer.item = 0
-			f1.Show()
+			'myForm.Close()
+			'AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
+			'Dim f1 As New Form1
+			'scoreforSingle = 0
+			'ClassPlayer.item = 0
+			'f1.Show()
 
 		ElseIf btn.Text = "Continue" Then
 			myForm.Close()
