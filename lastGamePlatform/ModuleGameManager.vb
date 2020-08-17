@@ -15,7 +15,7 @@
 	Public allPictureBoxes As New List(Of PictureBox)
 	Public waitBeforeFight As Integer = 3 'number of second to wait before fight
 	Dim tm As DateTime
-	Private str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True"
+	Private str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=../../|DataDirectory|\Database1.mdf;Integrated Security=True" 'detecting bin folder
 
 
 	'----single player--------------------------------------
@@ -671,7 +671,7 @@
 			'Console.WriteLine("move the enemies only when there is/are enemies in the list")
 			'Console.WriteLine("activate EnemyMovement() and EnemyIntersectWithPlayer()")
 			ModuleMovement.EnemyMovement()
-			'ModuleIntersection.EnemyIntersectWithPlayer()
+			ModuleIntersection.EnemyIntersectWithPlayer()
 		End If
 		If ModuleGameManager.bullets.Count > 0 Then
 			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")

@@ -428,7 +428,7 @@
 			If ModuleGameManager.enemies(en).Location.Y < ModuleGameManager.player1.Location.Y Then
 				ModuleGameManager.enemies(en).Location = New Point(ModuleGameManager.enemies(en).Location.X, ModuleGameManager.enemies(en).Location.Y + ModuleGameManager.enemiesSpeed(en))
 			End If
-			ModuleIntersection.EnemyIntersectWithPlayer()
+			'ModuleIntersection.EnemyIntersectWithPlayer()
 		Next
 	End Sub
 
