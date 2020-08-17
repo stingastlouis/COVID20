@@ -15,7 +15,7 @@
 	Public allPictureBoxes As New List(Of PictureBox)
 	Public waitBeforeFight As Integer = 3 'number of second to wait before fight
 	Dim tm As DateTime
-	Private str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True"
+	Private str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=../../|DataDirectory|\Database1.mdf;Integrated Security=True" 'detecting bin folder
 
 
 	'----single player--------------------------------------
@@ -357,7 +357,7 @@
 		While noOfEnemies > 0
 			Dim xpos As Integer = boss.Left + boss.Width
 			Dim ypos As Integer = boss.Top + boss.Height / 2
-			Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, 5, "ground.png") 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
+			Dim enemy As New ClassEnemies(xpos, ypos, "enemy" & noOfEnemies, 5, "Bat.gif") 'constructor with parameter(xPosition, yPosition, name, moveSpeed)
 			Dim en As PictureBox = enemy.generateEnemy() 'generate enemy picture box
 			myForm.Controls.Add(en) 'add the enemy generated to form
 			'retrive the movespeed of the enemy from constructor and add it to enemiesSpeed<>
@@ -671,7 +671,7 @@
 			'Console.WriteLine("move the enemies only when there is/are enemies in the list")
 			'Console.WriteLine("activate EnemyMovement() and EnemyIntersectWithPlayer()")
 			ModuleMovement.EnemyMovement()
-			'ModuleIntersection.EnemyIntersectWithPlayer()
+			ModuleIntersection.EnemyIntersectWithPlayer()
 		End If
 		If ModuleGameManager.bullets.Count > 0 Then
 			'Console.WriteLine("move the bullets when bullet is shot and check if bullet intersect with enemy or boss")
