@@ -169,7 +169,7 @@ Module ModuleIntersection
 
 					ClassPlayer.score += ClassItems.scoreLife
 					ClassPlayer.life += 1
-
+					ClassPlayer.item += 1
 					RemovePictureBoxAndUpdateScore(activePictureBox)
 
 
@@ -182,7 +182,7 @@ Module ModuleIntersection
 					Else
 						ClassPlayer.score += ClassItems.scoreGun
 					End If
-
+					ClassPlayer.item += 1
 					RemovePictureBoxAndUpdateScore(activePictureBox)
 					Exit For 'exit the for loop as picturebox name contains "gun" help in using less cpu power
 				End If
@@ -194,7 +194,7 @@ Module ModuleIntersection
 					Exit For 'exit the for loop as picturebox name contains "adn" help in using less cpu power
 				End If
 				If activePictureBox.Name.Contains("coin") Then
-
+					ClassPlayer.item += 1
 					ClassPlayer.score += ClassItems.scoreCoin
 					Console.WriteLine("new coin")
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(activePictureBox)
