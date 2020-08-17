@@ -1,4 +1,14 @@
-﻿Module ModuleGameManager
+﻿
+Module ModuleGameManager
+
+	'Imports System
+	'Imports System.Web
+	'Imports System.Data
+	'Imports System.Data.SqlClient
+	'Imports System.Web.Configuration
+	'Imports System.Configuration
+	Dim configu
+
 	Public myForm As Form
 	Public player1 As PictureBox
 	Public player2 As PictureBox
@@ -15,7 +25,7 @@
 	Public allPictureBoxes As New List(Of PictureBox)
 	Public waitBeforeFight As Integer = 3 'number of second to wait before fight
 	Dim tm As DateTime
-	Private str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=../../|DataDirectory|\Database1.mdf;Integrated Security=True" 'detecting bin folder
+	Private str As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True" 'detecting bin folder
 
 
 	'----single player--------------------------------------
