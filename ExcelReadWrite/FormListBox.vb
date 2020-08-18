@@ -1,6 +1,7 @@
 ﻿Imports DocumentFormat.OpenXml.Spreadsheet
 Imports SpreadsheetLight
 Imports DocumentFormat.OpenXml.Packaging
+Imports System.ComponentModel
 
 Public Class FormListBox
 
@@ -40,6 +41,11 @@ Public Class FormListBox
         myListBox.SetSelected(0, True)
     End Sub
 
+    Private Sub FormListBox_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        FormExcelReader.Show()
+        Me.Hide()
+    End Sub
+
     Private Function GetAllWorksheets(ByVal fileName As String) As Sheets
         Dim theSheets As Sheets
         Using document As SpreadsheetDocument =
@@ -49,6 +55,8 @@ Public Class FormListBox
         End Using
         Return theSheets
     End Function
+
+
 End Class
 
 

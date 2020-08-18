@@ -28,7 +28,7 @@ Public Class scoreforSingle
         End If
         con.Close()
         Timer1.Enabled = True
-        FileOpen(1, "singleScore.txt", OpenMode.Input)
+        FileOpen(1, IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\singleScore.txt"), OpenMode.Input)
         While Not EOF(1)
             Label1.Text += LineInput(1) + vbNewLine
         End While

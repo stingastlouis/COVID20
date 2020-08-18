@@ -130,4 +130,11 @@ Public Class FormExcelWriter
         myExcel.SetRowStyle(rowIndex, style)
         myExcel.SaveAs(outfile)
     End Sub
+
+    Private Sub FormExcelWriter_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        Me.Hide()
+        FormMainMenu.Show()
+
+
+    End Sub
 End Class
