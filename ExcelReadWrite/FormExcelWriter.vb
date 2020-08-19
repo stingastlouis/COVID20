@@ -103,9 +103,17 @@ Public Class FormExcelWriter
                     Dim myVal As Decimal = CDec(Val(currentCellValue))
                     If (myVal >= 38 AndAlso myVal < 40) Then
                         Dim mystyle As SLStyle = myExcel.CreateStyle()
-                        mystyle.Fill.SetPattern(PatternValues.Solid, SLThemeColorIndexValues.Accent2Color, SLThemeColorIndexValues.Accent4Color)
+
+
+
+
+                        'mystyle.Fill.SetPattern(PatternValues.Solid, SLThemeColorIndexValues.Accent2Color, SLThemeColorIndexValues.Accent4Color)
+                        mystyle.Fill.SetPattern(PatternValues.Solid, System.Drawing.Color.Green, System.Drawing.Color.Green)
+
                         myExcel.SetCellStyle(rows, startColumn + verifyAfterColumn + 1, mystyle)
+                        ' myExcel.SetCellStyle(rows, startColumn + verifyAfterColumn + 1, styleColor)
                         myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 1, "40")
+
                     Else
                         myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 1, currentCellValue)
                     End If

@@ -7,6 +7,7 @@ Public Class FormListBox
 
     Private Sub FormListBox_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         PopulateListBox(FormExcelReader.excelFile, ListBox1)
+
     End Sub
     Private Sub PopulateListBox(myfile As String, myListBox As ListBox)
         Dim sheetDocList As New List(Of SLDocument)
@@ -28,15 +29,18 @@ Public Class FormListBox
                 lastColumn = currentColumn 'get last column in case 1 sheet is longer
             End If
         Next
-
+        Dim x, y As Integer
         For rows As Integer = 1 To lastRow
             Dim myText As String = ""
             For Each sdl As SLDocument In sheetDocList
                 For columns As Integer = 1 To lastColumn
                     myText += sdl.GetCellValueAsString(rows, columns) + vbTab + vbTab
+
                 Next
             Next
             myListBox.Items.Add(myText)
+
+
         Next
         myListBox.SetSelected(0, True)
     End Sub

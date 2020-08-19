@@ -9,6 +9,10 @@
 	Private Sub Button2_Click(sender As Object, e As EventArgs) Handles ButtonTextboxes.Click
 		Me.Hide()
 		FormTextBox.Show()
+
+
+
+
 	End Sub
 	Dim afterTime As DateTime
 	Dim endTime As DateTime
