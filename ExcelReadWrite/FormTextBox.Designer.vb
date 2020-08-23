@@ -28,7 +28,7 @@ Partial Class FormTextBox
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1067, 554)
+        Me.ClientSize = New System.Drawing.Size(812, 554)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FormTextBox"
         Me.Text = "FormTextBox"
