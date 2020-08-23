@@ -54,6 +54,8 @@ Partial Class MultiScorep
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.Database1DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.User_TableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.User_TableBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -259,6 +261,7 @@ Partial Class MultiScorep
         Me.DataGridViewTextBoxColumn2.HeaderText = "player1_Name"
         Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
         Me.DataGridViewTextBoxColumn2.Width = 125
         '
         'DataGridViewTextBoxColumn3
@@ -267,6 +270,7 @@ Partial Class MultiScorep
         Me.DataGridViewTextBoxColumn3.HeaderText = "player2_Name"
         Me.DataGridViewTextBoxColumn3.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
         Me.DataGridViewTextBoxColumn3.Width = 125
         '
         'DataGridViewTextBoxColumn4
@@ -275,6 +279,7 @@ Partial Class MultiScorep
         Me.DataGridViewTextBoxColumn4.HeaderText = "p1score"
         Me.DataGridViewTextBoxColumn4.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
         Me.DataGridViewTextBoxColumn4.Width = 125
         '
         'DataGridViewTextBoxColumn5
@@ -283,6 +288,7 @@ Partial Class MultiScorep
         Me.DataGridViewTextBoxColumn5.HeaderText = "p2score"
         Me.DataGridViewTextBoxColumn5.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
         Me.DataGridViewTextBoxColumn5.Width = 125
         '
         'DataGridViewTextBoxColumn6
@@ -291,7 +297,26 @@ Partial Class MultiScorep
         Me.DataGridViewTextBoxColumn6.HeaderText = "Date"
         Me.DataGridViewTextBoxColumn6.MinimumWidth = 6
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
         Me.DataGridViewTextBoxColumn6.Width = 125
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(83, 410)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(266, 55)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Sort player 1 by maximum value"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(503, 410)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(266, 55)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "Sort player 2 by maximum value"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'MultiScorep
         '
@@ -299,7 +324,9 @@ Partial Class MultiScorep
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Firebrick
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1026, 368)
+        Me.ClientSize = New System.Drawing.Size(1030, 509)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.User_TableDataGridView)
         Me.Controls.Add(Me.User_TableBindingNavigator)
         Me.Controls.Add(Me.Label1)
@@ -349,4 +376,6 @@ Partial Class MultiScorep
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class
