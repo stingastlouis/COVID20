@@ -51,14 +51,14 @@ Public Class FormExcelWriter
         BoldRow(outFile, rowToBold)
         AutoFit(outFile)
         Try
-            Process.Start(outdir)
+            'Process.Start(outdir)
             Process.Start(outFile)
             MsgBox("Your file is located in:\n " + outFile)
         Catch ex As Exception
             MsgBox(ex)
         End Try
         Me.Close()
-        FormExcelReader.Show()
+        'FormExcelReader.Show()
     End Sub
     Private Function GetGrade(marks As Decimal) As String
         Dim Grade As String
