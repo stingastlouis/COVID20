@@ -40,46 +40,27 @@ Public Class FormTextBox
                 End If
             Next
 
-            For rows As Integer = 1 To lastRow
-                Dim myText As String = ""
-                For Each sdl As SLDocument In sheetDocList
-                    For columns As Integer = 1 To lastColumn
+            Dim changesheet As Integer
+            For Each sdl As SLDocument In sheetDocList
+                For rows As Integer = 1 To lastRow
 
+
+                    For columns As Integer = 1 To lastColumn
 
                         geneNewBox = New TextBox
                         geneNewBox.Size = New System.Drawing.Size(100, 20)
-                        geneNewBox.Location = New Point(10 + 100 * columns, 10 + 25 * rows)
+                        geneNewBox.Location = New Point(10 + 100 * columns + changesheet, 10 + 25 * rows)
                         geneNewBox.Name = "TextBox" & rows & "_" & columns
-                        Dim x, y As Integer
                         geneNewBox.Text = sdl.GetCellValueAsString(rows, columns)
-                        If columns = 2 Or columns = 5 Then
-                            If rows >= 5 Then
-                                If CInt(geneNewBox.Text) >= 38 And CInt(geneNewBox.Text) <= 39.5 Then
-                                    y = columns + 1
-                                    x = rows
-
-                                End If
-                            End If
-                        End If
-                        If columns = y And rows = x Then
-                            geneNewBox.BackColor = System.Drawing.Color.Green
-                        End If
-
-
-                        txtBox(rows, columns) = geneNewBox
                         Me.Controls.Add(geneNewBox)
-
-
 
                     Next
                 Next
-                If rows <= 2 Then
-                    Me.Width += rows * 2
-                End If
-                If rows > 2 Then
-                    Me.Width += rows * 2
-                End If
+                changesheet += 200
+
             Next
+
+
         Catch ex As Exception
             Me.Hide()
             FormMainMenu.Show()
