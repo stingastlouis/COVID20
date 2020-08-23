@@ -52,11 +52,7 @@
 			ButtonListBox.Enabled = True
 
 			excelFile = OpenFileDialog1.FileName
-			'ElseIf OpenFileDialog1.ShowDialog() = DialogResult.Cancel Then
-			'	OpenFileDialog1.Dispose()
-			'	Me.Close()
-			'	FormMainMenu.Show()
-			'	FormMainMenu.BringToFront()
+
 		End If
 		Return excelFile
 	End Function

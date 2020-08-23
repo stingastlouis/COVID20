@@ -10,39 +10,49 @@ Public Class FormListBox
 
     End Sub
     Private Sub PopulateListBox(myfile As String, myListBox As ListBox)
+
         Dim sheetDocList As New List(Of SLDocument)
 
         Dim totalColumn As Integer = 0
         Dim lastRow As Integer = 0 'use to know how many lines there will be in listbox
         Dim lastColumn As Integer = 0
-
-        For Each sh As Sheet In GetAllWorksheets(myfile)
-            Dim sd As New SLDocument(myfile, sh.Name)
-            sheetDocList.Add(sd)
-            totalColumn += sd.GetWorksheetStatistics.EndColumnIndex 'last cell with value
-            Dim currentRow As Integer = sd.GetWorksheetStatistics.EndRowIndex
-            If currentRow > lastRow Then
-                lastRow = currentRow 'get last row in case 1 sheet is longer
-            End If
-            Dim currentColumn As Integer = sd.GetWorksheetStatistics.EndColumnIndex
-            If currentColumn > lastColumn Then
-                lastColumn = currentColumn 'get last column in case 1 sheet is longer
-            End If
-        Next
-        Dim x, y As Integer
-        For rows As Integer = 1 To lastRow
-            Dim myText As String = ""
-            For Each sdl As SLDocument In sheetDocList
-                For columns As Integer = 1 To lastColumn
-                    myText += sdl.GetCellValueAsString(rows, columns) + vbTab + vbTab
-
-                Next
+        Try
+            For Each sh As Sheet In GetAllWorksheets(myfile)
+                Dim sd As New SLDocument(myfile, sh.Name)
+                sheetDocList.Add(sd)
+                totalColumn += sd.GetWorksheetStatistics.EndColumnIndex 'last cell with value
+                Dim currentRow As Integer = sd.GetWorksheetStatistics.EndRowIndex
+                If currentRow > lastRow Then
+                    lastRow = currentRow 'get last row in case 1 sheet is longer
+                End If
+                Dim currentColumn As Integer = sd.GetWorksheetStatistics.EndColumnIndex
+                If currentColumn > lastColumn Then
+                    lastColumn = currentColumn 'get last column in case 1 sheet is longer
+                End If
             Next
-            myListBox.Items.Add(myText)
 
 
-        Next
-        myListBox.SetSelected(0, True)
+
+            For rows As Integer = 1 To lastRow
+                Dim myText As String = ""
+                For Each sdl As SLDocument In sheetDocList
+                    For columns As Integer = 1 To lastColumn
+                        myText += sdl.GetCellValueAsString(rows, columns) + vbTab + vbTab
+
+
+                    Next
+                Next
+                myListBox.Items.Add(myText)
+
+
+            Next
+            myListBox.SetSelected(0, True)
+        Catch ex As Exception
+            Me.Hide()
+            MsgBox("An error occur go to main menu")
+            FormMainMenu.Show()
+        End Try
+
     End Sub
 
     Private Sub FormListBox_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing

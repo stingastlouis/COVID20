@@ -41,7 +41,7 @@ Partial Class FormExcelReader
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(780, 332)
+        Me.Panel1.Size = New System.Drawing.Size(882, 332)
         Me.Panel1.TabIndex = 0
         '
         'LabelTitle
@@ -50,7 +50,7 @@ Partial Class FormExcelReader
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelTitle.AutoSize = True
         Me.LabelTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 36.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelTitle.Location = New System.Drawing.Point(173, 22)
+        Me.LabelTitle.Location = New System.Drawing.Point(251, 75)
         Me.LabelTitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LabelTitle.Name = "LabelTitle"
         Me.LabelTitle.Size = New System.Drawing.Size(399, 69)
@@ -60,14 +60,13 @@ Partial Class FormExcelReader
         '
         'ButtonTextboxes
         '
-        Me.ButtonTextboxes.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ButtonTextboxes.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ButtonTextboxes.AutoSize = True
         Me.ButtonTextboxes.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonTextboxes.Location = New System.Drawing.Point(447, 261)
+        Me.ButtonTextboxes.Location = New System.Drawing.Point(67, 188)
         Me.ButtonTextboxes.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonTextboxes.Name = "ButtonTextboxes"
-        Me.ButtonTextboxes.Size = New System.Drawing.Size(384, 57)
+        Me.ButtonTextboxes.Size = New System.Drawing.Size(328, 57)
         Me.ButtonTextboxes.TabIndex = 1
         Me.ButtonTextboxes.Text = "View in TextBoxes"
         Me.ButtonTextboxes.UseVisualStyleBackColor = True
@@ -78,10 +77,10 @@ Partial Class FormExcelReader
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ButtonListBox.AutoSize = True
         Me.ButtonListBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonListBox.Location = New System.Drawing.Point(16, 261)
+        Me.ButtonListBox.Location = New System.Drawing.Point(482, 188)
         Me.ButtonListBox.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonListBox.Name = "ButtonListBox"
-        Me.ButtonListBox.Size = New System.Drawing.Size(383, 57)
+        Me.ButtonListBox.Size = New System.Drawing.Size(328, 57)
         Me.ButtonListBox.TabIndex = 0
         Me.ButtonListBox.Text = "View in List Boxes"
         Me.ButtonListBox.UseVisualStyleBackColor = True
@@ -97,7 +96,7 @@ Partial Class FormExcelReader
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(780, 332)
+        Me.ClientSize = New System.Drawing.Size(882, 332)
         Me.Controls.Add(Me.Panel1)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FormExcelReader"
