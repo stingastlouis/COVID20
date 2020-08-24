@@ -30,7 +30,7 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If Button2.Text = "Sort player 2 by maximum value" Then
-            User_TableDataGridView.Sort(DataGridViewTextBoxColumn4, System.ComponentModel.ListSortDirection.Descending)
+            User_TableDataGridView.Sort(DataGridViewTextBoxColumn5, System.ComponentModel.ListSortDirection.Descending)
             Button2.Text = "Sort player 2 by minimum value"
         ElseIf Button2.Text = "Sort player 2 by minimum value" Then
             User_TableDataGridView.Sort(DataGridViewTextBoxColumn5, System.ComponentModel.ListSortDirection.Ascending)

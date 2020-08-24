@@ -95,5 +95,8 @@ Public Class multiplayerRegForm
 
     End Sub
 
-
+    Private Sub multiplayerRegForm_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        Me.Hide()
+        startHere.Show()
+    End Sub
 End Class

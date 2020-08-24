@@ -15,7 +15,7 @@ Public Class scoreforSingle
         Dim con As New SqlClient.SqlConnection(Str)
         Dim cmdd As New SqlClient.SqlCommand
         cmdd.Connection = con
-        cmdd.CommandText = "Select max(score) AS highScore from single_Table ORDERBY  "
+        cmdd.CommandText = "Select max(score) AS highScore from single_Table"
         con.Open()
         'cmdd.ExecuteReader()
         Dim lrd As SqlClient.SqlDataReader = cmdd.ExecuteReader()
