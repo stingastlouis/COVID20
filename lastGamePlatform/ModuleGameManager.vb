@@ -85,6 +85,7 @@ Module ModuleGameManager
 
 		level = myLevel
 
+
 		Console.WriteLine("creating media player")
 		mediaPlayer.CreateControl()
 		mediaPlayer.uiMode = "invisible"
@@ -634,12 +635,30 @@ Module ModuleGameManager
 		End Select
 		If btn.Text = "Restart" Then
 
-			'myForm.Close()
+			myForm.Close()
 			'AddHandler myForm.FormClosed, AddressOf MyForm_FormClosed
-			'Dim f1 As New Form1
-			'scoreforSingle = 0
-			'ClassPlayer.item = 0
-			'f1.Show()
+			Select Case level
+				Case 1
+					ClassPlayer.score = 0
+					ClassPlayer.life = 3
+					ClassPlayer.item = 0
+					Form1.Show()
+					Exit Select
+				Case 2
+					ClassPlayer.score = 0
+					ClassPlayer.life = 3
+					ClassPlayer.item = 0
+					Form2.Show()
+					Exit Select
+				Case 3
+					ClassPlayer.score = 0
+					ClassPlayer.life = 3
+					ClassPlayer.item = 0
+					Form3.Show()
+					Exit Select
+			End Select
+
+
 
 		ElseIf btn.Text = "Continue" Then
 			myForm.Close()

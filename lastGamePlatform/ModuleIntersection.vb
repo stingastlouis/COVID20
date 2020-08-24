@@ -345,6 +345,7 @@ Module ModuleIntersection
 					Dim enemySize As Size = enemy.Size
 					Console.WriteLine("bullet intersect enemy")
 					ClassPlayer.score += ClassItems.scoreEnemy
+					ModuleGameManager.bullets.Remove(bullet)
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(bullet)
 					ModuleGameManager.RemovePictureBoxAndUpdateScore(enemy)
 					generateExplosion(enemySize, enemyLocation)
@@ -353,7 +354,7 @@ Module ModuleIntersection
 					Exit For 'break as current <> has been modified
 				End If
 			Next
-			'Exit For 'break as current <> has been modified
+			Exit For 'break as current <> has been modified
 		Next
 	End Sub
 
