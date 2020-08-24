@@ -84,49 +84,45 @@ Public Class FormExcelWriter
             Dim myExcel As New SLDocument(outfile)
             Dim f1 As New SLDocument(fileToBeGraded)
             f1.DeleteColumn(indexColumnToDelete, 1)
-            Dim startColumn As Integer = myExcel.GetWorksheetStatistics.EndColumnIndex
-            If startColumn < 1 Then : startColumn = 0
+            Dim startColumn As Integer = myExcel.GetWorksheetStatistics.EndColumnIndex 'will return -1 if there is nothing
+            If startColumn < 1 Then : startColumn = 0 'there is nothing in the sheet
             End If
-            Dim startRow As Integer = myExcel.GetWorksheetStatistics.EndRowIndex
-            If startRow < 1 Then : startColumn = 0
+            Dim startRow As Integer = myExcel.GetWorksheetStatistics.EndRowIndex 'will return -1 if there is nothing
+            If startRow < 1 Then : startColumn = 0 ' there is nothing in the sheet
             End If
             Dim verifyAfterColumn As Int16 = 0
             Dim startVerification As Boolean = False
             Dim f1rows As Int16 = f1.GetWorksheetStatistics.EndRowIndex
             Dim f1columns As Int16 = f1.GetWorksheetStatistics.EndColumnIndex
-            For rows As Int16 = 1 To f1rows
-                For columns As Int16 = 1 To (f1columns)
-                    Dim currentCellValue As String = f1.GetCellValueAsString(rows, columns)
-                    myExcel.SetCellValue(rows, startColumn + columns, currentCellValue)
+            For rows As Int16 = 1 To f1rows 'from 1 to the last row that has something
+                For columns As Int16 = 1 To (f1columns) 'from 1 to the last col that has something
+                    Dim currentCellValue As String = f1.GetCellValueAsString(rows, columns) 'get the current cell value as string
+                    myExcel.SetCellValue(rows, startColumn + columns, currentCellValue) 'insert the read value to the new sheet
                     If (currentCellValue = "Marks") Then
-                        rowToBold = rows
-                        verifyAfterColumn = columns
+                        rowToBold = rows 'bold the row as shown in the qu
+                        verifyAfterColumn = columns 'start the verification after the row that contain the word "marks"
                         startVerification = True
-                        myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 1, "Updated")
-                        myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 2, "Grade")
+                        myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 1, "Updated") 'add a new col
+                        myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 2, "Grade") 'add a new col
                         Exit For
                     End If
-                    If (startVerification) Then
-                        currentCellValue = f1.GetCellValueAsString(rows, verifyAfterColumn)
-                        myExcel.SetCellValue(rows, startColumn + verifyAfterColumn, currentCellValue)
-                        Dim myVal As Decimal = CDec(Val(currentCellValue))
-                        If (myVal >= 38 AndAlso myVal < 40) Then
+                    If (startVerification) Then 'start the verification after the row that contain the word "marks"
+                        currentCellValue = f1.GetCellValueAsString(rows, verifyAfterColumn) 'update the currentcellvalue variable with column that contain the word "marks"
+                        ' currentcellvalue contain row after the word marks but same col as marks
+                        myExcel.SetCellValue(rows, startColumn + verifyAfterColumn, currentCellValue) 'insert in the new excel sheet the same row and same col the currentCellValue
+                        Dim myVal As Decimal = CDec(Val(currentCellValue)) 'convert to decimal currentCellValue
+                        If (myVal >= 38 AndAlso myVal < 40) Then 'check if this row need to be updated and rendered as per condition
                             Dim mystyle As SLStyle = myExcel.CreateStyle()
-
-
-
-
-                            'mystyle.Fill.SetPattern(PatternValues.Solid, SLThemeColorIndexValues.Accent2Color, SLThemeColorIndexValues.Accent4Color)
                             mystyle.Fill.SetPattern(PatternValues.Solid, System.Drawing.Color.Green, System.Drawing.Color.Green)
 
-                            myExcel.SetCellStyle(rows, startColumn + verifyAfterColumn + 1, mystyle)
-                            ' myExcel.SetCellStyle(rows, startColumn + verifyAfterColumn + 1, styleColor)
-                            myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 1, "40")
+                            myExcel.SetCellStyle(rows, startColumn + verifyAfterColumn + 1, mystyle) 'set the updated cell colour to green
+
+                            myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 1, "40") 'set the updated cell value to 40
 
                         Else
-                            myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 1, currentCellValue)
+                            myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 1, currentCellValue) 'insert in col updated
                         End If
-                        myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 2, GetGrade(myVal))
+                        myExcel.SetCellValue(rows, startColumn + verifyAfterColumn + 2, GetGrade(myVal)) 'insert in col grade
                         Exit For
                     End If
                 Next

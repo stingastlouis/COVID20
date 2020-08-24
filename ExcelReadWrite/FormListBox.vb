@@ -17,7 +17,7 @@ Public Class FormListBox
         Dim lastRow As Integer = 0 'use to know how many lines there will be in listbox
         Dim lastColumn As Integer = 0
         Try
-            For Each sh As Sheet In GetAllWorksheets(myfile)
+            For Each sh As Sheet In GetAllWorksheets(myfile) 'get the last row and col
                 Dim sd As New SLDocument(myfile, sh.Name)
                 sheetDocList.Add(sd)
                 totalColumn += sd.GetWorksheetStatistics.EndColumnIndex 'last cell with value
@@ -37,12 +37,12 @@ Public Class FormListBox
                 Dim myText As String = ""
                 For Each sdl As SLDocument In sheetDocList
                     For columns As Integer = 1 To lastColumn
-                        myText += sdl.GetCellValueAsString(rows, columns) + vbTab + vbTab
+                        myText += sdl.GetCellValueAsString(rows, columns) + vbTab + vbTab 'merge the cols to make it a single row
 
 
                     Next
                 Next
-                myListBox.Items.Add(myText)
+                myListBox.Items.Add(myText) 'add the single row to listbox
 
 
             Next
