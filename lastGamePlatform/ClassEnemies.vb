@@ -24,7 +24,7 @@
 		Me.name = name
 		Me.moveSpeed = moveSpeed
 	End Sub
-
+	'contructor for the multiplayer part.
 	Public Sub New(xPosition As Integer, yPosition As Integer, name As String, moveSpeed As Integer, path As String)
 		Me.width = 40
 		Me.height = 50

@@ -36,7 +36,7 @@ Public Class scoreforSingle
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Label1.Top -= 2
+        Label1.Top -= 1
         If Label1.Top + Label1.Height <= 0 Then
             Label1.Top = Me.Height
         End If

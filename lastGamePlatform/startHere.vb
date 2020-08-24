@@ -19,9 +19,9 @@
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles ButtonMultiPlayerScore.Click
         Me.Hide()
-        Dim score As New MultiScorep
-        score.Show()
-        ' MultiScorep.Show()
+        'Dim score As New MultiScorep
+        'score.Show()
+        MultiScorep.Show()
 
     End Sub
 
