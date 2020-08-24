@@ -257,14 +257,14 @@ Module ModuleGameManager
 		ModuleGameManager.bullets.Add(bulletpb)
 		My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bulletSound.wav"), AudioPlayMode.Background)
 	End Sub
-	Public Sub GenerateNewBullet2(player)
+	Public Sub GenerateNewBullet2(player) ' for the first player 
 		Dim bullet As New ClassBullets(player)
 		Dim bulletpb As PictureBox = bullet.generateBullet()
 		myForm.Controls.Add(bulletpb)
 		ModuleGameManager.bullets2.Add(bulletpb)
 		My.Computer.Audio.Play(IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\Bullets\bulletSound.wav"), AudioPlayMode.Background)
 	End Sub
-	Public Sub GenerateNewBulletEnemy(boss)
+	Public Sub GenerateNewBulletEnemy(boss) 'generate virus from boss location
 		Dim bullet As New ClassBullets(boss)
 		Dim bulletpb As PictureBox = bullet.generateBullet()
 		myForm.Controls.Add(bulletpb)
@@ -896,6 +896,7 @@ Module ModuleGameManager
 			command.Connection = connection
 			connection.Open()
 			command.ExecuteNonQuery()
+
 			connection.Close()
 
 			multiTimer1.Enabled = False
@@ -950,6 +951,7 @@ Module ModuleGameManager
 			command.Parameters.AddWithValue("@score1", multiplayerRegForm.p1.playerScore)
 			command.Parameters.AddWithValue("@score2", multiplayerRegForm.p2.playerScore)
 			command.Connection = connection
+
 			connection.Open()
 			command.ExecuteNonQuery()
 			connection.Close()
