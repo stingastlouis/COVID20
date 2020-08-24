@@ -1068,7 +1068,9 @@ Module ModuleGameManager
 		If boss.Bounds.IntersectsWith(player1.Bounds) And boss.Enabled And player1.Enabled Then
 
 			ClassPlayer.life -= 1
-
+			If ClassPlayer.life <= 1 Then
+				ClassPlayer.life = 0
+			End If
 
 			ModuleGameManager.pLife.Text = "LIFE: " + CStr(ClassPlayer.life)
 			ModuleGameManager.CheckIfWinOrLoseMulti()
