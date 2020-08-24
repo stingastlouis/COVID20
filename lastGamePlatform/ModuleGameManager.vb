@@ -420,6 +420,8 @@ Module ModuleGameManager
 		Dim exitBtn As New Button
 
 		If progressBar.Value <= 0 Then
+			supergun0.SendToBack()
+			boss.SendToBack()
 			getScoreforSinglePlayer()
 			myTimer.Enabled = False
 			With winorlosetText
@@ -468,6 +470,8 @@ Module ModuleGameManager
 		End If
 
 		If ClassPlayer.life <= 0 Then
+			supergun0.SendToBack()
+			boss.SendToBack()
 			getScoreforSinglePlayer()
 			ClassPlayer.life = 0
 			myTimer.Enabled = False
@@ -889,6 +893,7 @@ Module ModuleGameManager
 		End If
 
 		If progressBar.Value <= 0 Then
+			boss.SendToBack()
 			command.CommandText = "UPDATE User_Table SET p1score=@score1,p2score=@score2 WHERE Id=@session_Id "
 			command.Parameters.AddWithValue("@session_Id", id_of_match)
 			command.Parameters.AddWithValue("@score1", multiplayerRegForm.p1.playerScore)
@@ -946,6 +951,7 @@ Module ModuleGameManager
 		End If
 
 		If multiplayerRegForm.p1.playerLife <= 0 And multiplayerRegForm.p2.playerLife <= 0 Then
+			boss.SendToBack()
 			command.CommandText = "UPDATE User_Table SET p1score=@score1,p2score=@score2 WHERE Id=@session_Id "
 			command.Parameters.AddWithValue("@session_Id", id_of_match)
 			command.Parameters.AddWithValue("@score1", multiplayerRegForm.p1.playerScore)
