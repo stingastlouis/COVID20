@@ -356,7 +356,7 @@
 
 				If returnTOposition = 99 Then
 					returnTOposition = 0
-					randomSpeed += gen.Next(1, 5)
+					randomSpeed += gen.Next(0.5, 1)
 				End If
 
 

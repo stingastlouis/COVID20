@@ -1062,7 +1062,7 @@ Module ModuleGameManager
 		If boss.Bounds.IntersectsWith(player1.Bounds) And boss.Enabled And player1.Enabled Then
 
 			ClassPlayer.life -= 1
-			multiplayerRegForm.p1.playerLife -= 1
+
 
 			ModuleGameManager.pLife.Text = "LIFE: " + CStr(ClassPlayer.life)
 			ModuleGameManager.CheckIfWinOrLoseMulti()
