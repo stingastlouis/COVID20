@@ -5,7 +5,7 @@ Imports System.ComponentModel
 
 Public Class FormTextBox
 
-    Dim geneNewBox As TextBox
+
     Private txtBox(1000, 1000) As TextBox
     Private Function GetAllWorksheets(ByVal fileName As String) As Sheets
         Dim theSheets As Sheets
@@ -39,24 +39,69 @@ Public Class FormTextBox
                     lastColumn = currentColumn 'get last column in case 1 sheet is longer
                 End If
             Next
-
-            Dim changesheet As Integer
+            Dim geneNewBox As TextBox
+            Dim corresPondinColumn As Integer
+            Dim corresPondinRows As Integer
+            Dim canColor As Boolean
             For Each sdl As SLDocument In sheetDocList
                 For rows As Integer = 1 To lastRow
 
 
                     For columns As Integer = 1 To lastColumn
 
+
+
+
                         geneNewBox = New TextBox
                         geneNewBox.Size = New System.Drawing.Size(100, 20)
-                        geneNewBox.Location = New Point(10 + 100 * columns + changesheet, 10 + 25 * rows)
+                        geneNewBox.Location = New Point(10 + 100 * columns, 10 + 25 * rows)
                         geneNewBox.Name = "TextBox" & rows & "_" & columns
                         geneNewBox.Text = sdl.GetCellValueAsString(rows, columns)
+                        'connect it to a handler, save a reference to the array and add it to the form controls
+                        ' AddHandler newbox.TextChanged, AddressOf TextBox_TextChanged
+                        If rows >= 5 Then
+                            If columns = 2 Or columns = 5 Then
+                                If CInt(geneNewBox.Text) >= 38 And CInt(geneNewBox.Text) < 39.5 Then
+
+                                    corresPondinColumn = columns + 1
+                                    corresPondinRows = rows
+                                    canColor = True
+
+                                End If
+
+                            End If
+
+
+
+                        End If
+                        If canColor Then
+                            If rows = corresPondinRows And columns = corresPondinColumn Then
+                                geneNewBox.BackColor = System.Drawing.Color.Green
+                            End If
+                        End If
+
+
+                        txtBox(rows, columns) = geneNewBox
                         Me.Controls.Add(geneNewBox)
+
+
+
+                        'geneNewBox = New TextBox
+                        'geneNewBox.Size = New System.Drawing.Size(100, 20)
+                        'geneNewBox.Location = New Point(10 + 100 * columns + 200, 10 + 25 * rows)
+                        'geneNewBox.Name = "TextBox" & rows & "_" & columns
+
+                        'geneNewBox.Text = sdl.GetCellValueAsString(rows, columns)
+                        'txtBox(rows, columns) = geneNewBox
+
+
+
+
+                        'Me.Controls.Add(geneNewBox)
 
                     Next
                 Next
-                changesheet += 200
+
 
             Next
 

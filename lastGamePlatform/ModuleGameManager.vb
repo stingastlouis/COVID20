@@ -422,6 +422,7 @@ Module ModuleGameManager
 		If progressBar.Value <= 0 Then
 			supergun0.SendToBack()
 			boss.SendToBack()
+			supergun0.Visible = False
 			getScoreforSinglePlayer()
 			myTimer.Enabled = False
 			With winorlosetText
@@ -472,6 +473,8 @@ Module ModuleGameManager
 		If ClassPlayer.life <= 0 Then
 			supergun0.SendToBack()
 			boss.SendToBack()
+
+			supergun0.Visible = False
 			getScoreforSinglePlayer()
 			ClassPlayer.life = 0
 			myTimer.Enabled = False
@@ -678,10 +681,10 @@ Module ModuleGameManager
 	End Sub
 
 	Private Sub ExtbtnMulti_Click(sender As Object, e As EventArgs)
-
+		myForm.Dispose()
 		startHere.Show()
 
-		myForm.Close()
+
 	End Sub
 
 
@@ -749,6 +752,8 @@ Module ModuleGameManager
 		'-if  supergun is present boss appear
 		If supergun0.Left < myForm.Width Then
 			'Console.WriteLine("make the boss appear")
+			ClassPlayer.life = 10
+
 			MakeBossAppear()
 			soloPlayerHitBoss()
 
@@ -894,6 +899,7 @@ Module ModuleGameManager
 
 		If progressBar.Value <= 0 Then
 			boss.SendToBack()
+
 			command.CommandText = "UPDATE User_Table SET p1score=@score1,p2score=@score2 WHERE Id=@session_Id "
 			command.Parameters.AddWithValue("@session_Id", id_of_match)
 			command.Parameters.AddWithValue("@score1", multiplayerRegForm.p1.playerScore)
@@ -952,6 +958,8 @@ Module ModuleGameManager
 
 		If multiplayerRegForm.p1.playerLife <= 0 And multiplayerRegForm.p2.playerLife <= 0 Then
 			boss.SendToBack()
+
+
 			command.CommandText = "UPDATE User_Table SET p1score=@score1,p2score=@score2 WHERE Id=@session_Id "
 			command.Parameters.AddWithValue("@session_Id", id_of_match)
 			command.Parameters.AddWithValue("@score1", multiplayerRegForm.p1.playerScore)
