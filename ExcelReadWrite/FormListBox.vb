@@ -9,6 +9,7 @@ Public Class FormListBox
         PopulateListBox(FormExcelReader.excelFile, ListBox1)
 
     End Sub
+
     Private Sub PopulateListBox(myfile As String, myListBox As ListBox)
 
         Dim sheetDocList As New List(Of SLDocument)
@@ -37,7 +38,14 @@ Public Class FormListBox
                 Dim myText As String = ""
                 For Each sdl As SLDocument In sheetDocList
                     For columns As Integer = 1 To lastColumn
-                        myText += sdl.GetCellValueAsString(rows, columns) + vbTab + vbTab 'merge the cols to make it a single row
+
+                        If sdl.GetCellValueAsString(rows, columns).Length <= 8 Then
+                            myText += sdl.GetCellValueAsString(rows, columns) + vbTab + vbTab + vbTab
+                        Else
+                            myText += sdl.GetCellValueAsString(rows, columns) + vbTab + vbTab
+                        End If
+
+                        'merge the cols to make it a single row
 
 
                     Next
