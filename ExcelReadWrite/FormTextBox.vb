@@ -6,7 +6,7 @@ Imports System.ComponentModel
 Public Class FormTextBox
 
 
-    Private txtBox(1000, 1000) As TextBox
+
     Private Function GetAllWorksheets(ByVal fileName As String) As Sheets
         Dim theSheets As Sheets
         Using document As SpreadsheetDocument =
@@ -57,8 +57,7 @@ Public Class FormTextBox
                         geneNewBox.Location = New Point(10 + 100 * columns, 10 + 25 * rows)
                         geneNewBox.Name = "TextBox" & rows & "_" & columns
                         geneNewBox.Text = sdl.GetCellValueAsString(rows, columns)
-                        'connect it to a handler, save a reference to the array and add it to the form controls
-                        ' AddHandler newbox.TextChanged, AddressOf TextBox_TextChanged
+
                         If rows >= 5 Then
                             If columns = 2 Or columns = 5 Then
                                 If CInt(geneNewBox.Text) >= 38 And CInt(geneNewBox.Text) < 39.5 Then
@@ -81,23 +80,10 @@ Public Class FormTextBox
                         End If
 
 
-                        txtBox(rows, columns) = geneNewBox
+
                         Me.Controls.Add(geneNewBox)
 
 
-
-                        'geneNewBox = New TextBox
-                        'geneNewBox.Size = New System.Drawing.Size(100, 20)
-                        'geneNewBox.Location = New Point(10 + 100 * columns + 200, 10 + 25 * rows)
-                        'geneNewBox.Name = "TextBox" & rows & "_" & columns
-
-                        'geneNewBox.Text = sdl.GetCellValueAsString(rows, columns)
-                        'txtBox(rows, columns) = geneNewBox
-
-
-
-
-                        'Me.Controls.Add(geneNewBox)
 
                     Next
                 Next

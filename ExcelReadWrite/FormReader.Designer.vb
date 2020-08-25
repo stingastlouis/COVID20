@@ -29,11 +29,13 @@ Partial Class FormExcelReader
         Me.ButtonListBox = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.LabelTitle)
         Me.Panel1.Controls.Add(Me.ButtonTextboxes)
         Me.Panel1.Controls.Add(Me.ButtonListBox)
@@ -92,6 +94,19 @@ Partial Class FormExcelReader
         'Timer1
         '
         '
+        'Button1
+        '
+        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Button1.AutoSize = True
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(263, 253)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(328, 57)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "View in GridView"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FormExcelReader
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -113,4 +128,5 @@ Partial Class FormExcelReader
 	Friend WithEvents ButtonListBox As Button
 	Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents Button1 As Button
 End Class

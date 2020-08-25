@@ -24,7 +24,7 @@
 
 		ButtonTextboxes.Enabled = False
 		ButtonListBox.Enabled = False
-
+		Button1.Enabled = False
 
 
 
@@ -50,7 +50,7 @@
 		If (OpenFileDialog1.ShowDialog() = DialogResult.OK) Then
 			ButtonTextboxes.Enabled = True
 			ButtonListBox.Enabled = True
-
+			Button1.Enabled = True
 			excelFile = OpenFileDialog1.FileName
 
 		End If
@@ -67,5 +67,10 @@
 
 		End If
 
+	End Sub
+
+	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+		Me.Hide()
+		gridView.Show()
 	End Sub
 End Class

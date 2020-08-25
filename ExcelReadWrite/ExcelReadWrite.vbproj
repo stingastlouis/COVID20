@@ -121,6 +121,12 @@
     <Compile Include="FormTextBox.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="gridView.Designer.vb">
+      <DependentUpon>gridView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gridView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTextBox.resx">
       <DependentUpon>FormTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gridView.resx">
+      <DependentUpon>gridView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
