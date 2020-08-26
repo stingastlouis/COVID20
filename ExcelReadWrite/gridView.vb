@@ -13,6 +13,7 @@ Public Class gridView
 	Dim canColor As Boolean
 	Dim tables As DataTableCollection
 
+
 	Private Function GetAllWorksheets(ByVal fileName As String) As Sheets
 		Dim theSheets As Sheets
 		Using document As SpreadsheetDocument =
@@ -33,41 +34,41 @@ Public Class gridView
 		Dim lastColumn As Integer = 0
 		'Try
 		For Each sh As Sheet In GetAllWorksheets(myfile) 'get the last row and col
-				Dim sd As New SLDocument(myfile, sh.Name)
-				sheetDocList.Add(sd)
-				totalColumn += sd.GetWorksheetStatistics.EndColumnIndex 'last cell with value
-				Dim currentRow As Integer = sd.GetWorksheetStatistics.EndRowIndex
-				If currentRow > lastRow Then
-					lastRow = currentRow 'get last row in case 1 sheet is longer
-				End If
-				Dim currentColumn As Integer = sd.GetWorksheetStatistics.EndColumnIndex
-				If currentColumn > lastColumn Then
-					lastColumn = currentColumn 'get last column in case 1 sheet is longer
-				End If
-			Next
+			Dim sd As New SLDocument(myfile, sh.Name)
+			sheetDocList.Add(sd)
+			totalColumn += sd.GetWorksheetStatistics.EndColumnIndex 'last cell with value
+			Dim currentRow As Integer = sd.GetWorksheetStatistics.EndRowIndex
+			If currentRow > lastRow Then
+				lastRow = currentRow 'get last row in case 1 sheet is longer
+			End If
+			Dim currentColumn As Integer = sd.GetWorksheetStatistics.EndColumnIndex
+			If currentColumn > lastColumn Then
+				lastColumn = currentColumn 'get last column in case 1 sheet is longer
+			End If
+		Next
 
 
-			Console.WriteLine("lastRow" & lastRow)
-			Console.WriteLine("lastcol" & lastColumn)
-			For rows As Integer = 1 To lastRow
-				Dim myText As String = ""
-				For Each sdl As SLDocument In sheetDocList
-					For columns As Integer = 1 To lastColumn
+		Console.WriteLine("lastRow" & lastRow)
+		Console.WriteLine("lastcol" & lastColumn)
+		For rows As Integer = 1 To lastRow - 1
+			Dim myText As String = ""
+			For Each sdl As SLDocument In sheetDocList
+				For columns As Integer = 1 To lastColumn - 1
 
-						myText = sdl.GetCellValueAsString(rows, columns)
-						If myText.Length < 1 Then
-							myText = "xxxx"
-						End If
-					dataOpener.Rows(rows).Cells(columns).Value = myText.ToString
+					myText = sdl.GetCellValueAsString(rows, columns)
+					If myText.Length < 1 Then
+						myText = "xxxx"
+					End If
+					dataOpener.Rows(rows).Cells(columns).Value = myText
 					'merge the cols to make it a single row
 					'Console.WriteLine(rows & " " & columns)
 
 				Next
-				Next
-				'myListBox.Items.Add(myText) 'add the single row to listbox
-
-
 			Next
+			'myListBox.Items.Add(myText) 'add the single row to listbox
+
+
+		Next
 
 
 		'Catch ex As Exception
@@ -80,13 +81,23 @@ Public Class gridView
 
 
 	Private Sub gridView_Load(sender As Object, e As EventArgs) Handles Me.Load
-		PopulateListBox(AppDomain.CurrentDomain.BaseDirectory + "compiledoutput.xlsx")
+		'PopulateListBox(AppDomain.CurrentDomain.BaseDirectory + "compiledoutput.xlsx")
 		Try
+			Dim stream As Stream
+			Dim reader As IExcelDataReader
+			Dim result As DataSet
+			Dim tables As DataTableCollection
+			Dim dt As DataTable
+			stream = File.Open(Str, FileMode.Open, FileAccess.Read)
+			reader = ExcelReaderFactory.CreateReader(stream)
+			result = reader.AsDataSet()
+			tables = result.Tables
+			dt = tables(0)
 
 
-
+			dataOpener.DataSource = dt
 			'Using stream = File.Open(Str, FileMode.Open, FileAccess.Read)
-			'	Using reader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)
+			'Using reader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)
 			'		Dim result As DataSet = reader.AsDataSet(New ExcelDataSetConfiguration() With {.ConfigureDataTable = Function(__) New ExcelDataTableConfiguration() With {.UseHeaderRow = True}})
 			'		tables = result.Tables
 
