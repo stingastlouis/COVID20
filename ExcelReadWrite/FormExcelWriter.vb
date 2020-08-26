@@ -53,6 +53,7 @@ Public Class FormExcelWriter
         Try
             'Process.Start(outdir)
             'Process.Start(outFile)
+            FormExcelReader.excelFile = outFile
             Me.Dispose()
             FormExcelReader.Show()
             ' MsgBox("Your file is located in:\n " + outFile)

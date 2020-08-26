@@ -1,5 +1,5 @@
 ﻿Public Class FormMainMenu
-	Private Sub ButtonReader_Click(sender As Object, e As EventArgs) Handles ButtonReader.Click
+	Private Sub ButtonReader_Click(sender As Object, e As EventArgs)
 		Me.Hide()
 		FormExcelReader.Show()
 	End Sub

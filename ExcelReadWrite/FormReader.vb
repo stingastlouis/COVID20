@@ -17,16 +17,20 @@
 	Dim afterTime As DateTime
 	Dim endTime As DateTime
 	Private Sub FormMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		Timer1.Enabled = True
-		afterTime.AddSeconds(2)
-		endTime = afterTime
-		endTime.AddSeconds(15)
+		'Timer1.Enabled = True
+		'afterTime.AddSeconds(2)
+		'endTime = afterTime
+		'endTime.AddSeconds(15)
 
-		ButtonTextboxes.Enabled = False
-		ButtonListBox.Enabled = False
-		Button1.Enabled = False
-		Button2.Enabled = False
-
+		'ButtonTextboxes.Enabled = False
+		'ButtonListBox.Enabled = False
+		'Button1.Enabled = False
+		'Button2.Enabled = False
+		If excelFile = "" Then
+			Me.Close()
+			MsgBox("error the path is empty")
+			FormMainMenu.Show()
+		End If
 
 
 
@@ -39,37 +43,37 @@
 		FormMainMenu.Show()
 	End Sub
 
-	Private Function ChooseExcel()
-		Timer1.Enabled = False
-		Dim excelFile As String = ""
-		OpenFileDialog1.FileName = "Ajit_Rishi.xlsx" ' Default file name
-		OpenFileDialog1.Filter = "Excel Worksheets|*.xlsx"
-		OpenFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory
-		OpenFileDialog1.Title = "Please select an Excel document."
+	'Private Function ChooseExcel()
+	'	Timer1.Enabled = False
+	'	Dim excelFile As String = ""
+	'	OpenFileDialog1.FileName = "Ajit_Rishi.xlsx" ' Default file name
+	'	OpenFileDialog1.Filter = "Excel Worksheets|*.xlsx"
+	'	OpenFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory
+	'	OpenFileDialog1.Title = "Please select an Excel document."
 
-		If (OpenFileDialog1.ShowDialog() = DialogResult.OK) Then
-			ButtonTextboxes.Enabled = True
-			ButtonListBox.Enabled = True
-			Button1.Enabled = True
-			Button2.Enabled = True
+	'	If (OpenFileDialog1.ShowDialog() = DialogResult.OK) Then
+	'		ButtonTextboxes.Enabled = True
+	'		ButtonListBox.Enabled = True
+	'		Button1.Enabled = True
+	'		Button2.Enabled = True
 
-			excelFile = OpenFileDialog1.FileName
+	'		excelFile = OpenFileDialog1.FileName
 
-		End If
-		Return excelFile
-	End Function
+	'	End If
+	'	Return excelFile
+	'End Function
 
-	Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-		Dim nowTime As DateTime = DateTime.Now
-
-
-		If nowTime >= afterTime Then
-			excelFile = ChooseExcel()
+	'Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+	'	Dim nowTime As DateTime = DateTime.Now
 
 
-		End If
+	'	If nowTime >= afterTime Then
+	'		excelFile = ChooseExcel()
 
-	End Sub
+
+	'	End If
+
+	'End Sub
 
 	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 		Me.Hide()
