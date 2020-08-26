@@ -52,8 +52,10 @@ Public Class FormExcelWriter
         AutoFit(outFile)
         Try
             'Process.Start(outdir)
-            Process.Start(outFile)
-            MsgBox("Your file is located in:\n " + outFile)
+            'Process.Start(outFile)
+            Me.Dispose()
+            FormExcelReader.Show()
+            ' MsgBox("Your file is located in:\n " + outFile)
         Catch ex As Exception
             MsgBox(ex)
         End Try

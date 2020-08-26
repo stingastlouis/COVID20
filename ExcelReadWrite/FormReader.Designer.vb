@@ -24,17 +24,19 @@ Partial Class FormExcelReader
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.LabelTitle = New System.Windows.Forms.Label()
         Me.ButtonTextboxes = New System.Windows.Forms.Button()
         Me.ButtonListBox = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.LabelTitle)
         Me.Panel1.Controls.Add(Me.ButtonTextboxes)
@@ -45,6 +47,19 @@ Partial Class FormExcelReader
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(882, 332)
         Me.Panel1.TabIndex = 0
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Button1.AutoSize = True
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(67, 253)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(328, 57)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "View in GridView"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'LabelTitle
         '
@@ -94,18 +109,18 @@ Partial Class FormExcelReader
         'Timer1
         '
         '
-        'Button1
+        'Button2
         '
-        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Button1.AutoSize = True
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(263, 253)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(328, 57)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "View in GridView"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button2.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Button2.AutoSize = True
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(482, 253)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(328, 57)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "View in Excel"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'FormExcelReader
         '
@@ -129,4 +144,5 @@ Partial Class FormExcelReader
 	Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class
