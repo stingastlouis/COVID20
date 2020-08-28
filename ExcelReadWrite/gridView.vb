@@ -61,7 +61,7 @@ Public Class gridView
 			End With
 		Next
 		dataOpener.Rows.RemoveAt(0)
-
+		ComboBox1.Items.Insert(0, "Select Student Name")
 		For i As Integer = 0 To dataOpener.Rows.Count - 1
 			ComboBox1.Items.Add(dataOpener.Rows(i).Cells(0).Value)
 		Next
@@ -122,9 +122,13 @@ Public Class gridView
 
 	Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
 		Dim Studname As String = ComboBox1.Text.ToString
+
 		For i As Integer = 0 To dataOpener.Rows.Count - 1
 			If dataOpener.Rows(i).Cells(0).Value = Studname Then
 				dataOpener.Rows(i).Selected = True
+			End If
+			If Studname.Contains("Select Student Name") Then
+				dataOpener.Rows(i).Selected = False
 			End If
 		Next
 	End Sub
