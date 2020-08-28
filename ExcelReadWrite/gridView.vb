@@ -10,10 +10,10 @@ Public Class gridView
 	Dim dtDetails As New DataTable
 	Dim dtHead As New DataTable
 	'Dim tables As DataTableCollection
-	Dim path As String = (AppDomain.CurrentDomain.BaseDirectory + "compiledoutput.xlsx")
+	'Dim Str As String = (AppDomain.CurrentDomain.BaseDirectory + "compiledoutput.xlsx")
 
 	Private Sub pophead()
-		Dim stream2 As Stream = File.OpenRead(path)
+		Dim stream2 As Stream = File.OpenRead(Str)
 		Dim reader2 As IExcelDataReader = ExcelReaderFactory.CreateReader(stream2)
 		Dim result2 As DataSet = reader2.AsDataSet()
 		Dim tables2 As DataTableCollection = result2.Tables
@@ -27,7 +27,7 @@ Public Class gridView
 		For r As Integer = 0 To dataName.Rows.Count - 1
 
 			For col As Integer = 0 To dataName.Columns.Count - 1
-				dataName.Columns(col).Width = 100
+				'dataName.Columns(col).Width = 100
 				If Me.Width > 1100 Then
 					dataName.Columns(col).Width = 300
 				End If
@@ -41,10 +41,13 @@ Public Class gridView
 
 
 		Next
+
+
+		dataName.Controls(1).Enabled = False
 	End Sub
 	Private Sub gridView_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-		Dim stream1 As Stream = File.OpenRead(path)
+		Dim stream1 As Stream = File.OpenRead(Str)
 		Dim reader1 As IExcelDataReader = ExcelReaderFactory.CreateReader(stream1)
 		Dim result1 As DataSet = reader1.AsDataSet()
 		Dim tables1 As DataTableCollection = result1.Tables
@@ -72,15 +75,15 @@ Public Class gridView
 			For rows As Integer = 0 To dataOpener.Rows.Count - 1
 				For columns As Integer = 0 To dataOpener.Columns.Count - 1
 
-					dataOpener.Columns(columns).Width = 85
+					'dataOpener.Columns(columns).Width = 85
 					If Me.Width > 1100 Then
-						dataOpener.Columns(columns).Width = 170
+						dataOpener.Columns(columns).Width = 300
 					End If
 					Dim CellChange As String = dataOpener.Rows(rows).Cells(columns).Value.ToString().Trim()
 
 					If rows >= 1 Then
 						If columns = 1 Or columns = 4 Then
-							If CInt(CellChange) >= 38 And CInt(CellChange) < 40 Then
+							If CDec(CellChange) >= 38 And CDec(CellChange) < 40 Then
 
 								corresPondinColumn = columns + 1
 								corresPondinRows = rows

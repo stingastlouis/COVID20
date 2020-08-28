@@ -14,8 +14,8 @@
 
 
 	End Sub
-	Dim afterTime As DateTime
-	Dim endTime As DateTime
+	'Dim afterTime As DateTime
+	'Dim endTime As DateTime
 	Private Sub FormMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		'Timer1.Enabled = True
 		'afterTime.AddSeconds(2)
@@ -26,10 +26,13 @@
 		'ButtonListBox.Enabled = False
 		'Button1.Enabled = False
 		'Button2.Enabled = False
+
 		If excelFile = "" Then
 			Me.Close()
 			MsgBox("error the path is empty")
 			FormMainMenu.Show()
+		Else
+			MsgBox("Your file is saved." & vbNewLine & excelFile)
 		End If
 
 
