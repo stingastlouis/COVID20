@@ -18,13 +18,25 @@ Public Class gridView
 		Dim result2 As DataSet = reader2.AsDataSet()
 		Dim tables2 As DataTableCollection = result2.Tables
 		dtHead = tables2(0)
-		For r As Integer = 3 To dtHead.Rows.Count - 1
-			dtHead.Rows.RemoveAt(r)
-			'Console.WriteLine(r)
-		Next
-		DataGridView1.DataSource = dtHead
-		DataGridView1.ColumnHeadersVisible = False
 
+		dataName.DataSource = dtHead
+		dataName.ColumnHeadersVisible = False
+		dataName.AllowUserToResizeColumns = False
+
+
+		For r As Integer = 0 To dataName.Rows.Count - 1
+
+			For col As Integer = 0 To dataName.Columns.Count - 1
+				dataName.Columns(col).Width = 85
+				If r >= 2 Then
+
+					dataName.Rows(r).Cells(col).Value = Nothing
+
+				End If
+			Next
+
+
+		Next
 	End Sub
 	Private Sub gridView_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -55,9 +67,10 @@ Public Class gridView
 		If dataOpener.Rows.Count > 0 Then
 			For rows As Integer = 0 To dataOpener.Rows.Count - 1
 				For columns As Integer = 0 To dataOpener.Columns.Count - 1
+					dataOpener.Columns(columns).Width = 85
 					Dim CellChange As String = dataOpener.Rows(rows).Cells(columns).Value.ToString().Trim()
 
-					If rows >= 3 Then
+					If rows >= 1 Then
 						If columns = 1 Or columns = 4 Then
 							If CInt(CellChange) >= 38 And CInt(CellChange) < 40 Then
 
@@ -87,7 +100,7 @@ Public Class gridView
 
 
 
-		'pophead()
+		pophead()
 
 	End Sub
 	Dim txtBox(1000, 1000) As String
