@@ -21,16 +21,20 @@ Public Class gridView
 
 		dataName.DataSource = dtHead
 		dataName.ColumnHeadersVisible = False
-		dataName.AllowUserToResizeColumns = False
+
 
 
 		For r As Integer = 0 To dataName.Rows.Count - 1
 
 			For col As Integer = 0 To dataName.Columns.Count - 1
-				dataName.Columns(col).Width = 85
-				If r >= 2 Then
+				dataName.Columns(col).Width = 100
+				If Me.Width > 1100 Then
+					dataName.Columns(col).Width = 300
+				End If
+				If r > 2 Then
 
 					dataName.Rows(r).Cells(col).Value = Nothing
+
 
 				End If
 			Next
@@ -67,7 +71,11 @@ Public Class gridView
 		If dataOpener.Rows.Count > 0 Then
 			For rows As Integer = 0 To dataOpener.Rows.Count - 1
 				For columns As Integer = 0 To dataOpener.Columns.Count - 1
+
 					dataOpener.Columns(columns).Width = 85
+					If Me.Width > 1100 Then
+						dataOpener.Columns(columns).Width = 170
+					End If
 					Dim CellChange As String = dataOpener.Rows(rows).Cells(columns).Value.ToString().Trim()
 
 					If rows >= 1 Then
@@ -120,6 +128,8 @@ Public Class gridView
 			End If
 		Next
 	End Sub
+
+
 
 	'Private Sub txtName_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtName.KeyUp
 	'	DataGridView1.DataSource = Me.PopulateDataGridView()
